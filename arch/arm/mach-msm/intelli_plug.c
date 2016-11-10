@@ -20,9 +20,15 @@
 #include <linux/mutex.h>
 #include <linux/module.h>
 
-#define INTELLI_PLUG_VERSION	1
+#define INTELLI_PLUG_MAJOR_VERSION	1
+#define INTELLI_PLUG_MINOR_VERSION	1
 
-#define DEF_SAMPLING_RATE			(50000)
+#define DEF_SAMPLING_RATE		(50000)
+#define DEF_SAMPLING_MS			(50)
+
+#define DUAL_CORE_PERSISTENCE		50
+#define TRI_CORE_PERSISTENCE		40
+#define QUAD_CORE_PERSISTENCE		30
 
 static DEFINE_MUTEX(intelli_plug_mutex);
 
@@ -114,7 +120,7 @@ static void intelli_plug_work_fn(struct work_struct *work)
 					//pr_info("case 1: %u\n", persist_count);
 					break;
 				case 2:
-					persist_count = 27;
+					persist_count = DUAL_CORE_PERSISTENCE;
 					if (num_online_cpus() == 1)
 						cpu_up(1);
 					else {
@@ -124,7 +130,7 @@ static void intelli_plug_work_fn(struct work_struct *work)
 					//pr_info("case 2: %u\n", persist_count);
 					break;
 				case 3:
-					persist_count = 21;
+					persist_count = TRI_CORE_PERSISTENCE;
 					if (num_online_cpus() == 2)
 						cpu_up(2);
 					else
@@ -132,7 +138,7 @@ static void intelli_plug_work_fn(struct work_struct *work)
 					//pr_info("case 3: %u\n", persist_count);
 					break;
 				case 4:
-					persist_count = 15;
+					persist_count = QUAD_CORE_PERSISTENCE;
 					if (num_online_cpus() == 3)
 						cpu_up(3);
 					//pr_info("case 4: %u\n", persist_count);
@@ -144,12 +150,15 @@ static void intelli_plug_work_fn(struct work_struct *work)
 		} //else
 			//pr_info("intelli_plug is suspened!\n");
 	}
-	schedule_delayed_work_on(0, &intelli_plug_work, msecs_to_jiffies(50));
+	schedule_delayed_work_on(0, &intelli_plug_work,
+		msecs_to_jiffies(DEF_SAMPLING_MS));
 }
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
 static void intelli_plug_early_suspend(struct early_suspend *handler)
 {
+	int i;
+	int num_of_active_cores = 4;
 	
 	cancel_delayed_work_sync(&intelli_plug_work);
 
@@ -158,23 +167,36 @@ static void intelli_plug_early_suspend(struct early_suspend *handler)
 	mutex_unlock(&intelli_plug_mutex);
 
 	// put rest of the cores to sleep!
-	switch (num_online_cpus()) {
-		case 4:
-			cpu_down(3);
-		case 3:
-			cpu_down(2);
-		case 2:
-			cpu_down(1);
+	for (i=1; i<num_of_active_cores; i++) {
+		if (cpu_online(i))
+			cpu_down(i);
 	}
 }
 
 static void intelli_plug_late_resume(struct early_suspend *handler)
 {
+	int num_of_active_cores;
+	int i;
+
 	mutex_lock(&intelli_plug_mutex);
+	/* keep cores awake long enough for faster wake up */
+	persist_count = DUAL_CORE_PERSISTENCE;
 	suspended = false;
 	mutex_unlock(&intelli_plug_mutex);
 
-	schedule_delayed_work_on(0, &intelli_plug_work, msecs_to_jiffies(10));
+	/* wake up everyone */
+	if (eco_mode_active)
+		num_of_active_cores = 2;
+	else
+		num_of_active_cores = 4;
+
+	for (i=1; i<num_of_active_cores; i++) {
+		if (!cpu_online(i))
+			cpu_up(i);
+	}
+
+	schedule_delayed_work_on(0, &intelli_plug_work,
+		msecs_to_jiffies(10));
 }
 
 static struct early_suspend intelli_plug_early_suspend_struct = {
@@ -192,8 +214,10 @@ int __init intelli_plug_init(void)
 	if (num_online_cpus() > 1)
 		delay -= jiffies % delay;
 
-	pr_info("intelli_plug: scheduler delay is: %d\n", delay);
-	pr_info("intelli_plug: version %d by faux123\n", INTELLI_PLUG_VERSION);
+	//pr_info("intelli_plug: scheduler delay is: %d\n", delay);
+	pr_info("intelli_plug: version %d.%d by faux123\n",
+		 INTELLI_PLUG_MAJOR_VERSION,
+		 INTELLI_PLUG_MINOR_VERSION);
 
 	INIT_DELAYED_WORK(&intelli_plug_work, intelli_plug_work_fn);
 	schedule_delayed_work_on(0, &intelli_plug_work, delay);
