@@ -50,7 +50,7 @@ struct qpnp_vib {
 	struct mutex lock;
 };
 
-static struct qpnp_vib *vib_dev;
+struct qpnp_vib *vib_dev;
 
 static int qpnp_vib_read_u8(struct qpnp_vib *vib, u8 *data, u16 reg)
 {
