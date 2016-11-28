@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -29,6 +33,12 @@
   @file vos_sched.c
   @brief VOS Scheduler Implementation
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2011 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ===========================================================================*/
 /*===========================================================================
                        EDIT HISTORY FOR FILE
@@ -59,8 +69,11 @@
 #include "wlan_qct_pal_msg.h"
 #include <linux/spinlock.h>
 #include <linux/kthread.h>
+<<<<<<< HEAD
 #include <linux/wcnss_wlan.h>
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*---------------------------------------------------------------------------
  * Preprocessor Definitions and Constants
  * ------------------------------------------------------------------------*/
@@ -71,6 +84,7 @@
  * we proceed with SSR in WD Thread
  */
 #define MAX_SSR_WAIT_ITERATIONS 200
+<<<<<<< HEAD
 /* Timer value for detecting thread stuck issues */
 #define THREAD_STUCK_TIMER_VAL 5000 // 5 seconds
 #define THREAD_STUCK_COUNT 3
@@ -78,6 +92,8 @@
 #define MC_Thread 0
 #define TX_Thread 1
 #define RX_Thread 2
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 static atomic_t ssr_protect_entry_count;
 
@@ -307,7 +323,10 @@ VOS_STATUS vos_watchdog_open
 
   // Initialize the lock
   spin_lock_init(&pWdContext->wdLock);
+<<<<<<< HEAD
   spin_lock_init(&pWdContext->thread_stuck_lock);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   //Create the Watchdog thread
   pWdContext->WdThread = kthread_create(VosWDThread, pWdContext,"VosWDThread");
@@ -430,6 +449,12 @@ VosMCThread
         /*
         ** Service the WDI message queue
         */
+<<<<<<< HEAD
+=======
+        VOS_TRACE(VOS_MODULE_ID_WDI, VOS_TRACE_LEVEL_INFO,
+                  ("Servicing the VOS MC WDI Message queue"));
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         pMsgWrapper = vos_mq_get(&pSchedContext->wdiMcMq);
 
         if (pMsgWrapper == NULL)
@@ -651,6 +676,7 @@ v_BOOL_t isSsrPanicOnFailure(void)
 
     return (pHddCtx->cfg_ini->fIsSsrPanicOnFailure);
 }
+<<<<<<< HEAD
 /**
  * vos_wd_detect_thread_stuck()- Detect thread stuck
  * by probing the MC, TX, RX threads and take action if
@@ -773,6 +799,8 @@ void vos_wd_reset_thread_stuck_count(int threadId)
      gpVosWatchdogContext->rxThreadStuckCount = 0;
   spin_unlock_irqrestore(&gpVosWatchdogContext->thread_stuck_lock, flags);
 }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /*---------------------------------------------------------------------------
   \brief VosWdThread() - The VOSS Watchdog thread
@@ -824,6 +852,7 @@ VosWDThread
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
   daemonize("WD_Thread");
 #endif
+<<<<<<< HEAD
   /* Initialize the timer to detect thread stuck issues */
   if (vos_timer_init(&pWdContext->threadStuckTimer, VOS_TIMER_TYPE_SW,
           vos_wd_detect_thread_stuck_cb, NULL)) {
@@ -838,6 +867,8 @@ VosWDThread
        else
           hddLog(LOG1, FL("Successfully started thread stuck timer"));
   }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   /*
   ** Ack back to the context from which the Watchdog thread has been
@@ -893,6 +924,10 @@ VosWDThread
       {
         VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO,
                 "%s: Watchdog thread signaled to shutdown", __func__);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         clear_bit(WD_SHUTDOWN_EVENT_MASK, &pWdContext->wdEventFlag);
         shutdown = VOS_TRUE;
         break;
@@ -945,19 +980,25 @@ VosWDThread
         else
         {
           pWdContext->isFatalError = false;
+<<<<<<< HEAD
           pHddCtx->isLogpInProgress = FALSE;
           vos_set_logp_in_progress(VOS_MODULE_ID_VOSS, FALSE);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         }
         atomic_set(&pHddCtx->isRestartInProgress, 0);
         pWdContext->resetInProgress = false;
         complete(&pHddCtx->ssr_comp_var);
       }
+<<<<<<< HEAD
       /* Post Msg to detect thread stuck */
       else if(test_and_clear_bit(WD_WLAN_DETECT_THREAD_STUCK_MASK,
                                           &pWdContext->wdEventFlag))
       {
         vos_wd_detect_thread_stuck();
       }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       else
       {
         //Unnecessary wakeup - Should never happen!!
@@ -968,7 +1009,10 @@ VosWDThread
     } // while message loop processing
   } // while shutdown
 
+<<<<<<< HEAD
   vos_timer_destroy(&pWdContext->threadStuckTimer);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   // If we get here the Watchdog thread must exit
   VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO,
       "%s: Watchdog Thread exiting !!!!", __func__);
@@ -1709,7 +1753,11 @@ void vos_sched_flush_mc_mqs ( pVosSchedContext pSchedContext )
   while( NULL != (pMsgWrapper = vos_mq_get(&pSchedContext->sysMcMq) ))
   {
     VOS_TRACE( VOS_MODULE_ID_VOSS,
+<<<<<<< HEAD
                VOS_TRACE_LEVEL_INFO,
+=======
+               VOS_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                "%s: Freeing MC SYS message type %d ",__func__,
                pMsgWrapper->pVosMsg->type );
     sysMcFreeMsg(pSchedContext->pVContext, pMsgWrapper->pVosMsg);
@@ -1720,7 +1768,11 @@ void vos_sched_flush_mc_mqs ( pVosSchedContext pSchedContext )
   {
     if(pMsgWrapper->pVosMsg != NULL) 
     {
+<<<<<<< HEAD
         VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO,
+=======
+        VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                    "%s: Freeing MC WDA MSG message type %d",
                    __func__, pMsgWrapper->pVosMsg->type );
         if (pMsgWrapper->pVosMsg->bodyptr) {
@@ -1739,7 +1791,11 @@ void vos_sched_flush_mc_mqs ( pVosSchedContext pSchedContext )
   {
     if(pMsgWrapper->pVosMsg != NULL)
     {
+<<<<<<< HEAD
         VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO,
+=======
+        VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                    "%s: Freeing MC WDI MSG message type %d",
                    __func__, pMsgWrapper->pVosMsg->type );
 
@@ -1772,7 +1828,11 @@ void vos_sched_flush_mc_mqs ( pVosSchedContext pSchedContext )
   while( NULL != (pMsgWrapper = vos_mq_get(&pSchedContext->peMcMq) ))
   {
     VOS_TRACE( VOS_MODULE_ID_VOSS,
+<<<<<<< HEAD
                VOS_TRACE_LEVEL_INFO,
+=======
+               VOS_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                "%s: Freeing MC PE MSG message type %d",__func__,
                pMsgWrapper->pVosMsg->type );
     peFreeMsg(vosCtx->pMACContext, (tSirMsgQ*)pMsgWrapper->pVosMsg);
@@ -1782,7 +1842,11 @@ void vos_sched_flush_mc_mqs ( pVosSchedContext pSchedContext )
   while( NULL != (pMsgWrapper = vos_mq_get(&pSchedContext->smeMcMq) ))
   {
     VOS_TRACE( VOS_MODULE_ID_VOSS,
+<<<<<<< HEAD
                VOS_TRACE_LEVEL_INFO,
+=======
+               VOS_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                "%s: Freeing MC SME MSG message type %d", __func__,
                pMsgWrapper->pVosMsg->type );
     sme_FreeMsg(vosCtx->pMACContext, pMsgWrapper->pVosMsg);
@@ -1792,7 +1856,11 @@ void vos_sched_flush_mc_mqs ( pVosSchedContext pSchedContext )
   while( NULL != (pMsgWrapper = vos_mq_get(&pSchedContext->tlMcMq) ))
   {
     VOS_TRACE( VOS_MODULE_ID_VOSS,
+<<<<<<< HEAD
                VOS_TRACE_LEVEL_INFO,
+=======
+               VOS_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                "%s: Freeing MC TL message type %d",__func__,
                pMsgWrapper->pVosMsg->type );
     WLANTL_McFreeMsg(pSchedContext->pVContext, pMsgWrapper->pVosMsg);
@@ -1934,6 +2002,7 @@ int vos_sched_is_rx_thread(int threadID)
    }
    return ((gpVosSchedContext->RxThread) && (threadID == gpVosSchedContext->RxThread->pid));
 }
+<<<<<<< HEAD
 
 /*-------------------------------------------------------------------------
  This helper function helps determine if thread id is of MC thread
@@ -1952,6 +2021,8 @@ int vos_sched_is_mc_thread(int threadID)
            (threadID == gpVosSchedContext->McThread->pid));
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*-------------------------------------------------------------------------
  Helper function to get the scheduler context
  ------------------------------------------------------------------------*/
@@ -2059,7 +2130,10 @@ VOS_STATUS vos_watchdog_wlan_shutdown(void)
         /* wcnss has crashed, and SSR has alredy been started by Kernel driver.
          * So disable SSR from WLAN driver */
         hdd_set_ssr_required( HDD_SSR_DISABLED );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         /* Release the lock here before returning */
         spin_unlock(&gpVosWatchdogContext->wdLock);
         return VOS_STATUS_E_FAILURE;
@@ -2125,6 +2199,11 @@ void vos_ssr_protect(const char *caller_func)
 {
      int count;
      count = atomic_inc_return(&ssr_protect_entry_count);
+<<<<<<< HEAD
+=======
+     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+               "%s: ENTRY ACTIVE %d", caller_func, count);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }
 
 /**
@@ -2139,6 +2218,7 @@ void vos_ssr_unprotect(const char *caller_func)
 {
    int count;
    count = atomic_dec_return(&ssr_protect_entry_count);
+<<<<<<< HEAD
 }
 /**
  * vos_is_wd_thread()- Check if threadid is
@@ -2171,4 +2251,8 @@ void vos_dump_stack(uint8_t thread_id)
           VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
                              "%s: Invalid thread invoked",__func__);
    }
+=======
+   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+               "%s: ENTRY INACTIVE %d", caller_func, count);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }

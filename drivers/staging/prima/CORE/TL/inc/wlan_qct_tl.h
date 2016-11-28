@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -102,10 +106,14 @@ when        who    what, where, why
 #define WLANTL_LLC_SNAP_OFFSET                0
 
 /*Size of the LLC/SNAP header*/
+<<<<<<< HEAD
 #define WLANTL_LLC_SNAP_SIZE                  8
 
 /* Number of Tx Queues, this should be same as NUM_TX_QUEUES in HDD */
 #define WLANTL_NUM_TX_QUEUES                  5
+=======
+#define WLANTL_LLC_SNAP_SIZE                   8
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /*============================================================================
  *     GENERIC STRUCTURES - not belonging to TL 
@@ -156,6 +164,7 @@ when        who    what, where, why
  --------------------------------------------------------------------------*/
 typedef enum
 {
+<<<<<<< HEAD
   /* The values from 0-3 correspond both to the TL tx queue
    * id and the also the AC corresponding to the packets queued
    */
@@ -176,6 +185,14 @@ typedef struct
    v_MACADDR_t    spoofMac;
 }WLANTL_SpoofMacAddr;
 
+=======
+  WLANTL_AC_BK = 0,
+  WLANTL_AC_BE = 1,
+  WLANTL_AC_VI = 2,
+  WLANTL_AC_VO = 3
+}WLANTL_ACEnumType; 
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*---------------------------------------------------------------------------
   STA Type
 ---------------------------------------------------------------------------*/
@@ -319,7 +336,11 @@ typedef struct
 typedef struct
 {
   /*AC weight for WFQ*/
+<<<<<<< HEAD
   v_U8_t   ucAcWeights[WLANTL_NUM_TX_QUEUES];
+=======
+  v_U8_t   ucAcWeights[WLANTL_MAX_AC]; 
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   /*Delayed trigger frame timmer: - used by TL to send trigger frames less 
     often when it has established that the App is suspended*/
@@ -406,9 +427,12 @@ typedef enum
 ---------------------------------------------------------------------------*/      
 typedef struct
 {
+<<<<<<< HEAD
   /* Save the AC of the packet */
   WLANTL_ACEnumType ac;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   /* TID of the packet being sent */
   v_U8_t    ucTID;
 
@@ -440,7 +464,10 @@ typedef struct
   v_BOOL_t  bMorePackets;
   /* notifying TL if this is an ARP frame or not */
   v_U8_t    ucIsArp;
+<<<<<<< HEAD
   v_U32_t   ucTxBdToken;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }WLANTL_MetaInfoType;
 
 /*---------------------------------------------------------------------------
@@ -609,8 +636,13 @@ typedef tSap_SoftapStats WLANTL_TRANSFER_STA_TYPE;
 typedef enum
 {
   WLANTL_DEBUG_TX_SNAPSHOT = 1<<0,
+<<<<<<< HEAD
   WLANTL_DEBUG_FW_CLEANUP = 1<<1,
   WLANTL_DEBUG_KICKDXE = 1<<2
+=======
+
+  WLANTL_DEBUG_FW_CLEANUP = 1<<1,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }WLANTL_DebugFlags;
 
 /*----------------------------------------------------------------------------
@@ -691,9 +723,12 @@ typedef VOS_STATUS (*WLANTL_STAFetchPktCBType)(
                                             vos_pkt_t**           vosDataBuff,
                                             WLANTL_MetaInfoType*  tlMetaInfo);
 
+<<<<<<< HEAD
 typedef VOS_STATUS (*WLANTL_MonRxCBType)( v_PVOID_t              pvosGCtx,
                                           vos_pkt_t*             vosDataBuff,
                                           int                    conversion);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*----------------------------------------------------------------------------
 
   DESCRIPTION   
@@ -1118,8 +1153,11 @@ WLANTL_ConfigureSwFrameTXXlationForAll
   v_BOOL_t enableFrameXlation
 );
 
+<<<<<<< HEAD
 VOS_STATUS WLANTL_SetMonRxCbk(v_PVOID_t pvosGCtx, WLANTL_MonRxCBType pfnMonRx);
 void WLANTL_SetIsConversionReq(v_PVOID_t pvosGCtx, v_BOOL_t isConversionReq);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*===========================================================================
 
   FUNCTION    WLANTL_RegisterSTAClient
@@ -1836,6 +1874,7 @@ WLANTL_FlushStaTID
 
 /*==========================================================================
 
+<<<<<<< HEAD
   FUNCTION    WLANTL_updateSpoofMacAddr
 
   DESCRIPTION
@@ -1872,6 +1911,8 @@ WLANTL_updateSpoofMacAddr
 );
 /*==========================================================================
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   FUNCTION    WLANTL_RegisterMgmtFrmClient
 
   DESCRIPTION 
@@ -2008,8 +2049,12 @@ WLANTL_TxMgmtFrm
   v_U8_t               tid,
   WLANTL_TxCompCBType  pfnCompTxFunc,
   v_PVOID_t            voosBDHeader,
+<<<<<<< HEAD
   v_U32_t              ucAckResponse,
   v_U32_t              ucTxBdToken
+=======
+  v_U32_t              ucAckResponse
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 );
 
 
@@ -2225,6 +2270,7 @@ WLANTL_GetRxPktCount
 );
 
 /*==========================================================================
+<<<<<<< HEAD
 
   FUNCTION    WLANTL_IsEAPOLPending
 
@@ -2260,6 +2306,8 @@ WLANTL_IsEAPOLPending
 );
 
 /*==========================================================================
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     VOSS SCHEDULER INTERACTION
   ==========================================================================*/
 
@@ -2945,15 +2993,26 @@ void WLANTL_PostResNeeded(v_PVOID_t pvosGCtx);
 
   DESCRIPTION
      This function is used by HDD to notify TL to finish Upper layer authentication
+<<<<<<< HEAD
      incase the last EAPOL packet is pending in the TL queue.
      To avoid the race condition between sme set key and the last EAPOL packet
      the HDD module calls this function just before calling the sme_RoamSetKey.
 
+=======
+     incase the last EAPOL packet is pending in the TL queue. 
+     To avoid the race condition between sme set key and the last EAPOL packet 
+     the HDD module calls this function just before calling the sme_RoamSetKey.
+   
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   DEPENDENCIES
 
     TL must have been initialized before this gets called.
 
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   PARAMETERS
 
    callbackRoutine:   HDD Callback function.
@@ -2962,9 +3021,15 @@ void WLANTL_PostResNeeded(v_PVOID_t pvosGCtx);
   RETURN VALUE
 
    VOS_STATUS_SUCCESS/VOS_STATUS_FAILURE
+<<<<<<< HEAD
 
   SIDE EFFECTS
 
+=======
+   
+  SIDE EFFECTS
+   
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ============================================================================*/
 
 VOS_STATUS WLANTL_Finish_ULA( void (*callbackRoutine) (void *callbackContext),

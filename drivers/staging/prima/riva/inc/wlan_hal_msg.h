@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 /* Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
 
 *
@@ -130,6 +134,7 @@ typedef tANI_U8 tHalIpv4Addr[4];
 #define WLAN_HAL_EXT_SCAN_MAX_SIG_CHANGE_APS         64
 #define WLAN_HAL_EXT_SCAN_MAX_RSSI_SAMPLE_SIZE       8
 
+<<<<<<< HEAD
 /* For Logging enhancement feature currently max 2 address will be passed */
 /* In future we may pass 3 address and length in suspend mode corner case */
 #define MAX_NUM_OF_BUFFER 3
@@ -154,6 +159,8 @@ typedef enum
     LOG_SIZE_96K  = 6
 }tHalLogBuffSize;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /* Message types for messages exchanged between WDI and HAL */
 typedef enum
 {
@@ -547,6 +554,7 @@ typedef enum
 
    WLAN_HAL_FW_STATS_REQ                    = 296,
    WLAN_HAL_FW_STATS_RSP                    = 297,
+<<<<<<< HEAD
    WLAN_HAL_FW_LOGGING_INIT_REQ             = 298,
    WLAN_HAL_FW_LOGGING_INIT_RSP             = 299,
    WLAN_HAL_GET_FRAME_LOG_REQ               = 300,
@@ -568,6 +576,9 @@ typedef enum
    WLAN_HAL_FW_LOGGING_DXE_DONE_IND         = 311,
    WLAN_HAL_LOST_LINK_PARAMETERS_IND        = 312,
    WLAN_HAL_SEND_FREQ_RANGE_CONTROL_IND     = 313,
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    WLAN_HAL_MSG_MAX = WLAN_HAL_MSG_TYPE_MAX_ENUM_SIZE
 }tHalHostMsgType;
 
@@ -3230,6 +3241,7 @@ typedef PACKED_PRE struct PACKED_POST
    tHalStatsRspParams statsRspParams;
 } tHalStatsRspMsg, *tpHalStatsRspMsg;
 
+<<<<<<< HEAD
  /*---------------------------------------------------------------------------
  * WLAN_HAL_SET_RTS_CTS_HTVHT_IND
  *---------------------------------------------------------------------------*/
@@ -3244,6 +3256,8 @@ typedef PACKED_PRE struct PACKED_POST
    tHalRtsCtsHtvhtIndParams   rtsCtsHtvhtIndParams;
 } tHalRtsCtsHtvhtIndMsg, *tpHalRtsCtsHtvhtIndMsg;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*---------------------------------------------------------------------------
  * WLAN_HAL_FW_STATS_REQ
  *---------------------------------------------------------------------------*/
@@ -5822,8 +5836,11 @@ typedef PACKED_PRE struct PACKED_POST
 {
    /*Tx Complete Indication Success or Failure*/
    tANI_U32   status;
+<<<<<<< HEAD
    /* Dialog token */
    tANI_U32   dialogToken;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }tTxComplParams,*tpTxComplParams;
 
 typedef PACKED_PRE struct PACKED_POST
@@ -6020,8 +6037,11 @@ typedef enum
     eAUTH_TYPE_WAPI_WAI_PSK          = 9,
     eAUTH_TYPE_CCKM_WPA              = 10,
     eAUTH_TYPE_CCKM_RSN              = 11,
+<<<<<<< HEAD
     eAUTH_TYPE_RSN_PSK_SHA256        = 12,
     eAUTH_TYPE_RSN_8021X_SHA256      = 13,
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
     eAUTH_TYPE_MAX = WLAN_HAL_MAX_ENUM_SIZE
 
@@ -6769,10 +6789,13 @@ typedef enum {
     FW_STATS               = 47,
     WPS_PRBRSP_TMPL        = 48,
     BCN_IE_FLT_DELTA       = 49,
+<<<<<<< HEAD
     TDLS_OFF_CHANNEL       = 51,
     MGMT_FRAME_LOGGING     = 53,
     ENHANCED_TXBD_COMPLETION = 54,
     LOGGING_ENHANCEMENT    = 55,
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     MAX_FEATURE_SUPPORTED  = 128,
 } placeHolderInCapBitmap;
 
@@ -6800,7 +6823,10 @@ typedef PACKED_PRE struct PACKED_POST{
 #define IS_DYNAMIC_WMM_PS_SUPPORTED_BY_HOST ((!!(halMsg_GetHostWlanFeatCaps(DYNAMIC_WMM_PS))))
 #define IS_MAC_SPOOF_SCAN_SUPPORTED_BY_HOST ((!!(halMsg_GetHostWlanFeatCaps(MAC_SPOOFED_SCAN))))
 #define IS_NEW_BMU_ERROR_RECOVERY_SUPPORTED_BY_HOST ((!!(halMsg_GetHostWlanFeatCaps(BMU_ERROR_GENERIC_RECOVERY))))
+<<<<<<< HEAD
 #define IS_ENHANCED_TXBD_COMPLETION_SUPPORTED_BY_HOST ((!!(halMsg_GetHostWlanFeatCaps(ENHANCED_TXBD_COMPLETION))))
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 tANI_U8 halMsg_GetHostWlanFeatCaps(tANI_U8 feat_enum_value);
 
@@ -7787,7 +7813,11 @@ typedef PACKED_PRE struct PACKED_POST
  * WLAN_HAL_AVOID_FREQ_RANGE_IND
  *-------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 #define WLAN_HAL_MAX_AVOID_FREQ_RANGE           15
+=======
+#define WLAN_HAL_MAX_AVOID_FREQ_RANGE           4
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 typedef PACKED_PRE struct PACKED_POST
 {
@@ -8501,6 +8531,7 @@ typedef PACKED_PRE struct PACKED_POST
     tHalMsgHeader         header;
     tMacSpoofedScanResp tMacSpoofedScanRespParams;
 }  tMacSpoofedScanRespMsg,  * tpMacSpoofedScanRespMsg;
+<<<<<<< HEAD
 /*---------------------------------------------------------------------------
  *WLAN_HAL_GET_FRAME_LOG_REQ
  *--------------------------------------------------------------------------*/
@@ -8765,6 +8796,8 @@ typedef PACKED_PRE struct PACKED_POST
 {
   tANI_U8   status;
 }tHalAvoidFreqRangeCtrlParam, *tpHalAvoidFreqRangeCtrlParam;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #if defined(__ANI_COMPILER_PRAGMA_PACK_STACK)
 #pragma pack(pop)

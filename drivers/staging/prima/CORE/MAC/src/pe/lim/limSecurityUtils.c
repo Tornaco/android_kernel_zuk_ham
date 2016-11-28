@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2013-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -39,7 +43,11 @@
 #include "wniApi.h"
 
 #include "sirCommon.h"
+<<<<<<< HEAD
 #include "wniCfg.h"
+=======
+#include "wniCfgSta.h"
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #include "cfgApi.h"
 
 
@@ -50,10 +58,13 @@
 
 
 #define LIM_SEED_LENGTH 16
+<<<<<<< HEAD
 /**
  *preauth node timeout value in interval of 10msec
  */
 #define LIM_OPENAUTH_TIMEOUT 500
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /**
  * limIsAuthAlgoSupported()
@@ -215,7 +226,11 @@ limDeletePreAuthList(tpAniSirGlobal pMac)
     {
         pTempNode = pCurrNode->next;
 
+<<<<<<< HEAD
         limLog(pMac, LOG1, FL("=====> limDeletePreAuthList "));
+=======
+        PELOG1(limLog(pMac, LOG1, FL("=====> limDeletePreAuthList "));)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         limReleasePreAuthNode(pMac, pCurrNode);
 
         pCurrNode = pTempNode;
@@ -264,6 +279,7 @@ limSearchPreAuthList(tpAniSirGlobal pMac, tSirMacAddr macAddr)
     return pTempNode;
 } /*** end limSearchPreAuthList() ***/
 
+<<<<<<< HEAD
 /**
  * limDeleteOpenAuthPreAuthNode
  *
@@ -327,6 +343,9 @@ limDeleteOpenAuthPreAuthNode(tpAniSirGlobal pMac)
 
     return authNodeFreed;
 }
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /**
  * limAddPreAuthNode
@@ -431,11 +450,18 @@ limDeletePreAuthNode(tpAniSirGlobal pMac, tSirMacAddr macAddr)
         pMac->lim.pLimPreAuthList = pTempNode->next;
 
 
+<<<<<<< HEAD
         limLog(pMac, LOG1, FL(" first node to delete"));
         limLog(pMac, LOG1,
                FL(" Release data entry:%p idx %d peer: " MAC_ADDRESS_STR),
                                          pTempNode, pTempNode->authNodeIdx,
                                                    MAC_ADDR_ARRAY(macAddr));
+=======
+        PELOG1(limLog(pMac, LOG1, FL("=====> limDeletePreAuthNode : first node to delete"));)
+        PELOG1(limLog(pMac, LOG1, FL("Release data entry: %x id %d peer "),
+                        pTempNode, pTempNode->authNodeIdx);
+        limPrintMacAddr(pMac, macAddr, LOG1);)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         limReleasePreAuthNode(pMac, pTempNode);
 
         return;
@@ -453,10 +479,17 @@ limDeletePreAuthNode(tpAniSirGlobal pMac, tSirMacAddr macAddr)
 
             pPrevNode->next = pTempNode->next;
 
+<<<<<<< HEAD
             limLog(pMac, LOG1, FL(" subsequent node to delete"));
             limLog(pMac, LOG1,
                    FL("Release data entry: %p id %d peer: "MAC_ADDRESS_STR),
                    pTempNode, pTempNode->authNodeIdx, MAC_ADDR_ARRAY(macAddr));
+=======
+            PELOG1(limLog(pMac, LOG1, FL("=====> limDeletePreAuthNode : subsequent node to delete"));
+            limLog(pMac, LOG1, FL("Release data entry: %x id %d peer "),
+                         pTempNode, pTempNode->authNodeIdx);
+            limPrintMacAddr(pMac, macAddr, LOG1);)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
             limReleasePreAuthNode(pMac, pTempNode);
 
             return;
@@ -524,6 +557,7 @@ limRestoreFromAuthState(tpAniSirGlobal pMac, tSirResultCodes resultCode, tANI_U1
     sessionEntry->limMlmState = sessionEntry->limPrevMlmState;
     
     MTRACE(macTrace(pMac, TRACE_CODE_MLM_STATE, sessionEntry->peSessionId, sessionEntry->limMlmState));
+<<<<<<< HEAD
     /* Set the authAckStatus status flag as sucess as
      * host have received the auth rsp and no longer auth
      * retry is needed also cancel the auth rety timer
@@ -531,6 +565,10 @@ limRestoreFromAuthState(tpAniSirGlobal pMac, tSirResultCodes resultCode, tANI_U1
     pMac->authAckStatus = LIM_AUTH_ACK_RCD_SUCCESS;
     // 'Change' timer for future activations
     limDeactivateAndChangeTimer(pMac, eLIM_AUTH_RETRY_TIMER);
+=======
+
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     // 'Change' timer for future activations
     limDeactivateAndChangeTimer(pMac, eLIM_AUTH_FAIL_TIMER);
 

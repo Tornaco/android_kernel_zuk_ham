@@ -76,7 +76,11 @@
 #define VPKT_SIZE_BUFFER  ((30 * 128) + 32)
 
 /* Transport channel count to report DIAG */
+<<<<<<< HEAD
 #define WPT_NUM_TRPT_CHANNEL      8
+=======
+#define WPT_NUM_TRPT_CHANNEL      4
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /* Transport channel name string size */
 #define WPT_TRPT_CHANNEL_NAME     4
 
@@ -412,6 +416,7 @@ void wpalPacketStallDumpLog
 );
 #endif /* FEATURE_WLAN_DIAG_SUPPORT */
 
+<<<<<<< HEAD
 /*---------------------------------------------------------------------------
     wpalLogPktSerialize - Serialize Logging data to logger thread
 
@@ -448,4 +453,6 @@ void wpalFwLogPktSerialize
 (
    wpt_packet *pFrame
 );
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #endif // __WLAN_QCT_PAL_PACKET_H

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2011-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2011-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -37,7 +41,11 @@
  *
  */
 
+<<<<<<< HEAD
 #include "wniCfg.h"
+=======
+#include "wniCfgSta.h"
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #include "cfgApi.h"
 #include "limTypes.h"
 #include "limTimerUtils.h"
@@ -152,8 +160,13 @@ void limTriggerBackgroundScan(tpAniSirGlobal pMac)
     tSirMacAddr      bcAddr = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
     tSirBackgroundScanMode   backgroundScan;
 
+<<<<<<< HEAD
     limLog(pMac, LOG1, FL("Background Scan: %d success, %d consec fail "),
         pMac->lim.gLimNumOfBackgroundScanSuccess,  pMac->lim.gLimNumOfConsecutiveBkgndScanFailure);
+=======
+    PELOG1(limLog(pMac, LOG1, FL("Background Scan: %d success, %d consec fail "),
+        pMac->lim.gLimNumOfBackgroundScanSuccess,  pMac->lim.gLimNumOfConsecutiveBkgndScanFailure);)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
     if (! limIsBackgroundScanAllowed(pMac))
     {

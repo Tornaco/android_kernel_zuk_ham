@@ -64,6 +64,12 @@ PANIC_ON_BUG := 1
 #Re-enable wifi on WDI timeout
 RE_ENABLE_WIFI_ON_WDI_TIMEOUT := 0
 
+<<<<<<< HEAD
+=======
+#Measure Roam Delay
+MEASURE_ROAM_TIME_DELAY := 0
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ifeq ($(CONFIG_CFG80211),y)
 HAVE_CFG80211 := 1
 else
@@ -300,9 +306,12 @@ SME_P2P_OBJS = $(SME_SRC_DIR)/p2p/p2p_Api.o
 
 SME_RRM_OBJS := $(SME_SRC_DIR)/rrm/sme_rrm.o
 
+<<<<<<< HEAD
 SME_NAN_OBJS = $(SME_SRC_DIR)/nan/nan_Api.o
 
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 SME_OBJS :=	$(SME_BTC_OBJS) \
 		$(SME_CCM_OBJS) \
 		$(SME_CMN_OBJS) \
@@ -311,8 +320,12 @@ SME_OBJS :=	$(SME_BTC_OBJS) \
 		$(SME_P2P_OBJS) \
 		$(SME_PMC_OBJS) \
 		$(SME_QOS_OBJS) \
+<<<<<<< HEAD
 		$(SME_RRM_OBJS) \
 		$(SME_NAN_OBJS)
+=======
+		$(SME_RRM_OBJS)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 ############ SVC ############
 SVC_DIR :=	CORE/SVC
@@ -506,7 +519,10 @@ OBJS :=		$(BAP_OBJS) \
 		$(WDI_OBJS)
 
 EXTRA_CFLAGS += $(INCS)
+<<<<<<< HEAD
 EXTRA_CFLAGS += -fno-pic
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 CDEFINES :=	-DANI_BUS_TYPE_PLATFORM=1 \
 		-DANI_LITTLE_BYTE_ENDIAN \
@@ -598,7 +614,19 @@ endif
 #normally, TDLS negative behavior is not needed
 ifeq ($(CONFIG_QCOM_TDLS),y)
 CDEFINES += -DFEATURE_WLAN_TDLS
+<<<<<<< HEAD
 CDEFINES += -DCONFIG_TDLS_IMPLICIT
+=======
+ifeq ($(BUILD_DEBUG_VERSION),1)
+CDEFINES += -DWLAN_FEATURE_TDLS_DEBUG
+endif
+CDEFINES += -DCONFIG_TDLS_IMPLICIT
+#CDEFINES += -DFEATURE_WLAN_TDLS_NEGATIVE
+#Code under FEATURE_WLAN_TDLS_INTERNAL is ported from volans, This code
+#is not tested only verifed that it compiles. This is not required for
+#supplicant based implementation
+#CDEFINES += -DFEATURE_WLAN_TDLS_INTERNAL
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 endif
 
 ifeq ($(CONFIG_PRIMA_WLAN_BTAMP),y)
@@ -650,8 +678,16 @@ ifeq ($(CONFIG_ENABLE_LINUX_REG), y)
 CDEFINES += -DCONFIG_ENABLE_LINUX_REG
 endif
 
+<<<<<<< HEAD
 CDEFINES += -DFEATURE_WLAN_CH_AVOID
 CDEFINES += -DWLAN_FEATURE_AP_HT40_24G
+=======
+ifeq ($(MEASURE_ROAM_TIME_DELAY),1)
+CDEFINES += -DDEBUG_ROAM_DELAY
+endif
+
+CDEFINES += -DFEATURE_WLAN_CH_AVOID
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 # Some kernel include files are being moved.  Check to see if
 # the old version of the files are present

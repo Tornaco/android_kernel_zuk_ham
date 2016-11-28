@@ -36,6 +36,12 @@
                
    Definitions for vOSS Timer services
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
 
@@ -328,6 +334,10 @@ v_TIME_t vos_timer_get_system_ticks( v_VOID_t );
   ------------------------------------------------------------------------*/
 v_TIME_t vos_timer_get_system_time( v_VOID_t );
 
+<<<<<<< HEAD
 v_BOOL_t vos_timer_is_initialized(vos_timer_t *timer);
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #endif // #if !defined __VOSS_TIMER_H

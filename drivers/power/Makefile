@@ -64,7 +64,13 @@ obj-$(CONFIG_PM8921_BMS)	+= pm8921-bms.o
 obj-$(CONFIG_QPNP_BMS)		+= qpnp-bms.o
 obj-$(CONFIG_PM8921_CHARGER)	+= pm8921-charger.o
 obj-$(CONFIG_QPNP_CHARGER)	+= qpnp-charger.o
+obj-$(CONFIG_BQ24196_CHARGER)	+= bq24196_charger.o
 obj-$(CONFIG_LTC4088_CHARGER)	+= ltc4088-charger.o
 obj-$(CONFIG_CHARGER_SMB347)	+= smb347-charger.o
 obj-$(CONFIG_BATTERY_BCL)	+= battery_current_limit.o
+<<<<<<< HEAD
 obj-$(CONFIG_BATTERY_BQ27530)	+= bq275x_bat_charger.o
+=======
+obj-$(CONFIG_HMAC_SHA1_BQ27541)	+= hmac_sha1_bq27541.o
+obj-$(CONFIG_PIC1503_FASTCG)	+= pic16F1503_fastcg.o
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

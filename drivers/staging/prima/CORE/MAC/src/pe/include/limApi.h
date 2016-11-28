@@ -97,7 +97,10 @@ typedef enum eMgmtFrmDropReason
     eMGMT_DROP_SCAN_MODE_FRAME,
     eMGMT_DROP_NON_SCAN_MODE_FRAME,
     eMGMT_DROP_INVALID_SIZE,
+<<<<<<< HEAD
     eMGMT_DROP_SPURIOUS_FRAME,
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }tMgmtFrmDropReason;
 
 
@@ -127,8 +130,11 @@ void limDumpInit(tpAniSirGlobal pMac);
 extern void limCleanup(tpAniSirGlobal);
 /// Function to post messages to LIM thread
 extern tANI_U32  limPostMsgApi(tpAniSirGlobal, tSirMsgQ *);
+<<<<<<< HEAD
 tANI_U32  limPostMsgApiHighPri(tpAniSirGlobal, tSirMsgQ *);
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /**
  * Function to process messages posted to LIM thread
  * and dispatch to various sub modules within LIM module.
@@ -193,6 +199,7 @@ void limHandleLowRssiInd(tpAniSirGlobal pMac);
 void limHandleBmpsStatusInd(tpAniSirGlobal pMac);
 void limHandleMissedBeaconInd(tpAniSirGlobal pMac, tpSirMsgQ pMsg);
 tMgmtFrmDropReason limIsPktCandidateForDrop(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U32 subType);
+<<<<<<< HEAD
 boolean limIsDeauthDiassocForDrop(tpAniSirGlobal pMac,
                                           tANI_U8 *pRxPacketInfo);
 #ifdef WLAN_FEATURE_11W
@@ -205,6 +212,9 @@ void limUpdateLostLinkParams(tpAniSirGlobal pMac,
                    tpPESession psessionEntry, tANI_U8 *pRxPacketInfo);
 
 
+=======
+void limMicFailureInd(tpAniSirGlobal pMac, tpSirMsgQ pMsg);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /* ----------------------------------------------------------------------- */
 // These used to be in DPH
 extern void limSetBssid(tpAniSirGlobal pMac, tANI_U8 *bssId);

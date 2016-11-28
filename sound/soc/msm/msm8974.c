@@ -33,7 +33,11 @@
 #include "qdsp6v2/msm-pcm-routing-v2.h"
 #include "../codecs/wcd9xxx-common.h"
 #include "../codecs/wcd9320.h"
-
+//OPPO 2013-12-13 liuyan add version recognition 
+#ifdef CONFIG_MACH_MSM8974_14001 
+#include <linux/pcb_version.h>
+#endif
+//liuyan add end
 #define DRV_NAME "msm8974-asoc-taiko"
 
 #define MSM8974_SPK_ON 1
@@ -81,12 +85,20 @@ static int msm8974_auxpcm_rate = 8000;
 static void *adsp_state_notifier;
 
 #define ADSP_STATE_READY_TIMEOUT_MS 50
+<<<<<<< HEAD
 
 #ifdef CONFIG_MACH_SHENQI_K9
 extern int msm_q6_enable_mi2s_clocks(bool enable);
 static bool system_bootup = 1;
 #endif
 
+=======
+//OPPO 2013-12-13 liuyan add  for dvt
+#ifdef CONFIG_MACH_MSM8974_14001 
+int pcb_version;
+#endif
+//liuyan add end
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 static inline int param_is_mask(int p)
 {
 	return ((p >= SNDRV_PCM_HW_PARAM_FIRST_MASK) &&
@@ -115,6 +127,7 @@ static const struct soc_enum msm8974_auxpcm_enum[] = {
 		SOC_ENUM_SINGLE_EXT(2, auxpcm_rate_text),
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_SHENQI_K9
 #define QUAT_MI2S_ENABLE
 
@@ -154,6 +167,63 @@ static struct request_gpio quat_mi2s_gpio[] = {
 };
 #endif
 #endif
+=======
+#ifdef CONFIG_OPPO_MSM_14021
+/* xiaojun.lv@PhoneDpt.AudioDrv, 2014/06/25, add for 14021 sec i2s patch */
+#define GPIO_SEC_MI2S_MCLK   78
+#define GPIO_SEC_MI2S_SCK    79
+#define GPIO_SEC_MI2S_WS     80
+#define GPIO_SEC_MI2S_DATA0  81
+#define GPIO_SEC_MI2S_DATA1  82
+
+
+#define MI2S_LPASS_CLK_ENABLE
+
+#ifdef MI2S_LPASS_CLK_ENABLE
+#include <sound/q6afe-v2.h>
+#endif
+
+struct request_gpio {
+	unsigned gpio_no;
+	char *gpio_name;
+};
+static struct request_gpio sec_mi2s_gpio[] = {
+
+	{
+		.gpio_no = GPIO_SEC_MI2S_MCLK,
+		.gpio_name = "SEC_MI2S_MCLK",
+	},
+
+	{
+		.gpio_no = GPIO_SEC_MI2S_SCK,
+		.gpio_name = "SEC_MI2S_SCK",
+	},
+	{
+		.gpio_no = GPIO_SEC_MI2S_WS,
+		.gpio_name = "SEC_MI2S_WS",
+	},
+
+	{
+		.gpio_no = GPIO_SEC_MI2S_DATA0,
+		.gpio_name = "SEC_MI2S_DATA0",
+	},
+	{
+		.gpio_no = GPIO_SEC_MI2S_DATA1,
+		.gpio_name = "SEC_MI2S_DATA1",
+	},
+
+
+};
+/* MI2S clock */
+struct mi2s_clk {
+	struct clk *core_clk;
+	struct clk *osr_clk;
+	struct clk *bit_clk;
+	atomic_t mi2s_rsc_ref;
+};
+static struct mi2s_clk sec_mi2s_clk;
+#endif /* CONFIG_OPPO_MSM_14021 */
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 void *def_taiko_mbhc_cal(void);
 static int msm_snd_enable_codec_ext_clk(struct snd_soc_codec *codec, int enable,
@@ -168,13 +238,24 @@ static struct wcd9xxx_mbhc_config mbhc_cfg = {
 	.mclk_rate = TAIKO_EXT_CLK_RATE,
 	.gpio = 0,
 	.gpio_irq = 0,
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_SHENQI_K9
 	.gpio_level_insert = 0,
 #else
 	.gpio_level_insert = 1,
+=======
+#ifndef CONFIG_MACH_MSM8974_14001 //luyan modify 2013-4-18
+	.gpio_level_insert = 1,
+#else
+	.gpio_level_insert = 0,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #endif
 	.detect_extn_cable = true,
+#ifdef CONFIG_MACH_MSM8974_14001 //luyan modify micbias to dc
+	.micbias_enable_flags = 1 << MBHC_MICBIAS_ENABLE_THRESHOLD_HEADSET | 1<<MBHC_MICBIAS_ENABLE_REGULAR_HEADSET,
+#else
 	.micbias_enable_flags = 1 << MBHC_MICBIAS_ENABLE_THRESHOLD_HEADSET,
+#endif
 	.insert_detect = true,
 	.swap_gnd_mic = NULL,
 	.cs_enable_flags = (1 << MBHC_CS_ENABLE_POLLING |
@@ -185,6 +266,15 @@ static struct wcd9xxx_mbhc_config mbhc_cfg = {
 	.use_vddio_meas = true,
 	.enable_anc_mic_detect = false,
 	.hw_jack_type = SIX_POLE_JACK,
+
+/* OPPO 2013-10-22 liuyan Modify end */
+#ifdef CONFIG_MACH_MSM8974_14001  //liuyan add 2013-4-18
+       .hpmic_switch_gpio=0,
+       .enable_spk_gpio=0,
+	.yda145_ctr_gpio=0,
+	.yda145_boost_gpio=0,
+       .count_regulator=0,
+#endif
 };
 
 struct msm_auxpcm_gpio {
@@ -199,6 +289,18 @@ struct msm_auxpcm_ctrl {
 };
 
 struct msm8974_asoc_mach_data {
+//liuyan 2013-3-14 add,hp mic switch
+#ifdef CONFIG_MACH_MSM8974_14001
+       int hpmic_switch_gpio;
+#ifdef CONFIG_MACH_MSM8974_14001
+/* xiaojun.lv@Prd.AudioDrv,2014/2/10,add for 14001 regulator*/       
+	struct regulator	*cdc_spk;
+#endif	
+	int enable_spk_gpio;
+	int yda145_ctr_gpio;
+	int yda145_boost_gpio;
+#endif
+//liuyan add end
 	int mclk_gpio;
 	u32 mclk_freq;
 	int us_euro_gpio;
@@ -748,6 +850,7 @@ static const struct snd_soc_dapm_widget msm8974_dapm_widgets[] = {
 
 	SND_SOC_DAPM_MIC("Handset Mic", NULL),
 	SND_SOC_DAPM_MIC("Headset Mic", NULL),
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_SHENQI_K9
 	SND_SOC_DAPM_MIC("ANC Front Mic", NULL),
 	SND_SOC_DAPM_MIC("DUAL Rear Mic", NULL),
@@ -755,6 +858,18 @@ static const struct snd_soc_dapm_widget msm8974_dapm_widgets[] = {
 	SND_SOC_DAPM_MIC("ANCRight Headset Mic", NULL),
 	SND_SOC_DAPM_MIC("ANCLeft Headset Mic", NULL),
 #endif
+=======
+//liuyan 2013-4-18 modify
+#ifndef CONFIG_MACH_MSM8974_14001
+	SND_SOC_DAPM_MIC("ANCRight Headset Mic", NULL),
+	SND_SOC_DAPM_MIC("ANCLeft Headset Mic", NULL),
+#else
+       SND_SOC_DAPM_MIC("Main Mic", NULL),
+	SND_SOC_DAPM_MIC("Second Mic", NULL),
+	SND_SOC_DAPM_MIC("ANC Mic", NULL),
+#endif
+//liuyan modify end
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 	SND_SOC_DAPM_MIC("Analog Mic4", NULL),
 	SND_SOC_DAPM_MIC("Analog Mic6", NULL),
 	SND_SOC_DAPM_MIC("Analog Mic7", NULL),
@@ -1602,7 +1717,13 @@ static int msm_audrx_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
 	struct snd_soc_dai *codec_dai = rtd->codec_dai;
-
+//liuyan 2013-3-14 add,hpmic switch
+#ifdef CONFIG_MACH_MSM8974_14001
+#ifndef CONFIG_OPPO_MSM_14021
+       struct msm8974_asoc_mach_data *mach_data;
+#endif       
+#endif
+//liuyan add end
 	/* Taiko SLIMBUS configuration
 	 * RX1, RX2, RX3, RX4, RX5, RX6, RX7, RX8, RX9, RX10, RX11, RX12, RX13
 	 * TX1, TX2, TX3, TX4, TX5, TX6, TX7, TX8, TX9, TX10, TX11, TX12, TX13
@@ -1689,6 +1810,70 @@ static int msm_audrx_init(struct snd_soc_pcm_runtime *rtd)
 		}
 	}
 	/* start mbhc */
+//liuyan 2013-3-14 add, hpmi switch gpio
+#ifndef CONFIG_OPPO_MSM_14021
+       mach_data=(struct msm8974_asoc_mach_data*)(rtd->card->drvdata);
+	mbhc_cfg.enable_spk_gpio=mach_data->enable_spk_gpio;
+	if (mbhc_cfg.enable_spk_gpio) {
+		err = gpio_request(mbhc_cfg.enable_spk_gpio, "ENABLE_SPK");
+		if (err) {
+			pr_err("%s: Failed to request gpio %d\n", __func__,
+				mbhc_cfg.enable_spk_gpio);
+			mbhc_cfg.enable_spk_gpio = 0;
+
+		}
+	       
+	}
+	gpio_direction_output(mbhc_cfg.enable_spk_gpio, 0);
+	printk("%s:enable_spk_gpio(%d)\n",__func__,mbhc_cfg.enable_spk_gpio);
+	//mbhc_cfg.cdc_spk=mach_data->cdc_spk;
+	//liuyan add for dvt
+#ifndef CONFIG_MACH_MSM8974_14001
+/* xiaojun.lv@Prd.AudioDrv,2014/2/22,modify for 14001 spk control*/	
+	if(pcb_version >= HW_VERSION__12){
+           mbhc_cfg.yda145_ctr_gpio=mach_data->yda145_ctr_gpio;
+	if (mbhc_cfg.yda145_ctr_gpio) {
+		err = gpio_request(mbhc_cfg.yda145_ctr_gpio, "YDA145_CTR");
+		if (err) {
+			pr_err("%s: Failed to request gpio %d\n", __func__,
+				mbhc_cfg.yda145_ctr_gpio);
+			mbhc_cfg.yda145_ctr_gpio = 0;
+
+		}
+	       
+	}
+	gpio_direction_output(mbhc_cfg.yda145_ctr_gpio, 0);
+	printk("%s:yda145_ctr_gpio(%d)\n",__func__,mbhc_cfg.yda145_ctr_gpio);
+
+	mbhc_cfg.yda145_boost_gpio=mach_data->yda145_boost_gpio;
+	if (mbhc_cfg.yda145_boost_gpio) {
+		err = gpio_request(mbhc_cfg.yda145_boost_gpio, "YDA145_BOOST");
+		if (err) {
+			pr_err("%s: Failed to request gpio %d\n", __func__,
+				mbhc_cfg.yda145_boost_gpio);
+			mbhc_cfg.yda145_boost_gpio = 0;
+
+		}
+	       
+	}
+	gpio_direction_output(mbhc_cfg.yda145_boost_gpio, 0);
+	printk("%s:yda145_boost_gpio(%d)\n",__func__,mbhc_cfg.yda145_boost_gpio);
+	}
+#else /* CONFIG_MACH_MSM8974_14001 */
+    mbhc_cfg.yda145_ctr_gpio=mach_data->yda145_ctr_gpio;
+	if (mbhc_cfg.yda145_ctr_gpio) {
+		err = gpio_request(mbhc_cfg.yda145_ctr_gpio, "YDA145_CTR");
+		if (err) {
+			pr_err("%s: Failed to request gpio %d\n", __func__,
+				mbhc_cfg.yda145_ctr_gpio);
+			mbhc_cfg.yda145_ctr_gpio = 0;
+		}
+	}
+	gpio_direction_output(mbhc_cfg.yda145_ctr_gpio, 0);
+	printk("%s:yda145_ctr_gpio(%d)\n",__func__,mbhc_cfg.yda145_ctr_gpio);
+#endif /* CONFIG_MACH_MSM8974_14001 */
+#endif
+//liuyan add end
 	mbhc_cfg.calibration = def_taiko_mbhc_cal();
 	if (mbhc_cfg.calibration) {
 		err = taiko_hs_detect(codec, &mbhc_cfg);
@@ -1722,7 +1907,10 @@ static int msm8974_snd_startup(struct snd_pcm_substream *substream)
 		 substream->name, substream->stream);
 	return 0;
 }
-
+#ifndef CONFIG_MACH_MSM8974_14001
+/* xiaojun.lv@Prd.AudioDrv,2014/3/7,modify for 14001 headset input key's voltage range*/
+//liuyan 2013-3-13 change no_mic form 30 to 100,hs_max from 2400 to 2000
+//liuyan 2013-7-22 change button0 threshold form -50 to -70
 void *def_taiko_mbhc_cal(void)
 {
 	void *taiko_cal;
@@ -1776,6 +1964,7 @@ void *def_taiko_mbhc_cal(void)
 	btn_low = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg, MBHC_BTN_DET_V_BTN_LOW);
 	btn_high = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg,
 					       MBHC_BTN_DET_V_BTN_HIGH);
+<<<<<<< HEAD
 	btn_low[0] = -75;
 	btn_high[0] = 150;
 	btn_low[1] = 151;
@@ -1792,6 +1981,30 @@ void *def_taiko_mbhc_cal(void)
 	btn_high[6] = 244;
 	btn_low[7] = 245;
 	btn_high[7] = 930;
+=======
+#ifndef CONFIG_MACH_MSM8974_14001 //liuyan 2013-12-10 modify the switch reange
+	btn_low[0] = -50; 
+	btn_high[0] = 20;
+	btn_low[1] = 21;
+#else
+	btn_low[0] = -70; 
+	btn_high[0] = 40;
+	btn_low[1] = 41;
+#endif
+	btn_high[1] = 61;
+	btn_low[2] = 62;
+	btn_high[2] = 104;
+	btn_low[3] = 105;
+	btn_high[3] = 148;
+	btn_low[4] = 149;
+	btn_high[4] = 189;
+	btn_low[5] = 190;
+	btn_high[5] = 228;
+	btn_low[6] = 229;
+	btn_high[6] = 269;
+	btn_low[7] = 270;
+	btn_high[7] = 500;
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 	n_ready = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg, MBHC_BTN_DET_N_READY);
 	n_ready[0] = 80;
 	n_ready[1] = 68;
@@ -1804,7 +2017,91 @@ void *def_taiko_mbhc_cal(void)
 
 	return taiko_cal;
 }
+#else /* CONFIG_MACH_MSM8974_14001 */
+void *def_taiko_mbhc_cal(void)
+{
+	void *taiko_cal;
+	struct wcd9xxx_mbhc_btn_detect_cfg *btn_cfg;
+	u16 *btn_low, *btn_high;
+	u8 *n_ready, *n_cic, *gain;
 
+	taiko_cal = kzalloc(WCD9XXX_MBHC_CAL_SIZE(WCD9XXX_MBHC_DEF_BUTTONS,
+						WCD9XXX_MBHC_DEF_RLOADS),
+			    GFP_KERNEL);
+	if (!taiko_cal) {
+		pr_err("%s: out of memory\n", __func__);
+		return NULL;
+	}
+
+#define S(X, Y) ((WCD9XXX_MBHC_CAL_GENERAL_PTR(taiko_cal)->X) = (Y))
+	S(t_ldoh, 100);
+	S(t_bg_fast_settle, 100);
+	S(t_shutdown_plug_rem, 255);
+	S(mbhc_nsa, 4);
+	S(mbhc_navg, 4);
+#undef S
+#define S(X, Y) ((WCD9XXX_MBHC_CAL_PLUG_DET_PTR(taiko_cal)->X) = (Y))
+	S(mic_current, TAIKO_PID_MIC_5_UA);
+	S(hph_current, TAIKO_PID_MIC_5_UA);
+	S(t_mic_pid, 100);
+	S(t_ins_complete, 250);
+	S(t_ins_retry, 200);
+#undef S
+#define S(X, Y) ((WCD9XXX_MBHC_CAL_PLUG_TYPE_PTR(taiko_cal)->X) = (Y))
+	S(v_no_mic, 30);
+	S(v_hs_max, 2400);
+#undef S
+#define S(X, Y) ((WCD9XXX_MBHC_CAL_BTN_DET_PTR(taiko_cal)->X) = (Y))
+	S(c[0], 62);
+	S(c[1], 124);
+	S(nc, 1);
+	S(n_meas, 3);
+	S(mbhc_nsc, 11);
+	S(n_btn_meas, 1);
+	S(n_btn_con, 2);
+	S(num_btn, WCD9XXX_MBHC_DEF_BUTTONS);
+	S(v_btn_press_delta_sta, 0); /*2014-7-2 liuyan modify for button detect*/
+	S(v_btn_press_delta_cic, 50);
+#undef S
+	btn_cfg = WCD9XXX_MBHC_CAL_BTN_DET_PTR(taiko_cal);
+	btn_low = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg, MBHC_BTN_DET_V_BTN_LOW);
+	btn_high = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg,
+					       MBHC_BTN_DET_V_BTN_HIGH);
+#ifndef CONFIG_MACH_MSM8974_14001 //liuyan 2013-12-10 modify the switch reange
+	btn_low[0] = -50; 
+	btn_high[0] = 20;
+	btn_low[1] = 21;
+#else
+	btn_low[0] = -70; 
+	btn_high[0] = 50;
+	btn_low[1] = 51;
+#endif
+	btn_high[1] = 52;
+	btn_low[2] = 53;
+	btn_high[2] = 54;
+	btn_low[3] = 55;
+	btn_high[3] = 263;
+	btn_low[4] = 264;
+	btn_high[4] = 265;
+	btn_low[5] = 266;
+	btn_high[5] = 267;
+	btn_low[6] = 268;
+	btn_high[6] = 269;
+	btn_low[7] = 270;
+	btn_high[7] = 500;
+	n_ready = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg, MBHC_BTN_DET_N_READY);
+	n_ready[0] = 80;
+	n_ready[1] = 68;
+	n_cic = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg, MBHC_BTN_DET_N_CIC);
+	n_cic[0] = 60;
+	n_cic[1] = 47;
+	gain = wcd9xxx_mbhc_cal_btn_det_mp(btn_cfg, MBHC_BTN_DET_GAIN);
+	gain[0] = 11;
+	gain[1] = 9;
+
+	return taiko_cal;
+}
+#endif /* CONFIG_MACH_MSM8974_14001 */
 static int msm_snd_hw_params(struct snd_pcm_substream *substream,
 			     struct snd_pcm_hw_params *params)
 {
@@ -1878,6 +2175,7 @@ static struct snd_soc_ops msm8974_be_ops = {
 	.shutdown = msm8974_snd_shudown,
 };
 
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_SHENQI_K9
 #ifdef QUAT_MI2S_ENABLE
 static int msm8974_quat_mi2s_free_gpios(void)
@@ -2042,6 +2340,123 @@ static struct snd_soc_ops msm8974_quat_mi2s_be_ops = {
 };
 #endif
 #endif
+=======
+#ifdef CONFIG_OPPO_MSM_14021
+/* xiaojun.lv@PhoneDpt.AudioDrv, 2014/06/25, add for 14021 sec i2s patch */
+static int msm8974_mi2s_free_gpios(void)
+{
+	int	i;
+	for (i = 0; i < ARRAY_SIZE(sec_mi2s_gpio); i++)
+                gpio_free(sec_mi2s_gpio[i].gpio_no);
+	return 0;
+}
+
+static struct afe_clk_cfg lpass_mi2s_enable = {
+        AFE_API_VERSION_I2S_CONFIG,
+        Q6AFE_LPASS_IBIT_CLK_3_P072_MHZ,
+        Q6AFE_LPASS_OSR_CLK_12_P288_MHZ,
+        Q6AFE_LPASS_CLK_SRC_INTERNAL,
+        Q6AFE_LPASS_CLK_ROOT_DEFAULT,
+        Q6AFE_LPASS_MODE_BOTH_VALID,
+        0,
+};
+static struct afe_clk_cfg lpass_mi2s_disable = {
+        AFE_API_VERSION_I2S_CONFIG,
+        0,
+        0,
+        Q6AFE_LPASS_CLK_SRC_INTERNAL,
+        Q6AFE_LPASS_CLK_ROOT_DEFAULT,
+        Q6AFE_LPASS_MODE_BOTH_VALID,
+        0,
+};
+
+
+static void msm8974_mi2s_shutdown(struct snd_pcm_substream *substream)
+{
+	int ret =0;
+
+	if (atomic_dec_return(&sec_mi2s_clk.mi2s_rsc_ref) == 0) {
+		pr_info("%s: free mi2s resources\n", __func__);
+	#ifdef MI2S_LPASS_CLK_ENABLE	
+       		ret = afe_set_lpass_clock(AFE_PORT_ID_SECONDARY_MI2S_RX, &lpass_mi2s_disable);	
+       		if (ret < 0) {	
+      			pr_err("%s: afe_set_lpass_clock failed\n", __func__);	
+       	//	return ret;	
+      		}
+    #endif	
+
+		msm8974_mi2s_free_gpios();
+	}
+}
+
+static int msm8974_configure_mi2s_gpio(void)
+{
+	int	rtn;
+	int	i;
+	for (i = 0; i < ARRAY_SIZE(sec_mi2s_gpio); i++) {
+
+		rtn = gpio_request(sec_mi2s_gpio[i].gpio_no,
+				sec_mi2s_gpio[i].gpio_name);
+
+		pr_info("%s: gpio = %d, gpio name = %s, rtn = %d\n", __func__,
+		sec_mi2s_gpio[i].gpio_no, sec_mi2s_gpio[i].gpio_name, rtn);
+		gpio_set_value(sec_mi2s_gpio[i].gpio_no, 1);
+
+		if (rtn) {
+			pr_err("%s: Failed to request gpio %d\n",
+				   __func__,
+				   sec_mi2s_gpio[i].gpio_no);
+			while( i >= 0) {
+				gpio_free(sec_mi2s_gpio[i].gpio_no);
+				i--;
+			}
+			break;
+		}
+	}
+
+	return rtn;
+}
+static int msm8974_mi2s_startup(struct snd_pcm_substream *substream)
+{
+	int ret = 0;
+	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+	struct snd_soc_dai *codec_dai = rtd->codec_dai;
+
+	pr_info("%s: dai name %s %p\n", __func__, cpu_dai->name, cpu_dai->dev);
+
+	if (atomic_inc_return(&sec_mi2s_clk.mi2s_rsc_ref) == 1) {
+		pr_info("%s: acquire mi2s resources\n", __func__);
+		msm8974_configure_mi2s_gpio();
+	#ifdef MI2S_LPASS_CLK_ENABLE	
+       		ret = afe_set_lpass_clock(AFE_PORT_ID_SECONDARY_MI2S_RX, &lpass_mi2s_enable);	
+       		if (ret < 0) {	
+      			pr_err("%s: afe_set_lpass_clock failed\n", __func__);	
+       		return ret;	
+      		}
+	#endif
+	
+		ret = snd_soc_dai_set_fmt(cpu_dai, SND_SOC_DAIFMT_CBS_CFS);
+		if (ret < 0)
+			dev_err(cpu_dai->dev, "set format for CPU dai"
+				" failed\n");
+
+		ret = snd_soc_dai_set_fmt(codec_dai, SND_SOC_DAIFMT_CBS_CFS);
+		if (ret < 0)
+			dev_err(codec_dai->dev, "set format for codec dai"
+				 " failed\n");
+
+		ret  = 0;
+	}
+	return ret;
+}
+
+static struct snd_soc_ops msm8974_mi2s_be_ops = {
+	.startup = msm8974_mi2s_startup,
+	.shutdown = msm8974_mi2s_shutdown
+};
+#endif /* CONFIG_OPPO_MSM_14021 */
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 static int msm8974_slimbus_2_hw_params(struct snd_pcm_substream *substream,
 				struct snd_pcm_hw_params *params)
@@ -2843,7 +3258,24 @@ static struct snd_soc_dai_link msm8974_common_dai_links[] = {
 		.ops = &msm_sec_auxpcm_be_ops,
 		.ignore_suspend = 1,
 	},
-
+#ifdef CONFIG_OPPO_MSM_14021
+/* xiaojun.lv@PhoneDpt.AudioDrv, 2014/07/26, add for MI2S feedback patch */	
+	{
+		.name = "SEC_MI2S Hostless",
+		.stream_name = "SEC_MI2S Hostless",
+		.cpu_dai_name = "SEC_MI2S_HOSTLESS",
+		.platform_name  = "msm-pcm-hostless",
+		.dynamic = 1,	
+		.trigger = {SND_SOC_DPCM_TRIGGER_POST,
+			    SND_SOC_DPCM_TRIGGER_POST},	
+		.no_host_mode = SND_SOC_DAI_LINK_NO_HOST,
+		.ignore_suspend = 1,
+		/* this dainlink has playback support */
+		.ignore_pmdown_time = 1,
+		.codec_dai_name = "snd-soc-dummy-dai",
+		.codec_name = "snd-soc-dummy",	
+	},	
+#endif
 	/* Backend DAI Links */
 	{
 		.name = LPASS_BE_SLIMBUS_0_RX,
@@ -3021,16 +3453,26 @@ static struct snd_soc_dai_link msm8974_common_dai_links[] = {
 		.be_hw_params_fixup = msm_be_hw_params_fixup,
 		.ignore_suspend = 1,
 	},
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_SHENQI_K9
 #ifdef QUAT_MI2S_ENABLE
 	{
 		.name = LPASS_BE_QUAT_MI2S_RX,
 		.stream_name = "Quaternary MI2S Playback",
 		.cpu_dai_name = "msm-dai-q6-mi2s.3",
+=======
+#ifdef CONFIG_OPPO_MSM_14021
+/* xiaojun.lv@PhoneDpt.AudioDrv, 2014/06/25, add for 14021 sec i2s patch */
+	{
+		.name = LPASS_BE_SEC_MI2S_RX,
+		.stream_name = "Secondary MI2S Playback",
+		.cpu_dai_name = "msm-dai-q6-mi2s.1",
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 		.platform_name = "msm-pcm-routing",
 		.codec_name     = "msm-stub-codec.1",
 		.codec_dai_name = "msm-stub-rx",
 		.no_pcm = 1,
+<<<<<<< HEAD
 		.be_id = MSM_BACKEND_DAI_QUATERNARY_MI2S_RX,
 		.be_hw_params_fixup = msm_be_hw_params_fixup,
 		.ops = &msm8974_quat_mi2s_be_ops,
@@ -3039,16 +3481,34 @@ static struct snd_soc_dai_link msm8974_common_dai_links[] = {
 		.name = LPASS_BE_QUAT_MI2S_TX,
 		.stream_name = "Quaternary MI2S Capture",
 		.cpu_dai_name = "msm-dai-q6-mi2s.3",
+=======
+		.be_id = MSM_BACKEND_DAI_SECONDARY_MI2S_RX,
+		.be_hw_params_fixup = msm_be_hw_params_fixup,
+		.ops = &msm8974_mi2s_be_ops,
+	},
+	{
+		.name = LPASS_BE_SEC_MI2S_TX,
+		.stream_name = "Secondary MI2S Capture",
+		.cpu_dai_name = "msm-dai-q6-mi2s.1",
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 		.platform_name = "msm-pcm-routing",
 		.codec_name     = "msm-stub-codec.1",
 		.codec_dai_name = "msm-stub-tx",
 		.no_pcm = 1,
+<<<<<<< HEAD
 		.be_id = MSM_BACKEND_DAI_QUATERNARY_MI2S_TX,
 		.be_hw_params_fixup = msm_be_hw_params_fixup,
 		.ops = &msm8974_quat_mi2s_be_ops,
 	},
 #endif
 #endif
+=======
+		.be_id = MSM_BACKEND_DAI_SECONDARY_MI2S_TX,
+		.be_hw_params_fixup = msm_be_hw_params_fixup,
+		.ops = &msm8974_mi2s_be_ops,
+	},
+#endif /* CONFIG_OPPO_MSM_14021 */	
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 };
 
 static struct snd_soc_dai_link msm8974_hdmi_dai_link[] = {
@@ -3228,7 +3688,73 @@ static __devinit int msm8974_asoc_machine_probe(struct platform_device *pdev)
 		ret = -EINVAL;
 		goto err;
 	}
-
+//liuyan 2013-3-14 add,hp mic switch
+#ifndef CONFIG_OPPO_MSM_14021
+       pcb_version=get_pcb_version();//liuyan add for dvt  //su 2014-12-01 15:56:02
+       printk("%s:pcb_version %d\n",__func__,pcb_version);
+       pdata->hpmic_switch_gpio= of_get_named_gpio(pdev->dev.of_node,
+				"qcom,hpmic-switch-gpio", 0);
+	if (pdata->hpmic_switch_gpio < 0) {
+		dev_err(&pdev->dev,
+			"Looking up %s property in node %s failed %d\n",
+			"qcom,hpmic-switch-gpio", pdev->dev.of_node->full_name,
+			pdata->hpmic_switch_gpio);
+		//ret = -ENODEV;
+		//goto err;
+	}
+	 pdata->enable_spk_gpio= of_get_named_gpio(pdev->dev.of_node,
+				"enable_spk-gpio", 0);
+	if (pdata->enable_spk_gpio < 0) {
+		dev_err(&pdev->dev,
+			"Looking up %s property in node %s failed %d\n",
+			"enable_spk-gpio", pdev->dev.of_node->full_name,
+			pdata->enable_spk_gpio);
+		//ret = -ENODEV;
+		//goto err;
+	}
+#ifndef CONFIG_MACH_MSM8974_14001
+/* xiaojun.lv@Prd.AudioDrv,2014/2/22,modify for 14001 spk control*/
+        //liuyan add for dvt
+        if(pcb_version >= HW_VERSION__12){
+	     pdata->yda145_ctr_gpio= of_get_named_gpio(pdev->dev.of_node,
+				"qcom,yda145_ctr-gpio", 0);
+	     if (pdata->yda145_ctr_gpio < 0) {
+		  dev_err(&pdev->dev,
+			"Looking up %s property in node %s failed %d\n",
+			"qcom,yda145_ctr-gpio", pdev->dev.of_node->full_name,
+			pdata->yda145_ctr_gpio);
+		//ret = -ENODEV;
+		//goto err;
+	    }
+	    pdata->yda145_boost_gpio= of_get_named_gpio(pdev->dev.of_node,
+				"qcom,yda145_boots-gpio", 0);
+	     if (pdata->yda145_ctr_gpio < 0) {
+		  dev_err(&pdev->dev,
+			"Looking up %s property in node %s failed %d\n",
+			"qcom,yda145_boots-gpio", pdev->dev.of_node->full_name,
+			pdata->yda145_boost_gpio);
+		//ret = -ENODEV;
+		//goto err;
+	    }
+        }
+#else  /* CONFIG_MACH_MSM8974_14001 */
+            pdata->yda145_ctr_gpio= of_get_named_gpio(pdev->dev.of_node,
+				"qcom,yda145_ctr-gpio", 0);
+	        if (pdata->yda145_ctr_gpio < 0) {
+    		  dev_err(&pdev->dev,
+    			"Looking up %s property in node %s failed %d\n",
+    			"qcom,yda145_ctr-gpio", pdev->dev.of_node->full_name,
+    			pdata->yda145_ctr_gpio);
+    	    }
+#endif /* CONFIG_MACH_MSM8974_14001 */
+	/*pdata->cdc_spk= regulator_get(&pdev->dev, "cdc_spk");
+		if (IS_ERR(pdata->cdc_spk)) {
+			pr_err("%s:Failed to get hpmic switch regulator\n",__func__);
+			pdata->cdc_spk= NULL;
+			//ret = -EINVAL;
+		}*/
+#endif
+//liuyan add end
 	pdata->mclk_gpio = of_get_named_gpio(pdev->dev.of_node,
 				"qcom,cdc-mclk-gpios", 0);
 	if (pdata->mclk_gpio < 0) {
@@ -3314,6 +3840,22 @@ static __devinit int msm8974_asoc_machine_probe(struct platform_device *pdev)
 			ret);
 		goto err;
 	}
+#ifdef CONFIG_MACH_MSM8974_14001
+#ifdef CONFIG_MACH_MSM8974_14001
+/* xiaojun.lv@Prd.AudioDrv,2014/2/10,add for 14001 regulator*/
+        pdata->cdc_spk= regulator_get(&pdev->dev, "cdc_spk");
+		if (IS_ERR(pdata->cdc_spk)) {
+			pr_err("%s:Failed to get hpmic switch regulator\n",__func__);
+			pdata->cdc_spk= NULL;
+			//ret = -EINVAL;
+		}
+		if(pdata->cdc_spk)
+        {
+    	    printk("%s regulator_enable(pdata->cdc_spk);\n",__func__);
+		    mbhc_cfg.cdc_spk = pdata->cdc_spk;
+		}
+#endif
+#endif /*CONFIG_MACH_MSM8974_14001*/
 
 	/* Parse Primary AUXPCM info from DT */
 	ret = msm8974_dtparse_auxpcm(pdev, &pdata->pri_auxpcm_ctrl,

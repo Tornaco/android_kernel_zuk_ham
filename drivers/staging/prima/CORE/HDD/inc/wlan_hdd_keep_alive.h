@@ -34,6 +34,11 @@
 
   \brief Android WLAN HDD Keep-Alive API
 
+<<<<<<< HEAD
+=======
+  Copyright 2011 (c) QUALCOMM Incorporated. All Rights Reserved.
+  QUALCOMM Proprietary and Confidential.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   ==========================================================================*/
 

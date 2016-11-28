@@ -31,6 +31,12 @@
 
   \brief 802.11 BT-AMP PAL Host Device Driver implementation
 
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   ========================================================================*/
 
@@ -4164,7 +4170,11 @@ static int BSL_Write(struct sk_buff *skb)
         // save away the pctx context...so it can be retrieved by the work procedure.
         pHciContext->pctx = pctx;
         pHciContext->magic = BT_AMP_HCI_CTX_MAGIC;
+<<<<<<< HEAD
         vos_init_work(&pHciContext->hciInterfaceProcessing,
+=======
+        INIT_WORK(&pHciContext->hciInterfaceProcessing,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                   bslWriteFinish);
 
         VOS_TRACE(VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH,

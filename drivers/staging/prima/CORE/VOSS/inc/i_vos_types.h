@@ -35,7 +35,10 @@
 #include <linux/string.h>
 #include <linux/slab.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 #include <linux/version.h>
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #include <asm/div64.h>
 
 /**=========================================================================
@@ -46,6 +49,12 @@
                
    Linux specific basic type definitions 
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
 

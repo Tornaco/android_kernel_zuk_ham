@@ -25,6 +25,14 @@
  * to the Linux Foundation.
  */
 
+<<<<<<< HEAD
+=======
+/*
+ * Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+ * Qualcomm Confidential and Proprietary 
+ */
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /* This file is generated from btampFsm.cdd - do not edit manually*/
 /* Generated on: Thu Oct 16 15:40:39 PDT 2008 */
 

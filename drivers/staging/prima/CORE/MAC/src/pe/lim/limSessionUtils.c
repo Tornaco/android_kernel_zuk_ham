@@ -253,7 +253,11 @@ isLimSessionOffChannel(tpAniSirGlobal pMac, tANI_U8 sessionId)
 
     if(sessionId >=  pMac->lim.maxBssId)
     {
+<<<<<<< HEAD
         limLog(pMac, LOGE, FL("Invalid sessionId: %d "), sessionId);
+=======
+        limLog(pMac, LOGE, FL("Invalid sessionId: %d \n "), sessionId);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         return FALSE;
     }
 

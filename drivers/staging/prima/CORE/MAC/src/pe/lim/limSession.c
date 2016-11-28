@@ -33,6 +33,12 @@
 
   \author Sunit Bhatia
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
 
@@ -109,6 +115,7 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
             vos_mem_set((void*)&pMac->lim.gpSession[i], sizeof(tPESession), 0);
 
             //Allocate space for Station Table for this session.
+<<<<<<< HEAD
             pMac->lim.gpSession[i].dph.dphHashTable.pHashTable = vos_mem_vmalloc(
                                                   sizeof(tpDphHashNode)*numSta);
             if ( NULL == pMac->lim.gpSession[i].dph.dphHashTable.pHashTable )
@@ -126,6 +133,22 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
                                                                "of size %lu"),
                              (long unsigned int) sizeof(tDphHashNode)*numSta);
                 vos_mem_vfree(pMac->lim.gpSession[i].dph.dphHashTable.pHashTable);
+=======
+            pMac->lim.gpSession[i].dph.dphHashTable.pHashTable = vos_mem_malloc(
+                                                  sizeof(tpDphHashNode)*numSta);
+            if ( NULL == pMac->lim.gpSession[i].dph.dphHashTable.pHashTable )
+            {
+                limLog(pMac, LOGE, FL("memory allocate failed!"));
+                return NULL;
+            }
+
+            pMac->lim.gpSession[i].dph.dphHashTable.pDphNodeArray = vos_mem_malloc(
+                                                       sizeof(tDphHashNode)*numSta);
+            if ( NULL == pMac->lim.gpSession[i].dph.dphHashTable.pDphNodeArray )
+            {
+                limLog(pMac, LOGE, FL("memory allocate failed!"));
+                vos_mem_free(pMac->lim.gpSession[i].dph.dphHashTable.pHashTable);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                 pMac->lim.gpSession[i].dph.dphHashTable.pHashTable = NULL;
                 return NULL;
             }
@@ -134,6 +157,7 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
             dphHashTableClassInit(pMac, 
                            &pMac->lim.gpSession[i].dph.dphHashTable);
 
+<<<<<<< HEAD
             pMac->lim.gpSession[i].gpLimPeerIdxpool = vos_mem_vmalloc(sizeof(
                                 *pMac->lim.gpSession[i].gpLimPeerIdxpool) * (numSta+1));
             if ( NULL == pMac->lim.gpSession[i].gpLimPeerIdxpool )
@@ -143,6 +167,15 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
                 sizeof(*pMac->lim.gpSession[i].gpLimPeerIdxpool) * (numSta+1));
                 vos_mem_vfree(pMac->lim.gpSession[i].dph.dphHashTable.pHashTable);
                 vos_mem_vfree(pMac->lim.gpSession[i].dph.dphHashTable.pDphNodeArray);
+=======
+            pMac->lim.gpSession[i].gpLimPeerIdxpool = vos_mem_malloc(sizeof(
+                                *pMac->lim.gpSession[i].gpLimPeerIdxpool) * (numSta+1));
+            if ( NULL == pMac->lim.gpSession[i].gpLimPeerIdxpool )
+            {
+                PELOGE(limLog(pMac, LOGE, FL("memory allocate failed!"));)
+                vos_mem_free(pMac->lim.gpSession[i].dph.dphHashTable.pHashTable);
+                vos_mem_free(pMac->lim.gpSession[i].dph.dphHashTable.pDphNodeArray);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                 pMac->lim.gpSession[i].dph.dphHashTable.pHashTable = NULL;
                 pMac->lim.gpSession[i].dph.dphHashTable.pDphNodeArray = NULL;
                 return NULL;
@@ -197,7 +230,11 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
             return(&pMac->lim.gpSession[i]);
         }
     }
+<<<<<<< HEAD
     limLog(pMac, LOGE, FL("Session can not be created.. Reached Max permitted sessions "));
+=======
+    limLog(pMac, LOGE, FL("Session can not be created.. Reached Max permitted sessions \n "));
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     return NULL;
 }
 
@@ -230,7 +267,11 @@ tpPESession peFindSessionByBssid(tpAniSirGlobal pMac,  tANI_U8*  bssid,    tANI_
         }
     }
 
+<<<<<<< HEAD
     limLog(pMac, LOG4, FL("Session lookup fails for BSSID: "));
+=======
+    limLog(pMac, LOG4, FL("Session lookup fails for BSSID: \n "));
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     limPrintMacAddr(pMac, bssid, LOG4);
     return(NULL);
 
@@ -279,13 +320,21 @@ tpPESession peFindSessionByBssIdx(tpAniSirGlobal pMac,  tANI_U8 bssIdx)
 {
     if(sessionId >=  pMac->lim.maxBssId)
     {
+<<<<<<< HEAD
         limLog(pMac, LOGE, FL("Invalid sessionId: %d "), sessionId);
+=======
+        limLog(pMac, LOGE, FL("Invalid sessionId: %d \n "), sessionId);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         return(NULL);
     }
     if((pMac->lim.gpSession[sessionId].valid == TRUE))
     {
         return(&pMac->lim.gpSession[sessionId]);
     }
+<<<<<<< HEAD
+=======
+    limLog(pMac, LOG1, FL("Session %d  not active\n "), sessionId);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     return(NULL);
 
 }
@@ -346,7 +395,10 @@ void peDeleteSession(tpAniSirGlobal pMac, tpPESession psessionEntry)
     tANI_U16 i = 0;
     tANI_U16 n;
     TX_TIMER *timer_ptr;
+<<<<<<< HEAD
     eHalStatus lock_status = eHAL_STATUS_SUCCESS;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
     limLog(pMac, LOGW, FL("Trying to delete a session %d Opmode %d BssIdx %d"
            " BSSID: " MAC_ADDRESS_STR), psessionEntry->peSessionId,
@@ -401,6 +453,7 @@ void peDeleteSession(tpAniSirGlobal pMac, tpPESession psessionEntry)
         psessionEntry->pLimMlmJoinReq = NULL;
     }
 
+<<<<<<< HEAD
     lock_status =  pe_AcquireGlobalLock(&pMac->lim);
     if (eHAL_STATUS_SUCCESS == lock_status)
     {
@@ -415,12 +468,27 @@ void peDeleteSession(tpAniSirGlobal pMac, tpPESession psessionEntry)
     if(psessionEntry->dph.dphHashTable.pDphNodeArray != NULL)
     {
         vos_mem_vfree(psessionEntry->dph.dphHashTable.pDphNodeArray);
+=======
+    if(psessionEntry->dph.dphHashTable.pHashTable != NULL)
+    {
+        vos_mem_free(psessionEntry->dph.dphHashTable.pHashTable);
+        psessionEntry->dph.dphHashTable.pHashTable = NULL;
+    }
+
+    if(psessionEntry->dph.dphHashTable.pDphNodeArray != NULL)
+    {
+        vos_mem_free(psessionEntry->dph.dphHashTable.pDphNodeArray);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         psessionEntry->dph.dphHashTable.pDphNodeArray = NULL;
     }
 
     if(psessionEntry->gpLimPeerIdxpool != NULL)
     {
+<<<<<<< HEAD
         vos_mem_vfree(psessionEntry->gpLimPeerIdxpool);
+=======
+        vos_mem_free(psessionEntry->gpLimPeerIdxpool);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         psessionEntry->gpLimPeerIdxpool = NULL;
     }
 
@@ -529,7 +597,11 @@ tpPESession peFindSessionByPeerSta(tpAniSirGlobal pMac,  tANI_U8*  sa,    tANI_U
       }
    }   
 
+<<<<<<< HEAD
    limLog(pMac, LOG1, FL("Session lookup fails for Peer StaId: "));
+=======
+   limLog(pMac, LOG1, FL("Session lookup fails for Peer StaId: \n "));
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    limPrintMacAddr(pMac, sa, LOG1);
    return NULL;
 }

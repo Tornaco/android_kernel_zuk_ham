@@ -589,7 +589,8 @@ config  ARCH_MSM_SCORPION
 config  ARCH_MSM_KRAIT
 	bool
 	select ARM_L1_CACHE_SHIFT_6
-	select DEVFREQ_GOV_MSM_CPUBW_HWMON
+	select DEVFREQ_GOV_MSM_BW_HWMON
+	select DEVFREQ_GOV_MSM_CACHE_HWMON
 
 config  MSM_CORTEX_A7
 	bool
@@ -1140,6 +1141,8 @@ config MACH_FSM9XXX_SURF
 	  FFA board.
 
 endmenu
+
+source "arch/arm/mach-msm/oppo/Kconfig"
 
 config MSM_STACKED_MEMORY
 	bool "Stacked Memory"
@@ -3064,6 +3067,7 @@ config HAS_MACH_MEMUTILS
 	bool "Motorola MSM memcpy enhancements"
 	help
 	Faster memcpy performance for Krait
+<<<<<<< HEAD
 
 config MSM_SECBOOT
 	default n
@@ -3098,6 +3102,8 @@ config MSM_HOTPLUG
 		The MSM hotplug driver controls on-/offlining of additional cores based
 		on current cpu load.
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 endif
 
 config KERNEL_TEXT_MPU_PROT

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -1411,11 +1415,14 @@ typedef __ani_attr_pre_packed struct sRemBeaconFilterMsg
     tANI_U8  ucRemIeId[1];
 }  __ani_attr_packed tRemBeaconFilterMsg, *tpRemBeaconFilterMsg;
 
+<<<<<<< HEAD
 typedef struct sNanRequest
 {
     tANI_U16 request_data_len;
     tANI_U8  request_data[1];
 } tNanRequest, *tpNanRequest;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #endif /* _HALMSGAPI_H_ */
 

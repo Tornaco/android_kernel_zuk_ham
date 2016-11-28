@@ -164,7 +164,10 @@ static inline VOS_MODULE_ID getVosModuleId(tANI_U8 modId)
     switch(modId)
     {
         case SIR_HAL_MODULE_ID:
+<<<<<<< HEAD
         case SIR_HAL_EXT_MODULE_ID:
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         case SIR_PHY_MODULE_ID:
             return VOS_MODULE_ID_WDA;
         case SIR_PMM_MODULE_ID:

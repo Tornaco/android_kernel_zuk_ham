@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -31,6 +35,12 @@
 
   \brief WLAN Host Device Driver implementation
 
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   ========================================================================*/
 
@@ -67,7 +77,11 @@
 
 #include <linux/wireless.h>
 #include <net/cfg80211.h>
+<<<<<<< HEAD
 #include <vos_sched.h>
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #define WEXT_CSCAN_HEADER               "CSCAN S\x01\x00\x00S\x00"
 #define WEXT_CSCAN_HEADER_SIZE          12
@@ -531,6 +545,7 @@ static eHalStatus hdd_IndicateScanResult(hdd_scan_info_t *scanInfo, tCsrScanResu
 
 /**---------------------------------------------------------------------------
 
+<<<<<<< HEAD
   \brief hdd_processSpoofMacAddrRequest() -
 
    The function is called from scan completion callback and from
@@ -589,6 +604,8 @@ VOS_STATUS hdd_processSpoofMacAddrRequest(hdd_context_t *pHddCtx)
 
 /**---------------------------------------------------------------------------
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   \brief hdd_ScanRequestCallback() -
 
    The sme module calls this callback function once it finish the scan request
@@ -655,7 +672,11 @@ static eHalStatus hdd_ScanRequestCallback(tHalHandle halHandle, void *pContext,
 
 /**---------------------------------------------------------------------------
 
+<<<<<<< HEAD
   \brief __iw_set_scan() -
+=======
+  \brief iw_set_scan() -
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
    This function process the scan request from the wpa_supplicant
    and set the scan request to the SME
@@ -669,22 +690,35 @@ static eHalStatus hdd_ScanRequestCallback(tHalHandle halHandle, void *pContext,
   --------------------------------------------------------------------------*/
 
 
+<<<<<<< HEAD
 int __iw_set_scan(struct net_device *dev, struct iw_request_info *info,
                  union iwreq_data *wrqu, char *extra)
 {
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    hdd_wext_state_t *pwextBuf;
+=======
+int iw_set_scan(struct net_device *dev, struct iw_request_info *info,
+                 union iwreq_data *wrqu, char *extra)
+{
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev) ;
+   hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+   hdd_wext_state_t *pwextBuf = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    tCsrScanRequest scanRequest;
    v_U32_t scanId = 0;
    eHalStatus status = eHAL_STATUS_SUCCESS;
    struct iw_scan_req *scanReq = (struct iw_scan_req *)extra;
+<<<<<<< HEAD
    int ret = 0;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
    ENTER();
 
    VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: enter !!!",__func__);
 
+<<<<<<< HEAD
    pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
    if (NULL == pAdapter)
    {
@@ -706,6 +740,8 @@ int __iw_set_scan(struct net_device *dev, struct iw_request_info *info,
                  "%s: pwextBuf is NULL",__func__);
        return -EINVAL;
    }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef WLAN_BTAMP_FEATURE
    //Scan not supported when AMP traffic is on.
    if( VOS_TRUE == WLANBAP_AmpSessionOn() ) 
@@ -720,6 +756,13 @@ int __iw_set_scan(struct net_device *dev, struct iw_request_info *info,
        return eHAL_STATUS_SUCCESS;
    }
 
+<<<<<<< HEAD
+=======
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+      return eHAL_STATUS_SUCCESS;
+   }
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    vos_mem_zero( &scanRequest, sizeof(scanRequest));
 
    if (NULL != wrqu->data.pointer)
@@ -740,8 +783,12 @@ int __iw_set_scan(struct net_device *dev, struct iw_request_info *info,
 
       if (wrqu->data.flags & IW_SCAN_THIS_ESSID)  {
 
+<<<<<<< HEAD
           if(scanReq->essid_len  &&
                (scanReq->essid_len <= SIR_MAC_MAX_SSID_LENGTH)) {
+=======
+          if(scanReq->essid_len) {
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
               scanRequest.SSIDs.numOfSSIDs = 1;
               scanRequest.SSIDs.SSIDList =( tCsrSSIDInfo *)vos_mem_malloc(sizeof(tCsrSSIDInfo));
               if(scanRequest.SSIDs.SSIDList) {
@@ -755,10 +802,13 @@ int __iw_set_scan(struct net_device *dev, struct iw_request_info *info,
                 VOS_ASSERT(0);
               }
           }
+<<<<<<< HEAD
           else
           {
             hddLog(LOGE, FL("Invalid essid length : %d"), scanReq->essid_len);
           }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       }
 
        /* set min and max channel time */
@@ -843,6 +893,7 @@ error:
        vos_mem_free(scanRequest.SSIDs.SSIDList);
 
    EXIT();
+<<<<<<< HEAD
    return status;
 }
 
@@ -856,11 +907,20 @@ int iw_set_scan(struct net_device *dev, struct iw_request_info *info,
    vos_ssr_unprotect(__func__);
 
    return ret;
+=======
+
+   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: exit !!!",__func__);
+   return status;
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }
 
 /**---------------------------------------------------------------------------
 
+<<<<<<< HEAD
   \brief __iw_get_scan() -
+=======
+  \brief iw_get_scan() -
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
    This function returns the scan results to the wpa_supplicant
 
@@ -873,6 +933,7 @@ int iw_set_scan(struct net_device *dev, struct iw_request_info *info,
   --------------------------------------------------------------------------*/
 
 
+<<<<<<< HEAD
 int __iw_get_scan(struct net_device *dev,
                 struct iw_request_info *info,
                 union iwreq_data *wrqu, char *extra)
@@ -880,10 +941,20 @@ int __iw_get_scan(struct net_device *dev,
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    tHalHandle hHal;
+=======
+int iw_get_scan(struct net_device *dev,
+                         struct iw_request_info *info,
+                         union iwreq_data *wrqu, char *extra)
+{
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev) ;
+   hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+   tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    tCsrScanResultInfo *pScanResult;
    eHalStatus status = eHAL_STATUS_SUCCESS;
    hdd_scan_info_t scanInfo;
    tScanResultHandle pResult;
+<<<<<<< HEAD
    int i = 0, ret = 0;
 
    ENTER();
@@ -911,12 +982,28 @@ int __iw_get_scan(struct net_device *dev,
                  "%s: Hal Context is NULL",__func__);
        return -EINVAL;
    }
+=======
+   int i = 0;
+
+   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: enter buffer length %d!!!",
+       __func__, (wrqu->data.length)?wrqu->data.length:IW_SCAN_MAX_DATA);
+   ENTER();
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
    if (TRUE == pHddCtx->scan_info.mScanPending)
    {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:mScanPending is TRUE !!!",__func__);
        return -EAGAIN;
    }
+<<<<<<< HEAD
+=======
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+      return -EAGAIN;
+   }
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    scanInfo.dev = dev;
    scanInfo.start = extra;
    scanInfo.info = info;
@@ -935,7 +1022,11 @@ int __iw_get_scan(struct net_device *dev,
    if (NULL == pResult)
    {
        // no scan results
+<<<<<<< HEAD
        hddLog(LOG1,"__iw_get_scan: NULL Scan Result ");
+=======
+       hddLog(LOG1,"iw_get_scan: NULL Scan Result ");
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
        return 0;
    }
 
@@ -954,6 +1045,7 @@ int __iw_get_scan(struct net_device *dev,
 
    sme_ScanResultPurge(hHal, pResult);
 
+<<<<<<< HEAD
    VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: exit total %d BSS reported !!!",__func__, i);
    EXIT();
    return status;
@@ -972,6 +1064,13 @@ int iw_get_scan(struct net_device *dev,
     return ret;
 }
 
+=======
+   EXIT();
+   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: exit total %d BSS reported !!!",__func__, i);
+   return status;
+}
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #if 0
 static eHalStatus hdd_CscanRequestCallback(tHalHandle halHandle, void *pContext,
                          tANI_U32 scanId, eCsrScanStatus status)

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -33,6 +37,12 @@
                
    Definitions for platform with VOSS packet support and LA.
   
+<<<<<<< HEAD
+=======
+   Copyright 2010 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
 
@@ -43,7 +53,10 @@
 #include "vos_packet.h"
 #include "vos_trace.h"
 #include "vos_list.h"
+<<<<<<< HEAD
 #include "vos_api.h"
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #include <linux/skbuff.h>
 #include "dma-mapping.h"
@@ -178,13 +191,21 @@ wpt_packet * wpalPacketAlloc(wpt_packet_type pktType, wpt_uint32 nPktSize,
                                        nPktSize, 1, VOS_FALSE, 
                                        wpalPacketRXLowResourceCB, usrData);
 
+<<<<<<< HEAD
+=======
+#ifndef FEATURE_R33D
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       /* Reserve the entire raw rx buffer for DXE */
       if( vosStatus == VOS_STATUS_SUCCESS )
       {
         wpalPacketAvailableCB = NULL;
         vosStatus =  vos_pkt_reserve_head_fast( pVosPkt, &pData, nPktSize ); 
       }
+<<<<<<< HEAD
 
+=======
+#endif /* FEATURE_R33D */
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       if((NULL != pVosPkt) && (VOS_STATUS_E_RESOURCES != vosStatus))
       {
          vos_pkt_get_packet_length(pVosPkt, &allocLen);
@@ -973,6 +994,7 @@ void wpalPacketStallDumpLog
    return;
 }
 #endif /* FEATURE_WLAN_DIAG_SUPPORT */
+<<<<<<< HEAD
 
 /*---------------------------------------------------------------------------
     wpalLogPktSerialize - Serialize Logging data to logger thread
@@ -1035,3 +1057,5 @@ void wpalFwLogPktSerialize
 {
     vos_logger_pkt_serialize(WPAL_TO_VOS_PKT(pFrame),LOG_PKT_TYPE_FW_LOG);
 }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

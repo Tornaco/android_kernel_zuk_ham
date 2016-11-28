@@ -36,6 +36,11 @@
  *  This file contains the external API implemntation exposed by the
  *   wlan device abstarction layer module.
  *
+<<<<<<< HEAD
+=======
+ *   Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+ *   Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  */
 
 #include "wlan_qct_wdi.h"
@@ -191,6 +196,7 @@ void WDI_DS_MemPoolDestroy(WDI_DS_BdMemPoolType *memPool)
   wpalMemoryFree(memPool->AllocationBitmap);
   wpalMemoryZero(memPool, sizeof(*memPool));
 }
+<<<<<<< HEAD
 
 WDI_Status WDI_DS_LoggingMbCreate(WDI_DS_LoggingMbType *pLoggingMailbox, wpt_uint8 size)
 {
@@ -227,6 +233,8 @@ void WDI_DS_LoggingMbDestroy(WDI_DS_LoggingMbType *pLoggingMailbox)
   wpalDmaMemoryFree(pLoggingMailbox->pLoggingMbVirtAddress);
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*
  * Allocate chunk memory
  */

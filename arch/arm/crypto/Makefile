@@ -27,4 +27,7 @@ $(src)/sha256-core.S_shipped: $(src)/sha256-armv4.pl
 	$(call cmd,perl)
 
 .PRECIOUS: $(obj)/aesbs-core.S $(obj)/sha256-core.S
+<<<<<<< HEAD
 .PRECIOUS: $(obj)/aesbs-core.S
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

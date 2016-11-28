@@ -465,6 +465,7 @@ typedef enum
 
   WDI_SPOOF_MAC_ADDR_REQ                         = 101,
 
+<<<<<<< HEAD
   WDI_GET_FW_STATS_REQ                           = 102,
 
   /* Send command to encrypt the given message */
@@ -479,6 +480,10 @@ typedef enum
   WDI_MON_START_REQ                              = 107,
   WDI_MON_STOP_REQ                               = 108,
   WDI_FATAL_EVENT_LOGGING_REQ                    = 109,
+=======
+  /* Send command to encrypt the given message */
+  WDI_ENCRYPT_MSG_REQ                            = 102,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   WDI_MAX_REQ,
 
@@ -518,12 +523,18 @@ typedef enum
   /* csa channel switch req*/
   WDI_CH_SWITCH_REQ_V1,
   WDI_TDLS_CHAN_SWITCH_REQ,
+<<<<<<< HEAD
   WDI_SET_RTS_CTS_HTVHT_IND,
   WDI_FW_LOGGING_DXE_DONE_IND,
   WDI_SEND_FREQ_RANGE_CONTROL_IND,
 
   /*Keep adding the indications to the max request
     such that we keep them separate */
+=======
+
+  /*Keep adding the indications to the max request
+    such that we keep them sepparate */
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   WDI_MAX_UMAC_IND
 }WDI_RequestEnumType;
 
@@ -808,6 +819,7 @@ typedef enum
   WDI_EXTSCAN_RESET_SIGNF_RSSI_CHANGE_RSP        = 100,
 #endif
   WDI_SPOOF_MAC_ADDR_RSP                         = 101,
+<<<<<<< HEAD
   WDI_GET_FW_STATS_RSP                           = 102,
 
   /* Send command to encrypt the given message */
@@ -822,6 +834,11 @@ typedef enum
   WDI_MON_STOP_RSP                               = 108,
   WDI_FATAL_EVENT_LOGGING_RSP                    = 109,
 
+=======
+
+  /* Send command to encrypt the given message */
+  WDI_ENCRYPT_MSG_RSP                            = 102,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   /*-------------------------------------------------------------------------
     Indications
      !! Keep these last in the enum if possible
@@ -900,8 +917,11 @@ typedef enum
 #endif
   WDI_TDLS_CHAN_SWITCH_REQ_RESP      = WDI_HAL_IND_MIN + 26,
   WDI_HAL_DEL_BA_IND                 = WDI_HAL_IND_MIN + 27,
+<<<<<<< HEAD
   WDI_HAL_NAN_EVENT                  = WDI_HAL_IND_MIN + 28,
   WDI_HAL_LOST_LINK_PARAMS_IND       = WDI_HAL_IND_MIN + 29,
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   WDI_MAX_RESP
 }WDI_ResponseEnumType; 
 
@@ -1262,9 +1282,12 @@ typedef struct
 
   /* reason for WDI_DetectedDeviceError */
   void *                        DeviceErrorReason;
+<<<<<<< HEAD
 
    /* Roam delay statistic enabled in ini*/
    wpt_uint8                  roamDelayStatsEnabled;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }WDI_ControlBlockType; 
 
 
@@ -5862,6 +5885,7 @@ WDI_ProcessBatchScanResultInd
 
 #endif /* FEATURE_WLAN_BATCH_SCAN */
 
+<<<<<<< HEAD
 WDI_Status
 WDI_ProcessGetFwStatsReq
 (
@@ -5876,6 +5900,8 @@ WDI_ProcessGetFwStatsRsp
   WDI_EventInfoType*     pEventData
 );
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef FEATURE_WLAN_CH_AVOID
 /**
  @brief v -
@@ -6129,6 +6155,7 @@ WDI_ProcessSpoofMacAddrRsp
 );
 
 WDI_Status
+<<<<<<< HEAD
 WDI_ProcessGetFrameLogRsp
 (
   WDI_ControlBlockType*  pWDICtx,
@@ -6178,6 +6205,8 @@ WDI_ProcessFWFrameLoggingInitRsp
 );
 
 WDI_Status
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 WDI_ProcessEncryptMsgReq
 (
   WDI_ControlBlockType*  pWDICtx,
@@ -6190,6 +6219,7 @@ WDI_ProcessEncryptMsgRsp
   WDI_ControlBlockType*  pWDICtx,
   WDI_EventInfoType*     pEventData
 );
+<<<<<<< HEAD
 
 /**
  @brief Process NAN Request
@@ -6315,5 +6345,7 @@ WDI_ProcessEnableDisableCAEventInd
   WDI_EventInfoType*     pEventData
 );
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #endif /*WLAN_QCT_WDI_I_H*/
 

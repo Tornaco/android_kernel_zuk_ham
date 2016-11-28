@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013, 2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -39,6 +43,11 @@ DESCRIPTION
   module.
 
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ===========================================================================*/
 
 
@@ -80,8 +89,11 @@ when           who        what, where, why
 #include "sapFsm_ext.h"
 #include "sapChSelect.h"
 #include "wlan_hdd_dp_utils.h"
+<<<<<<< HEAD
 #include "wlan_hdd_main.h"
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*----------------------------------------------------------------------------
  * Preprocessor Definitions and Constants
  * -------------------------------------------------------------------------*/
@@ -162,6 +174,7 @@ typedef struct {
     WLANTL_STAStateType tlSTAState;
 
    /** Transmit queues for each AC (VO,VI,BE etc). */
+<<<<<<< HEAD
    hdd_list_t wmm_tx_queue[NUM_TX_QUEUES];
 
    /** Might need to differentiate queue depth in contention case */
@@ -169,6 +182,18 @@ typedef struct {
 
    /**Track whether OS TX queue has been disabled.*/
    v_BOOL_t txSuspended[NUM_TX_QUEUES];
+=======
+   //hdd_list_t wmm_tx_queue[NUM_TX_QUEUES];
+   hdd_list_t wmm_tx_queue[4];
+
+   /** Might need to differentiate queue depth in contention case */
+   //v_U16_t aTxQueueDepth[NUM_TX_QUEUES];
+   v_U16_t aTxQueueDepth[4];
+
+   /**Track whether OS TX queue has been disabled.*/
+   //v_BOOL_t txSuspended[NUM_TX_QUEUES];
+   v_BOOL_t txSuspended[4];
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
    /**Track whether 3/4th of resources are used */
    v_BOOL_t vosLowResource;
@@ -178,11 +203,14 @@ typedef struct {
 
    /** The station entry for which Deauth is in progress  */
    v_BOOL_t isDeauthInProgress;
+<<<<<<< HEAD
 
 #ifdef WLAN_FEATURE_AP_HT40_24G
    /** Track HT40 Intolerant station */
    v_BOOL_t isHT40IntolerantSet;
 #endif
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 } hdd_station_info_t;
 
 typedef struct sSapContext {
@@ -262,6 +290,7 @@ typedef struct sSapContext {
     tSapAcsChannelInfo acsBestChannelInfo;
     spinlock_t staInfo_lock; //To protect access to station Info
     hdd_station_info_t aStaInfo[WLAN_MAX_STA_COUNT];
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_AP_HT40_24G
     v_U8_t            affected_start;
     v_U8_t            affected_end;
@@ -271,6 +300,8 @@ typedef struct sSapContext {
     v_U8_t            ObssScanInterval;
     v_U8_t            ObssTransitionDelayFactor;
 #endif
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 } *ptSapContext;
 
 
@@ -294,6 +325,7 @@ typedef struct sWLAN_SAPEvent {
 /*----------------------------------------------------------------------------
  * Function Declarations and Documentation
  * -------------------------------------------------------------------------*/
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_AP_HT40_24G
 /*==========================================================================
 
@@ -320,6 +352,8 @@ typedef struct sWLAN_SAPEvent {
 eHalStatus sapGet24GOBSSAffectedChannel(tHalHandle halHandle,
                                                 ptSapContext psapCtx);
 #endif
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /*==========================================================================
 
@@ -614,6 +648,7 @@ sapconvertToCsrProfile(tsap_Config_t *pconfig_params, eCsrRoamBssType bssType, t
 ============================================================================*/
 void sapFreeRoamProfile(tCsrRoamProfile *profile);
 
+<<<<<<< HEAD
 
 #ifdef WLAN_FEATURE_AP_HT40_24G
 /*==========================================================================
@@ -661,6 +696,8 @@ void sapAddHT40IntolerantSta(ptSapContext sapContext, tCsrRoamInfo *pCsrRoamInfo
 void sapRemoveHT40IntolerantSta(ptSapContext sapContext, tCsrRoamInfo *pCsrRoamInfo);
 #endif
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*==========================================================================
 
   FUNCTION    sapIsPeerMacAllowed
@@ -887,6 +924,7 @@ SIDE EFFECTS
 ============================================================================*/
 eCsrPhyMode sapConvertSapPhyModeToCsrPhyMode( eSapPhyMode sapPhyMode );
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_AP_HT40_24G
 /*==========================================================================
 FUNCTION  sap_ht2040_timer_cb
@@ -908,6 +946,8 @@ SIDE EFFECTS
 eHalStatus sapCheckHT40SecondaryIsNotAllowed(ptSapContext psapCtx);
 #endif
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef __cplusplus
 }
 #endif 

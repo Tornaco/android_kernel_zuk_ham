@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -35,6 +39,11 @@ DESCRIPTION
   in the Gen6 host software.
 
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ===========================================================================*/
 
 /*===========================================================================
@@ -71,7 +80,10 @@ when        who         what, where, why
 #include "wlan_qct_wda.h"
 #include "sme_Api.h"
 #include "macInitApi.h"
+<<<<<<< HEAD
 #include "vos_sched.h"
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 VOS_STATUS WLANFTM_McProcessMsg (v_VOID_t *message);
 
@@ -382,10 +394,16 @@ VOS_STATUS sysMcProcessMsg( v_CONTEXT_t pVosContext, vos_msg_t *pMsg )
          // function that is in the message.
          case SYS_MSG_ID_MC_THR_PROBE:
          {
+<<<<<<< HEAD
 #ifdef WLAN_LOGGING_SOCK_SVC_ENABLE
              if(pMsg->callback)
                 ((sysThreadProbeCback)pMsg->callback)(current->pid);
 #endif
+=======
+            VOS_TRACE(VOS_MODULE_ID_SYS, VOS_TRACE_LEVEL_ERROR,
+                       " Received SYS_MSG_ID_MC_THR_PROBE message msgType = %d [0x%08x]",
+                       pMsg->type, pMsg->type);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
             break;
          }
 
@@ -395,9 +413,13 @@ VOS_STATUS sysMcProcessMsg( v_CONTEXT_t pVosContext, vos_msg_t *pMsg )
 
             if (NULL != timerCB)
             {
+<<<<<<< HEAD
                vos_ssr_protect(__func__);
                timerCB(pMsg->bodyptr);
                vos_ssr_unprotect(__func__);
+=======
+               timerCB(pMsg->bodyptr);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
             }
             break;
          }
@@ -406,6 +428,10 @@ VOS_STATUS sysMcProcessMsg( v_CONTEXT_t pVosContext, vos_msg_t *pMsg )
              WLANFTM_McProcessMsg((v_VOID_t *)pMsg->bodyptr);
              break;
          }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
          default:
          {
             VOS_TRACE( VOS_MODULE_ID_SYS, VOS_TRACE_LEVEL_ERROR,
@@ -471,10 +497,20 @@ VOS_STATUS sysTxProcessMsg( v_CONTEXT_t pVosContext, vos_msg_t *pMsg )
          // function that is in the message.
          case SYS_MSG_ID_TX_THR_PROBE:
          {
+<<<<<<< HEAD
 #ifdef WLAN_LOGGING_SOCK_SVC_ENABLE
             if(pMsg->callback)
                ((sysThreadProbeCback)pMsg->callback)(current->pid);
 #endif
+=======
+           /* Handling for this message is not needed now so adding 
+            * debug print and VOS_ASSERT*/
+            VOS_TRACE( VOS_MODULE_ID_SYS, VOS_TRACE_LEVEL_ERROR,
+                       " Received SYS_MSG_ID_TX_THR_PROBE message msgType= %d [0x%08x]",
+                       pMsg->type, pMsg->type );
+            VOS_ASSERT(0);
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
             break;
          }
 
@@ -547,6 +583,7 @@ VOS_STATUS sysRxProcessMsg( v_CONTEXT_t pVosContext, vos_msg_t *pMsg )
             break;
          }
 
+<<<<<<< HEAD
          case SYS_MSG_ID_RX_THR_PROBE:
          {
 #ifdef WLAN_LOGGING_SOCK_SVC_ENABLE
@@ -556,6 +593,8 @@ VOS_STATUS sysRxProcessMsg( v_CONTEXT_t pVosContext, vos_msg_t *pMsg )
             break;
          }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
          default:
          {
             VOS_TRACE( VOS_MODULE_ID_SYS, VOS_TRACE_LEVEL_ERROR,

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -41,6 +45,11 @@
  * This file contains the API exposed by the 
  * wlan device abstarction layer module for abstracting DXE/SDIO.
  *
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+ * Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Example usage for DXE.
  * ----------------------
@@ -72,6 +81,7 @@ typedef enum
    WDTS_CHANNEL_TX_HIGH_PRI,
    WDTS_CHANNEL_RX_LOW_PRI,
    WDTS_CHANNEL_RX_HIGH_PRI,
+<<<<<<< HEAD
    WDTS_CHANNEL_RX_LOG,
    WDTS_CHANNEL_RX_FW_LOG,
    WDTS_CHANNEL_MAX
@@ -84,6 +94,11 @@ typedef enum
 #define WDTS_RX_LOG_CHANNEL_MASK (1<<WDTS_CHANNEL_RX_LOG)
 #define WDTS_RX_FW_LOG_CHANNEL_MASK (1<<WDTS_CHANNEL_RX_FW_LOG)
 
+=======
+   WDTS_CHANNEL_MAX
+}  WDTS_ChannelType;
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 typedef enum
 {
    WDTS_POWER_STATE_FULL,
@@ -98,9 +113,12 @@ typedef wpt_status (*WDTS_TxCompleteCbType)(void *pContext, wpt_packet *pFrame, 
 typedef wpt_status (*WDTS_RxFrameReadyCbType) (void *pContext, wpt_packet *pFrame, WDTS_ChannelType channel);
 typedef wpt_status (*WDTS_LowResourceCbType)(void *pContext, WDTS_ChannelType channel, wpt_boolean on);
 typedef void  (*WDTS_SetPSCbType)(wpt_status  status, unsigned int dxePhyAddr);
+<<<<<<< HEAD
 typedef void (*WDTS_MbReceiveMsgType)(void *pContext);
 typedef void (*WDTS_RxLogDoneType)(void *pContext);
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /* DTS Set power state ACK callback. 
  * This callback function should be invoked by the DTS to notify WDI that set
  * power state request is complete.
@@ -113,6 +131,7 @@ typedef void (*WDTS_RxLogDoneType)(void *pContext);
 typedef void  (*WDTS_SetPowerStateCbType)(wpt_status   status,
                                           unsigned int dxePhyAddr,
                                           void*        pUserData);
+<<<<<<< HEAD
 typedef struct
 {
    WDTS_RxFrameReadyCbType  rxFrameReadyCB;
@@ -121,23 +140,36 @@ typedef struct
    WDTS_MbReceiveMsgType    receiveMbMsgCB;
    WDTS_RxLogDoneType       receiveLogCompleteCB;
 }WDTS_ClientCallbacks;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 typedef struct {
   void * (*open)(void);
   wpt_status (*start) (void *pContext);
+<<<<<<< HEAD
   wpt_status (*register_client)(void *pContext, WDTS_ClientCallbacks, void *clientData);
+=======
+  wpt_status (*register_client)(void *pContext, WDTS_RxFrameReadyCbType, 
+      WDTS_TxCompleteCbType, WDTS_LowResourceCbType, void *clientData);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   wpt_status (*xmit) (void *pContext, wpt_packet *packet, WDTS_ChannelType channel);
   wpt_status (*txComplete) (void *pContext, wpt_uint32 ucTxResReq);
   wpt_status (*setPowerState) (void *pContext, WDTS_PowerStateType   powerState, 
                                WDTS_SetPSCbType cBack);
   void (*channelDebug)(wpt_boolean displaySnapshot,
                        wpt_uint8   debugFlags);
+<<<<<<< HEAD
   void (*kickDxe) (void);
   wpt_status (*stop) (void *pContext);
   wpt_status (*close) (void *pContext);
   wpt_uint32 (*getFreeTxDataResNumber) (void *pContext);
   wpt_uint32 (*setupLogTransfer) (wpt_uint64 bufferAddr, wpt_uint32 bufferSize);
   wpt_status  (*startLogTransfer) (void);
+=======
+  wpt_status (*stop) (void *pContext);
+  wpt_status (*close) (void *pContext);
+  wpt_uint32 (*getFreeTxDataResNumber) (void *pContext);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 } WDTS_TransportDriverTrype;
 
 typedef struct {
@@ -256,6 +288,7 @@ wpt_status WDTS_SetPowerState(void *pContext, WDTS_PowerStateType powerState,
  */
 void WDTS_ChannelDebug(wpt_boolean displaySnapshot, wpt_uint8 debugFlags);
 
+<<<<<<< HEAD
 /* DTS Transport Channel Kick Dxe
  * Request Kick DXE when HDD TX timeout happen
  *
@@ -265,6 +298,8 @@ void WDTS_ChannelDebug(wpt_boolean displaySnapshot, wpt_uint8 debugFlags);
  */
 void WDTS_ChannelKickDxe(void);
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /* DTS Stop function. 
  * Stop Transport driver, ie DXE, SDIO
  * Parameters:

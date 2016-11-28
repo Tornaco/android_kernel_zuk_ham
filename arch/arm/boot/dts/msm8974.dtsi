@@ -2211,7 +2211,11 @@
 		qcom,memory-reservation-size = <0x280000>; /* 2.5M EBI1 buffer */
 	};
 
+<<<<<<< HEAD
         qcom_cedev: qcom,qcedev@fd440000 {
+=======
+	qcom_cedev: qcedev@fd440000 {
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 		compatible = "qcom,qcedev";
 		reg = <0xfd440000 0x20000>,
 		      <0xfd444000 0x1b000>;
@@ -2228,7 +2232,11 @@
 				<56 512 3936000 393600>;
 	};
 
+<<<<<<< HEAD
         qcom_crypto: qcrypto@fd440000 {
+=======
+	qcom_crypto: qcrypto@fd440000 {
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 		compatible = "qcom,qcrypto";
 		reg = <0xfd440000 0x20000>,
 		      <0xfd444000 0x1b000>;
@@ -2249,7 +2257,11 @@
 				<56 512 3936000 393600>;
 	};
 
+<<<<<<< HEAD
         qcom_crypto1: qcrypto1@fd440000 {
+=======
+	qcom_crypto1: qcrypto1@fd440000 {
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 		compatible = "qcom,qcrypto";
 		reg = <0xfd440000 0x20000>,
 		      <0xfd444000 0x1b000>;

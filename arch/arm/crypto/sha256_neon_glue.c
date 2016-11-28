@@ -15,10 +15,17 @@
  */
 
 #include <crypto/internal/hash.h>
+<<<<<<< HEAD
 #include <linux/cryptohash.h>
 #include <linux/types.h>
 #include <linux/string.h>
 #include <linux/module.h>
+=======
+#include <linux/module.h>
+#include <linux/cryptohash.h>
+#include <linux/types.h>
+#include <linux/string.h>
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #include <crypto/sha.h>
 #include <asm/byteorder.h>
 #include <asm/simd.h>

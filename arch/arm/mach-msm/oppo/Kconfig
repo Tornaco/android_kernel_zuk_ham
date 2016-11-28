@@ -1,0 +1,23 @@
+config MACH_OPPO
+	bool
+	depends on ARCH_MSM
+
+menu "Oppo board selection"
+
+config MACH_MSM8974_14001
+	bool "OnePlus One"
+	select MACH_OPPO
+	help
+	  Support for the OnePlus One (bacon)
+
+endmenu
+
+menu "Oppo specific options"
+
+config OPPO_DEVICE_INFO
+	bool "Oppo device info driver"
+	default y if MACH_OPPO
+	help
+	  Say Y to enable Oppo device info driver
+
+endmenu

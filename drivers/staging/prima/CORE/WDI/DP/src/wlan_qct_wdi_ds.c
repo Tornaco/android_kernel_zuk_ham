@@ -36,6 +36,11 @@
  *  This file contains the external API implemntation exposed by the 
  *   wlan device abstarction layer module.
  *
+<<<<<<< HEAD
+=======
+ *   Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+ *   Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  */
 
 
@@ -69,7 +74,10 @@ WDI_Status WDI_DS_Register( void *pContext,
   WDI_DS_TxCompleteCallback pfnTxCompleteCallback,
   WDI_DS_RxPacketCallback pfnRxPacketCallback,
   WDI_DS_TxFlowControlCallback pfnTxFlowControlCallback,
+<<<<<<< HEAD
   WDI_DS_RxLogCallback pfnRxLogCallback,
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   void *pCallbackContext)
 {
   WDI_DS_ClientDataType *pClientData;
@@ -95,7 +103,10 @@ WDI_Status WDI_DS_Register( void *pContext,
   pClientData->receiveFrameCB = pfnRxPacketCallback;
   pClientData->txCompleteCB = pfnTxCompleteCallback;
   pClientData->txResourceCB = pfnTxFlowControlCallback;
+<<<<<<< HEAD
   pClientData->rxLogCB = pfnRxLogCallback;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   pClientData->pCallbackContext = pCallbackContext;
 
   for(bssLoop = 0; bssLoop < WDI_DS_MAX_SUPPORTED_BSS; bssLoop++)
@@ -212,8 +223,12 @@ WDI_Status WDI_DS_TxPacket(void *pContext,
               "Packet Length is %d\n", pTxMetadata->fPktlen);
   }
   wdiStatus = WDI_FillTxBd(pContext, ucTypeSubtype, pSTAMACAddress, pAddr2MACAddress,
+<<<<<<< HEAD
     &ucUP, 1, pvBDHeader, ucTxFlag /* No ACK */, ucProtMgmtFrame, 0, isEapol, &staId,
     pTxMetadata->txBdToken);
+=======
+    &ucUP, 1, pvBDHeader, ucTxFlag /* No ACK */, ucProtMgmtFrame, 0, isEapol, &staId);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   if(WDI_STATUS_SUCCESS != wdiStatus)
   {

@@ -784,10 +784,13 @@ tANI_BOOLEAN csrMatchBSS( tHalHandle hHal, tSirBssDescription *pBssDesc, tCsrSca
 tANI_BOOLEAN csrIsBssidMatch( tHalHandle hHal, tCsrBssid *pProfBssid, tCsrBssid *BssBssid );
 tANI_BOOLEAN csrMatchBSSToConnectProfile( tHalHandle hHal, tCsrRoamConnectedProfile *pProfile,
                                           tSirBssDescription *pBssDesc, tDot11fBeaconIEs *pIes );
+<<<<<<< HEAD
 
 void csrAddRateBitmap(tANI_U8 rate, tANI_U16 *pRateBitmap);
 tANI_BOOLEAN csrIsRateAlreadyPresent(tANI_U8 rate, tANI_U16 RateBitmap);
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 tANI_BOOLEAN csrRatesIsDot11RateSupported( tHalHandle hHal, tANI_U8 rate );
 tANI_U16 csrRatesFindBestRate( tSirMacRateSet *pSuppRates, tSirMacRateSet *pExtRates, tSirMacPropRateSet *pPropRates );
 tSirBssType csrTranslateBsstypeToMacType(eCsrRoamBssType csrtype);

@@ -141,7 +141,10 @@ typedef struct sSirProbeRespBeacon
     tDot11fIEVHTCaps          VHTCaps;
     tDot11fIEVHTOperation     VHTOperation;
     tDot11fIEVHTExtBssLoad    VHTExtBssLoad;
+<<<<<<< HEAD
     tDot11fIEExtCap           ExtCap;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     tDot11fIEOperatingMode    OperatingMode;
     tANI_U8                   WiderBWChanSwitchAnnPresent;
     tDot11fIEWiderBWChanSwitchAnn WiderBWChanSwitchAnn;
@@ -578,6 +581,7 @@ PopulateDot11fHTInfo(tpAniSirGlobal   pMac,
                      tDot11fIEHTInfo *pDot11f,
                      tpPESession      psessionEntry);
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_AP_HT40_24G
 tSirRetStatus
 PopulateDot11fOBSSScanParameters(tpAniSirGlobal   pMac,
@@ -585,6 +589,8 @@ PopulateDot11fOBSSScanParameters(tpAniSirGlobal   pMac,
                      tpPESession      psessionEntry);
 #endif
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 void PopulateDot11fIBSSParams(tpAniSirGlobal  pMac,
        tDot11fIEIBSSParams *pDot11f, tpPESession psessionEntry);
 
@@ -731,10 +737,13 @@ PopulateDot11fSuppRates(tpAniSirGlobal      pMac,
                         tANI_U8                  nChannelNum,
                         tDot11fIESuppRates *pDot11f,tpPESession);
 
+<<<<<<< HEAD
 tSirRetStatus
 PopulateDot11fRatesTdls(tpAniSirGlobal p_mac,
                            tDot11fIESuppRates *p_supp_rates,
                            tDot11fIEExtSuppRates *p_ext_supp_rates);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 tSirRetStatus PopulateDot11fTPCReport(tpAniSirGlobal      pMac,
                                       tDot11fIETPCReport *pDot11f,
@@ -888,12 +897,19 @@ int FindIELocation( tpAniSirGlobal pMac,
 
 #ifdef WLAN_FEATURE_11AC
 tSirRetStatus
+<<<<<<< HEAD
 PopulateDot11fVHTCaps(tpAniSirGlobal  pMac, tDot11fIEVHTCaps *pDot11f,
           tANI_U8 nChannelNum, tAniBool isProbeRspAssocRspBeacon);
 
 tSirRetStatus
 PopulateDot11fVHTOperation(tpAniSirGlobal  pMac,
                      tDot11fIEVHTOperation  *pDot11f, tANI_U8 nChannelNum);
+=======
+PopulateDot11fVHTCaps(tpAniSirGlobal  pMac, tDot11fIEVHTCaps *pDot11f, tAniBool isProbeRspAssocRspBeacon );
+
+tSirRetStatus
+PopulateDot11fVHTOperation(tpAniSirGlobal  pMac, tDot11fIEVHTOperation  *pDot11f);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 tSirRetStatus
 PopulateDot11fVHTExtBssLoad(tpAniSirGlobal  pMac, tDot11fIEVHTExtBssLoad   *pDot11f);

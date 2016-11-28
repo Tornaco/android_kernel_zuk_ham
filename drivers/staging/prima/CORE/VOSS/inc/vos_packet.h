@@ -36,6 +36,12 @@
                
    Network Protocol packet/buffer support interfaces 
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
 
@@ -52,7 +58,10 @@
   ------------------------------------------------------------------------*/
 #define VOS_PKT_PROTO_TYPE_EAPOL   0x02
 #define VOS_PKT_PROTO_TYPE_DHCP    0x04
+<<<<<<< HEAD
 #define VOS_PKT_PROTO_TYPE_ARP     0x08
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*-------------------------------------------------------------------------- 
   Type declarations
   ------------------------------------------------------------------------*/

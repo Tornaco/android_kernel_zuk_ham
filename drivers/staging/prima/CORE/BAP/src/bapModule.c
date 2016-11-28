@@ -580,7 +580,11 @@ WLANBAP_ReleaseHndl
   if( btampContext->isBapSessionOpen == TRUE )
   {
     halStatus = sme_CloseSession(halHandle, 
+<<<<<<< HEAD
             btampContext->sessionId, VOS_TRUE, NULL, NULL);
+=======
+            btampContext->sessionId, NULL, NULL);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     if(eHAL_STATUS_SUCCESS == halStatus)
     {
       btampContext->isBapSessionOpen = FALSE;

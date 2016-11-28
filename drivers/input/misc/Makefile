@@ -67,4 +67,13 @@ obj-$(CONFIG_BMP18X_I2C)		+= bmp18x-i2c.o
 obj-$(CONFIG_SENSORS_MMA8X5X)	  	+= mma8x5x.o
 obj-$(CONFIG_SENSORS_STK3X1X)		+= stk3x1x.o
 obj-$(CONFIG_SENSORS_CAPELLA_CM36283)	+= cm36283.o
+<<<<<<< HEAD
 obj-$(CONFIG_MACH_SHENQI_K9)		+= shenqi_hall_switch.o
+=======
+#ranfei add for fpc1021
+obj-$(CONFIG_BTP_FPC1021)  += fpc1020_main.o fpc1020_capture.o fpc1020_common.o fpc1020_regulator.o fpc1020_nav.o
+#add end
+#ranfei add for MXM1120
+obj-$(CONFIG_HALL_MXM1120)  += m1120.o
+#add end
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

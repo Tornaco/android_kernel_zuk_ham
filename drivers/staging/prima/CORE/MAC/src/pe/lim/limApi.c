@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -40,7 +44,11 @@
  *
  */
 #include "palTypes.h"
+<<<<<<< HEAD
 #include "wniCfg.h"
+=======
+#include "wniCfgSta.h"
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #include "wniApi.h"
 #include "sirCommon.h"
 #include "sirDebug.h"
@@ -351,9 +359,12 @@ static void __limInitVars(tpAniSirGlobal pMac)
     pMac->lim.gScanInPowersave = 0;
     pMac->lim.probeCounter = 0;
     pMac->lim.maxProbe = 0;
+<<<<<<< HEAD
     pMac->lim.txBdToken = 0;
 
     pMac->lim.EnableTdls2040BSSCoexIE = 1;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }
 
 static void __limInitAssocVars(tpAniSirGlobal pMac)
@@ -667,7 +678,11 @@ tSirRetStatus limStart(tpAniSirGlobal pMac)
 {
    tSirResultCodes retCode = eSIR_SUCCESS;
 
+<<<<<<< HEAD
    limLog(pMac, LOG1, FL(" enter"));
+=======
+   PELOG1(limLog(pMac, LOG1, FL(" enter"));)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
    if (pMac->lim.gLimSmeState == eLIM_SME_OFFLINE_STATE)
    {
@@ -860,7 +875,11 @@ limCleanup(tpAniSirGlobal pMac)
     // free up preAuth table
     if (pMac->lim.gLimPreAuthTimerTable.pTable != NULL)
     {
+<<<<<<< HEAD
         vos_mem_vfree(pMac->lim.gLimPreAuthTimerTable.pTable);
+=======
+        vos_mem_free(pMac->lim.gLimPreAuthTimerTable.pTable);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         pMac->lim.gLimPreAuthTimerTable.pTable = NULL;
         pMac->lim.gLimPreAuthTimerTable.numEntry = 0;
     }
@@ -1002,29 +1021,70 @@ tSirRetStatus peOpen(tpAniSirGlobal pMac, tMacOpenParameters *pMacOpenParam)
          return eSIR_FAILURE;
     }
 
+<<<<<<< HEAD
     pMac->lim.limTimers.gpLimCnfWaitTimer = vos_mem_vmalloc(sizeof(TX_TIMER) * pMac->lim.maxStation);
+=======
+    pMac->lim.limTimers.gpLimCnfWaitTimer = vos_mem_malloc(sizeof(TX_TIMER) * pMac->lim.maxStation);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     if (NULL == pMac->lim.limTimers.gpLimCnfWaitTimer)
     {
         PELOGE(limLog(pMac, LOGE, FL("memory allocate failed!"));)
         return eSIR_FAILURE;
     }
 
+<<<<<<< HEAD
     pMac->lim.gpSession = vos_mem_vmalloc(sizeof(tPESession)* pMac->lim.maxBssId);
     if (NULL == pMac->lim.gpSession)
     {
         limLog(pMac, LOGE, FL("memory allocate failed!"));
         vos_mem_vfree(pMac->lim.limTimers.gpLimCnfWaitTimer);
+=======
+#if 0
+    pMac->lim.gpLimAIDpool = vos_mem_malloc(sizeof(*pMac->lim.gpLimAIDpool) * (WNI_CFG_ASSOC_STA_LIMIT_STAMAX+1));
+    if (NULL == pMac->lim.gpLimAIDpool)
+    {
+        PELOGE(limLog(pMac, LOGE, FL("memory allocate failed!"));)
+        return eSIR_FAILURE;
+    }
+#endif
+    pMac->lim.gpSession = vos_mem_malloc(sizeof(tPESession)* pMac->lim.maxBssId);
+    if (NULL == pMac->lim.gpSession)
+    {
+        limLog(pMac, LOGE, FL("memory allocate failed!"));
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         return eSIR_FAILURE;
     }
  
     vos_mem_set(pMac->lim.gpSession, sizeof(tPESession)*pMac->lim.maxBssId, 0);
 
+<<<<<<< HEAD
+=======
+
+ /*
+    pMac->dph.dphHashTable.pHashTable = vos_mem_malloc(sizeof(tpDphHashNode)*pMac->lim.maxStation);
+    if (NULL == pMac->dph.dphHashTable.pHashTable)
+    {
+        PELOGE(limLog(pMac, LOGE, FL("memory allocate failed!"));)
+        return eSIR_FAILURE;
+    }
+
+    pMac->dph.dphHashTable.pDphNodeArray = vos_mem_malloc(sizeof(tDphHashNode)*pMac->lim.maxStation);
+    if (NULL == pMac->dph.dphHashTable.pDphNodeArray)
+    {
+        PELOGE(limLog(pMac, LOGE, FL("memory allocate failed!"));)
+        return eSIR_FAILURE;
+    }
+    */
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     pMac->pmm.gPmmTim.pTim = vos_mem_malloc(sizeof(tANI_U8)*pMac->lim.maxStation);
     if (NULL == pMac->pmm.gPmmTim.pTim)
     {
         PELOGE(limLog(pMac, LOGE, FL("memory allocate failed for pTim!"));)
+<<<<<<< HEAD
         vos_mem_vfree(pMac->lim.limTimers.gpLimCnfWaitTimer);
         vos_mem_vfree(pMac->lim.gpSession);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         return eSIR_FAILURE;
     }
     vos_mem_set(pMac->pmm.gPmmTim.pTim, sizeof(tANI_U8)*pMac->lim.maxStation, 0);
@@ -1035,9 +1095,15 @@ tSirRetStatus peOpen(tpAniSirGlobal pMac, tMacOpenParameters *pMacOpenParam)
     if( !VOS_IS_STATUS_SUCCESS( vos_lock_init( &pMac->lim.lkPeGlobalLock ) ) )
     {
         PELOGE(limLog(pMac, LOGE, FL("pe lock init failed!"));)
+<<<<<<< HEAD
         vos_mem_vfree(pMac->lim.limTimers.gpLimCnfWaitTimer);
         pMac->lim.limTimers.gpLimCnfWaitTimer = NULL;
         vos_mem_vfree(pMac->lim.gpSession);
+=======
+        vos_mem_free(pMac->lim.limTimers.gpLimCnfWaitTimer);
+        pMac->lim.limTimers.gpLimCnfWaitTimer = NULL;
+        vos_mem_free(pMac->lim.gpSession);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         pMac->lim.gpSession = NULL;
         vos_mem_free(pMac->pmm.gPmmTim.pTim);
         pMac->pmm.gPmmTim.pTim = NULL;
@@ -1045,7 +1111,10 @@ tSirRetStatus peOpen(tpAniSirGlobal pMac, tMacOpenParameters *pMacOpenParam)
     }
     pMac->lim.deauthMsgCnt = 0;
     pMac->lim.retryPacketCnt = 0;
+<<<<<<< HEAD
     pMac->lim.gLimIbssRetryCnt = 0;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
     /*
      * peOpen is successful by now, so it is right time to initialize
@@ -1081,11 +1150,29 @@ tSirRetStatus peClose(tpAniSirGlobal pMac)
             peDeleteSession(pMac,&pMac->lim.gpSession[i]);
         }
     }
+<<<<<<< HEAD
     vos_mem_vfree(pMac->lim.limTimers.gpLimCnfWaitTimer);
     pMac->lim.limTimers.gpLimCnfWaitTimer = NULL;
     vos_mem_vfree(pMac->lim.gpSession);
     pMac->lim.gpSession = NULL;
 
+=======
+    vos_mem_free(pMac->lim.limTimers.gpLimCnfWaitTimer);
+    pMac->lim.limTimers.gpLimCnfWaitTimer = NULL;
+#if 0
+    vos_mem_free(pMac->lim.gpLimAIDpool);
+    pMac->lim.gpLimAIDpool = NULL;
+#endif
+    
+    vos_mem_free(pMac->lim.gpSession);
+    pMac->lim.gpSession = NULL;
+    /*
+    vos_mem_free(pMac->dph.dphHashTable.pHashTable);
+    pMac->dph.dphHashTable.pHashTable = NULL;
+    vos_mem_free(pMac->dph.dphHashTable.pDphNodeArray);
+    pMac->dph.dphHashTable.pDphNodeArray = NULL;
+    */
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     vos_mem_free(pMac->pmm.gPmmTim.pTim);
     pMac->pmm.gPmmTim.pTim = NULL;
     if( !VOS_IS_STATUS_SUCCESS( vos_lock_destroy( &pMac->lim.lkPeGlobalLock ) ) )
@@ -1217,7 +1304,10 @@ tANI_U8 limIsTimerAllowedInPowerSaveState(tpAniSirGlobal pMac, tSirMsgQ *pMsg)
             case SIR_LIM_ASSOC_FAIL_TIMEOUT:
             case SIR_LIM_AUTH_FAIL_TIMEOUT:
             case SIR_LIM_ADDTS_RSP_TIMEOUT:
+<<<<<<< HEAD
             case SIR_LIM_AUTH_RETRY_TIMEOUT:
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                 retStatus = TRUE;
                 break;
 
@@ -1265,6 +1355,7 @@ limPostMsgApi(tpAniSirGlobal pMac, tSirMsgQ *pMsg)
 
 } /*** end limPostMsgApi() ***/
 
+<<<<<<< HEAD
 /**
  * limPostMsgApiHighPri()
  *
@@ -1294,6 +1385,8 @@ limPostMsgApiHighPri(tpAniSirGlobal pMac, tSirMsgQ *pMsg)
 
 } /*** end limPostMsgApi() ***/
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /*--------------------------------------------------------------------------
 
@@ -1408,6 +1501,7 @@ VOS_STATUS peHandleMgmtFrame( v_PVOID_t pvosGCtx, v_PVOID_t vosBuff)
        FL ( "RxBd=%p mHdr=%p Type: %d Subtype: %d  Sizes:FC%d Mgmt%d"),
        pRxPacketInfo, mHdr, mHdr->fc.type, mHdr->fc.subType, sizeof(tSirMacFrameCtl), sizeof(tSirMacMgmtHdr) );)
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
        if (WDA_GET_ROAMCANDIDATEIND(pRxPacketInfo))
            limLog(pMac, LOG1, FL("roamCandidateInd %d"),
@@ -1417,6 +1511,11 @@ VOS_STATUS peHandleMgmtFrame( v_PVOID_t pvosGCtx, v_PVOID_t vosBuff)
            limLog(pMac, LOG1, FL("offloadScanLearn %d"),
                   WDA_GET_OFFLOADSCANLEARN(pRxPacketInfo));
 #endif
+=======
+    MTRACE(macTrace(pMac, TRACE_CODE_RX_MGMT, NO_SESSION, 
+                        LIM_TRACE_MAKE_RXMGMT(mHdr->fc.subType,  
+                        (tANI_U16) (((tANI_U16) (mHdr->seqControl.seqNumHi << 4)) | mHdr->seqControl.seqNumLo)));)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     }
 
 
@@ -1769,7 +1868,11 @@ limHandleIBSScoalescing(
         ieLen    = WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo);
         tsfLater = WDA_GET_RX_TSF_LATER(pRxPacketInfo);
         pIEs = WDA_GET_RX_MPDU_DATA(pRxPacketInfo);
+<<<<<<< HEAD
         limLog(pMac, LOG1, FL("BEFORE Coalescing tsfLater val :%d"), tsfLater);
+=======
+        PELOG3(limLog(pMac, LOG3, FL("BEFORE Coalescing tsfLater val :%d"), tsfLater);)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         retCode  = limIbssCoalesce(pMac, pHdr, pBeacon, pIEs, ieLen, tsfLater,psessionEntry);
     }
     return retCode;
@@ -1826,6 +1929,7 @@ tAniBool limEncTypeMatched(tpAniSirGlobal pMac, tpSchBeaconStruct  pBeacon,
                 (pSession->encryptType == eSIR_ED_AES_128_CMAC)))
         return eSIR_TRUE;
 
+<<<<<<< HEAD
     /* For HS2.0, RSN ie is not present
      * in beacon. Therefore no need to
      * check for security type in case
@@ -1839,6 +1943,8 @@ tAniBool limEncTypeMatched(tpAniSirGlobal pMac, tpSchBeaconStruct  pBeacon,
     if (pSession->bOSENAssociation)
         return eSIR_TRUE;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     return eSIR_FALSE;
 }
 
@@ -1897,7 +2003,14 @@ limDetectChangeInApCapabilities(tpAniSirGlobal pMac,
           (eSIR_FALSE == securityCapsMatched)
           ) ) )
     {
+<<<<<<< HEAD
         if ( false == psessionEntry->fWaitForProbeRsp )
+=======
+        /* No need to send probe request if security
+         * capability doesnt match, Disconnect directly.*/
+        if( (false == psessionEntry->fWaitForProbeRsp) &&
+                              (eSIR_TRUE == securityCapsMatched))
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         {
             /* If Beacon capabilities is not matching with the current capability,
              * then send unicast probe request to AP and take decision after
@@ -2057,7 +2170,11 @@ tSirRetStatus limUpdateShortSlot(tpAniSirGlobal pMac, tpSirProbeRespBeacon pBeac
     if (nShortSlot != psessionEntry->shortSlotTimeSupported)
     {
         // Short slot time capability of AP has changed. Adopt to it.
+<<<<<<< HEAD
         limLog(pMac, LOG1, FL("Shortslot capability of AP changed: %d"),  nShortSlot);
+=======
+        PELOG1(limLog(pMac, LOG1, FL("Shortslot capability of AP changed: %d"),  nShortSlot);)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         ((tpSirMacCapabilityInfo)&psessionEntry->limCurrentBssCaps)->shortSlotTime = (tANI_U16)nShortSlot;
         psessionEntry->shortSlotTimeSupported = nShortSlot;
         pBeaconParams->fShortSlotTime = (tANI_U8) nShortSlot;
@@ -2131,7 +2248,11 @@ void limHandleBmpsStatusInd(tpAniSirGlobal pMac)
         case ePMM_STATE_UAPSD_SLEEP:
         case ePMM_STATE_UAPSD_WT_WAKEUP_RSP:
         case ePMM_STATE_WOWLAN:
+<<<<<<< HEAD
             limLog(pMac, LOG1, FL("Sending EXIT_BMPS_IND to SME "));
+=======
+            PELOG1(limLog(pMac, LOG1, FL("Sending EXIT_BMPS_IND to SME "));)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
             limSendExitBmpsInd(pMac, eSME_BMPS_STATUS_IND_RCVD);
             break;
 
@@ -2199,6 +2320,7 @@ void limHandleMissedBeaconInd(tpAniSirGlobal pMac, tpSirMsgQ pMsg)
     return;
 }
 
+<<<<<<< HEAD
 
 void limUpdateLostLinkParams(tpAniSirGlobal pMac,
                      tpPESession psessionEntry, tANI_U8 *pRxPacketInfo)
@@ -2305,6 +2427,8 @@ void limProcessLostLinkParamsInd(tpAniSirGlobal pMac, tpSirMsgQ pMsg)
     return;
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /** -----------------------------------------------------------------
   \brief limMicFailureInd() - handles mic failure  indication
  
@@ -2377,11 +2501,16 @@ void limMicFailureInd(tpAniSirGlobal pMac, tpSirMsgQ pMsg)
     mmhMsg.type = eWNI_SME_MIC_FAILURE_IND;
     mmhMsg.bodyptr = pSirSmeMicFailureInd;
     mmhMsg.bodyval = 0;
+<<<<<<< HEAD
     MTRACE(macTrace(pMac, TRACE_CODE_TX_SME_MSG, sessionId, mmhMsg.type));
+=======
+    MTRACE(macTraceMsgTx(pMac, sessionId, mmhMsg.type));
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     limSysProcessMmhMsgApi(pMac, &mmhMsg, ePROT);
     return;
 }
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_11W
 /** --------------------------------------------------------------------
  * lim_is_assoc_req_for_drop()- function to decides to drop assoc\reassoc
@@ -2529,6 +2658,9 @@ end:
     pe_ReleaseGlobalLock(&pMac->lim);
     return ret;
 }
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /** -----------------------------------------------------------------
   \brief limIsPktCandidateForDrop() - decides whether to drop the frame or not
 
@@ -2604,12 +2736,15 @@ tMgmtFrmDropReason limIsPktCandidateForDrop(tpAniSirGlobal pMac, tANI_U8 *pRxPac
         return eMGMT_DROP_NO_DROP;
 #endif
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_11W
     if ((subType == SIR_MAC_MGMT_ASSOC_REQ ||
          subType == SIR_MAC_MGMT_REASSOC_REQ) &&
          lim_is_assoc_req_for_drop(pMac, pRxPacketInfo))
         return eMGMT_DROP_SPURIOUS_FRAME;
 #endif
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     //Drop INFRA Beacons and Probe Responses in IBSS Mode
     if( (subType == SIR_MAC_MGMT_BEACON) ||
         (subType == SIR_MAC_MGMT_PROBE_RSP))

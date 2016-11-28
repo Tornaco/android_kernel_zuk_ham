@@ -739,11 +739,14 @@ limStartBssReqSerDes(tpAniSirGlobal pMac, tpSirSmeStartBssReq pStartBssReq, tANI
         len  -= pStartBssReq->extendedRateSet.numRates;
     }
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_AP_HT40_24G
     /* extract apHT40_24GEnabled */
     pStartBssReq->apHT40_24GEnabled = *pBuf++;
     len--;
 #endif
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     if (len)
     {
         limLog(pMac, LOGW, FL("Extra bytes left in SME_START_BSS_REQ, len=%d"), len);
@@ -968,6 +971,7 @@ limJoinReqSerDes(tpAniSirGlobal pMac, tpSirSmeJoinReq pJoinReq, tANI_U8 *pBuf)
         return eSIR_FAILURE;
     }
 
+<<<<<<< HEAD
     pJoinReq->bOSENAssociation = *pBuf++;
     len--;
     if (limCheckRemainingLength(pMac, len) == eSIR_FAILURE)
@@ -976,6 +980,8 @@ limJoinReqSerDes(tpAniSirGlobal pMac, tpSirSmeJoinReq pJoinReq, tANI_U8 *pBuf)
         return eSIR_FAILURE;
     }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     // Extract cbMode
     pJoinReq->cbMode = *pBuf++;
     len--;
@@ -1026,11 +1032,14 @@ limJoinReqSerDes(tpAniSirGlobal pMac, tpSirSmeJoinReq pJoinReq, tANI_U8 *pBuf)
         }
     }
 
+<<<<<<< HEAD
     //Extract rateBitMap
     pJoinReq->rateBitMap = limGetU16(pBuf);
     pBuf += sizeof(tANI_U16);
     len -= sizeof(tANI_U16);
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     // Extract RSN IE
     pJoinReq->rsnIE.length = limGetU16(pBuf);
     pBuf += sizeof(tANI_U16);
@@ -1094,7 +1103,11 @@ limJoinReqSerDes(tpAniSirGlobal pMac, tpSirSmeJoinReq pJoinReq, tANI_U8 *pBuf)
     if (pJoinReq->addIEScan.length)
     {
         // Check for IE length (that includes length of type & length)
+<<<<<<< HEAD
         if (pJoinReq->addIEScan.length > SIR_MAC_MAX_ADD_IE_LENGTH + 2)
+=======
+        if (pJoinReq->addIEScan.length > SIR_MAC_MAX_IE_LENGTH + 2)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         {
             limLog(pMac, LOGE,
                    FL("Invalid addIE Scan length %d in SME_JOIN_REQ"),
@@ -1321,11 +1334,19 @@ limJoinReqSerDes(tpAniSirGlobal pMac, tpSirSmeJoinReq pJoinReq, tANI_U8 *pBuf)
     pBuf += pJoinReq->supportedChannels.numChnl;
     len-= pJoinReq->supportedChannels.numChnl;
 
+<<<<<<< HEAD
     limLog(pMac, LOG1,
             FL("spectrumInd ON: minPower %d, maxPower %d , numChnls %d"),
             pJoinReq->powerCap.minTxPower,
             pJoinReq->powerCap.maxTxPower,
             pJoinReq->supportedChannels.numChnl);
+=======
+    PELOG2(limLog(pMac, LOG2,
+            FL("spectrumInd ON: minPower %d, maxPower %d , numChnls %d"),
+            pJoinReq->powerCap.minTxPower,
+            pJoinReq->powerCap.maxTxPower,
+            pJoinReq->supportedChannels.numChnl);)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
     // Extract uapsdPerAcBitmask
     pJoinReq->uapsdPerAcBitmask = *pBuf++;
@@ -1454,6 +1475,7 @@ limAssocIndSerDes(tpAniSirGlobal pMac, tpLimMlmAssocInd pAssocInd, tANI_U8 *pBuf
     limCopyU32(pBuf, pAssocInd->WmmStaInfoPresent);
     pBuf += sizeof(tANI_U32);
     mLen += sizeof(tANI_U32);
+<<<<<<< HEAD
 
 #ifdef WLAN_FEATURE_AP_HT40_24G
     limCopyU32(pBuf, pAssocInd->HT40MHzIntoPresent);
@@ -1461,6 +1483,8 @@ limAssocIndSerDes(tpAniSirGlobal pMac, tpLimMlmAssocInd pAssocInd, tANI_U8 *pBuf
     mLen += sizeof(tANI_U32);
 #endif
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
      // Fill in length of SME_ASSOC_IND message
     limCopyU16(pLen, mLen);
 

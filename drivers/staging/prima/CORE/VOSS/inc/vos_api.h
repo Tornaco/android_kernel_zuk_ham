@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -36,6 +40,12 @@
                
    Header file that inludes all the vOSS API definitions.
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
  /*=========================================================================== 
@@ -75,6 +85,7 @@
 #include <vos_timer.h>
 #include <vos_pack_align.h>
 
+<<<<<<< HEAD
 
 /**
  * enum log_event_type - Type of event initiating bug report
@@ -149,6 +160,8 @@ enum log_event_host_reason_code {
 	WLAN_LOG_REASON_MSG_POST_FAIL,
 };
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*------------------------------------------------------------------------- 
   Function declarations and documenation
   ------------------------------------------------------------------------*/
@@ -185,9 +198,13 @@ VOS_STATUS vos_preStart( v_CONTEXT_t vosContext );
 
 VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle );
 
+<<<<<<< HEAD
 VOS_STATUS vos_mon_start( v_CONTEXT_t vosContext );
 
 VOS_STATUS vos_mon_stop( v_CONTEXT_t vosContext );
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 VOS_STATUS vos_start( v_CONTEXT_t vosContext ); 
 
@@ -251,6 +268,7 @@ void vos_set_load_unload_in_progress(VOS_MODULE_ID moduleId, v_U8_t value);
 
 v_U8_t vos_is_reinit_in_progress(VOS_MODULE_ID moduleId, v_VOID_t *moduleContext);
 void vos_set_reinit_in_progress(VOS_MODULE_ID moduleId, v_U8_t value);
+<<<<<<< HEAD
 VOS_STATUS vos_logger_pkt_serialize(vos_pkt_t *pPacket, uint32 pkt_type);
 bool vos_is_log_report_in_progress(void);
 void vos_reset_log_report_in_progress(void);
@@ -261,6 +279,8 @@ VOS_STATUS vos_fatal_event_logs_req( uint32_t is_fatal, uint32_t indicator,
 VOS_STATUS vos_process_done_indication(v_U8_t type, v_U32_t reason_code);
 void vos_send_fatal_event_done(void);
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /**---------------------------------------------------------------------------
   
@@ -337,7 +357,13 @@ VOS_STATUS vos_alloc_context( v_VOID_t *pVosContext, VOS_MODULE_ID moduleID,
   --------------------------------------------------------------------------*/
 VOS_STATUS vos_free_context( v_VOID_t *pVosContext, VOS_MODULE_ID moduleID,
                              v_VOID_t *pModuleContext );
+<<<<<<< HEAD
 v_BOOL_t vos_is_apps_power_collapse_allowed(void* pHddCtx);
+=======
+                             
+v_BOOL_t vos_is_apps_power_collapse_allowed(void* pHddCtx);
+void vos_abort_mac_scan(tANI_U8 sessionId);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /**
   @brief vos_wlanShutdown() - This API will shutdown WLAN driver
@@ -397,16 +423,25 @@ VOS_STATUS vos_wlanRestart(void);
   This function is called to issue dump commands to Firmware
 
   @param
+<<<<<<< HEAD
        cmd     -  Command No. to execute
        arg1    -  argument 1 to cmd
        arg2    -  argument 2 to cmd
        arg3    -  argument 3 to cmd
        arg4    -  argument 4 to cmd
        async   -  asynchronous event. Don't wait for completion.
+=======
+       cmd - Command No. to execute
+       arg1 - argument 1 to cmd
+       arg2 - argument 2 to cmd
+       arg3 - argument 3 to cmd
+       arg4 - argument 4 to cmd
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   @return
        NONE
 */
 v_VOID_t vos_fwDumpReq(tANI_U32 cmd, tANI_U32 arg1, tANI_U32 arg2,
+<<<<<<< HEAD
                         tANI_U32 arg3, tANI_U32 arg4, tANI_U8 async);
 
 v_VOID_t vos_flush_work(struct work_struct *work);
@@ -414,11 +449,15 @@ v_VOID_t vos_flush_delayed_work(struct delayed_work *dwork);
 
 v_VOID_t vos_init_work(struct work_struct *work , void *callbackptr);
 v_VOID_t vos_init_delayed_work(struct delayed_work *dwork , void *callbackptr);
+=======
+                        tANI_U32 arg3, tANI_U32 arg4);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 v_U64_t vos_get_monotonic_boottime(void);
 
 VOS_STATUS vos_randomize_n_bytes(void *mac_addr, tANI_U32 n);
 
+<<<<<<< HEAD
 v_BOOL_t vos_is_wlan_in_badState(VOS_MODULE_ID moduleId,
                                  v_VOID_t *moduleContext);
 v_VOID_t  vos_set_roam_delay_stats_enabled(v_U8_t value);
@@ -437,4 +476,6 @@ v_BOOL_t vos_isUnloadInProgress(void);
 v_BOOL_t vos_isLoadUnloadInProgress(void);
 
 void vos_probe_threads(void);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #endif // if !defined __VOS_NVITEM_H

@@ -45,7 +45,11 @@ obj-$(CONFIG_FB_MSM_MDSS) += mdss_fb.o
 
 obj-$(CONFIG_FB_MSM_MDSS_DSI_CTRL_STATUS) += mdss_dsi_status.o
 
+<<<<<<< HEAD
 obj-$(CONFIG_FB_MSM_MDSS) += mdss_livedisplay.o
 obj-$(CONFIG_FB_MSM_MDSS_KCAL_CTRL) += mdss_mdp_kcal_ctrl.o
 
 obj-$(CONFIG_FB_MSM_MDSS) += lcd_notify.o
+=======
+obj-$(CONFIG_FB_MSM_MDSS_KCAL_CTRL) += mdss_mdp_kcal_ctrl.o
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

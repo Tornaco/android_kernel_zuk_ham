@@ -31,6 +31,12 @@
   @brief This source file contains the various function definitions for the 
   RTOS abstraction layer, implemented for VOSS
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2008 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ===========================================================================*/
 
 /*=========================================================================== 

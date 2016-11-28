@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -35,6 +39,12 @@
 
   DEPENDENCIES: 
  
+<<<<<<< HEAD
+=======
+                Copyright (c) 2007 QUALCOMM Incorporated.
+                All Rights Reserved.
+                Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ============================================================================*/
 
 /*============================================================================
@@ -49,19 +59,25 @@
 #include "vos_lock.h"
 #include "vos_memory.h"
 #include "vos_trace.h"
+<<<<<<< HEAD
 #include "i_vos_diag_core_event.h"
 #include "vos_diag_core_event.h"
 #include <linux/wcnss_wlan.h>
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 
 /*----------------------------------------------------------------------------
  * Preprocessor Definitions and Constants
  * -------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 #define WIFI_POWER_EVENT_DEFAULT_WAKELOCK_TIMEOUT 0
 #define WIFI_POWER_EVENT_WAKELOCK_TAKEN 0
 #define WIFI_POWER_EVENT_WAKELOCK_RELEASED 1
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*----------------------------------------------------------------------------
  * Type Declarations
  * -------------------------------------------------------------------------*/
@@ -481,6 +497,7 @@ VOS_STATUS vos_spin_lock_destroy(vos_spin_lock_t *pLock)
 
    return VOS_STATUS_SUCCESS;
 }
+<<<<<<< HEAD
 
 /*--------------------------------------------------------------------------
 
@@ -620,3 +637,5 @@ VOS_STATUS vos_wake_lock_destroy(vos_wake_lock_t *pLock)
 #endif
     return VOS_STATUS_SUCCESS;
 }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

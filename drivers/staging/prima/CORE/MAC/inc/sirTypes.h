@@ -166,7 +166,10 @@ typedef enum eSirRetStatus
     eSIR_PMM_STA_NOT_ASSOCIATED,
     eSIR_PMM_HEART_BEAT_TMOUT,
     eSIR_PMM_NTH_BEACON_DELIVERY,
+<<<<<<< HEAD
     eSIR_PMM_INVALID_REQ,
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
     // ARQ Return Codes
     eSIR_ARQ_ERROR_BASE=0x2500,
@@ -185,6 +188,7 @@ typedef enum eSirRetStatus
 
 } tSirRetStatus;
 
+<<<<<<< HEAD
 typedef enum
 {
    FW_UBSP_STATS = 1,
@@ -207,4 +211,6 @@ typedef struct
    }fwStatsData;
 }tSirFwStatsResult;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 # endif // __SIR_TYPES_H

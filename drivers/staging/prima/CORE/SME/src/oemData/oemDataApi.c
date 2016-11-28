@@ -272,12 +272,15 @@ eHalStatus oemData_ProcessOemDataReqCommand(tpAniSirGlobal pMac, tSmeCmd *pOemDa
     else
     {
         smsLog(pMac, LOG1, "%s: OEM_DATA REQ not allowed in the current mode", __func__);
+<<<<<<< HEAD
         status = eHAL_STATUS_FAILURE;
     }
 
     if(!HAL_STATUS_SUCCESS(status))
     {
         smsLog(pMac, LOG1, "%s: OEM_DATA Failure, Release command", __func__);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
         oemData_ReleaseOemDataReqCommand(pMac, pOemDataReqCmd, eOEM_DATA_REQ_INVALID_MODE);
         pMac->oemData.oemDataReqActive = eANI_BOOLEAN_FALSE;
     }

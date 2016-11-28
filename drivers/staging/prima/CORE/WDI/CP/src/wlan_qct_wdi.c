@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -45,6 +49,12 @@
   Are listed for each API below.
 
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2008 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ===========================================================================*/
 
 /*===========================================================================
@@ -91,8 +101,11 @@
 #include "pttMsgApi.h"
 #include "vos_trace.h"
 
+<<<<<<< HEAD
 #include "vos_api.h"
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*===========================================================================
    WLAN DAL Control Path Internal Data Definitions and Declarations
  ===========================================================================*/
@@ -102,7 +115,11 @@
 #define MAC_ADDRESS_STR "%02x:%02x:%02x:%02x:%02x:%02x"
 
 #define FEATURE_NOT_SUPPORTED 127
+<<<<<<< HEAD
 #define MAX_FW_HOST_CAP_SIZE 1024
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef FEATURE_WLAN_SCAN_PNO
 #define WDI_PNO_VERSION_MASK 0x8000
 #endif
@@ -194,6 +211,7 @@ static placeHolderInCapBitmap supportEnabledFeatures[] =
    ,FW_STATS                       //47
    ,WPS_PRBRSP_TMPL                //48
    ,BCN_IE_FLT_DELTA               //49
+<<<<<<< HEAD
    ,FEATURE_NOT_SUPPORTED          //50
 #ifdef FEATURE_WLAN_TDLS
     ,TDLS_OFF_CHANNEL              //51
@@ -204,6 +222,8 @@ static placeHolderInCapBitmap supportEnabledFeatures[] =
    ,MGMT_FRAME_LOGGING             //53
    ,ENHANCED_TXBD_COMPLETION       //54
    ,LOGGING_ENHANCEMENT            //55
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 };
 
 /*-------------------------------------------------------------------------- 
@@ -467,6 +487,7 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
   NULL,
 #endif /* WLAN_FEATURE_EXTSCAN */
   WDI_ProcessSpoofMacAddrReq,       /* WDI_SPOOF_MAC_ADDR_REQ */
+<<<<<<< HEAD
 
   WDI_ProcessGetFwStatsReq,                   /*WDI_GET_FW_STATS_REQ*/
 
@@ -480,6 +501,10 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
   WDI_ProcessMonStartReq,          /* WDI_MON_START_REQ */
   WDI_ProcessMonStopReq,           /* WDI_MON_STOP_REQ */
   WDI_ProcessFatalEventLogsReq,     /*WDI_FATAL_EVENT_LOGGING_REQ*/
+=======
+  WDI_ProcessEncryptMsgReq,         /* WDI_ENCRYPT_MSG_REQ*/
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   /*-------------------------------------------------------------------------
     Indications
   -------------------------------------------------------------------------*/
@@ -512,9 +537,13 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
 #else
   NULL,
 #endif
+<<<<<<< HEAD
   WDI_ProcessSetRtsCtsHtvhtInd,       /* WDI_SET_RTS_CTS_HTVHT_IND */
   WDI_ProcessFWLoggingDXEdoneInd,       /* WDI_FW_LOGGING_DXE_DONE_IND */
   WDI_ProcessEnableDisableCAEventInd,   /* WDI_SEND_FREQ_RANGE_CONTROL_IND */
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 };
 
 
@@ -633,6 +662,10 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
 #endif // FEATURE_WLAN_SCAN_PNO
 
   WDI_ProcessSetTxPerTrackingRsp,      /* WDI_SET_TX_PER_TRACKING_RESP  */
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   /*---------------------------------------------------------------------
     Indications
   ---------------------------------------------------------------------*/
@@ -741,6 +774,7 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
     NULL,
 #endif /* WLAN_FEATURE_EXTSCAN */
     WDI_ProcessSpoofMacAddrRsp,                /* WDI_SPOOF_MAC_ADDR_RSP */
+<<<<<<< HEAD
 
     WDI_ProcessGetFwStatsRsp,                     /*WDI_GET_FW_STATS_RSP*/
 
@@ -753,6 +787,10 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
     WDI_ProcessMonStartRsp,                    /* WDI_MON_START_RSP*/
     WDI_ProcessMonStopRsp,                    /* WDI_MON_STOP_RSP*/
     WDI_ProcessFatalEventLogsRsp,              /*WDI_FATAL_EVENT_LOGGING_RSP*/
+=======
+    WDI_ProcessEncryptMsgRsp,                  /* WDI_ENCRYPT_MSG_RSP*/
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   /*---------------------------------------------------------------------
     Indications
   ---------------------------------------------------------------------*/
@@ -837,8 +875,11 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
   NULL,
 #endif
   WDI_delBaInd,                             /* WDI_HAL_DEL_BA_IND*/
+<<<<<<< HEAD
   WDI_ProcessNanEvent,                      /* WDI_HAL_NAN_EVENT */
   WDI_Process_LostLinkParamInd,             /* WDI_HAL_LOST_LINK_PARAMS_IND*/
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 };
 
 
@@ -1173,6 +1214,7 @@ static char *WDI_getReqMsgString(wpt_uint16 wdiReqMsgId)
     CASE_RETURN_STRING( WDI_EXTSCAN_RESET_SIGNF_RSSI_CHANGE_REQ);
 #endif /* WLAN_FEATURE_EXTSCAN */
     CASE_RETURN_STRING( WDI_SPOOF_MAC_ADDR_REQ);
+<<<<<<< HEAD
     CASE_RETURN_STRING( WDI_GET_FW_STATS_REQ);
     CASE_RETURN_STRING( WDI_ENCRYPT_MSG_REQ);
     CASE_RETURN_STRING( WDI_FW_LOGGING_INIT_REQ);
@@ -1183,6 +1225,9 @@ static char *WDI_getReqMsgString(wpt_uint16 wdiReqMsgId)
     CASE_RETURN_STRING( WDI_MON_STOP_REQ );
     CASE_RETURN_STRING( WDI_FATAL_EVENT_LOGGING_REQ );
     CASE_RETURN_STRING( WDI_SEND_FREQ_RANGE_CONTROL_IND );
+=======
+    CASE_RETURN_STRING( WDI_ENCRYPT_MSG_REQ);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     default:
         return "Unknown WDI MessageId";
   }
@@ -1314,11 +1359,15 @@ static char *WDI_getRespMsgString(wpt_uint16 wdiRespMsgId)
     CASE_RETURN_STRING( WDI_HAL_EXTSCAN_SIG_RSSI_RESULT_IND);
 
 #endif /* WLAN_FEATURE_EXTSCAN */
+<<<<<<< HEAD
     CASE_RETURN_STRING( WDI_GET_FW_STATS_RSP);
     CASE_RETURN_STRING( WDI_ENCRYPT_MSG_RSP);
     CASE_RETURN_STRING( WDI_FW_LOGGING_INIT_RSP);
     CASE_RETURN_STRING( WDI_GET_FRAME_LOG_RSP);
     CASE_RETURN_STRING (WDI_FATAL_EVENT_LOGGING_RSP);
+=======
+    CASE_RETURN_STRING( WDI_ENCRYPT_MSG_RSP);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     default:
         return "Unknown WDI MessageId";
   }
@@ -1335,6 +1384,7 @@ static char *WDI_getRespMsgString(wpt_uint16 wdiRespMsgId)
 void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
 {
      int i,j;
+<<<<<<< HEAD
      char *pTempCapStr = NULL;
      char *pCapStr = NULL;
      pTempCapStr = vos_mem_malloc(MAX_FW_HOST_CAP_SIZE);
@@ -1346,6 +1396,10 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
      }
 
      pCapStr = pTempCapStr;
+=======
+     char capStr[512];
+     char *pCapStr = capStr;
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
      for (j = 0; j < 4; j++) {
          for (i = 0; i < 32; i++) {
              if ((*(capabilityBitmap + j) & (1 << i))) {
@@ -1455,9 +1509,13 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
                      case DYNAMIC_WMM_PS: snprintf(pCapStr, sizeof("DYNAMIC_WMM_PS"), "%s", "DYNAMIC_WMM_PS");
                           pCapStr += strlen("DYNAMIC_WMM_PS");
                           break;
+<<<<<<< HEAD
                      case FW_STATS: snprintf(pCapStr, sizeof("FW_STATS"), "%s", "FW_STATS");
                           pCapStr += strlen("FW_STATS");
                           break;
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                      case MAC_SPOOFED_SCAN: snprintf(pCapStr, sizeof("MAC_SPOOFED_SCAN"), "%s", "MAC_SPOOFED_SCAN");
                           pCapStr += strlen("MAC_SPOOFED_SCAN");
                           break;
@@ -1467,9 +1525,14 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
                      case BCN_IE_FLT_DELTA: snprintf(pCapStr, sizeof("BCN_IE_FLT_DELTA"), "%s", "BCN_IE_FLT_DELTA");
                           pCapStr += strlen("BCN_IE_FLT_DELTA");
                           break;
+<<<<<<< HEAD
                      case MGMT_FRAME_LOGGING: snprintf(pCapStr, sizeof("MGMT_FRAME_LOGGING"), "%s", "MGMT_FRAME_LOGGING");
                           pCapStr += strlen("MGMT_FRAME_LOGGING");
                           break;
+=======
+
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                      case BMU_ERROR_GENERIC_RECOVERY: snprintf(pCapStr, sizeof("BMU_ERROR_GENERIC_RECOVERY"), "%s", "BMU_ERROR_GENERIC_RECOVERY");
                           pCapStr += strlen("BMU_ERROR_GENERIC_RECOVERY");
                           break;
@@ -1478,6 +1541,7 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
                           pCapStr += strlen("DISA");
                           break;
 
+<<<<<<< HEAD
                      case TDLS_OFF_CHANNEL: snprintf(pCapStr, sizeof("TDLS_OFF_CHANNEL"), "%s", "TDLS_OFF_CHANNEL");
                           pCapStr += strlen("TDLS_OFF_CHANNEL");
                           break;
@@ -1486,6 +1550,8 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
                           break;
 
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                  }
                  *pCapStr++ = ',';
                  *pCapStr++ = ' ';
@@ -1494,12 +1560,17 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
      }
      pCapStr -= 2;
      *pCapStr = '\0';
+<<<<<<< HEAD
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO, "\t\t%s", pTempCapStr);
      if (pTempCapStr)
      {
          vos_mem_free(pTempCapStr);
          pTempCapStr = NULL;
      }
+=======
+     pCapStr = capStr;
+     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR, "\t\t%s", pCapStr);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 }
 
 /**
@@ -1779,7 +1850,11 @@ WDI_Init
 
   /*The WDI is initialized - set state to init */
   gWDICb.uGlobalState = WDI_INIT_ST;
+<<<<<<< HEAD
   gWDICb.roamDelayStatsEnabled = vos_get_roam_delay_stats_enabled();
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   /*Send the context as a ptr to the global WDI Control Block*/
   *ppWDIGlobalCtx = &gWDICb;
 
@@ -4231,6 +4306,7 @@ WDI_SetUapsdAcParamsReq
 }/*WDI_SetUapsdAcParamsReq*/
 
 /**
+<<<<<<< HEAD
  @brief WDI_FWLoggingDXEdoneInd
 
         FW Logging DXE done Indication from the upper layer will be sent
@@ -4449,6 +4525,8 @@ WDI_FWLoggingInitReq
 }
 
 /**
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  @brief WDI_ConfigureRxpFilterReq will be called when the upper
         MAC wants to set/reset the RXP filters for received pkts
         (MC, BC etc.). Upon the call of this API the WLAN DAL will pack
@@ -6961,7 +7039,10 @@ WDI_PostMainEvent
   WDI_Status         wdiStatus;
   WDI_MainFuncType   pfnWDIMainEvHdlr;
   WDI_MainStateType  wdiOldState;
+<<<<<<< HEAD
   static int failCnt = 0;
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
   /*-------------------------------------------------------------------------
@@ -7010,11 +7091,17 @@ WDI_PostMainEvent
   }
   else
   {
+<<<<<<< HEAD
     if (!(failCnt & 0xF))
         WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
               "Unexpected event %d in state: %d",
               wdiEV, wdiOldState);
     failCnt++;
+=======
+    WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+              "Unexpected event %d in state: %d",
+              wdiEV, wdiOldState);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     wdiStatus = WDI_STATUS_E_NOT_ALLOWED;
   }
 
@@ -7224,7 +7311,11 @@ WDI_MainStartStarted
   wdiStartRspCb = (WDI_StartRspCb)pEventData->pCBfnc;
 
    /*Notify UMAC*/
+<<<<<<< HEAD
   wdiStartRspCb( &pWDICtx->wdiCachedStartRspParams, pEventData->pUserData);
+=======
+  wdiStartRspCb( &pWDICtx->wdiCachedStartRspParams, pWDICtx->pRspCBUserData);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   /*Return Success*/
   return WDI_STATUS_SUCCESS;
@@ -14120,7 +14211,10 @@ WDI_ProcessEnterImpsReq
       WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
                 "WDI Init failed to wait on an event");
 
+<<<<<<< HEAD
       WDTS_SetPowerState(pWDICtx, WDTS_POWER_STATE_FULL, NULL);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       WDI_ASSERT(0);
       goto fail;
    }
@@ -14299,7 +14393,10 @@ WDI_ProcessEnterBmpsReq
       WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
                 "WDI Init failed to wait on an event");
 
+<<<<<<< HEAD
       WDTS_SetPowerState(pWDICtx, WDTS_POWER_STATE_FULL, NULL);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       WDI_ASSERT(0);
       goto fail;
    }
@@ -16389,7 +16486,11 @@ WDI_ProcessInitScanRsp
 
   wdiStatus   =   WDI_HAL_2_WDI_STATUS(halInitScanRspMsg.initScanRspParams.status);
 
+<<<<<<< HEAD
   if (pWDICtx->bInBmps && (WDI_STATUS_SUCCESS == wdiStatus))
+=======
+  if ( pWDICtx->bInBmps )
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   {
      // notify DTS that we are entering Full power
      wptStatus = WDTS_SetPowerState(pWDICtx, WDTS_POWER_STATE_FULL, NULL);
@@ -16399,12 +16500,15 @@ WDI_ProcessInitScanRsp
         WDI_ASSERT(0);
     }
   }
+<<<<<<< HEAD
   else
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                "Error returned WDI_ProcessInitScanRspi:%d BMPS%d",
                wdiStatus, pWDICtx->bInBmps);
   }
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   /*Notify UMAC*/
   wdiInitScanRspCb( wdiStatus, pWDICtx->pRspCBUserData);
@@ -21530,10 +21634,15 @@ WDI_ProcessTxCompleteInd
 
   /*Fill in the indication parameters*/
   wdiInd.wdiIndicationType = WDI_TX_COMPLETE_IND;
+<<<<<<< HEAD
 
   wpalMemoryCopy( &wdiInd.wdiIndicationData,
                   &halTxComplIndMsg.txComplParams,
                   sizeof(WDI_TxBDStatus) );
+=======
+  wdiInd.wdiIndicationData.tx_complete_status
+                               = halTxComplIndMsg.txComplParams.status;
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   if ( pWDICtx->wdiLowLevelIndCB )
   {
@@ -22916,6 +23025,7 @@ WDI_PALCtrlMsgCB
     return;
   }
 
+<<<<<<< HEAD
   /*Access to the global state must be locked */
   wpalMutexAcquire(&pWDICtx->wptMutex);
 
@@ -22924,6 +23034,14 @@ WDI_PALCtrlMsgCB
   */
   WDI_STATE_TRANSITION( pWDICtx, pMsg->val);
   wpalMutexRelease(&pWDICtx->wptMutex);
+=======
+  /*Transition back to the state that we had before serialization
+  - serialization transitions us to BUSY to stop any incomming requests
+  ! TO DO L: possible race condition here if a request comes in between the
+   state transition and the post function*/
+
+  WDI_STATE_TRANSITION( pWDICtx, pMsg->val);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
   /*-----------------------------------------------------------------------
      Check to see what type of event we are serializing
@@ -22957,8 +23075,12 @@ WDI_PALCtrlMsgCB
     break;
   }/*switch ( pEventData->wdiRequest )*/
 
+<<<<<<< HEAD
   if (!(WDI_STATUS_SUCCESS == wdiStatus || WDI_STATUS_PENDING == wdiStatus
          || WDI_STATUS_SUCCESS_SYNC == wdiStatus))
+=======
+  if ( WDI_STATUS_SUCCESS != wdiStatus  )
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   {
     WDI_ExtractRequestCBFromEvent(pEventData, &pfnReqStatusCB, &pUserData);
 
@@ -24261,6 +24383,7 @@ WDI_2_HAL_REQ_TYPE
 #endif /* WLAN_FEATURE_EXTSCAN */
   case WDI_SPOOF_MAC_ADDR_REQ:
        return WLAN_HAL_MAC_SPOOFED_SCAN_REQ;
+<<<<<<< HEAD
   case WDI_GET_FW_STATS_REQ:
        return WLAN_HAL_FW_STATS_REQ;
   case WDI_ENCRYPT_MSG_REQ:
@@ -24283,6 +24406,10 @@ WDI_2_HAL_REQ_TYPE
        return WLAN_HAL_FATAL_EVENT_LOGGING_REQ;
   case WDI_SEND_FREQ_RANGE_CONTROL_IND:
        return WLAN_HAL_SEND_FREQ_RANGE_CONTROL_IND;
+=======
+  case WDI_ENCRYPT_MSG_REQ:
+       return WLAN_HAL_ENCRYPT_DATA_REQ;
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   default:
     return WLAN_HAL_MSG_MAX;
   }
@@ -24596,6 +24723,7 @@ case WLAN_HAL_DEL_STA_SELF_RSP:
 #endif /* WLAN_FEATURE_EXTSCAN */
   case WLAN_HAL_MAC_SPOOFED_SCAN_RSP:
        return WDI_SPOOF_MAC_ADDR_RSP;
+<<<<<<< HEAD
   case WLAN_HAL_FW_STATS_RSP:
        return WDI_GET_FW_STATS_RSP;
   case WLAN_HAL_ENCRYPT_DATA_RSP:
@@ -24616,6 +24744,11 @@ case WLAN_HAL_DEL_STA_SELF_RSP:
        return WDI_MON_STOP_RSP;
   case WLAN_HAL_FATAL_EVENT_LOGGING_RSP:
        return WDI_FATAL_EVENT_LOGGING_RSP;
+=======
+  case WLAN_HAL_ENCRYPT_DATA_RSP:
+       return WDI_ENCRYPT_MSG_RSP;
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   default:
     return eDRIVER_TYPE_MAX;
   }
@@ -25407,12 +25540,15 @@ WDI_ExtractRequestCBFromEvent
     *ppfnReqCB   =  ((WDI_DelSTAReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_DelSTAReqParamsType*)pEvent->pEventData)->pUserData;
     break;
+<<<<<<< HEAD
 
   case WDI_ADD_STA_SELF_REQ:
     *ppfnReqCB   =  ((WDI_AddSTASelfReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_AddSTASelfReqParamsType*)pEvent->pEventData)->pUserData;
     break;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   case WDI_DEL_STA_SELF_REQ:
     *ppfnReqCB   =  ((WDI_DelSTASelfReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_DelSTASelfReqParamsType*)pEvent->pEventData)->pUserData;
@@ -25637,6 +25773,13 @@ WDI_ExtractRequestCBFromEvent
     break;
 #endif
 
+<<<<<<< HEAD
+=======
+  case WDI_SPOOF_MAC_ADDR_REQ:
+    *ppfnReqCB   =  ((WDI_GtkOffloadGetInfoReqMsg*)pEvent->pEventData)->wdiReqStatusCB;
+    *ppUserData  =  ((WDI_GtkOffloadGetInfoReqMsg*)pEvent->pEventData)->pUserData;
+    break;
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   default:
     *ppfnReqCB   =  NULL;
     *ppUserData  =  NULL;
@@ -26296,7 +26439,11 @@ WDI_ProcessSetRssiFilterReq
    /*-----------------------------------------------------------------------
      Get message buffer
    -----------------------------------------------------------------------*/
+<<<<<<< HEAD
    if (( WDI_STATUS_SUCCESS != WDI_GetMessageBuffer( pWDICtx, WDI_SET_RSSI_FILTER_REQ,
+=======
+   if (( WDI_STATUS_SUCCESS != WDI_GetMessageBuffer( pWDICtx, WDI_SET_PREF_NETWORK_REQ,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
                          sizeof(ucRssiThreshold),
                          &pSendBuffer, &usDataOffset, &usSendSize))||
        ( usSendSize < (usDataOffset + sizeof(ucRssiThreshold) )))
@@ -29381,14 +29528,22 @@ WDI_featureCapsExchangeReq
    ------------------------------------------------------------------------*/
    FillAllFeatureCaps(gpHostWlanFeatCaps, supportEnabledFeatures,
       (sizeof(supportEnabledFeatures)/sizeof(supportEnabledFeatures[0])));
+<<<<<<< HEAD
    WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO,
+=======
+   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       "Host caps %x %x %x %x",
       gpHostWlanFeatCaps->featCaps[0],
       gpHostWlanFeatCaps->featCaps[1],
       gpHostWlanFeatCaps->featCaps[2],
       gpHostWlanFeatCaps->featCaps[3]
    );
+<<<<<<< HEAD
    WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO, "Host Capability");
+=======
+   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR, "Host Capability");
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    WDI_TraceHostFWCapabilities(gpHostWlanFeatCaps->featCaps);
    wdiEventData.wdiRequest      = WDI_FEATURE_CAPS_EXCHANGE_REQ;
    wdiEventData.pEventData      = gpHostWlanFeatCaps; 
@@ -29549,14 +29704,22 @@ WDI_ProcessFeatureCapsExchangeRsp
 
    wpalMemoryCopy(gpFwWlanFeatCaps,(tWlanFeatCaps *) pEventData -> pEventData,
                     fCapsStructSize);
+<<<<<<< HEAD
    WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO,
+=======
+   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
       "FW caps %x %x %x %x",
       gpFwWlanFeatCaps->featCaps[0],
       gpFwWlanFeatCaps->featCaps[1],
       gpFwWlanFeatCaps->featCaps[2],
       gpFwWlanFeatCaps->featCaps[3]
    );
+<<<<<<< HEAD
    WPAL_TRACE(  eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO, "Firmware Capability");
+=======
+   WPAL_TRACE(  eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR, "Firmware Capability");
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    WDI_TraceHostFWCapabilities(gpFwWlanFeatCaps->featCaps);
    wdiFeatureCapsExchangeCb = (WDI_featureCapsExchangeCb) pWDICtx -> pfncRspCB; 
 
@@ -29671,6 +29834,7 @@ wpt_uint8 WDI_getFwWlanFeatCaps(wpt_uint8 feat_enum_value)
     return featSupported;
 }
 
+<<<<<<< HEAD
 wpt_uint8 WDI_selectCbMode( wpt_uint8 channel, wpt_uint8 ChannelBW )
 {
   /* 5gHz Channel */
@@ -29740,6 +29904,8 @@ wpt_uint8 WDI_selectCbMode( wpt_uint8 channel, wpt_uint8 ChannelBW )
   return PHY_SINGLE_CHANNEL_CENTERED;
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef WLAN_FEATURE_11AC
 WDI_Status
 WDI_ProcessUpdateVHTOpModeReq
@@ -29862,6 +30028,7 @@ void WDI_TransportChannelDebug
    WDTS_ChannelDebug(displaySnapshot, debugFlags);
    return;
 }
+<<<<<<< HEAD
 
 /**
  @brief WDI_TransportKickDxe -
@@ -29877,6 +30044,8 @@ void WDI_TransportKickDxe()
    return;
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /**
  @brief WDI_SsrTimerCB
     Callback function for SSR timer, if this is called then the graceful
@@ -31055,10 +31224,13 @@ WDI_ProcessChAvoidInd
                  pEventData->pEventData,
                  sizeof(tHalAvoidFreqRangeIndParams));
 
+<<<<<<< HEAD
   /* Avoid Over flow */
   if (WLAN_HAL_MAX_AVOID_FREQ_RANGE < chAvoidIndicationParam.avoidCnt)
      chAvoidIndicationParam.avoidCnt = WLAN_HAL_MAX_AVOID_FREQ_RANGE;
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   wdiInd.wdiIndicationType = WDI_CH_AVOID_IND;
   wdiInd.wdiIndicationData.wdiChAvoidInd.avoidRangeCount =
                chAvoidIndicationParam.avoidCnt;
@@ -31619,6 +31791,7 @@ WDI_Status WDI_GetBcnMissRate( void *pUserData,
 
   return WDI_PostMainEvent(&gWDICb, WDI_REQUEST_EVENT, &wdiEventData);
 }
+<<<<<<< HEAD
 
 /*
  * FUNCTION: WDI_ProcessGetFwStatsRsp
@@ -31753,6 +31926,8 @@ WDI_Status
                        pEventData->pUserData, WDI_GET_FW_STATS_RSP);
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef WLAN_FEATURE_LINK_LAYER_STATS
 
 /**
@@ -32168,6 +32343,7 @@ WDI_ProcessLLStatsClearReq
 }
 #endif /* WLAN_FEATURE_LINK_LAYER_STATS */
 
+<<<<<<< HEAD
 WDI_Status WDI_FWStatsGetReq( void* pUserData,
                    WDI_FWStatsGetRspCb          wdiFWStatsGetRspCb,
                    wpt_uint32                   stats)
@@ -32438,6 +32614,8 @@ WDI_ProcessMonStopRsp
   return WDI_STATUS_SUCCESS;
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef WLAN_FEATURE_EXTSCAN
 
 /**
@@ -34410,6 +34588,7 @@ WDI_ProcessSpoofMacAddrRsp
 }
 
 /**
+<<<<<<< HEAD
  @brief Process Get Frame Log Rsp function
         (called when a response is being received over the bus from HAL)
 
@@ -34883,6 +35062,8 @@ WDI_ProcessFWLoggingInitReq
 }
 
 /**
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  @brief WDI_EncryptMsgReq
 
  @param pwdiEncryptMsgParams: Req parameter for the FW
@@ -35044,6 +35225,7 @@ WDI_ProcessEncryptMsgRsp
           pWDICtx->pRspCBUserData);
   return WDI_STATUS_SUCCESS;
 }
+<<<<<<< HEAD
 
 WDI_Status
 WDI_NanRequest
@@ -35478,3 +35660,5 @@ WDI_EnableDisableCAEventInd
   return WDI_PostMainEvent(&gWDICb, WDI_REQUEST_EVENT, &wdiEventData);
 
 } /* WDI_EnableDisableCAEventInd */
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

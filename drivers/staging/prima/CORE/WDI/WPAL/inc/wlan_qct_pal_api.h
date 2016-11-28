@@ -36,6 +36,12 @@
                
    Definitions for platform independent
   
+<<<<<<< HEAD
+=======
+   Copyright 2010 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
 
@@ -326,6 +332,7 @@ void wpalWlanReload(void);
 void wpalWcnssResetIntr(void);
 
 /*---------------------------------------------------------------------------
+<<<<<<< HEAD
     wpalWcnssIsProntoHwVer3 -  Check for Pronto ver3 HW
 
     Param:
@@ -345,11 +352,25 @@ int wpalWcnssIsProntoHwVer3(void);
        arg3 -  argument 3 to cmd
        arg4 -  argument 4 to cmd
        async -asynchronous event. Don't wait for completion.
+=======
+    wpalFwDumpReq -  Trigger the dump commands to Firmware
+
+    Param:
+       cmd - Command No. to execute
+       arg1 - argument 1 to cmd
+       arg2 - argument 2 to cmd
+       arg3 - argument 3 to cmd
+       arg4 - argument 4 to cmd
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
     Return:
        NONE
 ---------------------------------------------------------------------------*/
 void wpalFwDumpReq(wpt_uint32 cmd, wpt_uint32 arg1, wpt_uint32 arg2,
+<<<<<<< HEAD
                     wpt_uint32 arg3, wpt_uint32 arg4, wpt_boolean async);
+=======
+                    wpt_uint32 arg3, wpt_uint32 arg4);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /*---------------------------------------------------------------------------
     wpalDevicePanic -  Trigger Device Panic
@@ -382,6 +403,7 @@ int  wpalIslogPInProgress(void);
        STATUS
 --------------------------------------------------------------------------*/
 int  wpalIsSsrPanicOnFailure(void);
+<<<<<<< HEAD
 
 int  wpalGetDxeReplenishRXTimerVal(void);
 int  wpalIsDxeSSREnable(void);
@@ -389,4 +411,6 @@ int  wpalIsDxeSSREnable(void);
 wpt_uint8 wpalIsFwLoggingEnabled(void);
 wpt_uint8 wpalIsFwLoggingSupported(void);
 wpt_uint8 wpalIsFwEvLoggingEnabled(void);
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #endif // __WLAN_QCT_PAL_API_H

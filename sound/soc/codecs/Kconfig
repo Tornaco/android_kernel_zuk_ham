@@ -462,8 +462,16 @@ config SND_SOC_MSM_HDMI_CODEC_RX
 	HDMI audio drivers should be built only if the platform
         supports hdmi panel.
 
+<<<<<<< HEAD
 config SOUND_CONTROL_HAX_3_GPL
 	tristate "new wcd93xx sound control hax"
 	default y
 	help
 	  FauxSound WCD93xx chipset sound control hacks 3.0 for deeper hax
+=======
+#ifdef CONFIG_MACH_MSM8974_14001
+#xiaojun.lv@PhoneDpt.AudioDrv, 2014/06/13, add for TI smartPA TAS2552
+config SND_SOC_TAS2552
+	tristate
+#endif /*CONFIG_MACH_MSM8974_14001*/
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12

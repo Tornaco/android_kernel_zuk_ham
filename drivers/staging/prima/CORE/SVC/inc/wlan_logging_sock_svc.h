@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
 * Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
+=======
+* Copyright (c) 2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 *
 * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
 *
@@ -39,6 +43,7 @@
 #include <vos_trace.h>
 #include <wlan_nlink_common.h>
 
+<<<<<<< HEAD
 
 int wlan_logging_sock_init_svc(void);
 int wlan_logging_sock_deinit_svc(void);
@@ -64,4 +69,12 @@ void wlan_deinit_log_completion(void);
 void wlan_logging_set_log_level(void);
 
 bool wlan_is_logger_thread(int threadId);
+=======
+int wlan_logging_sock_init_svc(void);
+int wlan_logging_sock_deinit_svc(void);
+int wlan_logging_sock_activate_svc(int log_fe_to_console, int num_buf);
+int wlan_logging_sock_deactivate_svc(void);
+int wlan_log_to_user(VOS_TRACE_LEVEL log_level, char *to_be_sent, int length);
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #endif /* WLAN_LOGGING_SOCK_SVC_H */

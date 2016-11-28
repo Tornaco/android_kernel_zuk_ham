@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -104,7 +108,13 @@ typedef enum {
    UPDATE_CHANNEL_LIST    = 35,
    WLAN_MCADDR_FLT        = 36,
    WLAN_CH144             = 37,
+<<<<<<< HEAD
    NAN = 38,
+=======
+#ifdef WLAN_FEATURE_NAN
+   NAN = 38,
+#endif
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #ifdef FEATURE_WLAN_TDLS
    TDLS_SCAN_COEXISTENCE  = 39,
 #endif
@@ -118,18 +128,25 @@ typedef enum {
 #endif
 
    DYNAMIC_WMM_PS        = 43,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    MAC_SPOOFED_SCAN      = 44,
    BMU_ERROR_GENERIC_RECOVERY = 45,
    DISA                  = 46,
    FW_STATS              = 47,
    WPS_PRBRSP_TMPL       = 48,
    BCN_IE_FLT_DELTA      = 49,
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_TDLS
    TDLS_OFF_CHANNEL      = 51,
 #endif
    MGMT_FRAME_LOGGING    = 53,
    ENHANCED_TXBD_COMPLETION = 54,
    LOGGING_ENHANCEMENT   = 55,
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    //MAX_FEATURE_SUPPORTED = 128
 } placeHolderInCapBitmap;
 
@@ -333,7 +350,10 @@ typedef struct sSirMbMsgP2p
 
 // HAL message types
 #define SIR_HAL_MSG_TYPES_BEGIN            (SIR_HAL_MODULE_ID << 8)
+<<<<<<< HEAD
 #define SIR_HAL_EXT_MSG_TYPES_BEGIN        (SIR_HAL_EXT_MODULE_ID << 8)
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #define SIR_HAL_ITC_MSG_TYPES_BEGIN        (SIR_HAL_MSG_TYPES_BEGIN+0x20)
 #define SIR_HAL_RADAR_DETECTED_IND         SIR_HAL_ITC_MSG_TYPES_BEGIN
 #define SIR_HAL_WDT_KAM_RSP                (SIR_HAL_ITC_MSG_TYPES_BEGIN + 1)
@@ -625,6 +645,10 @@ typedef struct sSirMbMsgP2p
 #define SIR_HAL_DHCP_STOP_IND              (SIR_HAL_ITC_MSG_TYPES_BEGIN + 205)
 #define SIR_HAL_IBSS_PEER_INACTIVITY_IND   (SIR_HAL_ITC_MSG_TYPES_BEGIN + 206)
 
+<<<<<<< HEAD
+=======
+#define SIR_HAL_LPHB_CONF_IND              (SIR_HAL_ITC_MSG_TYPES_BEGIN + 206)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #define SIR_HAL_LPHB_WAIT_EXPIRE_IND       (SIR_HAL_ITC_MSG_TYPES_BEGIN + 207)
 
 #define SIR_HAL_ADD_PERIODIC_TX_PTRN_IND   (SIR_HAL_ITC_MSG_TYPES_BEGIN + 208)
@@ -696,6 +720,7 @@ typedef struct sSirMbMsgP2p
 #define SIR_HAL_TDLS_CHAN_SWITCH_REQ_RSP      (SIR_HAL_ITC_MSG_TYPES_BEGIN + 259)
 #endif
 #define SIR_HAL_SPOOF_MAC_ADDR_REQ            (SIR_HAL_ITC_MSG_TYPES_BEGIN + 260)
+<<<<<<< HEAD
 #define SIR_HAL_SPOOF_MAC_ADDR_RSP            (SIR_HAL_ITC_MSG_TYPES_BEGIN + 261)
 
 #define SIR_HAL_FW_STATS_GET_REQ              (SIR_HAL_ITC_MSG_TYPES_BEGIN + 262)
@@ -716,6 +741,11 @@ typedef struct sSirMbMsgP2p
 #define SIR_HAL_LOST_LINK_PARAMS_IND         (SIR_HAL_ITC_MSG_TYPES_BEGIN + 273)
 #define SIR_HAL_SEND_FREQ_RANGE_CONTROL_IND  (SIR_HAL_ITC_MSG_TYPES_BEGIN + 274)
 #define SIR_HAL_SEND_LOG_DONE_IND            (SIR_HAL_ITC_MSG_TYPES_BEGIN + 275)
+=======
+
+#define SIR_HAL_ENCRYPT_MSG_REQ               (SIR_HAL_ITC_MSG_TYPES_BEGIN + 261)
+#define SIR_HAL_ENCRYPT_MSG_RSP               (SIR_HAL_ITC_MSG_TYPES_BEGIN + 262)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #define SIR_HAL_MSG_TYPES_END              (SIR_HAL_MSG_TYPES_BEGIN + 0x1FF)
 // CFG message types
@@ -811,9 +841,18 @@ typedef struct sSirMbMsgP2p
 #define SIR_LIM_DEAUTH_ACK_TIMEOUT       (SIR_LIM_TIMEOUT_MSG_START + 0x27)
 #define SIR_LIM_PERIODIC_JOIN_PROBE_REQ_TIMEOUT (SIR_LIM_TIMEOUT_MSG_START + 0x28)
 
+<<<<<<< HEAD
 #define SIR_LIM_CONVERT_ACTIVE_CHANNEL_TO_PASSIVE (SIR_LIM_TIMEOUT_MSG_START + 0x2C)
 #define SIR_LIM_AUTH_RETRY_TIMEOUT            (SIR_LIM_TIMEOUT_MSG_START + 0x2D)
 
+=======
+#ifdef FEATURE_WLAN_TDLS_INTERNAL
+#define SIR_LIM_TDLS_DISCOVERY_RSP_WAIT     (SIR_LIM_TIMEOUT_MSG_START + 0x29)
+#define SIR_LIM_TDLS_LINK_SETUP_RSP_TIMEOUT (SIR_LIM_TIMEOUT_MSG_START + 0x2A)
+#define SIR_LIM_TDLS_LINK_SETUP_CNF_TIMEOUT (SIR_LIM_TIMEOUT_MSG_START + 0x2B)
+#endif
+#define SIR_LIM_CONVERT_ACTIVE_CHANNEL_TO_PASSIVE (SIR_LIM_TIMEOUT_MSG_START + 0x2C)
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 #define SIR_LIM_MSG_TYPES_END            (SIR_LIM_MSG_TYPES_BEGIN+0xFF)
 
 // SCH message types

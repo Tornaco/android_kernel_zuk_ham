@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -36,6 +40,12 @@
                
    Definitions for vOSS Events
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
   
   ========================================================================*/
 
@@ -55,9 +65,12 @@
 extern "C" {
 #endif /* __cplusplus */
 
+<<<<<<< HEAD
 #define WAKE_LOCK_NAME_LEN 80
 
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 /*------------------------------------------------------------------------- 
   Event ID: EVENT_WLAN_SECURITY
   ------------------------------------------------------------------------*/
@@ -248,6 +261,7 @@ typedef struct
    v_U8_t  mode;
 } vos_event_wlan_btc_type;
 
+<<<<<<< HEAD
 /*-------------------------------------------------------------------------
   Event ID: EVENT_WLAN_EAPOL
   ------------------------------------------------------------------------*/
@@ -284,10 +298,13 @@ struct vos_event_wlan_wake_lock
 
 
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 /*------------------------------------------------------------------------- 
   Function declarations and documenation
   ------------------------------------------------------------------------*/
+<<<<<<< HEAD
 enum wifi_connectivity_events {
        WIFI_EVENT_DRIVER_EAPOL_FRAME_TRANSMIT_REQUESTED,
        WIFI_EVENT_DRIVER_EAPOL_FRAME_RECEIVED,
@@ -313,6 +330,9 @@ enum wake_lock_reason {
        WIFI_POWER_EVENT_WAKELOCK_HOLD_RX,
        WIFI_POWER_EVENT_WAKELOCK_SAP,
 };
+=======
+
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #ifdef __cplusplus
 }

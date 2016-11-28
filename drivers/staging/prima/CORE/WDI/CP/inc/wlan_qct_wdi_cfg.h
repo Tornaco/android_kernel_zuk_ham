@@ -42,6 +42,11 @@ DESCRIPTION
   by the same name !! 
   
       
+<<<<<<< HEAD
+=======
+  Copyright (c) 2010 QUALCOMM Incorporated. All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ===========================================================================*/
 
 

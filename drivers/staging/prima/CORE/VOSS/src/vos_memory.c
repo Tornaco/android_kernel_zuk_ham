@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -31,6 +35,12 @@
   @brief Virtual Operating System Services Memory API
 
   
+<<<<<<< HEAD
+=======
+  Copyright (c) 2008 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 ===========================================================================*/
 
 /*=========================================================================== 
@@ -55,14 +65,20 @@
  * ------------------------------------------------------------------------*/
 #include "vos_memory.h"
 #include "vos_trace.h"
+<<<<<<< HEAD
 #include "vos_api.h"
 #include <vmalloc.h>
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #ifdef CONFIG_WCNSS_MEM_PRE_ALLOC
 #include <linux/wcnss_wlan.h>
 #define WCNSS_PRE_ALLOC_GET_THRESHOLD (4*1024)
 #endif
+<<<<<<< HEAD
 #define VOS_GET_MEMORY_TIME_THRESHOLD 3000
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 #ifdef MEMORY_DEBUG
 #include "wlan_hdd_dp_utils.h"
@@ -191,6 +207,7 @@ v_VOID_t * vos_mem_malloc_debug( v_SIZE_t size, char* fileName, v_U32_t lineNum)
    v_SIZE_t new_size;
    int flags = GFP_KERNEL;
    unsigned long IrqFlags;
+<<<<<<< HEAD
    unsigned long  time_before_kmalloc;
 
 
@@ -202,6 +219,18 @@ v_VOID_t * vos_mem_malloc_debug( v_SIZE_t size, char* fileName, v_U32_t lineNum)
    }
 
    if (in_interrupt() || irqs_disabled() || in_atomic())
+=======
+
+
+   if (size > (1024*1024))
+   {
+       VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
+               "%s: called with arg > 1024K; passed in %d !!!", __func__,size); 
+       return NULL;
+   }
+
+   if (in_interrupt())
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    {
       flags = GFP_ATOMIC;
    }
@@ -217,6 +246,7 @@ v_VOID_t * vos_mem_malloc_debug( v_SIZE_t size, char* fileName, v_U32_t lineNum)
                return pmem;
       }
 #endif
+<<<<<<< HEAD
       time_before_kmalloc = vos_timer_get_system_time();
       memPtr = kmalloc(size, flags);
 
@@ -228,10 +258,14 @@ v_VOID_t * vos_mem_malloc_debug( v_SIZE_t size, char* fileName, v_U32_t lineNum)
                "%s: kmalloc took %lu msec", __func__,
                vos_timer_get_system_time() - time_before_kmalloc);
       return memPtr;
+=======
+      return kmalloc(size, flags);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
    }
 
    new_size = size + sizeof(struct s_vos_mem_struct) + 8; 
 
+<<<<<<< HEAD
    time_before_kmalloc = vos_timer_get_system_time();
    memStruct = (struct s_vos_mem_struct*)kmalloc(new_size, flags);
    /* If time taken by kmalloc is greater than VOS_GET_MEMORY_TIME_THRESHOLD
@@ -241,6 +275,9 @@ v_VOID_t * vos_mem_malloc_debug( v_SIZE_t size, char* fileName, v_U32_t lineNum)
       VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
           "%s: kmalloc took %lu msec", __func__,
           vos_timer_get_system_time() - time_before_kmalloc);
+=======
+   memStruct = (struct s_vos_mem_struct*)kmalloc(new_size, flags);
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
    if(memStruct != NULL)
    {
@@ -319,6 +356,7 @@ v_VOID_t vos_mem_free( v_VOID_t *ptr )
 v_VOID_t * vos_mem_malloc( v_SIZE_t size )
 {
    int flags = GFP_KERNEL;
+<<<<<<< HEAD
    v_VOID_t* memPtr = NULL;
 #ifdef CONFIG_WCNSS_MEM_PRE_ALLOC
     v_VOID_t* pmem;
@@ -329,6 +367,14 @@ v_VOID_t * vos_mem_malloc( v_SIZE_t size )
    {
        VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
                "%s: called with invalid arg %u !!!", __func__, size);
+=======
+#ifdef CONFIG_WCNSS_MEM_PRE_ALLOC
+    v_VOID_t* pmem;
+#endif    
+   if (size > (1024*1024))
+   {
+       VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR, "%s: called with arg > 1024K; passed in %d !!!", __func__,size); 
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
        return NULL;
    }
    if (in_interrupt() || irqs_disabled() || in_atomic())
@@ -343,6 +389,7 @@ v_VOID_t * vos_mem_malloc( v_SIZE_t size )
            return pmem;
    }
 #endif
+<<<<<<< HEAD
    time_before_kmalloc = vos_timer_get_system_time();
    memPtr = kmalloc(size, flags);
    /* If time taken by kmalloc is greater than VOS_GET_MEMORY_TIME_THRESHOLD
@@ -356,6 +403,10 @@ v_VOID_t * vos_mem_malloc( v_SIZE_t size )
    return memPtr;
 
 }
+=======
+   return kmalloc(size, flags);
+}   
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 
 v_VOID_t vos_mem_free( v_VOID_t *ptr )
 {
@@ -371,6 +422,7 @@ v_VOID_t vos_mem_free( v_VOID_t *ptr )
 }
 #endif
 
+<<<<<<< HEAD
 v_VOID_t * vos_mem_vmalloc(v_SIZE_t size)
 {
     if (size == 0 || size >= (1024*1024))
@@ -396,6 +448,8 @@ v_VOID_t vos_mem_vfree(void *addr)
     return;
 }
 
+=======
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 v_VOID_t vos_mem_set( v_VOID_t *ptr, v_SIZE_t numBytes, v_BYTE_t value )
 {
    if (ptr == NULL)
@@ -461,6 +515,7 @@ v_VOID_t vos_mem_move( v_VOID_t *pDst, const v_VOID_t *pSrc, v_SIZE_t numBytes )
    memmove(pDst, pSrc, numBytes);
 }
 
+<<<<<<< HEAD
 v_BOOL_t vos_mem_compare(
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,18,0))
                           const v_VOID_t *pMemory1,
@@ -473,6 +528,9 @@ v_BOOL_t vos_mem_compare(
                           v_VOID_t *pMemory2,
 #endif
                           v_U32_t numBytes )
+=======
+v_BOOL_t vos_mem_compare( v_VOID_t *pMemory1, v_VOID_t *pMemory2, v_U32_t numBytes )
+>>>>>>> 8527126d7c8cf527f34d3c19a7a7a798d0008c12
 { 
    if (0 == numBytes)
    {
