@@ -182,8 +182,13 @@ else
 	# annotated or signed tagged state (as git describe only
 	# looks at signed or annotated tags - git tag -a/-s) and
 	# LOCALVERSION= is not specified
+<<<<<<< HEAD
 	if test "${LOCALVERSION+set}" != "set"; then		
 		res="$res$"
+=======
+	if test "${LOCALVERSION+set}" != "set"; then
+		scm=$(scm_version --short)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 	fi
 fi
 

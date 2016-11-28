@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -38,7 +42,11 @@
  */
  
 #include "palTypes.h"
+<<<<<<< HEAD
 #include "wniCfg.h"
+=======
+#include "wniCfgSta.h"
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #include "aniGlobal.h"
 #include "sirMacProtDef.h"
 
@@ -338,6 +346,7 @@ tSirRetStatus schSetFixedBeaconFields(tpAniSirGlobal pMac,tpPESession psessionEn
         PopulateDot11fHTCaps( pMac,psessionEntry, &pBcn2->HTCaps );
         PopulateDot11fHTInfo( pMac, &pBcn2->HTInfo, psessionEntry );
     }
+<<<<<<< HEAD
 
 #ifdef WLAN_FEATURE_AP_HT40_24G
     if ((pMac->roam.configParam.apHT40_24GEnabled)
@@ -355,16 +364,26 @@ tSirRetStatus schSetFixedBeaconFields(tpAniSirGlobal pMac,tpPESession psessionEn
 
     PopulateDot11fExtCap( pMac, &pBcn2->ExtCap, psessionEntry);
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef WLAN_FEATURE_11AC
     if(psessionEntry->vhtCapability)
     {        
         schLog( pMac, LOGW, FL("Populate VHT IEs in Beacon"));
+<<<<<<< HEAD
         PopulateDot11fVHTCaps( pMac, &pBcn2->VHTCaps,
                               psessionEntry->currentOperChannel, eSIR_TRUE );
         PopulateDot11fVHTOperation( pMac, &pBcn2->VHTOperation,
                                           psessionEntry->currentOperChannel);
         // we do not support multi users yet
         //PopulateDot11fVHTExtBssLoad( pMac, &bcn2.VHTExtBssLoad);
+=======
+        PopulateDot11fVHTCaps( pMac, &pBcn2->VHTCaps, eSIR_TRUE );
+        PopulateDot11fVHTOperation( pMac, &pBcn2->VHTOperation);
+        // we do not support multi users yet
+        //PopulateDot11fVHTExtBssLoad( pMac, &bcn2.VHTExtBssLoad);
+        PopulateDot11fExtCap( pMac, &pBcn2->ExtCap, psessionEntry);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         if(psessionEntry->gLimOperatingMode.present)
             PopulateDot11fOperatingMode( pMac, &pBcn2->OperatingMode, psessionEntry );
     }
@@ -635,6 +654,7 @@ void limUpdateProbeRspTemplateIeBitmapBeacon2(tpAniSirGlobal pMac,
                      sizeof(beacon2->HTInfo));
     }
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_AP_HT40_24G
     // Overlapping BSS Scan Parameters IE
     if (pMac->roam.configParam.apHT40_24GEnabled)
@@ -660,6 +680,8 @@ void limUpdateProbeRspTemplateIeBitmapBeacon2(tpAniSirGlobal pMac,
     }
 #endif
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef WLAN_FEATURE_11AC
     if(beacon2->VHTCaps.present)
     {

@@ -158,6 +158,11 @@ WLANSAP_Open
         return VOS_STATUS_E_FAULT;
     }
 
+<<<<<<< HEAD
+=======
+    vos_mem_zero(pSapCtx, sizeof(tSapContext));
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /*------------------------------------------------------------------------
         Clean up SAP control block, initialize all values
     ------------------------------------------------------------------------*/
@@ -165,6 +170,7 @@ WLANSAP_Open
 
     WLANSAP_CleanCB(pSapCtx, 0 /*do not empty*/);
 
+<<<<<<< HEAD
     if (!VOS_IS_STATUS_SUCCESS(vos_spin_lock_init(&pSapCtx->staInfo_lock)))
     {
         VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
@@ -173,6 +179,8 @@ WLANSAP_Open
         return VOS_STATUS_E_FAULT;
     }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     // Setup the "link back" to the VOSS context
     pSapCtx->pvosGCtx = pvosGCtx;
 
@@ -265,6 +273,16 @@ WLANSAP_Start
         return VOS_STATUS_E_FAULT;
     }
 
+<<<<<<< HEAD
+=======
+    if (!VOS_IS_STATUS_SUCCESS(vos_spin_lock_init(&pSapCtx->staInfo_lock)))
+    {
+        VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
+                 "WLANSAP_Start failed init staInfo_lock\n");
+        return VOS_STATUS_E_FAULT;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return VOS_STATUS_SUCCESS;
 }/* WLANSAP_Start */
 
@@ -602,6 +620,12 @@ WLANSAP_StartBss
 
         //Set the BSSID to your "self MAC Addr" read the mac address from Configuation ITEM received from HDD
         pSapCtx->csrRoamProfile.BSSIDs.numOfBSSIDs = 1;
+<<<<<<< HEAD
+=======
+        vos_mem_copy(pSapCtx->csrRoamProfile.BSSIDs.bssid,
+                     pSapCtx->self_mac_addr,
+                     sizeof( tCsrBssid ) );
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
         //Save a copy to SAP context
         vos_mem_copy(pSapCtx->csrRoamProfile.BSSIDs.bssid,
@@ -1226,11 +1250,15 @@ VOS_STATUS
 WLANSAP_DisassocSta
 (
     v_PVOID_t  pvosGCtx,
+<<<<<<< HEAD
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,18,0))
     const v_U8_t *pPeerStaMac
 #else
     v_U8_t *pPeerStaMac
 #endif
+=======
+    v_U8_t *pPeerStaMac
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 )
 {
     ptSapContext  pSapCtx = VOS_GET_SAP_CB(pvosGCtx);
@@ -2404,7 +2432,11 @@ void WLANSAP_PopulateDelStaParams(const v_U8_t *mac,
             vos_mem_copy(pDelStaParams->peerMacAddr, mac, VOS_MAC_ADDR_SIZE);
 
         if (reason_code == 0)
+<<<<<<< HEAD
             pDelStaParams->reason_code = eSIR_MAC_DEAUTH_LEAVING_BSS_REASON;
+=======
+            pDelStaParams->reason_code = eCsrForcedDeauthSta;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         else
             pDelStaParams->reason_code = reason_code;
 

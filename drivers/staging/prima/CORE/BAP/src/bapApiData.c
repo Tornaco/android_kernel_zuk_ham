@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -42,6 +46,12 @@
   Are listed for each API below. 
   
   
+<<<<<<< HEAD
+=======
+  Copyright (c) 2008 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ===========================================================================*/
 
 /*===========================================================================
@@ -400,7 +410,10 @@ WLANBAP_XlateTxDataPkt
     // Now copy the AC values from the Logical Link context
     *pucAC = pLogLinkContext->btampAC;
     // Now copy the values from the Logical Link context to the MetaInfo 
+<<<<<<< HEAD
     tlMetaInfo->ac = *pucAC;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     tlMetaInfo->ucTID = pLogLinkContext->ucTID;
     tlMetaInfo->ucUP = pLogLinkContext->ucUP;
     tlMetaInfo->ucIsEapol = VOS_FALSE;

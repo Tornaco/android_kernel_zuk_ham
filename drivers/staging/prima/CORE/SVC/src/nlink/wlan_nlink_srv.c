@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -111,7 +115,10 @@ void nl_srv_exit(void)
    }
 #endif /* WLAN_KD_READY_NOTIFIER */
    netlink_kernel_release(nl_srv_sock);
+<<<<<<< HEAD
    nl_srv_sock = NULL;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 /*
@@ -177,7 +184,11 @@ int nl_srv_ucast(struct sk_buff *skb, int dst_pid, int flag)
 
    if (err < 0)
       VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
       "NLINK: netlink_unicast to pid[%d] failed, ret[%d]", dst_pid, err);
+=======
+      "NLINK: netlink_unicast to pid[%d] failed, ret[0x%X]", dst_pid, err);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    return err;
 }
@@ -189,10 +200,13 @@ int nl_srv_ucast(struct sk_buff *skb, int dst_pid, int flag)
 int nl_srv_bcast(struct sk_buff *skb)
 {
    int err;
+<<<<<<< HEAD
    int flags = GFP_KERNEL;
 
    if (in_interrupt() || irqs_disabled() || in_atomic())
        flags = GFP_ATOMIC;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,7,0))
    NETLINK_CB(skb).pid = 0; //sender's pid
@@ -201,7 +215,11 @@ int nl_srv_bcast(struct sk_buff *skb)
 #endif
    NETLINK_CB(skb).dst_group = WLAN_NLINK_MCAST_GRP_ID; //destination group
 
+<<<<<<< HEAD
    err = netlink_broadcast(nl_srv_sock, skb, 0, WLAN_NLINK_MCAST_GRP_ID, flags);
+=======
+   err = netlink_broadcast(nl_srv_sock, skb, 0, WLAN_NLINK_MCAST_GRP_ID, GFP_KERNEL);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    if (err < 0)
    {
@@ -286,6 +304,12 @@ static void nl_srv_rcv_msg (struct sk_buff *skb, struct nlmsghdr *nlh)
       return;
    }
 
+<<<<<<< HEAD
+=======
+   VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+      "NLINK: Received NL msg type [%d]", type);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    // turn type into dispatch table offset
    type -= WLAN_NL_MSG_BASE;
 
@@ -388,6 +412,7 @@ void nl_srv_nl_close_indication
 }
 #endif /* WLAN_KD_READY_NOTIFIER */
 
+<<<<<<< HEAD
 /*
  * nl_srv_is_initialized() - This function is used check if the netlink
  * service is initialized
@@ -404,3 +429,5 @@ int nl_srv_is_initialized()
    else
        return -EPERM;
 }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc

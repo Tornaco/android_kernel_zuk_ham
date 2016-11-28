@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -45,7 +49,11 @@
 #include <linux/wireless.h>
 #include <wlan_hdd_includes.h>
 #include <net/arp.h>
+<<<<<<< HEAD
 #include <vos_sched.h>
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*---------------------------------------------------------------------------------------------
 
   \brief hdd_OemDataReqCallback() - 
@@ -97,7 +105,11 @@ static eHalStatus hdd_OemDataReqCallback(tHalHandle hHal,
 
 /**--------------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
   \brief __iw_get_oem_data_rsp() -
+=======
+  \brief iw_get_oem_data_rsp() - 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
   This function gets the oem data response. This invokes
   the respective sme functionality. Function for handling the oem data rsp 
@@ -111,8 +123,13 @@ static eHalStatus hdd_OemDataReqCallback(tHalHandle hHal,
   \return - 0 for success, non zero for failure
 
 -----------------------------------------------------------------------------------------------*/
+<<<<<<< HEAD
 int __iw_get_oem_data_rsp(
         struct net_device *dev,
+=======
+int iw_get_oem_data_rsp(
+        struct net_device *dev, 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         struct iw_request_info *info,
         union iwreq_data *wrqu,
         char *extra)
@@ -121,6 +138,7 @@ int __iw_get_oem_data_rsp(
     eHalStatus                            status;
     struct iw_oem_data_rsp*               pHddOemDataRsp;
     tOemDataRsp*                          pSmeOemDataRsp;
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
 
@@ -138,6 +156,18 @@ int __iw_get_oem_data_rsp(
     {
         return rc;
     }
+=======
+
+    hdd_adapter_t *pAdapter = (netdev_priv(dev));
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!",__func__);
+       return -EBUSY;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     do
     {
         //get the oem data response from sme
@@ -164,6 +194,7 @@ int __iw_get_oem_data_rsp(
         }
     } while(0);
 
+<<<<<<< HEAD
     EXIT();
     return rc;
 }
@@ -186,6 +217,14 @@ int iw_get_oem_data_rsp(
 /**--------------------------------------------------------------------------------------------
 
   \brief __iw_set_oem_data_req() -
+=======
+    return rc;
+}
+
+/**--------------------------------------------------------------------------------------------
+
+  \brief iw_set_oem_data_req() - 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
   This function sets the oem data req configuration. This invokes
   the respective sme oem data req functionality. Function for 
@@ -199,8 +238,13 @@ int iw_get_oem_data_rsp(
   \return - 0 for success, non zero for failure
 
 -----------------------------------------------------------------------------------------------*/
+<<<<<<< HEAD
 int __iw_set_oem_data_req(
         struct net_device *dev,
+=======
+int iw_set_oem_data_req(
+        struct net_device *dev, 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         struct iw_request_info *info,
         union iwreq_data *wrqu,
         char *extra)
@@ -209,6 +253,7 @@ int __iw_set_oem_data_req(
     eHalStatus status = eHAL_STATUS_SUCCESS;
     struct iw_oem_data_req *pOemDataReq = NULL;
     tOemDataReqConfig oemDataReqConfig;
+<<<<<<< HEAD
     tANI_U32 oemDataReqID = 0;
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
@@ -250,6 +295,19 @@ int __iw_set_oem_data_req(
         VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                    FL("pno scan in progress"));
         return -EBUSY;
+=======
+
+    tANI_U32 oemDataReqID = 0;
+
+    hdd_adapter_t *pAdapter = (netdev_priv(dev));
+    hdd_wext_state_t *pwextBuf = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!",__func__);
+       return -EBUSY;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     do
@@ -296,6 +354,7 @@ int __iw_set_oem_data_req(
 
     } while(0);
 
+<<<<<<< HEAD
     EXIT();
     return rc;
 }
@@ -314,5 +373,10 @@ int iw_set_oem_data_req(
 
     return ret;
 }
+=======
+    return rc;
+}
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #endif

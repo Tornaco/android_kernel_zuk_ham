@@ -159,7 +159,11 @@ typedef struct sSirRSNie
 typedef struct sSirAddie
 {
     tANI_U16       length;
+<<<<<<< HEAD
     tANI_U8        addIEdata[SIR_MAC_MAX_ADD_IE_LENGTH+2];
+=======
+    tANI_U8        addIEdata[SIR_MAC_MAX_IE_LENGTH+2];
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 } tSirAddie, *tpSirAddie;
 
 #ifdef FEATURE_WLAN_ESE
@@ -222,6 +226,7 @@ typedef struct sSirMicFailureInfo
 
 } tSirMicFailureInfo, *tpSirMicFailureInfo;
 
+<<<<<<< HEAD
 typedef struct sSirLostLinkParamsInfo
 {
     tANI_U8 bssIdx;
@@ -234,6 +239,8 @@ typedef struct sSirLostLinkParamsInfo
     tANI_U32 rsvd2;
 }tSirLostLinkParamsInfo, *tpSirLostLinkParamsInfo;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 // Boa command. Used mainly for radar info persistance
 typedef struct sBoaCommand
 {

@@ -43,6 +43,12 @@
   Are listed for each API below.
 
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2010-2011 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ===========================================================================*/
 
 /*===========================================================================
@@ -139,6 +145,7 @@ void WDA_TLI_FastHwFwdDataFrame
 }
 #endif /*WLAN_PERF*/
 
+<<<<<<< HEAD
 void WDA_DS_RxLogCallback(void)
 {
   vos_msg_t vosMessage;
@@ -152,6 +159,8 @@ void WDA_DS_RxLogCallback(void)
   return;
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*==========================================================================
   FUNCTION    WDA_DS_Register
 
@@ -248,7 +257,10 @@ VOS_STATUS WDA_DS_Register
                                (WDI_DS_TxCompleteCallback)WDA_DS_TxCompleteCB,
                                (WDI_DS_RxPacketCallback)pfnRxPacketCallback,
                                WDA_DS_TxFlowControlCallback,
+<<<<<<< HEAD
                                WDA_DS_RxLogCallback,
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                                pvosGCtx );
 
   if ( WDI_STATUS_SUCCESS != wdiStatus )
@@ -435,8 +447,12 @@ WDA_DS_BuildTxPacketInfo
   v_U32_t          txFlag,
   v_U32_t         timeStamp,
   v_U8_t          ucIsEapol,
+<<<<<<< HEAD
   v_U8_t          ucUP,
   v_U32_t         ucTxBdToken
+=======
+  v_U8_t          ucUP
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 )
 {
   VOS_STATUS             vosStatus;
@@ -481,7 +497,11 @@ WDA_DS_BuildTxPacketInfo
   pTxMetaInfo->fdisableFrmXlt = ucDisableFrmXtl;
   pTxMetaInfo->frmType     = ( ( typeSubtype & 0x30 ) >> 4 );
   pTxMetaInfo->typeSubtype = typeSubtype;
+<<<<<<< HEAD
   pTxMetaInfo->txBdToken = ucTxBdToken;
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   /* Length = MAC header + payload */
   vos_pkt_get_packet_length( vosDataBuff, pusPktLen);
   pTxMetaInfo->fPktlen = *pusPktLen;

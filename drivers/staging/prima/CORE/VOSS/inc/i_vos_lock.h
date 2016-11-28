@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -34,6 +38,12 @@
   
   \brief Linux-specific definitions for vOSS Locks
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 
@@ -46,10 +56,13 @@
 #include <linux/mutex.h>
 #include <linux/spinlock.h>
 #include <linux/sched.h>
+<<<<<<< HEAD
 #if defined(WLAN_OPEN_SOURCE)
 #include <linux/wakelock.h>
 #endif
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*-------------------------------------------------------------------------- 
   Preprocessor definitions and constants
@@ -72,6 +85,7 @@ typedef struct vos_lock_s
 
 typedef spinlock_t vos_spin_lock_t;
 
+<<<<<<< HEAD
 #if defined(WLAN_OPEN_SOURCE)
 typedef struct wake_lock vos_wake_lock_t;
 #else
@@ -79,6 +93,8 @@ typedef int vos_wake_lock_t;
 #endif
 
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*------------------------------------------------------------------------- 
   Function declarations and documenation
   ------------------------------------------------------------------------*/

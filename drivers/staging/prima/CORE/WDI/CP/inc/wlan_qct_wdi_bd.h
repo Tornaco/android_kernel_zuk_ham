@@ -1151,7 +1151,10 @@ typedef struct
         wpt_uint32 csuTcpUdpStartOffset:10;
 #endif
 #endif /*WCN_PRONTO*/
+<<<<<<< HEAD
         wpt_uint32 txBdToken;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 } WDI_TxBdType;
 

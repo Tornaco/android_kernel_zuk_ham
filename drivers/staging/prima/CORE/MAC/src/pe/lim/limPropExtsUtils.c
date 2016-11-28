@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -39,7 +43,11 @@
  *
  */
 #include "aniGlobal.h"
+<<<<<<< HEAD
 #include "wniCfg.h"
+=======
+#include "wniCfgSta.h"
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #include "sirCommon.h"
 #include "sirDebug.h"
 #include "utilsApi.h"
@@ -103,8 +111,12 @@ limExtractApCapability(tpAniSirGlobal pMac, tANI_U8 *pIE, tANI_U16 ieLen,
     sirDumpBuf( pMac, SIR_LIM_MODULE_ID, LOG3, pIE, ieLen );)
     if (sirParseBeaconIE(pMac, pBeaconStruct, pIE, (tANI_U32)ieLen) == eSIR_SUCCESS)
     {
+<<<<<<< HEAD
         if (pBeaconStruct->wmeInfoPresent || pBeaconStruct->wmeEdcaPresent
             || pBeaconStruct->HTCaps.present)
+=======
+        if (pBeaconStruct->wmeInfoPresent || pBeaconStruct->wmeEdcaPresent)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             LIM_BSS_CAPS_SET(WME, *qosCap);
         if (LIM_BSS_CAPS_GET(WME, *qosCap) && pBeaconStruct->wsmCapablePresent)
             LIM_BSS_CAPS_SET(WSM, *qosCap);
@@ -118,6 +130,7 @@ limExtractApCapability(tpAniSirGlobal pMac, tANI_U8 *pIE, tANI_U16 ieLen,
 
 #ifdef WLAN_FEATURE_11AC
         VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_INFO_MED,
+<<<<<<< HEAD
             "***beacon.VHTCaps.present*****=%d BSS_VHT_CAPABLE:%d",
             pBeaconStruct->VHTCaps.present,
             IS_BSS_VHT_CAPABLE(pBeaconStruct->VHTCaps));
@@ -126,6 +139,13 @@ limExtractApCapability(tpAniSirGlobal pMac, tANI_U8 *pIE, tANI_U16 ieLen,
 
         if (IS_BSS_VHT_CAPABLE(pBeaconStruct->VHTCaps)
                           && pBeaconStruct->VHTOperation.present)
+=======
+            "***beacon.VHTCaps.present*****=%d",pBeaconStruct->VHTCaps.present);
+        VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_INFO_MED,
+           "***beacon.SU Beamformer Capable*****=%d",pBeaconStruct->VHTCaps.suBeamFormerCap);
+
+        if ( pBeaconStruct->VHTCaps.present && pBeaconStruct->VHTOperation.present)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         {
             psessionEntry->vhtCapabilityPresentInBeacon = 1;
             psessionEntry->apCenterChan = pBeaconStruct->VHTOperation.chanCenterFreqSeg1;
@@ -196,12 +216,15 @@ limExtractApCapability(tpAniSirGlobal pMac, tANI_U8 *pIE, tANI_U16 ieLen,
         {
             psessionEntry->countryInfoPresent = TRUE;
         }
+<<<<<<< HEAD
         /* Check if Extended caps are present in probe resp or not */
         if (pBeaconStruct->ExtCap.present)
         {
             psessionEntry->is_ext_caps_present = TRUE;
         }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
     vos_mem_free(pBeaconStruct);
     return;

@@ -61,6 +61,12 @@
    This linked list API is implemented with appropriate locking
    mechanisms to assure operations on the list are thread safe.
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 

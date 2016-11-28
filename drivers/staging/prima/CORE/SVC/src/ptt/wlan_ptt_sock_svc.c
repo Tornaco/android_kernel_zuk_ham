@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -113,6 +117,7 @@ int ptt_sock_send_msg_to_app(tAniHdr *wmsg, int radio, int src_mod, int pid, int
    wnl = (tAniNlHdr *) nlh;
    wnl->radio = radio;
    vos_mem_copy(&wnl->wmsg, wmsg, wmsg_length);
+<<<<<<< HEAD
 #ifdef PTT_SOCK_DEBUG_VERBOSE
    ptt_sock_dump_buf((const unsigned char *)skb->data, skb->len);
 #endif
@@ -129,6 +134,14 @@ int ptt_sock_send_msg_to_app(tAniHdr *wmsg, int radio, int src_mod, int pid, int
          "%s:Failed sending Msg Type [0x%X] to pid[%d]\n",
          __func__, be16_to_cpu(wmsg->type), pid);
    }
+=======
+   PTT_TRACE(VOS_TRACE_LEVEL_INFO, "%s: Sending Msg Type [0x%X] to pid[%d]\n",
+      __func__, be16_to_cpu(wmsg->type), pid);
+#ifdef PTT_SOCK_DEBUG_VERBOSE
+   ptt_sock_dump_buf((const unsigned char *)skb->data, skb->len);
+#endif
+   err = nl_srv_ucast(skb, pid, flag);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return err;
 }
 /*
@@ -157,7 +170,11 @@ static void ptt_sock_proc_reg_req(tAniHdr *wmsg, int radio)
    if (ptt_sock_send_msg_to_app((tAniHdr *)&rspmsg.wniHdr, radio,
       ANI_NL_MSG_PUMAC, reg_req->pid, MSG_DONTWAIT) < 0)
    {
+<<<<<<< HEAD
       PTT_TRACE(VOS_TRACE_LEVEL_INFO, "%s: Error sending ANI_MSG_APP_REG_RSP to pid[%d]\n",
+=======
+      PTT_TRACE(VOS_TRACE_LEVEL_ERROR, "%s: Error sending ANI_MSG_APP_REG_RSP to pid[%d]\n",
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
          __func__, reg_req->pid);
    }
 }

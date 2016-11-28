@@ -30,6 +30,12 @@
   \file  wlan_hdd_softap_tx_rx.c
   
   \brief Linux HDD Tx/RX APIs
+<<<<<<< HEAD
+=======
+         Copyright 2008 (c) Qualcomm, Incorporated.
+         All Rights Reserved.
+         Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ==========================================================================*/
 
@@ -46,7 +52,10 @@
 #include <linux/etherdevice.h>
 //#include <vos_list.h>
 #include <vos_types.h>
+<<<<<<< HEAD
 #include <vos_sched.h>
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #include <aniGlobal.h>
 #include <halTypes.h>
 #include <net/ieee80211_radiotap.h>
@@ -57,8 +66,12 @@
 #include <mach/subsystem_restart.h>
 #endif
 #include "sapInternal.h"
+<<<<<<< HEAD
 #include  "wlan_hdd_trace.h"
 #include "vos_diag_core_event.h"
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*--------------------------------------------------------------------------- 
   Preprocessor definitions and constants
   -------------------------------------------------------------------------*/ 
@@ -114,10 +127,18 @@ void hdd_softap_traffic_monitor_timeout_handler( void *pUsrData )
    hdd_context_t *pHddCtx = (hdd_context_t *)pUsrData;
    v_TIME_t       currentTS;
 
+<<<<<<< HEAD
    ENTER();
    if (0 != (wlan_hdd_validate_context(pHddCtx)))
    {
        return;
+=======
+   if (NULL == pHddCtx)
+   {
+      VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
+              "%s: Invalid user data, context", __func__);
+      return;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    }
 
    currentTS = vos_timer_get_system_time();
@@ -135,7 +156,10 @@ void hdd_softap_traffic_monitor_timeout_handler( void *pUsrData )
                       pHddCtx->cfg_ini->trafficIdleTimeout);
    }
 
+<<<<<<< HEAD
    EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return;
 }
 
@@ -145,10 +169,19 @@ VOS_STATUS hdd_start_trafficMonitor( hdd_adapter_t *pAdapter )
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     VOS_STATUS status = VOS_STATUS_SUCCESS;
 
+<<<<<<< HEAD
     ENTER();
     status = wlan_hdd_validate_context(pHddCtx);
     if (0 != status)
     {
+=======
+    status = wlan_hdd_validate_context(pHddCtx);
+
+    if (0 != status)
+    {
+        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                   "%s: HDD context is not valid", __func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         return status;
     }
 
@@ -175,8 +208,11 @@ VOS_STATUS hdd_start_trafficMonitor( hdd_adapter_t *pAdapter )
         VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_INFO,
                   "%s  Traffic Monitor is not Enable in ini file", __func__);
     }
+<<<<<<< HEAD
 
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return status;
 }
 
@@ -185,10 +221,19 @@ VOS_STATUS hdd_stop_trafficMonitor( hdd_adapter_t *pAdapter )
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     VOS_STATUS status = VOS_STATUS_SUCCESS;
 
+<<<<<<< HEAD
     ENTER();
     status = wlan_hdd_validate_context(pHddCtx);
     if (-ENODEV == status)
     {
+=======
+    status = wlan_hdd_validate_context(pHddCtx);
+
+    if (-ENODEV == status)
+    {
+        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                   "%s: HDD context is not valid", __func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         return status;
     }
 
@@ -207,7 +252,10 @@ VOS_STATUS hdd_stop_trafficMonitor( hdd_adapter_t *pAdapter )
         vos_lock_destroy(&pHddCtx->traffic_monitor.trafficLock);
         pHddCtx->traffic_monitor.isInitialized = 0;
     }
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return VOS_STATUS_SUCCESS;
 }
 
@@ -304,7 +352,10 @@ int hdd_softap_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
    //Extract the destination address from ethernet frame
    v_MACADDR_t *pDestMacAddress = (v_MACADDR_t*)skb->data;
    int os_status = NETDEV_TX_OK; 
+<<<<<<< HEAD
    struct sk_buff *skb1;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    v_CONTEXT_t pVosContext = ( WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
    ptSapContext pSapCtx = NULL;
@@ -341,7 +392,11 @@ int hdd_softap_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
    }
    else
    {
+<<<<<<< HEAD
       STAId = hdd_sta_id_find_from_mac_addr(pAdapter, pDestMacAddress);
+=======
+      STAId = *(v_U8_t *)(((v_U8_t *)(skb->data)) - 1);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       if (STAId == HDD_WLAN_INVALID_STA_ID)
       {
          VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_WARN,
@@ -395,8 +450,12 @@ int hdd_softap_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
    VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_INFO,
               "%s: Classified as ac %d up %d", __func__, ac, up);
 
+<<<<<<< HEAD
    if (( NULL != pHddCtx ) &&
          (pHddCtx->cfg_ini->gEnableDebugLog & VOS_PKT_PROTO_TYPE_DHCP))
+=======
+   if ( ( NULL != pHddCtx ) && pHddCtx->cfg_ini->enableDhcpDebug )
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    {
        hdd_dump_dhcp_pkt(skb, TX_PATH);
    }
@@ -412,8 +471,11 @@ int hdd_softap_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
        pSapCtx->aStaInfo[STAId].txSuspended[ac] = VOS_TRUE;
        netif_stop_subqueue(dev, skb_get_queue_mapping(skb));
        txSuspended = VOS_TRUE;
+<<<<<<< HEAD
        MTRACE(vos_trace(VOS_MODULE_ID_HDD, TRACE_CODE_HDD_STOP_NETDEV,
                         pAdapter->sessionId, ac));
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     /* If 3/4th of the max queue size is used then enable the flag.
@@ -422,10 +484,15 @@ int hdd_softap_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
    {
       if (pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac].count >= HDD_TX_QUEUE_LOW_WATER_MARK)
       {
+<<<<<<< HEAD
           if (!(pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac].ratelimit_count % 0x40))
               VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
                      "%s: TX queue for Best Effort AC is 3/4th full", __func__);
           pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac].ratelimit_count++;
+=======
+          VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
+                     "%s: TX queue for Best Effort AC is 3/4th full", __func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
           pSapCtx->aStaInfo[STAId].vosLowResource = VOS_TRUE;
       }
       else
@@ -489,6 +556,7 @@ int hdd_softap_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
          spin_lock_bh(&pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac].lock);
          status = hdd_list_remove_back( &pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac], &anchor);
          spin_unlock_bh(&pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac].lock);
+<<<<<<< HEAD
          /* Free the skb only if we are able to remove it from the list.
           * If we are not able to retrieve it from the list it means that
           * the skb was pulled by TX Thread and is use so we should not free
@@ -503,6 +571,12 @@ int hdd_softap_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
          ++pAdapter->stats.tx_dropped;
          ++pAdapter->hdd_stats.hddTxRxStats.txXmitDropped;
          ++pAdapter->hdd_stats.hddTxRxStats.txXmitDroppedAC[ac];
+=======
+         ++pAdapter->stats.tx_dropped;
+         ++pAdapter->hdd_stats.hddTxRxStats.txXmitDropped;
+         ++pAdapter->hdd_stats.hddTxRxStats.txXmitDroppedAC[ac];
+         kfree_skb(skb);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
          goto xmit_done;
       }
    }
@@ -538,7 +612,10 @@ VOS_STATUS hdd_softap_sta_2_sta_xmit(struct sk_buff *skb,
    hdd_adapter_t *pAdapter = (hdd_adapter_t *)netdev_priv(dev);
    v_U8_t ac;
    vos_list_node_t *anchor = NULL;
+<<<<<<< HEAD
    struct sk_buff *skb1;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    v_CONTEXT_t pVosContext = ( WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
    ptSapContext pSapCtx = NULL;
@@ -638,6 +715,7 @@ VOS_STATUS hdd_softap_sta_2_sta_xmit(struct sk_buff *skb,
          spin_lock_bh(&pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac].lock);
          status = hdd_list_remove_back( &pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac], &anchor);
          spin_unlock_bh(&pSapCtx->aStaInfo[STAId].wmm_tx_queue[ac].lock);
+<<<<<<< HEAD
          /* Free the skb only if we are able to remove it from the list.
           * If we are not able to retrieve it from the list it means that
           * the skb was pulled by TX Thread and is use so we should not free
@@ -652,6 +730,12 @@ VOS_STATUS hdd_softap_sta_2_sta_xmit(struct sk_buff *skb,
          ++pAdapter->stats.tx_dropped;
          ++pAdapter->hdd_stats.hddTxRxStats.txXmitDropped;
          ++pAdapter->hdd_stats.hddTxRxStats.txXmitDroppedAC[ac];
+=======
+         ++pAdapter->stats.tx_dropped;
+         ++pAdapter->hdd_stats.hddTxRxStats.txXmitDropped;
+         ++pAdapter->hdd_stats.hddTxRxStats.txXmitDroppedAC[ac];
+         kfree_skb(skb);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
          status = VOS_STATUS_E_FAILURE;
          goto xmit_end;
       }
@@ -665,19 +749,30 @@ xmit_end:
 }
 
 /**============================================================================
+<<<<<<< HEAD
   @brief __hdd_softap_tx_timeout() - Function called by OS if there is any
+=======
+  @brief hdd_softap_tx_timeout() - Function called by OS if there is any
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   timeout during transmission. Since HDD simply enqueues packet
   and returns control to OS right away, this would never be invoked
 
   @param dev : [in] pointer to Libra network device
   @return    : None
   ===========================================================================*/
+<<<<<<< HEAD
 void __hdd_softap_tx_timeout(struct net_device *dev)
+=======
+void hdd_softap_tx_timeout(struct net_device *dev)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 {
    hdd_adapter_t *pAdapter =  WLAN_HDD_GET_PRIV_PTR(dev);
    struct netdev_queue *txq;
    int i = 0;
+<<<<<<< HEAD
    int status = 0;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    hdd_context_t *pHddCtx;
 
    VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
@@ -692,15 +787,25 @@ void __hdd_softap_tx_timeout(struct net_device *dev)
    }
 
    pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+<<<<<<< HEAD
    status = wlan_hdd_validate_context(pHddCtx);
    if (status != 0)
    {
+=======
+   if (pHddCtx->isLogpInProgress) {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+                       "%s:LOGP in Progress. Ignore!!!",__func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        return;
    }
 
    ++pAdapter->hdd_stats.hddTxRxStats.txTimeoutCount;
 
+<<<<<<< HEAD
    for (i = 0; i < NUM_TX_QUEUES; i++)
+=======
+   for (i = 0; i < 8; i++)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    {
       txq = netdev_get_tx_queue(dev, i);
       VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
@@ -708,7 +813,11 @@ void __hdd_softap_tx_timeout(struct net_device *dev)
    }
 
    VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
              "carrier state: %d", netif_carrier_ok(dev));
+=======
+              "carrier state: %d", netif_carrier_ok(dev));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    ++pAdapter->hdd_stats.hddTxRxStats.continuousTxTimeoutCount;
 
@@ -744,6 +853,7 @@ void __hdd_softap_tx_timeout(struct net_device *dev)
 
 } 
 
+<<<<<<< HEAD
 void hdd_softap_tx_timeout(struct net_device *dev)
 {
    vos_ssr_protect(__func__);
@@ -754,18 +864,28 @@ void hdd_softap_tx_timeout(struct net_device *dev)
 
 /**============================================================================
   @brief __hdd_softap_stats() - Function registered with the Linux OS for
+=======
+
+/**============================================================================
+  @brief hdd_softap_stats() - Function registered with the Linux OS for 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   device TX/RX statistic
 
   @param dev      : [in] pointer to Libra network device
   
   @return         : pointer to net_device_stats structure
   ===========================================================================*/
+<<<<<<< HEAD
 struct net_device_stats* __hdd_softap_stats(struct net_device *dev)
+=======
+struct net_device_stats* hdd_softap_stats(struct net_device *dev)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 {
    hdd_adapter_t* priv = netdev_priv(dev);
    return &priv->stats;
 }
 
+<<<<<<< HEAD
 struct net_device_stats* hdd_softap_stats(struct net_device *dev)
 {
    struct net_device_stats *priv_stats;
@@ -775,6 +895,8 @@ struct net_device_stats* hdd_softap_stats(struct net_device *dev)
 
    return priv_stats;
 }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /**============================================================================
   @brief hdd_softap_init_tx_rx() - Init function to initialize Tx/RX
@@ -940,10 +1062,15 @@ static VOS_STATUS hdd_softap_flush_tx_queues_sta( hdd_adapter_t *pAdapter, v_U8_
 VOS_STATUS hdd_softap_init_tx_rx_sta( hdd_adapter_t *pAdapter, v_U8_t STAId, v_MACADDR_t *pmacAddrSTA)
 {
    v_U8_t i = 0;
+<<<<<<< HEAD
    VOS_STATUS status;
    v_CONTEXT_t pVosContext = ( WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
    ptSapContext pSapCtx = NULL;
 
+=======
+   v_CONTEXT_t pVosContext = ( WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
+   ptSapContext pSapCtx = NULL;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    pSapCtx = VOS_GET_SAP_CB(pVosContext);
    if(pSapCtx == NULL){
        VOS_TRACE(VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
@@ -971,6 +1098,7 @@ VOS_STATUS hdd_softap_init_tx_rx_sta( hdd_adapter_t *pAdapter, v_U8_t STAId, v_M
    vos_copy_macaddr( &pSapCtx->aStaInfo[STAId].macAddrSTA, pmacAddrSTA);
 
    spin_unlock_bh( &pSapCtx->staInfo_lock );
+<<<<<<< HEAD
 
    status = hdd_sta_id_hash_add_entry(pAdapter, STAId, pmacAddrSTA);
    if (status != VOS_STATUS_SUCCESS) {
@@ -984,6 +1112,8 @@ VOS_STATUS hdd_softap_init_tx_rx_sta( hdd_adapter_t *pAdapter, v_U8_t STAId, v_M
              MAC_ADDRESS_STR), STAId,
              MAC_ADDR_ARRAY(pmacAddrSTA->bytes));
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return VOS_STATUS_SUCCESS;
 }
 
@@ -1029,6 +1159,7 @@ VOS_STATUS hdd_softap_deinit_tx_rx_sta ( hdd_adapter_t *pAdapter, v_U8_t STAId )
 
    pSapCtx->aStaInfo[STAId].isUsed = FALSE;
    pSapCtx->aStaInfo[STAId].isDeauthInProgress = FALSE;
+<<<<<<< HEAD
 
    status = hdd_sta_id_hash_remove_entry(pAdapter,
                 STAId, &pSapCtx->aStaInfo[STAId].macAddrSTA);
@@ -1043,6 +1174,8 @@ VOS_STATUS hdd_softap_deinit_tx_rx_sta ( hdd_adapter_t *pAdapter, v_U8_t STAId )
              MAC_ADDRESS_STR), STAId,
              MAC_ADDR_ARRAY(pSapCtx->aStaInfo[STAId].macAddrSTA.bytes));
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    /* if this STA had any of its WMM TX queues suspended, then the
       associated queue on the network interface was disabled.  check
       to see if that is the case, in which case we need to re-enable
@@ -1139,10 +1272,17 @@ VOS_STATUS hdd_softap_tx_complete_cbk( v_VOID_t *vosContext,
 
    //Get the Adapter context.
    pAdapter = (hdd_adapter_t *)netdev_priv(((struct sk_buff *)pOsPkt)->dev);
+<<<<<<< HEAD
    if((pAdapter == NULL) || (WLAN_HDD_ADAPTER_MAGIC != pAdapter->magic))
    {
       VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
                  "%s: HDD adapter context is invalid", __func__);
+=======
+   if(pAdapter == NULL)
+   {
+      VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
+                 "%s: HDD adapter context is Null", __func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    }
    else
    {
@@ -1386,6 +1526,7 @@ VOS_STATUS hdd_softap_tx_fetch_packet_cbk( v_VOID_t *vosContext,
    {
       if (TRUE == hdd_IsEAPOLPacket( pVosPacket ))
       {
+<<<<<<< HEAD
          pPktMetaInfo->ucIsEapol = 1;
          wlan_hdd_log_eapol(skb,
                             WIFI_EVENT_DRIVER_EAPOL_FRAME_TRANSMIT_REQUESTED);
@@ -1394,6 +1535,15 @@ VOS_STATUS hdd_softap_tx_fetch_packet_cbk( v_VOID_t *vosContext,
 
    if ((NULL != pHddCtx) &&
        (pHddCtx->cfg_ini->gEnableDebugLog))
+=======
+         VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_INFO_HIGH,
+                    "%s: VOS packet is EAPOL packet", __func__);
+         pPktMetaInfo->ucIsEapol = 1;
+      }
+   }
+ 
+   if (pHddCtx->cfg_ini->gEnableDebugLog)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    {
       proto_type = vos_pkt_get_proto_type(skb,
                                           pHddCtx->cfg_ini->gEnableDebugLog);
@@ -1407,6 +1557,7 @@ VOS_STATUS hdd_softap_tx_fetch_packet_cbk( v_VOID_t *vosContext,
          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                    "SAP TX DHCP");
       }
+<<<<<<< HEAD
       else if (VOS_PKT_PROTO_TYPE_ARP & proto_type)
       {
          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
@@ -1416,6 +1567,11 @@ VOS_STATUS hdd_softap_tx_fetch_packet_cbk( v_VOID_t *vosContext,
 //xg: @@@@: temporarily disble these. will revisit later
    {
       pPktMetaInfo->ac = ac;
+=======
+   }
+//xg: @@@@: temporarily disble these. will revisit later
+   {
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       pPktMetaInfo->ucUP = pktNode->userPriority;
       pPktMetaInfo->ucTID = pPktMetaInfo->ucUP;
    }
@@ -1437,8 +1593,11 @@ VOS_STATUS hdd_softap_tx_fetch_packet_cbk( v_VOID_t *vosContext,
                  "%s: TX queue re-enabled", __func__);
       pSapCtx->aStaInfo[STAId].txSuspended[ac] = VOS_FALSE;
       netif_wake_subqueue(pAdapter->dev, skb_get_queue_mapping(skb));
+<<<<<<< HEAD
       MTRACE(vos_trace(VOS_MODULE_ID_HDD, TRACE_CODE_HDD_WAKE_NETDEV,
                        pAdapter->sessionId, ac));
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    }    
 
    // We're giving the packet to TL so consider it transmitted from
@@ -1485,11 +1644,18 @@ VOS_STATUS hdd_softap_tx_low_resource_cbk( vos_pkt_t *pVosPacket,
    v_U8_t STAId = WLAN_MAX_STA_COUNT;
    v_CONTEXT_t pVosContext = NULL;
    ptSapContext pSapCtx = NULL;
+<<<<<<< HEAD
 
    if (pAdapter == NULL || WLAN_HDD_ADAPTER_MAGIC != pAdapter->magic)
    {
       VOS_TRACE(VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
                  FL("Invalid adapter %p"), pAdapter);
+=======
+   if(pAdapter == NULL)
+   {
+      VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_ERROR,
+                 "%s: HDD adapter context is Null", __func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       return VOS_STATUS_E_FAILURE;
    }
    pVosContext = (WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
@@ -1630,7 +1796,12 @@ VOS_STATUS hdd_softap_rx_packet_cbk( v_VOID_t *vosContext,
       }
 
       // Extract the OS packet (skb).
+<<<<<<< HEAD
       status = vos_pkt_get_os_packet( pVosPacket, (v_VOID_t **)&skb, VOS_FALSE );
+=======
+      // Tell VOS to detach the OS packet from the VOS packet
+      status = vos_pkt_get_os_packet( pVosPacket, (v_VOID_t **)&skb, VOS_TRUE );
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       if(!VOS_IS_STATUS_SUCCESS( status ))
       {
          ++pAdapter->hdd_stats.hddTxRxStats.rxDropped;
@@ -1638,11 +1809,15 @@ VOS_STATUS hdd_softap_rx_packet_cbk( v_VOID_t *vosContext,
                     "%s: Failure extracting skb from vos pkt", __func__);
          return VOS_STATUS_E_FAILURE;
       }
+<<<<<<< HEAD
 
       if (TRUE == hdd_IsEAPOLPacket(pVosPacket))
           wlan_hdd_log_eapol(skb, WIFI_EVENT_DRIVER_EAPOL_FRAME_RECEIVED);
 
       pVosPacket->pSkb = NULL;
+=======
+   
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       //hdd_softap_dump_sk_buff(skb);
 
       skb->dev = pAdapter->dev;
@@ -1671,11 +1846,14 @@ VOS_STATUS hdd_softap_rx_packet_cbk( v_VOID_t *vosContext,
             VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                       "SAP RX DHCP");
          }
+<<<<<<< HEAD
          else if (VOS_PKT_PROTO_TYPE_ARP & proto_type)
          {
             VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                       "SAP RX ARP");
          }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       }
 
       if (WLAN_RX_BCMC_STA_ID == pRxMetaInfo->ucDesSTAId)
@@ -1708,19 +1886,30 @@ VOS_STATUS hdd_softap_rx_packet_cbk( v_VOID_t *vosContext,
       {
          VOS_TRACE( VOS_MODULE_ID_HDD_SAP_DATA, VOS_TRACE_LEVEL_INFO_LOW,
                           "%s: send one packet to kernel", __func__);
+<<<<<<< HEAD
          if ((NULL != pHddCtx) &&
              (pHddCtx->cfg_ini->gEnableDebugLog & VOS_PKT_PROTO_TYPE_DHCP))
+=======
+         if ( pHddCtx->cfg_ini->enableDhcpDebug )
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
          {
              hdd_dump_dhcp_pkt(skb, RX_PATH);
          }
 
          skb->protocol = eth_type_trans(skb, skb->dev);
          skb->ip_summed = CHECKSUM_NONE;
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_HOLD_RX_WAKELOCK
        vos_wake_lock_timeout_release(&pHddCtx->rx_wake_lock,
                     HDD_WAKE_LOCK_DURATION,
                     WIFI_POWER_EVENT_WAKELOCK_HOLD_RX);
 
+=======
+#ifdef WLAN_OPEN_SOURCE
+#ifdef WLAN_FEATURE_HOLD_RX_WAKELOCK
+         wake_lock_timeout(&pHddCtx->rx_wake_lock, msecs_to_jiffies(HDD_WAKE_LOCK_DURATION));
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #endif
          rxstat = netif_rx_ni(skb);
          if (NET_RX_SUCCESS == rxstat)
@@ -1956,12 +2145,18 @@ VOS_STATUS hdd_softap_RegisterSTA( hdd_adapter_t *pAdapter,
                   "Turn on Monitor the carrier");
        netif_carrier_on(pmonAdapter->dev);
            //Enable Tx queue
+<<<<<<< HEAD
        hddLog(VOS_TRACE_LEVEL_INFO, FL("Enabling queues"));
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        netif_tx_start_all_queues(pmonAdapter->dev);
     }
    netif_carrier_on(pAdapter->dev);
    //Enable Tx queue
+<<<<<<< HEAD
    hddLog(VOS_TRACE_LEVEL_INFO, FL("Enabling queues"));
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    netif_tx_start_all_queues(pAdapter->dev);
 
    return( vosStatus );

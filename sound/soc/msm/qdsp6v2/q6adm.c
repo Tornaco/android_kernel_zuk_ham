@@ -1436,8 +1436,11 @@ int adm_matrix_map(int session_id, int path, int num_copps,
 		ret = -EINVAL;
 		goto fail_cmd;
 	}
-
+#ifndef CONFIG_MACH_MSM8974_14001 //John.Xu modified for waves effect not works
 	if (perf_mode != ULTRA_LOW_LATENCY_PCM_MODE) {
+#else
+	if (!perf_mode) {
+#endif
 		for (i = 0; i < num_copps; i++)
 			send_adm_cal(port_id[i], path, perf_mode);
 
@@ -1758,8 +1761,11 @@ int adm_close(int port_id, int perf_mode)
 			goto fail_cmd;
 		}
 	}
-
+#ifndef CONFIG_MACH_MSM8974_14001 //modified by John.Xu for Waves effect not works when open touch sound
 	if (perf_mode != ULTRA_LOW_LATENCY_PCM_MODE) {
+#else
+	if (!perf_mode) {
+#endif
 		pr_debug("%s: remove adm device from rtac\n", __func__);
 		rtac_remove_adm_device(port_id, copp_id);
 	}

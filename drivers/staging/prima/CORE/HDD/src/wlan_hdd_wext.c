@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2011-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -50,7 +54,11 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/wireless.h>
+<<<<<<< HEAD
 #include <linux/wcnss_wlan.h>
+=======
+#include <linux/ratelimit.h>
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #include <macTrace.h>
 #include <wlan_hdd_includes.h>
 #include <wlan_btc_svc.h>
@@ -103,7 +111,13 @@
 #include "vos_trace.h"
 #include "wlan_hdd_assoc.h"
 
+<<<<<<< HEAD
 #include "vos_utils.h"
+=======
+#ifdef DEBUG_ROAM_DELAY
+#include "vos_utils.h"
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #include "sapInternal.h"
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
@@ -166,6 +180,7 @@ static const hdd_freq_chan_map_t freq_chan_map[] = { {2412, 1}, {2417, 2},
 #endif
 #define  WE_SET_SCAN_BAND_PREFERENCE     17
 #define  WE_SET_MIRACAST_VENDOR_CONFIG     18
+<<<<<<< HEAD
 #define WE_GET_FRAME_LOG                 19
 #ifdef FEATURE_WLAN_TDLS
 #define  WE_SET_TDLS_2040_BSS_COEXISTENCE 20
@@ -173,6 +188,9 @@ static const hdd_freq_chan_map_t freq_chan_map[] = { {2412, 1}, {2417, 2},
 #define  WE_SET_RTS_CTS_HTVHT             21
 #define  WE_SET_MONITOR_STATE             22
 #define  WE_SET_PROXIMITY_ENABLE          23
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /* Private ioctls and their sub-ioctls */
 #define WLAN_PRIV_SET_NONE_GET_INT    (SIOCIWFIRSTPRIV + 1)
@@ -239,9 +257,17 @@ static const hdd_freq_chan_map_t freq_chan_map[] = { {2412, 1}, {2417, 2},
 #define WE_SET_REASSOC_TRIGGER     8
 #define WE_DISPLAY_DATAPATH_SNAP_SHOT    9
 #define WE_STOP_OBSS_SCAN    11
+<<<<<<< HEAD
 #define WE_DUMP_ROAM_TIMER_LOG     12
 #define WE_RESET_ROAM_TIMER_LOG    13
 #define WE_GET_FW_LOGS             14
+=======
+
+#ifdef DEBUG_ROAM_DELAY
+#define WE_DUMP_ROAM_TIMER_LOG     12
+#define WE_RESET_ROAM_TIMER_LOG    13
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /* Private ioctls and their sub-ioctls */
 #define WLAN_PRIV_SET_VAR_INT_GET_NONE   (SIOCIWFIRSTPRIV + 7)
@@ -258,8 +284,11 @@ static const hdd_freq_chan_map_t freq_chan_map[] = { {2412, 1}, {2417, 2},
 
 #define WE_MTRACE_DUMP_CMD    8
 #define WE_MTRACE_SELECTIVE_MODULE_LOG_ENABLE_CMD    9
+<<<<<<< HEAD
 #define WE_CONFIGURE_MONITOR_MODE  10
 #define WE_SET_MONITOR_MODE_FILTER  11
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #ifdef FEATURE_WLAN_TDLS
 #undef  MAX_VAR_ARGS
@@ -367,9 +396,18 @@ static const hdd_freq_chan_map_t freq_chan_map[] = { {2412, 1}, {2417, 2},
 #define WLAN_ADAPTER 0
 #define P2P_ADAPTER  1
 
+<<<<<<< HEAD
 #define TX_PWR_MIN  6
 #define TX_PWR_MAX 22
 #define TX_PWR_DEF 50
+=======
+#define HDD_IOCTL_RATELIMIT_INTERVAL 20*HZ
+#define HDD_IOCTL_RATELIMIT_BURST 1
+
+static DEFINE_RATELIMIT_STATE(hdd_ioctl_timeout_rs, \
+        HDD_IOCTL_RATELIMIT_INTERVAL,     \
+        HDD_IOCTL_RATELIMIT_BURST);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*
  * When supplicant sends SETBAND ioctl it queries for channels from
@@ -508,8 +546,11 @@ void hdd_wlan_get_version(hdd_adapter_t *pAdapter, union iwreq_data *wrqu,
     VOS_STATUS status;
     tSirVersionString wcnss_SW_version;
     tSirVersionString wcnss_HW_version;
+<<<<<<< HEAD
     tSirVersionString iris_name;
     char *pIRISversion;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     char *pSWversion;
     char *pHWversion;
     tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
@@ -536,6 +577,7 @@ void hdd_wlan_get_version(hdd_adapter_t *pAdapter, union iwreq_data *wrqu,
         pHWversion = "Unknown";
     }
 
+<<<<<<< HEAD
     status = wcnss_get_iris_name(iris_name);
 
     if (!status) {
@@ -549,12 +591,20 @@ void hdd_wlan_get_version(hdd_adapter_t *pAdapter, union iwreq_data *wrqu,
                                  QWLAN_VERSIONSTR,
                                  pSWversion,
                                  pHWversion, pIRISversion);
+=======
+    wrqu->data.length = scnprintf(extra, WE_MAX_STR_LEN,
+                                 "Host SW:%s, FW:%s, HW:%s",
+                                 QWLAN_VERSIONSTR,
+                                 pSWversion,
+                                 pHWversion);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     return;
 }
 
 int hdd_wlan_get_rts_threshold(hdd_adapter_t *pAdapter, union iwreq_data *wrqu)
 {
+<<<<<<< HEAD
     tHalHandle hHal;
     hdd_context_t *pHddCtx;
     v_U32_t threshold = 0;
@@ -581,6 +631,18 @@ int hdd_wlan_get_rts_threshold(hdd_adapter_t *pAdapter, union iwreq_data *wrqu)
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: Hal Context is NULL",__func__);
         return -EINVAL;
+=======
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    v_U32_t threshold = 0,status = 0;
+
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
+                                  "%s:LOGP in Progress. Ignore!!!",__func__);
+      return status;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     if ( eHAL_STATUS_SUCCESS !=
@@ -602,6 +664,7 @@ int hdd_wlan_get_rts_threshold(hdd_adapter_t *pAdapter, union iwreq_data *wrqu)
 
 int hdd_wlan_get_frag_threshold(hdd_adapter_t *pAdapter, union iwreq_data *wrqu)
 {
+<<<<<<< HEAD
     tHalHandle hHal;
     hdd_context_t *pHddCtx;
     v_U32_t threshold = 0, status = 0;
@@ -628,6 +691,18 @@ int hdd_wlan_get_frag_threshold(hdd_adapter_t *pAdapter, union iwreq_data *wrqu)
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: Hal Context is NULL",__func__);
         return -EINVAL;
+=======
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    v_U32_t threshold = 0,status = 0;
+
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+                                  "%s:LOGP in Progress. Ignore!!!",__func__);
+      return status;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     if ( ccmCfgGetInt(hHal, WNI_CFG_FRAGMENTATION_THRESHOLD, &threshold)
@@ -776,6 +851,7 @@ static void hdd_GetRssiCB( v_S7_t rssi, tANI_U32 staId, void *pContext )
    /* paranoia: invalidate the magic */
    pStatsContext->magic = 0;
 
+<<<<<<< HEAD
    /* copy over the rssi.FW will return RSSI as -100
     * if there are no samples to calculate the average
     * RSSI
@@ -784,6 +860,11 @@ static void hdd_GetRssiCB( v_S7_t rssi, tANI_U32 staId, void *pContext )
        pAdapter->rssi = rssi;
    if (pAdapter->rssi > 0)
        pAdapter->rssi = 0;
+=======
+   /* copy over the rssi */
+   pAdapter->rssi = rssi;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    /* notify the caller */
    complete(&pStatsContext->completion);
 
@@ -874,6 +955,7 @@ VOS_STATUS wlan_hdd_get_rssi(hdd_adapter_t *pAdapter, v_S7_t *rssi_value)
    pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
    pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
 
+<<<<<<< HEAD
    if (eConnectionState_Associated != pHddStaCtx->conn_info.connState)
    {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s:Not associated, rssi on Disconnect : %d",
@@ -890,6 +972,8 @@ VOS_STATUS wlan_hdd_get_rssi(hdd_adapter_t *pAdapter, v_S7_t *rssi_value)
        return VOS_STATUS_SUCCESS;
    }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    init_completion(&context.completion);
    context.pAdapter = pAdapter;
    context.magic = RSSI_CONTEXT_MAGIC;
@@ -936,6 +1020,7 @@ VOS_STATUS wlan_hdd_get_rssi(hdd_adapter_t *pAdapter, v_S7_t *rssi_value)
 
    return VOS_STATUS_SUCCESS;
 }
+<<<<<<< HEAD
 /**---------------------------------------------------------------------------
 
   \brief wlan_hdd_get_frame_logs() -
@@ -993,6 +1078,8 @@ VOS_STATUS wlan_hdd_get_frame_logs(hdd_adapter_t *pAdapter, v_U8_t flag)
    return VOS_STATUS_SUCCESS;
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 VOS_STATUS wlan_hdd_get_snr(hdd_adapter_t *pAdapter, v_S7_t *snr)
 {
@@ -1003,8 +1090,11 @@ VOS_STATUS wlan_hdd_get_snr(hdd_adapter_t *pAdapter, v_S7_t *snr)
    long lrc;
    int valid;
 
+<<<<<<< HEAD
    ENTER();
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    if (NULL == pAdapter)
    {
        hddLog(VOS_TRACE_LEVEL_ERROR,
@@ -1017,6 +1107,10 @@ VOS_STATUS wlan_hdd_get_snr(hdd_adapter_t *pAdapter, v_S7_t *snr)
    valid = wlan_hdd_validate_context(pHddCtx);
    if (0 != valid)
    {
+<<<<<<< HEAD
+=======
+       hddLog(VOS_TRACE_LEVEL_ERROR, FL("HDD context is not valid"));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        return VOS_STATUS_E_FAULT;
    }
 
@@ -1071,10 +1165,15 @@ VOS_STATUS wlan_hdd_get_snr(hdd_adapter_t *pAdapter, v_S7_t *snr)
 
    *snr = pAdapter->snr;
 
+<<<<<<< HEAD
    EXIT();
    return VOS_STATUS_SUCCESS;
 }
 
+=======
+   return VOS_STATUS_SUCCESS;
+}
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
 
 static void hdd_GetRoamRssiCB( v_S7_t rssi, tANI_U32 staId, void *pContext )
@@ -1124,6 +1223,7 @@ static void hdd_GetRoamRssiCB( v_S7_t rssi, tANI_U32 staId, void *pContext )
    /* paranoia: invalidate the magic */
    pStatsContext->magic = 0;
 
+<<<<<<< HEAD
    /* copy over the rssi.FW will return RSSI as -100
     * if there are no samples to calculate the average
     * RSSI
@@ -1133,6 +1233,11 @@ static void hdd_GetRoamRssiCB( v_S7_t rssi, tANI_U32 staId, void *pContext )
 
    if (pAdapter->rssi > 0)
        pAdapter->rssi = 0;
+=======
+   /* copy over the rssi */
+   pAdapter->rssi = rssi;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    /* notify the caller */
    complete(&pStatsContext->completion);
 
@@ -1349,7 +1454,11 @@ void hdd_clearRoamProfileIe( hdd_adapter_t *pAdapter)
    pWextState->roamProfile.bWPSAssociation = VOS_FALSE;
    pWextState->roamProfile.bOSENAssociation = VOS_FALSE;
    pWextState->roamProfile.nAddIEScanLength = 0;
+<<<<<<< HEAD
    memset(pWextState->roamProfile.addIEScan, 0 , SIR_MAC_MAX_ADD_IE_LENGTH+2);
+=======
+   memset(pWextState->roamProfile.addIEScan, 0 , SIR_MAC_MAX_IE_LENGTH+2);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    pWextState->roamProfile.pAddIEAssoc = (tANI_U8 *)NULL;
    pWextState->roamProfile.nAddIEAssocLength = 0;
 
@@ -1388,10 +1497,17 @@ void wlan_hdd_ula_done_cb(v_VOID_t *callbackContext)
 {
     hdd_adapter_t *pAdapter = (hdd_adapter_t*)callbackContext;
 
+<<<<<<< HEAD
     if ( (pAdapter == NULL) || (WLAN_HDD_ADAPTER_MAGIC != pAdapter->magic))
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: Invalid pAdapter magic/ pAdapter is NULL", __func__);
+=======
+    if (WLAN_HDD_ADAPTER_MAGIC != pAdapter->magic)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                  "%s: Invalid pAdapter magic", __func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
     else
     {
@@ -1472,6 +1588,7 @@ v_U8_t* wlan_hdd_get_vendor_oui_ie_ptr(v_U8_t *oui, v_U8_t oui_size, v_U8_t *ie,
     return NULL;
 }
 
+<<<<<<< HEAD
 static int __iw_set_commit(struct net_device *dev, struct iw_request_info *info,
                          union iwreq_data *wrqu, char *extra)
 {
@@ -1551,6 +1668,25 @@ static int iw_get_name(struct net_device *dev,
     vos_ssr_unprotect(__func__);
 
     return ret;
+=======
+static int iw_set_commit(struct net_device *dev, struct iw_request_info *info,
+                         union iwreq_data *wrqu, char *extra)
+{
+    hddLog( LOG1, "In %s", __func__);
+    /* Do nothing for now */
+    return 0;
+}
+
+static int iw_get_name(struct net_device *dev,
+                       struct iw_request_info *info,
+                       char *wrqu, char *extra)
+{
+
+    ENTER();
+    strlcpy(wrqu, "Qcom:802.11n", IFNAMSIZ);
+    EXIT();
+    return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static int __iw_set_mode(struct net_device *dev,
@@ -1558,29 +1694,47 @@ static int __iw_set_mode(struct net_device *dev,
                          union iwreq_data *wrqu, char *extra)
 {
     hdd_wext_state_t         *pWextState;
+<<<<<<< HEAD
     hdd_adapter_t            *pAdapter;
     hdd_context_t            *pHddCtx;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     tCsrRoamProfile          *pRoamProfile;
     eCsrRoamBssType          LastBSSType;
     eMib_dot11DesiredBssType connectedBssType;
     hdd_config_t             *pConfig;
     struct wireless_dev      *wdev;
+<<<<<<< HEAD
     int                      status = 0;
 
     ENTER();
 
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+=======
+
+    ENTER();
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (NULL == pAdapter)
     {
         hddLog(VOS_TRACE_LEVEL_WARN,
                "%s: Invalid context, pAdapter", __func__);
         return 0;
     }
+<<<<<<< HEAD
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     status = wlan_hdd_validate_context(pHddCtx);
     if (0 != status)
     {
         return status;
+=======
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                 "%s:LOGP in Progress. Ignore!!!", __func__);
+       return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
@@ -1671,6 +1825,7 @@ static int __iw_get_mode(struct net_device *dev,
 {
 
     hdd_wext_state_t *pWextState;
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     int ret = 0;
@@ -1678,6 +1833,12 @@ static int __iw_get_mode(struct net_device *dev,
     ENTER();
 
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+
+    hddLog(LOG1, "In %s", __func__);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (NULL == pAdapter)
     {
         hddLog(VOS_TRACE_LEVEL_WARN,
@@ -1685,12 +1846,21 @@ static int __iw_get_mode(struct net_device *dev,
         return 0;
     }
 
+<<<<<<< HEAD
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     ret = wlan_hdd_validate_context(pHddCtx);
     if (0 != ret)
     {
         return ret;
     }
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                 "%s:LOGP in Progress. Ignore!!!", __func__);
+       return 0;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
     if (pWextState == NULL)
     {
@@ -1718,7 +1888,10 @@ static int __iw_get_mode(struct net_device *dev,
         break;
     }
 
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -1746,6 +1919,7 @@ static int __iw_set_freq(struct net_device *dev,
     v_U32_t status = 0;
 
     hdd_wext_state_t *pWextState;
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     tHalHandle hHal;
@@ -1792,6 +1966,20 @@ static int __iw_set_freq(struct net_device *dev,
                   "%s: pWextState is NULL",__func__);
         return -EINVAL;
     }
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+    tCsrRoamProfile * pRoamProfile;
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+       return status;
+    }
+
+    pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     pRoamProfile = &pWextState->roamProfile;
 
@@ -1888,6 +2076,7 @@ static int __iw_get_freq(struct net_device *dev,
                          struct iw_freq *fwrq, char *extra)
 {
    v_U32_t status = FALSE, channel = 0, freq = 0;
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    tHalHandle hHal;
    hdd_wext_state_t *pWextState;
@@ -1932,6 +2121,24 @@ static int __iw_get_freq(struct net_device *dev,
                  "%s: pWextState is NULL",__func__);
        return -EINVAL;
    }
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   tHalHandle hHal;
+   hdd_wext_state_t *pWextState;
+   tCsrRoamProfile * pRoamProfile;
+   hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+
+   ENTER();
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+      return status;
+   }
+
+   pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+   hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    pRoamProfile = &pWextState->roamProfile;
 
    if( pHddStaCtx->conn_info.connState== eConnectionState_Associated )
@@ -1963,9 +2170,13 @@ static int __iw_get_freq(struct net_device *dev,
        fwrq->m = 0;
        fwrq->e = MHZ;
     }
+<<<<<<< HEAD
 
     EXIT();
     return ret;
+=======
+   return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static int iw_get_freq(struct net_device *dev,
@@ -1986,6 +2197,7 @@ static int __iw_get_tx_power(struct net_device *dev,
                              union iwreq_data *wrqu, char *extra)
 {
 
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    hdd_station_ctx_t *pHddStaCtx;
@@ -2024,6 +2236,27 @@ static int __iw_get_tx_power(struct net_device *dev,
    wrqu->txpower.value = pAdapter->hdd_stats.ClassA_stat.max_pwr;
 
    EXIT();
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+   hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+
+   if (pHddCtx->isLogpInProgress)
+   {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+              "%s:LOGP in Progress. Ignore!!!",__func__);
+      return -EBUSY;
+   }
+
+   if(eConnectionState_Associated != pHddStaCtx->conn_info.connState)
+   {
+      wrqu->txpower.value = 0;
+      return 0;
+   }
+   wlan_hdd_get_classAstats(pAdapter);
+   wrqu->txpower.value = pAdapter->hdd_stats.ClassA_stat.max_pwr;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return 0;
 }
 
@@ -2044,6 +2277,7 @@ static int __iw_set_tx_power(struct net_device *dev,
                              struct iw_request_info *info,
                              union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     tHalHandle hHal;
     hdd_context_t *pHddCtx;
@@ -2072,6 +2306,19 @@ static int __iw_set_tx_power(struct net_device *dev,
                   "%s: Hal Context is NULL",__func__);
         return -EINVAL;
     }
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+       return 0;
+    }
+
+    ENTER();
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if ( ccmCfgSetInt(hHal, WNI_CFG_CURRENT_TX_POWER_LEVEL, wrqu->txpower.value, ccmCfgSetCallback, eANI_BOOLEAN_TRUE) != eHAL_STATUS_SUCCESS )
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -2104,6 +2351,7 @@ static int __iw_get_bitrate(struct net_device *dev,
    VOS_STATUS vos_status = VOS_STATUS_SUCCESS;
    eHalStatus status = eHAL_STATUS_SUCCESS;
    hdd_wext_state_t *pWextState;
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    hdd_station_ctx_t *pHddStaCtx;
@@ -2139,6 +2387,22 @@ static int __iw_get_bitrate(struct net_device *dev,
    }
    else
    {
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+
+   ENTER();
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+      return status;
+   }
+
+   if(eConnectionState_Associated != pHddStaCtx->conn_info.connState) {
+        wrqu->bitrate.value = 0;
+   }
+   else {
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       status = sme_GetStatistics( WLAN_HDD_GET_HAL_CTX(pAdapter), eCSR_HDD,
                                SME_SUMMARY_STATS       |
                                SME_GLOBAL_CLASSA_STATS |
@@ -2158,12 +2422,15 @@ static int __iw_get_bitrate(struct net_device *dev,
       }
 
       pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+<<<<<<< HEAD
       if (NULL == pWextState)
       {
           VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                     "%s: pWextState is NULL",__func__);
           return -EINVAL;
       }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
       vos_status = vos_wait_single_event(&pWextState->vosevent, WLAN_WAIT_TIME_STATS);
 
@@ -2204,15 +2471,22 @@ static int __iw_set_bitrate(struct net_device *dev,
                             union iwreq_data *wrqu,
                             char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_wext_state_t *pWextState;
     hdd_station_ctx_t *pHddStaCtx;
     hdd_context_t *pHddCtx;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_wext_state_t *pWextState;
+    hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     v_U8_t supp_rates[WNI_CFG_SUPPORTED_RATES_11A_LEN];
     v_U32_t a_len = WNI_CFG_SUPPORTED_RATES_11A_LEN;
     v_U32_t b_len = WNI_CFG_SUPPORTED_RATES_11B_LEN;
     v_U32_t i, rate;
     v_U32_t valid_rate = FALSE, active_phy_mode = 0;
+<<<<<<< HEAD
     int ret = 0;
 
     ENTER();
@@ -2247,6 +2521,17 @@ static int __iw_set_bitrate(struct net_device *dev,
                   "%s: pWextState is NULL",__func__);
         return -EINVAL;
     }
+=======
+
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+       return 0;
+    }
+
+    pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     if (eConnectionState_Associated != pHddStaCtx->conn_info.connState)
     {
@@ -2298,8 +2583,11 @@ static int __iw_set_bitrate(struct net_device *dev,
                 FL("failed to set ini parameter, WNI_CFG_FIXED_RATE"));
         return -EIO;
     }
+<<<<<<< HEAD
 
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -2322,6 +2610,7 @@ static int __iw_set_genie(struct net_device *dev,
                           union iwreq_data *wrqu,
                           char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    hdd_wext_state_t *pWextState;
@@ -2380,6 +2669,47 @@ static int __iw_set_genie(struct net_device *dev,
    memset( &pWextState->genIE, 0, sizeof(pWextState->genIE) );
 
    while (remLen >= 2)
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_wext_state_t *pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+    u_int8_t *genie = NULL;
+    u_int8_t *base_genie = NULL;
+    v_U16_t remLen;
+
+   ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return 0;
+    }
+
+    if (!wrqu->data.length) {
+        hdd_clearRoamProfileIe(pAdapter);
+        EXIT();
+        return 0;
+    }
+
+    base_genie = mem_alloc_copy_from_user_helper(wrqu->data.pointer,
+                                                 wrqu->data.length);
+    if (NULL == base_genie)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                  "mem_alloc_copy_from_user_helper fail");
+        return -ENOMEM;
+    }
+
+    genie = base_genie;
+
+    remLen = wrqu->data.length;
+
+    hddLog(LOG1,"iw_set_genie ioctl IE[0x%X], LEN[%d]", genie[0], genie[1]);
+
+    /* clear any previous genIE before this call */
+    memset( &pWextState->genIE, 0, sizeof(pWextState->genIE) );
+
+    while (remLen >= 2)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    {
         v_U16_t eLen = 0;
         v_U8_t elementId;
@@ -2395,8 +2725,13 @@ static int __iw_set_genie(struct net_device *dev,
             case IE_EID_VENDOR:
                 if ((IE_LEN_SIZE+IE_EID_SIZE+IE_VENDOR_OUI_SIZE) > eLen) /* should have at least OUI */
                 {
+<<<<<<< HEAD
                     ret = -EINVAL;
                     goto exit;
+=======
+                    kfree(base_genie);
+                    return -EINVAL;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 }
 
                 if (0 == memcmp(&genie[0], "\x00\x50\xf2\x04", 4))
@@ -2410,8 +2745,13 @@ static int __iw_set_genie(struct net_device *dev,
                        hddLog(VOS_TRACE_LEVEL_FATAL, "Cannot accommodate genIE. "
                                                       "Need bigger buffer space");
                        VOS_ASSERT(0);
+<<<<<<< HEAD
                        ret = -EINVAL;
                        goto exit;
+=======
+                       kfree(base_genie);
+                       return -ENOMEM;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                     }
                     // save to Additional IE ; it should be accumulated to handle WPS IE + other IE
                     memcpy( pWextState->genIE.addIEdata + curGenIELen, genie - 2, eLen + 2);
@@ -2420,6 +2760,7 @@ static int __iw_set_genie(struct net_device *dev,
                 else if (0 == memcmp(&genie[0], "\x00\x50\xf2", 3))
                 {
                     hddLog (VOS_TRACE_LEVEL_INFO, "%s Set WPA IE (len %d)",__func__, eLen + 2);
+<<<<<<< HEAD
                     if ((eLen + 2) > (sizeof(pWextState->WPARSNIE)))
                     {
                        hddLog(VOS_TRACE_LEVEL_FATAL, "Cannot accommodate genIE. "
@@ -2428,6 +2769,8 @@ static int __iw_set_genie(struct net_device *dev,
                        VOS_ASSERT(0);
                        goto exit;
                     }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                     memset( pWextState->WPARSNIE, 0, MAX_WPA_RSN_IE_LEN );
                     memcpy( pWextState->WPARSNIE, genie - 2, (eLen + 2));
                     pWextState->roamProfile.pWPAReqIE = pWextState->WPARSNIE;
@@ -2444,8 +2787,13 @@ static int __iw_set_genie(struct net_device *dev,
                        hddLog(VOS_TRACE_LEVEL_FATAL, "Cannot accommodate genIE. "
                                                       "Need bigger buffer space");
                        VOS_ASSERT(0);
+<<<<<<< HEAD
                        ret = -ENOMEM;
                        goto exit;
+=======
+                       kfree(base_genie);
+                       return -ENOMEM;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                     }
                     // save to Additional IE ; it should be accumulated to handle WPS IE + other IE
                     memcpy( pWextState->genIE.addIEdata + curGenIELen, genie - 2, eLen + 2);
@@ -2454,6 +2802,7 @@ static int __iw_set_genie(struct net_device *dev,
               break;
          case DOT11F_EID_RSN:
                 hddLog (LOG1, "%s Set RSN IE (len %d)",__func__, eLen+2);
+<<<<<<< HEAD
                 if ((eLen + 2) > (sizeof(pWextState->WPARSNIE)))
                 {
                     hddLog(VOS_TRACE_LEVEL_FATAL, "Cannot accommodate genIE. "
@@ -2462,6 +2811,8 @@ static int __iw_set_genie(struct net_device *dev,
                     VOS_ASSERT(0);
                     goto exit;
                 }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 memset( pWextState->WPARSNIE, 0, MAX_WPA_RSN_IE_LEN );
                 memcpy( pWextState->WPARSNIE, genie - 2, (eLen + 2));
                 pWextState->roamProfile.pRSNReqIE = pWextState->WPARSNIE;
@@ -2470,16 +2821,27 @@ static int __iw_set_genie(struct net_device *dev,
 
          default:
                 hddLog (LOGE, "%s Set UNKNOWN IE %X",__func__, elementId);
+<<<<<<< HEAD
                 goto exit;
+=======
+            kfree(base_genie);
+            return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
         genie += eLen;
         remLen -= eLen;
     }
+<<<<<<< HEAD
 
 exit:
     EXIT();
     kfree(base_genie);
     return ret;
+=======
+    EXIT();
+    kfree(base_genie);
+    return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static int iw_set_genie(struct net_device *dev,
@@ -2502,15 +2864,21 @@ static int __iw_get_genie(struct net_device *dev,
                           char *extra)
 {
     hdd_wext_state_t *pWextState;
+<<<<<<< HEAD
     hdd_context_t *pHddCtx;
     hdd_adapter_t *pAdapter;
     hdd_station_ctx_t *pHddStaCtx;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     eHalStatus status;
     v_U32_t length = DOT11F_IE_RSN_MAX_LEN;
     v_U8_t genIeBytes[DOT11F_IE_RSN_MAX_LEN];
 
     ENTER();
 
+<<<<<<< HEAD
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
     if (NULL == pAdapter)
     {
@@ -2540,6 +2908,17 @@ static int __iw_get_genie(struct net_device *dev,
                   "%s: STA Context is NULL",__func__);
         return -EINVAL;
     }
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+       return 0;
+    }
+
+
+    hddLog(LOG1,"getGEN_IE ioctl");
+
+    pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     if( pHddStaCtx->conn_info.connState == eConnectionState_NotConnected)
     {
@@ -2593,6 +2972,7 @@ static int __iw_get_encode(struct net_device *dev,
                            struct iw_request_info *info,
                            struct iw_point *dwrq, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     hdd_wext_state_t *pWextState;
@@ -2624,6 +3004,22 @@ static int __iw_get_encode(struct net_device *dev,
     }
 
     pRoamProfile  = &(pWextState->roamProfile);
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_wext_state_t *pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+    tCsrRoamProfile *pRoamProfile = &(pWextState->roamProfile);
+    int keyId;
+    eCsrAuthType authType = eCSR_AUTH_TYPE_NONE;
+    int i;
+
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress) {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+       return 0;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     keyId = pRoamProfile->Keys.defaultIndex;
 
     if(keyId < 0 || keyId >= MAX_WEP_KEYS)
@@ -2727,6 +3123,7 @@ static int __iw_set_rts_threshold(struct net_device *dev,
                                   struct iw_request_info *info,
                                   union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     tHalHandle hHal;
@@ -2757,6 +3154,19 @@ static int __iw_set_rts_threshold(struct net_device *dev,
         return -EINVAL;
     }
 
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+            "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EAGAIN;
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if ( wrqu->rts.value < WNI_CFG_RTS_THRESHOLD_STAMIN || wrqu->rts.value > WNI_CFG_RTS_THRESHOLD_STAMAX )
     {
         return -EINVAL;
@@ -2816,6 +3226,7 @@ static int __iw_set_frag_threshold(struct net_device *dev,
                                    struct iw_request_info *info,
                                    union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    tHalHandle hHal;
@@ -2845,6 +3256,19 @@ static int __iw_set_frag_threshold(struct net_device *dev,
        return -EINVAL;
    }
 
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+
+   ENTER();
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+       return -EBUSY;
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if ( wrqu->frag.value < WNI_CFG_FRAGMENTATION_THRESHOLD_STAMIN || wrqu->frag.value > WNI_CFG_FRAGMENTATION_THRESHOLD_STAMAX )
     {
         return -EINVAL;
@@ -2875,6 +3299,7 @@ static int iw_set_frag_threshold(struct net_device *dev,
    return ret;
 }
 
+<<<<<<< HEAD
 static int __iw_get_power_mode(struct net_device *dev,
                              struct iw_request_info *info,
                              union iwreq_data *wrqu, char *extra)
@@ -2954,14 +3379,37 @@ static int iw_set_power_mode(struct net_device *dev,
    return ret;
 }
 
+=======
+static int iw_get_power_mode(struct net_device *dev,
+                             struct iw_request_info *info,
+                             union iwreq_data *wrqu, char *extra)
+{
+   ENTER();
+   return -EOPNOTSUPP;
+}
+
+static int iw_set_power_mode(struct net_device *dev,
+                             struct iw_request_info *info,
+                             union iwreq_data *wrqu, char *extra)
+{
+    ENTER();
+    return -EOPNOTSUPP;
+}
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 static int __iw_get_range(struct net_device *dev,
                           struct iw_request_info *info,
                           union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    tHalHandle hHal;
    hdd_context_t *pHddCtx;
    int ret = 0;
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    struct iw_range *range = (struct iw_range *) extra;
 
    v_U8_t channels[WNI_CFG_VALID_CHANNEL_LIST_LEN];
@@ -2975,6 +3423,7 @@ static int __iw_get_range(struct net_device *dev,
 
    ENTER();
 
+<<<<<<< HEAD
    pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
    if (NULL == pAdapter)
    {
@@ -2998,6 +3447,18 @@ static int __iw_get_range(struct net_device *dev,
    wrqu->data.length = sizeof(struct iw_range);
    memset(range, 0, sizeof(struct iw_range));
 
+=======
+   wrqu->data.length = sizeof(struct iw_range);
+   memset(range, 0, sizeof(struct iw_range));
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+      return -EBUSY;
+   }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    /*Get the phy mode*/
    if (ccmCfgGetInt(hHal,
                   WNI_CFG_DOT11_MODE, &active_phy_mode) == eHAL_STATUS_SUCCESS)
@@ -3471,11 +3932,16 @@ static int iw_get_linkspeed(struct net_device *dev,
                             struct iw_request_info *info,
                             union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    hdd_context_t *pHddCtx;
    char *pLinkSpeed = (char*)extra;
    int len = sizeof(v_U32_t) + 1;
    v_U32_t link_speed;
+<<<<<<< HEAD
    hdd_station_ctx_t *pHddStaCtx;
    VOS_STATUS status;
    int rc, valid = 0;
@@ -3502,6 +3968,22 @@ static int iw_get_linkspeed(struct net_device *dev,
                  "%s: STA Context is NULL",__func__);
        return -EINVAL;
    }
+=======
+   hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+   VOS_STATUS status;
+   int rc, valid;
+
+   pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+
+   valid = wlan_hdd_validate_context(pHddCtx);
+
+   if (0 != valid)
+   {
+       hddLog(VOS_TRACE_LEVEL_ERROR, FL("HDD context is not valid"));
+       return valid;
+   }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    if (eConnectionState_Associated != pHddStaCtx->conn_info.connState)
    {
       /* we are not connected so we don't have a classAstats */
@@ -3546,7 +4028,10 @@ static int iw_get_linkspeed(struct net_device *dev,
        return -EIO;
    }
 
+<<<<<<< HEAD
    EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   /* a value is being successfully returned */
    return rc;
 }
@@ -3704,8 +4189,11 @@ static void parse_Bufferforpkt(tSirpkt80211 *pkt, u8 *pBuffer, u16 len)
     uint8 byte = 0;
     char *temp = pBuffer;
     uint16 fragNum = 0;
+<<<<<<< HEAD
     char *pHeader;
     tSir80211Header header;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     macHeader = &pkt->macHeader;
 
@@ -3740,6 +4228,7 @@ static void parse_Bufferforpkt(tSirpkt80211 *pkt, u8 *pBuffer, u16 len)
     }
 
     length = getByte(&temp);
+<<<<<<< HEAD
     if (length > sizeof(tSir80211Header))
        length = sizeof(tSir80211Header);
 
@@ -3751,6 +4240,8 @@ static void parse_Bufferforpkt(tSirpkt80211 *pkt, u8 *pBuffer, u16 len)
 
     print_hex_dump(KERN_INFO, "Header : ", DUMP_PREFIX_NONE, 16, 1,
             (char *)&header, length, 0);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     byte = getByte(&temp);
 
@@ -3838,6 +4329,12 @@ static void parse_Bufferforpkt(tSirpkt80211 *pkt, u8 *pBuffer, u16 len)
         macHeader->usQosCtrl += getByte(&temp) << 8;
     }
 
+<<<<<<< HEAD
+=======
+    print_hex_dump(KERN_INFO, "Header : ", DUMP_PREFIX_NONE, 16, 1,
+            (char *)&pkt->macHeader, sizeof(tSir80211Header), 0);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     //parse payload
     length = getByte(&temp);
     length += getByte(&temp) << 8;
@@ -3885,7 +4382,10 @@ VOS_STATUS  wlan_hdd_enter_bmps(hdd_adapter_t *pAdapter, int mode)
    struct statsContext context;
    eHalStatus status;
    hdd_context_t *pHddCtx;
+<<<<<<< HEAD
    hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    if (NULL == pAdapter)
    {
@@ -3932,6 +4432,7 @@ VOS_STATUS  wlan_hdd_enter_bmps(hdd_adapter_t *pAdapter, int mode)
    }
    else if (DRIVER_POWER_MODE_AUTO == mode)
    {
+<<<<<<< HEAD
        /* If this is called by hdd_suspend_wlan or hdd_resume_wlan, driver
         * was already in BMPS state and thus either STA or P2P-CLI is in
         * associated state and authenticated, so even if STA connState is
@@ -3949,6 +4450,8 @@ VOS_STATUS  wlan_hdd_enter_bmps(hdd_adapter_t *pAdapter, int mode)
            return VOS_STATUS_E_AGAIN;
        }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        if (pHddCtx->cfg_ini->fIsBmpsEnabled)
        {
            hddLog(VOS_TRACE_LEVEL_INFO_HIGH, "%s:Wlan driver Entering Bmps ",
@@ -4085,6 +4588,7 @@ static int __iw_set_priv(struct net_device *dev,
                        struct iw_request_info *info,
                        union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     char *cmd = NULL;
     int cmd_len = wrqu->data.length;
@@ -4109,6 +4613,18 @@ static int __iw_set_priv(struct net_device *dev,
         return rc;
     }
 
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    char *cmd = NULL;
+    int cmd_len = wrqu->data.length;
+    int ret = 0;
+    int rc = 0;
+    VOS_STATUS vos_status = VOS_STATUS_SUCCESS;
+
+    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+
+    ENTER();
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     cmd = mem_alloc_copy_from_user_helper(wrqu->data.pointer,
                                           wrqu->data.length);
     if (NULL == cmd)
@@ -4126,6 +4642,21 @@ static int __iw_set_priv(struct net_device *dev,
     hddLog(VOS_TRACE_LEVEL_INFO_MED,
            "%s: ***Received %s cmd from Wi-Fi GUI***", __func__, cmd);
 
+<<<<<<< HEAD
+=======
+    if (pHddCtx->isLogpInProgress) {
+        if (ioctl_debug)
+        {
+            pr_info("%s: RESTART in progress\n", __func__);
+        }
+
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                 "%s:LOGP in Progress. Ignore!!!",__func__);
+        kfree(cmd);
+        return -EBUSY;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (strncmp(cmd, "CSCAN", 5) == 0 )
     {
        if (eHAL_STATUS_SUCCESS != iw_set_cscan(dev, info, wrqu, cmd)) {
@@ -4427,7 +4958,10 @@ done:
                __func__, cmd, wrqu->data.length, rc);
     }
     kfree(cmd);
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return rc;
 }
 
@@ -4443,6 +4977,7 @@ static int iw_set_priv(struct net_device *dev,
    return ret;
 }
 
+<<<<<<< HEAD
 static int __iw_set_nick(struct net_device *dev,
                        struct iw_request_info *info,
                        union iwreq_data *wrqu, char *extra)
@@ -4471,10 +5006,13 @@ static int __iw_set_nick(struct net_device *dev,
    return 0;
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 static int iw_set_nick(struct net_device *dev,
                        struct iw_request_info *info,
                        union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    int ret;
 
    vos_ssr_protect(__func__);
@@ -4509,6 +5047,9 @@ static int __iw_get_nick(struct net_device *dev,
        return ret;
    }
    EXIT();
+=======
+   ENTER();
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return 0;
 }
 
@@ -4516,6 +5057,7 @@ static int iw_get_nick(struct net_device *dev,
                        struct iw_request_info *info,
                        union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    int ret;
 
    vos_ssr_protect(__func__);
@@ -4529,10 +5071,15 @@ static struct iw_statistics * __get_wireless_stats(struct net_device *dev)
 {
    ENTER();
    return NULL;
+=======
+   ENTER();
+   return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static struct iw_statistics *get_wireless_stats(struct net_device *dev)
 {
+<<<<<<< HEAD
 
        struct iw_statistics *stats;
 
@@ -4541,17 +5088,29 @@ static struct iw_statistics *get_wireless_stats(struct net_device *dev)
        vos_ssr_unprotect(__func__);
 
        return stats;
+=======
+   ENTER();
+   return NULL;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static int __iw_set_encode(struct net_device *dev,
                          struct iw_request_info *info,
                          union iwreq_data *wrqu,char *extra)
+<<<<<<< HEAD
 
 {
    hdd_adapter_t *pAdapter;
    hdd_station_ctx_t *pHddStaCtx;
    hdd_wext_state_t  *pWextState;
    hdd_context_t *pHddCtx;
+=======
+
+{
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+   hdd_wext_state_t  *pWextState =  WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    struct iw_point *encoderq = &(wrqu->encoding);
    v_U32_t keyId;
    v_U8_t key_length;
@@ -4562,6 +5121,7 @@ static int __iw_set_encode(struct net_device *dev,
 
 
    ENTER();
+<<<<<<< HEAD
    pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
    if (NULL == pAdapter)
    {
@@ -4591,6 +5151,17 @@ static int __iw_set_encode(struct net_device *dev,
        return -EINVAL;
    }
 
+=======
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!",__func__);
+        return 0;
+   }
+
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    keyId = encoderq->flags & IW_ENCODE_INDEX;
 
    if(keyId)
@@ -4718,7 +5289,11 @@ static int __iw_set_encode(struct net_device *dev,
           return status;
        }
    }
+<<<<<<< HEAD
    EXIT();
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return 0;
 }
 
@@ -4740,6 +5315,7 @@ static int __iw_get_encodeext(struct net_device *dev,
                struct iw_point *dwrq,
                char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_wext_state_t  *pWextState;
     tCsrRoamProfile *pRoamProfile;
@@ -4772,6 +5348,24 @@ static int __iw_get_encodeext(struct net_device *dev,
         return -EINVAL;
     }
     pRoamProfile = &(pWextState->roamProfile);
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_wext_state_t  *pWextState =  WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+    tCsrRoamProfile *pRoamProfile = &(pWextState->roamProfile);
+    int keyId;
+    eCsrEncryptionType encryptionType = eCSR_ENCRYPT_TYPE_NONE;
+    eCsrAuthType authType = eCSR_AUTH_TYPE_NONE;
+    int i;
+
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+              "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EBUSY;
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     keyId = pRoamProfile->Keys.defaultIndex;
 
@@ -4853,6 +5447,7 @@ static int __iw_set_encodeext(struct net_device *dev,
                         struct iw_request_info *info,
                         union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_station_ctx_t *pHddStaCtx;
     hdd_wext_state_t  *pWextState;
@@ -4860,6 +5455,14 @@ static int __iw_set_encodeext(struct net_device *dev,
     eHalStatus halStatus = eHAL_STATUS_SUCCESS;
 
     tCsrRoamProfile *pRoamProfile;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+    hdd_wext_state_t  *pWextState =  WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+    eHalStatus halStatus= eHAL_STATUS_SUCCESS;
+
+    tCsrRoamProfile *pRoamProfile = &pWextState->roamProfile;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     v_U32_t status = 0;
 
     struct iw_encode_ext *ext = (struct iw_encode_ext*)extra;
@@ -4873,6 +5476,7 @@ static int __iw_set_encodeext(struct net_device *dev,
     VOS_STATUS vos_status;
 
     ENTER();
+<<<<<<< HEAD
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
     if (NULL == pAdapter)
     {
@@ -4901,6 +5505,16 @@ static int __iw_set_encodeext(struct net_device *dev,
         return -EINVAL;
     }
     pRoamProfile = &pWextState->roamProfile;
+=======
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!",__func__);
+        return 0;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     key_index = encoding->flags & IW_ENCODE_INDEX;
 
     if(key_index > 0) {
@@ -5067,8 +5681,13 @@ static int __iw_set_encodeext(struct net_device *dev,
 
        pHddStaCtx->roam_info.roamingState = HDD_ROAM_STATE_NONE;
     }
+<<<<<<< HEAD
     EXIT();
     return halStatus;
+=======
+
+   return halStatus;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static int iw_set_encodeext(struct net_device *dev,
@@ -5088,6 +5707,7 @@ static int __iw_set_retry(struct net_device *dev,
                         struct iw_request_info *info,
                         union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    tHalHandle hHal;
    hdd_context_t *pHddCtx;
@@ -5116,6 +5736,18 @@ static int __iw_set_retry(struct net_device *dev,
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: Hal Context is NULL",__func__);
        return -EINVAL;
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+
+   ENTER();
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                   "%s:LOGP in Progress. Ignore!!!", __func__);
+      return -EBUSY;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    }
 
    if(wrqu->retry.value < WNI_CFG_LONG_RETRY_LIMIT_STAMIN ||
@@ -5177,6 +5809,7 @@ static int __iw_get_retry(struct net_device *dev,
                         struct iw_request_info *info,
                         union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    tHalHandle hHal;
@@ -5206,6 +5839,19 @@ static int __iw_get_retry(struct net_device *dev,
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: Hal Context is NULL",__func__);
        return -EINVAL;
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+   v_U32_t retry = 0;
+
+   ENTER();
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+              "%s:LOGP in Progress. Ignore!!!", __func__);
+      return -EBUSY;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    }
 
    if((wrqu->retry.flags & IW_RETRY_LONG))
@@ -5263,6 +5909,7 @@ static int __iw_set_mlme(struct net_device *dev,
                        union iwreq_data *wrqu,
                        char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     hdd_station_ctx_t *pHddStaCtx;
@@ -5290,6 +5937,20 @@ static int __iw_set_mlme(struct net_device *dev,
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                                   "%s:STA context is NULL",__func__);
         return -EINVAL;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+    struct iw_mlme *mlme = (struct iw_mlme *)extra;
+    eHalStatus status = eHAL_STATUS_SUCCESS;
+
+    ENTER();
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!",__func__);
+        return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     //reason_code is unused. By default it is set to eCSR_DISCONNECT_REASON_UNSPECIFIED
@@ -5324,7 +5985,10 @@ static int __iw_set_mlme(struct net_device *dev,
                 /* Resetting authKeyMgmt */
                 (WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter))->authKeyMgmt = 0;
 
+<<<<<<< HEAD
                 hddLog(VOS_TRACE_LEVEL_INFO, FL("Disabling queues"));
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 netif_tx_disable(dev);
                 netif_carrier_off(dev);
 
@@ -5364,11 +6028,17 @@ static int __iw_setint_getnone(struct net_device *dev,
                                struct iw_request_info *info,
                                union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     tHalHandle hHal;
     hdd_wext_state_t  *pWextState;
     hdd_context_t *pHddCtx;
     hdd_mon_ctx_t *pMonCtx = NULL;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    hdd_wext_state_t  *pWextState =  WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     int *value = (int *)extra;
     int sub_cmd = value[0];
     int set_value = value[1];
@@ -5377,6 +6047,7 @@ static int __iw_setint_getnone(struct net_device *dev,
 #ifdef CONFIG_HAS_EARLYSUSPEND
     v_U8_t nEnableSuspendOld;
 #endif
+<<<<<<< HEAD
 
     ENTER();
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
@@ -5413,6 +6084,17 @@ static int __iw_setint_getnone(struct net_device *dev,
 
       INIT_COMPLETION(pWextState->completion_var);
     }
+=======
+    INIT_COMPLETION(pWextState->completion_var);
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EBUSY;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     switch(sub_cmd)
     {
         case WE_SET_11D_STATE:
@@ -5856,6 +6538,7 @@ static int __iw_setint_getnone(struct net_device *dev,
                  FL("Invalid value %d in WE_SET_MIRACAST_VENDOR_CONFIG IOCTL"), set_value);
                 ret = -EINVAL;
             }
+<<<<<<< HEAD
             break;
         }
 
@@ -6018,6 +6701,9 @@ static int __iw_setint_getnone(struct net_device *dev,
             else {
                 ret = -EINVAL;
             }
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             break;
         }
         default:
@@ -6027,7 +6713,11 @@ static int __iw_setint_getnone(struct net_device *dev,
             break;
         }
     }
+<<<<<<< HEAD
     EXIT();
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return ret;
 }
 
@@ -6052,14 +6742,22 @@ static int __iw_setchar_getnone(struct net_device *dev,
     int sub_cmd;
     int ret = 0; /* success */
     char *pBuffer = NULL;
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
 #ifdef WLAN_FEATURE_VOWIFI
     hdd_config_t  *pConfig;
+=======
+    hdd_adapter_t *pAdapter = (netdev_priv(dev));
+    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+#ifdef WLAN_FEATURE_VOWIFI
+    hdd_config_t  *pConfig = pHddCtx->cfg_ini;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #endif /* WLAN_FEATURE_VOWIFI */
     struct iw_point s_priv_data;
     tSirpkt80211 *pkt;
 
+<<<<<<< HEAD
     ENTER();
 
     if (!capable(CAP_NET_ADMIN))
@@ -6086,6 +6784,15 @@ static int __iw_setchar_getnone(struct net_device *dev,
 #ifdef WLAN_FEATURE_VOWIFI
     pConfig = pHddCtx->cfg_ini;
 #endif
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EBUSY;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* helper function to get iwreq_data with compat handling. */
     if (hdd_priv_get_data(&s_priv_data, wrqu))
     {
@@ -6171,8 +6878,12 @@ static int __iw_setchar_getnone(struct net_device *dev,
           {
               hddLog(VOS_TRACE_LEVEL_ERROR,
                       "%s: vos_mem_alloc failed", __func__);
+<<<<<<< HEAD
               ret = -ENOMEM;
               break;
+=======
+              return -ENOMEM;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
           }
 
           memset(pkt, 0, sizeof(tSirpkt80211));
@@ -6206,8 +6917,11 @@ static int __iw_setchar_getnone(struct net_device *dev,
        }
     }
     kfree(pBuffer);
+<<<<<<< HEAD
 
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return ret;
 }
 
@@ -6229,13 +6943,20 @@ static int __iw_setnone_getint(struct net_device *dev,
                                struct iw_request_info *info,
                                union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     tHalHandle hHal;
     hdd_context_t *pHddCtx;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     int *value = (int *)extra;
     int ret = 0; /* success */
     tSmeConfigParams smeConfig;
 
+<<<<<<< HEAD
     ENTER();
 
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
@@ -6257,6 +6978,15 @@ static int __iw_setnone_getint(struct net_device *dev,
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: Hal Context is NULL",__func__);
         return -EINVAL;
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        if (__ratelimit(&hdd_ioctl_timeout_rs)) {
+            VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        }
+        return -EBUSY;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     switch (value[0])
@@ -6366,7 +7096,11 @@ static int __iw_setnone_getint(struct net_device *dev,
             break;
         }
     }
+<<<<<<< HEAD
     EXIT();
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return ret;
 }
 
@@ -6388,12 +7122,17 @@ int __iw_set_three_ints_getnone(struct net_device *dev,
                                 struct iw_request_info *info,
                                 union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     int *value = (int *)extra;
     int sub_cmd = value[0];
     int ret = 0;
 
+<<<<<<< HEAD
     ENTER();
 
     if (!capable(CAP_NET_ADMIN))
@@ -6416,6 +7155,15 @@ int __iw_set_three_ints_getnone(struct net_device *dev,
     {
         return ret;
     }
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EBUSY;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     switch(sub_cmd)
     {
         case WE_SET_WLAN_DBG:
@@ -6440,7 +7188,10 @@ int __iw_set_three_ints_getnone(struct net_device *dev,
             break;
         }
     }
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return ret;
 }
 
@@ -6461,22 +7212,31 @@ static int __iw_get_char_setnone(struct net_device *dev,
                                  struct iw_request_info *info,
                                  union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     int sub_cmd = wrqu->data.flags;
     hdd_context_t *pHddCtx;
     int ret = 0;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    int sub_cmd = wrqu->data.flags;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef WLAN_FEATURE_11W
     hdd_wext_state_t *pWextState;
 #endif
 
+<<<<<<< HEAD
     ENTER();
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (pAdapter == NULL)
     {
          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                    "%s: pAdapter is NULL!", __func__);
          return -EINVAL;
     }
+<<<<<<< HEAD
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     ret = wlan_hdd_validate_context(pHddCtx);
     if (0 != ret)
@@ -6492,6 +7252,26 @@ static int __iw_get_char_setnone(struct net_device *dev,
         return -EINVAL;
     }
 #endif
+=======
+#ifdef WLAN_FEATURE_11W
+    pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+#endif
+
+    if (NULL == WLAN_HDD_GET_CTX(pAdapter))
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                                        "%s: HDD Context is NULL!", __func__);
+
+        return -EINVAL;
+    }
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EBUSY;
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     switch(sub_cmd)
     {
@@ -6751,7 +7531,11 @@ static int __iw_get_char_setnone(struct net_device *dev,
                 len += buf;
 
                 /*printing the PE Sme and Mlm states for valid lim sessions*/
+<<<<<<< HEAD
                 while ( check < 3 && count < pMac->lim.maxBssId)
+=======
+                while ( check < 3 && count < 255)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 {
                     if ( pMac->lim.gpSession[count].valid )
                     {
@@ -6786,7 +7570,10 @@ static int __iw_get_char_setnone(struct net_device *dev,
         case WE_GET_RSSI:
         {
             v_S7_t s7Rssi = 0;
+<<<<<<< HEAD
             wlan_hdd_get_station_stats(pAdapter);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             wlan_hdd_get_rssi(pAdapter, &s7Rssi);
             snprintf(extra, WE_MAX_STR_LEN, "rssi=%d",s7Rssi);
             wrqu->data.length = strlen(extra)+1;
@@ -6921,6 +7708,10 @@ static int __iw_get_char_setnone(struct net_device *dev,
             status = wlan_hdd_validate_context(pHddCtx);
             if (0 != status)
             {
+<<<<<<< HEAD
+=======
+                hddLog(LOGE, "%s: getSNR: HDD context is not valid", __func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 return status;
             }
 
@@ -6950,7 +7741,11 @@ static int __iw_get_char_setnone(struct net_device *dev,
             break;
         }
     }
+<<<<<<< HEAD
     EXIT();
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -6972,12 +7767,17 @@ static int __iw_setnone_getnone(struct net_device *dev,
                                 struct iw_request_info *info,
                                 union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     int sub_cmd;
     int ret = 0; /* success */
     struct iw_point s_priv_data;
 
+<<<<<<< HEAD
     ENTER();
 
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
@@ -6993,6 +7793,15 @@ static int __iw_setnone_getnone(struct net_device *dev,
     {
         return ret;
     }
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EBUSY;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* helper function to get iwreq_data with compat handling. */
     if (hdd_priv_get_data(&s_priv_data, wrqu))
     {
@@ -7053,7 +7862,11 @@ static int __iw_setnone_getnone(struct net_device *dev,
 
                /*Make sure that pAdapter cleaned properly*/
                hdd_stop_adapter( pHddCtx, pAdapter_to_stop, VOS_TRUE );
+<<<<<<< HEAD
                hdd_deinit_adapter( pHddCtx, pAdapter_to_stop, TRUE);
+=======
+               hdd_deinit_adapter( pHddCtx, pAdapter_to_stop );
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                memset(&pAdapter_to_stop->sessionCtx, 0, sizeof(pAdapter_to_stop->sessionCtx));
 
                wlan_hdd_release_intf_addr(WLAN_HDD_GET_CTX(pAdapter),
@@ -7162,6 +7975,10 @@ static int __iw_setnone_getnone(struct net_device *dev,
             sme_HT40StopOBSSScan(pMac, pAdapter->sessionId);
         }
         break;
+<<<<<<< HEAD
+=======
+#ifdef DEBUG_ROAM_DELAY
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         case WE_DUMP_ROAM_TIMER_LOG:
         {
             vos_dump_roam_time_log_service();
@@ -7173,6 +7990,7 @@ static int __iw_setnone_getnone(struct net_device *dev,
             vos_reset_roam_timer_log();
             break;
         }
+<<<<<<< HEAD
         case WE_GET_FW_LOGS:
         {
             vos_fatal_event_logs_req(WLAN_LOG_TYPE_NON_FATAL,
@@ -7181,13 +7999,20 @@ static int __iw_setnone_getnone(struct net_device *dev,
                      TRUE);
             break;
         }
+=======
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         default:
         {
             hddLog(LOGE, "%s: unknown ioctl %d", __func__, sub_cmd);
             break;
         }
     }
+<<<<<<< HEAD
     EXIT();
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return ret;
 }
 
@@ -7215,13 +8040,17 @@ void hdd_wmm_tx_snapshot(hdd_adapter_t *pAdapter)
     int i = 0, j = 0;
     v_CONTEXT_t pVosContext = ( WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
     ptSapContext pSapCtx = VOS_GET_SAP_CB(pVosContext);
+<<<<<<< HEAD
     hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
     hdd_ibss_peer_info_t *pPeerInfo;
     v_SIZE_t tx_queue_count[NUM_TX_QUEUES];
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     for ( i=0; i< NUM_TX_QUEUES; i++)
     {
         spin_lock_bh(&pAdapter->wmm_tx_queue[i].lock);
+<<<<<<< HEAD
         tx_queue_count[i] = pAdapter->wmm_tx_queue[i].count;
         spin_unlock_bh(&pAdapter->wmm_tx_queue[i].lock);
     }
@@ -7233,13 +8062,24 @@ void hdd_wmm_tx_snapshot(hdd_adapter_t *pAdapter)
         }
     }
 
+=======
+
+        hddLog(LOGE, "HDD WMM TxQueue Info For AC: %d Count: %d PrevAdress:%p, NextAddress:%p",
+               i, pAdapter->wmm_tx_queue[i].count,
+               pAdapter->wmm_tx_queue[i].anchor.prev, pAdapter->wmm_tx_queue[i].anchor.next);
+        spin_unlock_bh(&pAdapter->wmm_tx_queue[i].lock);
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if(pSapCtx == NULL){
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   FL("psapCtx is NULL"));
         return;
     }
 
+<<<<<<< HEAD
     spin_lock_bh(&pSapCtx->staInfo_lock);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     for(i =0; i<WLAN_MAX_STA_COUNT; i++)
     {
         if(pSapCtx->aStaInfo[i].isUsed)
@@ -7247,6 +8087,7 @@ void hdd_wmm_tx_snapshot(hdd_adapter_t *pAdapter)
              hddLog(LOGE, "******STAIndex: %d*********", i);
              for ( j=0; j< NUM_TX_QUEUES; j++)
              {
+<<<<<<< HEAD
                 if( pSapCtx->aStaInfo[i].wmm_tx_queue[j].count )
                 {
                    spin_lock_bh(&pSapCtx->aStaInfo[i].wmm_tx_queue[j].lock);
@@ -7285,16 +8126,28 @@ void hdd_wmm_tx_snapshot(hdd_adapter_t *pAdapter)
                        pPeerInfo->ibssStaInfo[i].wmm_tx_queue[j].anchor.prev,
                        pPeerInfo->ibssStaInfo[i].wmm_tx_queue[j].anchor.next);
                 spin_unlock_bh(&pPeerInfo->ibssStaInfo[i].wmm_tx_queue[j].lock);
+=======
+                spin_lock_bh(&pSapCtx->aStaInfo[i].wmm_tx_queue[j].lock);
+                hddLog(LOGE, "HDD TxQueue Info For AC: %d Count: %d PrevAdress:%p, NextAddress:%p",
+                       j, pSapCtx->aStaInfo[i].wmm_tx_queue[j].count,
+                       pSapCtx->aStaInfo[i].wmm_tx_queue[j].anchor.prev,
+                       pSapCtx->aStaInfo[i].wmm_tx_queue[j].anchor.next);
+                spin_unlock_bh(&pSapCtx->aStaInfo[i].wmm_tx_queue[j].lock);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
              }
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 static int __iw_set_var_ints_getnone(struct net_device *dev,
                                      struct iw_request_info *info,
                                      union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     tHalHandle hHal;
     int sub_cmd;
@@ -7304,17 +8157,30 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
     hdd_context_t *pHddCtx = NULL;
     hdd_ap_ctx_t  *pAPCtx = NULL;
     v_CONTEXT_t pVosContext;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    int sub_cmd;
+    int *apps_args = (int *) extra;
+    hdd_station_ctx_t *pStaCtx = NULL ;
+    hdd_context_t *pHddCtx = NULL;
+    hdd_ap_ctx_t  *pAPCtx = NULL;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     int cmd = 0;
     int staId = 0;
     int ret = 0;
 
+<<<<<<< HEAD
     ENTER();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (extra == NULL)
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: NULL extra buffer pointer", __func__);
         return -EINVAL;
     }
+<<<<<<< HEAD
     pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
     if (NULL == pAdapter)
     {
@@ -7323,10 +8189,18 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
         return -EINVAL;
     }
     pVosContext = ( WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
+=======
+
+    sub_cmd = wrqu->data.flags;
+
+    hddLog(LOG1, "%s: Received length %d", __func__, wrqu->data.length);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     ret = wlan_hdd_validate_context(pHddCtx);
     if (0 != ret)
     {
+<<<<<<< HEAD
         return ret;
     }
     if( VOS_MONITOR_MODE != hdd_get_conparam())
@@ -7343,6 +8217,12 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
 
     hddLog(LOG1, "%s: Received length %d", __func__, wrqu->data.length);
 
+=======
+        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                    "%s: HDD context is Null", __func__);
+        return ret;
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     if(( sub_cmd == WE_MCC_CONFIG_CREDENTIAL ) ||
         (sub_cmd == WE_MCC_CONFIG_PARAMS ))
@@ -7370,18 +8250,26 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
     {
         case WE_LOG_DUMP_CMD:
             {
+<<<<<<< HEAD
                 if (apps_args[0] == 26) {
                     if (!pHddCtx->cfg_ini->crash_inject_enabled) {
                         hddLog(LOGE, "Crash Inject ini disabled, Ignore Crash Inject");
                         return 0;
                     }
                 }
+=======
+                vos_ssr_protect(__func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 hddLog(LOG1, "%s: LOG_DUMP %d arg1 %d arg2 %d arg3 %d arg4 %d",
                         __func__, apps_args[0], apps_args[1], apps_args[2],
                         apps_args[3], apps_args[4]);
 
                 logPrintf(hHal, apps_args[0], apps_args[1], apps_args[2],
                         apps_args[3], apps_args[4]);
+<<<<<<< HEAD
+=======
+                vos_ssr_unprotect(__func__);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
             }
             break;
@@ -7390,6 +8278,7 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
             {
                 p2p_app_setP2pPs_t p2pNoA;
 
+<<<<<<< HEAD
                 if (pAdapter->device_mode != WLAN_HDD_P2P_GO) {
                     hddLog(LOGE,
                         FL("Setting NoA is not allowed in Device mode:%d"),
@@ -7397,6 +8286,8 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
                     return -EINVAL;
                 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 p2pNoA.opp_ps = apps_args[0];
                 p2pNoA.ctWindow = apps_args[1];
                 p2pNoA.duration = apps_args[2];
@@ -7479,6 +8370,7 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
             }
         break;
 #endif
+<<<<<<< HEAD
         case WE_CONFIGURE_MONITOR_MODE:
            {
                v_U32_t magic = 0;
@@ -7585,6 +8477,8 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
            }
          break;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         default:
             {
                 hddLog(LOGE, "%s: Invalid IOCTL command %d",
@@ -7592,7 +8486,11 @@ static int __iw_set_var_ints_getnone(struct net_device *dev,
             }
             break;
     }
+<<<<<<< HEAD
     EXIT();
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -7605,6 +8503,7 @@ static int iw_hdd_set_var_ints_getnone(struct net_device *dev,
     int apps_args[MAX_VAR_ARGS] = {0};
     int num_args;
 
+<<<<<<< HEAD
     if (!capable(CAP_NET_ADMIN))
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -7612,6 +8511,8 @@ static int iw_hdd_set_var_ints_getnone(struct net_device *dev,
         return -EPERM;
     }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* helper function to get iwreq_data with compat handling. */
     if (hdd_priv_get_data(&u_priv_wrqu.data, wrqu))
     {
@@ -7663,14 +8564,20 @@ static int __iw_add_tspec(struct net_device *dev,
                           struct iw_request_info *info,
                           union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_station_ctx_t *pHddStaCtx;
    hdd_context_t *pHddCtx;
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    hdd_wlan_wmm_status_e *pStatus = (hdd_wlan_wmm_status_e *)extra;
    int params[HDD_WLAN_WMM_PARAM_COUNT];
    sme_QosWmmTspecInfo tSpec;
    v_U32_t handle;
    struct iw_point s_priv_data;
+<<<<<<< HEAD
    int ret = 0;
 
    ENTER();
@@ -7694,6 +8601,9 @@ static int __iw_add_tspec(struct net_device *dev,
                  "%s: STA Context is NULL",__func__);
        return -EINVAL;
    }
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    // make sure the application is sufficiently priviledged
    // note that the kernel will do this for "set" ioctls, but since
    // this ioctl wants to return status to user space it must be
@@ -7702,6 +8612,17 @@ static int __iw_add_tspec(struct net_device *dev,
    {
       return -EPERM;
    }
+<<<<<<< HEAD
+=======
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+      return -EBUSY;
+   }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    // we must be associated in order to add a tspec
    if (eConnectionState_Associated != pHddStaCtx->conn_info.connState)
    {
@@ -7835,8 +8756,11 @@ static int __iw_add_tspec(struct net_device *dev,
    }
 
    *pStatus = hdd_wmm_addts(pAdapter, handle, &tSpec);
+<<<<<<< HEAD
 
    EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return 0;
 }
 
@@ -7858,6 +8782,7 @@ static int __iw_del_tspec(struct net_device *dev,
                           struct iw_request_info *info,
                           union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    int *params = (int *)extra;
@@ -7881,6 +8806,13 @@ static int __iw_del_tspec(struct net_device *dev,
    {
        return ret;
    }
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   int *params = (int *)extra;
+   hdd_wlan_wmm_status_e *pStatus = (hdd_wlan_wmm_status_e *)extra;
+   v_U32_t handle;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    // make sure the application is sufficiently priviledged
    // note that the kernel will do this for "set" ioctls, but since
    // this ioctl wants to return status to user space it must be
@@ -7889,6 +8821,17 @@ static int __iw_del_tspec(struct net_device *dev,
    {
       return -EPERM;
    }
+<<<<<<< HEAD
+=======
+
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+      return -EBUSY;
+   }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    // although we are defined to be a "get" ioctl, the params we require
    // will fit in the iwreq_data, therefore unlike iw_add_tspec() there
    // is no need to copy the params from user space
@@ -7903,8 +8846,11 @@ static int __iw_del_tspec(struct net_device *dev,
    }
 
    *pStatus = hdd_wmm_delts(pAdapter, handle);
+<<<<<<< HEAD
 
    EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return 0;
 }
 
@@ -7926,6 +8872,7 @@ static int __iw_get_tspec(struct net_device *dev,
                           struct iw_request_info *info,
                           union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
    hdd_adapter_t *pAdapter;
    hdd_context_t *pHddCtx;
    int *params = (int *)extra;
@@ -7934,10 +8881,17 @@ static int __iw_get_tspec(struct net_device *dev,
    int ret = 0;
 
    ENTER();
+=======
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+   int *params = (int *)extra;
+   hdd_wlan_wmm_status_e *pStatus = (hdd_wlan_wmm_status_e *)extra;
+   v_U32_t handle;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    // although we are defined to be a "get" ioctl, the params we require
    // will fit in the iwreq_data, therefore unlike iw_add_tspec() there
    // is no need to copy the params from user space
+<<<<<<< HEAD
    pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
    if (NULL == pAdapter)
    {
@@ -7952,6 +8906,9 @@ static int __iw_get_tspec(struct net_device *dev,
    {
        return ret;
    }
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    // validate the handle
    handle = params[HDD_WLAN_WMM_PARAM_HANDLE];
    if (HDD_WMM_HANDLE_IMPLICIT == handle)
@@ -7961,8 +8918,19 @@ static int __iw_get_tspec(struct net_device *dev,
       return 0;
    }
 
+<<<<<<< HEAD
    *pStatus = hdd_wmm_checkts(pAdapter, handle);
    EXIT();
+=======
+   if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+   {
+      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+      return -EBUSY;
+   }
+
+   *pStatus = hdd_wmm_checkts(pAdapter, handle);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return 0;
 }
 
@@ -7990,6 +8958,7 @@ static int __iw_set_fties(struct net_device *dev,
                           struct iw_request_info *info,
                           union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_station_ctx_t *pHddStaCtx;
     hdd_context_t *pHddCtx;
@@ -8016,6 +8985,17 @@ static int __iw_set_fties(struct net_device *dev,
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: STA Context is NULL",__func__);
         return -EINVAL;
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
+    //v_CONTEXT_t pVosContext;
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+       return -EBUSY;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
     if (!wrqu->data.length)
     {
@@ -8044,7 +9024,10 @@ static int __iw_set_fties(struct net_device *dev,
     sme_SetFTIEs( WLAN_HDD_GET_HAL_CTX(pAdapter), pAdapter->sessionId, extra,
         wrqu->data.length);
 
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -8066,6 +9049,7 @@ static int __iw_set_dynamic_mcbc_filter(struct net_device *dev,
         struct iw_request_info *info,
         union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     tpRcvFltMcAddrList pRequest = (tpRcvFltMcAddrList)extra;
     hdd_context_t *pHddCtx;
@@ -8097,6 +9081,24 @@ static int __iw_set_dynamic_mcbc_filter(struct net_device *dev,
                   "%s: Hal Context is NULL",__func__);
         return -EINVAL;
     }
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tpRcvFltMcAddrList pRequest = (tpRcvFltMcAddrList)extra;
+    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+    tpSirWlanSetRxpFilters wlanRxpFilterParam;
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    tpSirRcvFltMcAddrList mc_addr_list_ptr;
+    int idx;
+    eHalStatus ret_val;
+
+    if (pHddCtx->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+       return -EBUSY;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (HDD_MULTICAST_FILTER_LIST == pRequest->mcastBcastFilterSetting)
     {
 #ifdef WLAN_FEATURE_PACKET_FILTERING
@@ -8189,7 +9191,10 @@ static int __iw_set_dynamic_mcbc_filter(struct net_device *dev,
         }
     }
 
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -8210,6 +9215,7 @@ static int __iw_clear_dynamic_mcbc_filter(struct net_device *dev,
                                           struct iw_request_info *info,
                                           union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     tpSirWlanSetRxpFilters wlanRxpFilterParam;
@@ -8238,6 +9244,13 @@ static int __iw_clear_dynamic_mcbc_filter(struct net_device *dev,
     {
         return ret;
     }
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+    tpSirWlanSetRxpFilters wlanRxpFilterParam;
+    hddLog(VOS_TRACE_LEVEL_INFO_HIGH, "%s: ", __func__);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     //Reset the filter to INI value as we have to clear the dynamic filter
     pHddCtx->configuredMcastBcastFilter = pHddCtx->cfg_ini->mcastBcastFilterSetting;
 
@@ -8278,7 +9291,10 @@ static int __iw_clear_dynamic_mcbc_filter(struct net_device *dev,
         }
 
     }
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -8300,6 +9316,7 @@ static int __iw_set_host_offload(struct net_device *dev,
                                  struct iw_request_info *info,
                                  union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     tpHostOffloadRequest pRequest = (tpHostOffloadRequest) extra;
@@ -8322,6 +9339,18 @@ static int __iw_set_host_offload(struct net_device *dev,
         return ret;
     }
 
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tpHostOffloadRequest pRequest = (tpHostOffloadRequest) extra;
+    tSirHostOffloadReq offloadRequest;
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+       return -EBUSY;
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* Debug display of request components. */
     switch (pRequest->offloadType)
     {
@@ -8377,7 +9406,10 @@ static int __iw_set_host_offload(struct net_device *dev,
         return -EINVAL;
     }
 
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -8398,6 +9430,7 @@ static int __iw_set_keepalive_params(struct net_device *dev,
                                      struct iw_request_info *info,
                                      union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     tpKeepAliveRequest pRequest = (tpKeepAliveRequest) extra;
@@ -8418,6 +9451,19 @@ static int __iw_set_keepalive_params(struct net_device *dev,
     {
         return ret;
     }
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tpKeepAliveRequest pRequest = (tpKeepAliveRequest) extra;
+    tSirKeepAliveReq keepaliveRequest;
+
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return 0;
+    }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* Debug display of request components. */
     hddLog(VOS_TRACE_LEVEL_INFO,
            "%s: Set Keep Alive Request : TimePeriod %d size %zu",
@@ -8465,7 +9511,11 @@ static int __iw_set_keepalive_params(struct net_device *dev,
                __func__);
         return -EINVAL;
     }
+<<<<<<< HEAD
     EXIT();
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return 0;
 }
 
@@ -8495,6 +9545,15 @@ int wlan_hdd_set_filter(hdd_context_t *pHddCtx, tpPacketFilterCfg pRequest,
                 __func__ );
         return 0;
     }
+<<<<<<< HEAD
+=======
+    if (pHddCtx->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+       return -EBUSY;
+    }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* Debug display of request components. */
     hddLog(VOS_TRACE_LEVEL_ERROR, "%s: Packet Filter Request : FA %d params %d",
             __func__, pRequest->filterAction, pRequest->numParams);
@@ -8529,9 +9588,12 @@ int wlan_hdd_set_filter(hdd_context_t *pHddCtx, tpPacketFilterCfg pRequest,
 
                 hddLog(VOS_TRACE_LEVEL_INFO, "Data Offset %d Data Len %d",
                         pRequest->paramsData[i].dataOffset, pRequest->paramsData[i].dataLength);
+<<<<<<< HEAD
                 if ((sizeof(packetFilterSetReq.paramsData[i].compareData)) <
                     (pRequest->paramsData[i].dataLength))
                     return -EINVAL;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
                 memcpy(&packetFilterSetReq.paramsData[i].compareData,
                         pRequest->paramsData[i].compareData, pRequest->paramsData[i].dataLength);
@@ -8850,6 +9912,7 @@ static int __iw_set_packet_filter_params(struct net_device *dev,
                                          struct iw_request_info *info,
                                          union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     tpPacketFilterCfg pRequest = NULL;
@@ -8878,6 +9941,13 @@ static int __iw_set_packet_filter_params(struct net_device *dev,
     {
         return ret;
     }
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tpPacketFilterCfg pRequest = NULL;
+    int ret;
+    struct iw_point s_priv_data;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (hdd_priv_get_data(&s_priv_data, wrqu))
     {
        return -EINVAL;
@@ -8901,7 +9971,10 @@ static int __iw_set_packet_filter_params(struct net_device *dev,
     ret = wlan_hdd_set_filter(WLAN_HDD_GET_CTX(pAdapter), pRequest, pAdapter->sessionId);
     kfree(pRequest);
 
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return ret;
 }
 
@@ -8926,6 +9999,7 @@ static int __iw_get_statistics(struct net_device *dev,
   VOS_STATUS vos_status = VOS_STATUS_SUCCESS;
   eHalStatus status = eHAL_STATUS_SUCCESS;
   hdd_wext_state_t *pWextState;
+<<<<<<< HEAD
   hdd_adapter_t *pAdapter;
   hdd_context_t *pHddCtx;
   char *p = extra;
@@ -8953,6 +10027,24 @@ static int __iw_get_statistics(struct net_device *dev,
   pStats = &(pAdapter->hdd_stats.summary_stat);
   aStats =  &(pAdapter->hdd_stats.ClassA_stat);
   dStats = &(pAdapter->hdd_stats.ClassD_stat);
+=======
+  hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+  hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+  char *p = extra;
+  int tlen = 0;
+  tCsrSummaryStatsInfo *pStats = &(pAdapter->hdd_stats.summary_stat);
+
+  tCsrGlobalClassAStatsInfo *aStats = &(pAdapter->hdd_stats.ClassA_stat);
+  tCsrGlobalClassDStatsInfo *dStats = &(pAdapter->hdd_stats.ClassD_stat);
+
+  ENTER();
+
+  if (pHddCtx->isLogpInProgress) {
+     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s:LOGP in Progress. Ignore!!!",__func__);
+     return -EINVAL;
+  }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   if (eConnectionState_Associated != (WLAN_HDD_GET_STATION_CTX_PTR(pAdapter))->conn_info.connState) {
 
      wrqu->txpower.value = 0;
@@ -8977,12 +10069,15 @@ static int __iw_get_statistics(struct net_device *dev,
     }
 
     pWextState = WLAN_HDD_GET_WEXT_STATE_PTR(pAdapter);
+<<<<<<< HEAD
     if (NULL == pWextState)
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: pWextState is NULL",__func__);
         return -EINVAL;
     }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     vos_status = vos_wait_single_event(&pWextState->vosevent, WLAN_WAIT_TIME_STATS);
     if (!VOS_IS_STATUS_SUCCESS(vos_status))
@@ -9540,6 +10635,7 @@ static int __iw_set_pno_priv(struct net_device *dev,
                            struct iw_request_info *info,
                            union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
     int ret = 0;
@@ -9561,14 +10657,27 @@ static int __iw_set_pno_priv(struct net_device *dev,
         return ret;
     }
 
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                 "Set PNO Private");
 
+<<<<<<< HEAD
     status = iw_set_pno(dev,info,wrqu,extra,0);
 
     EXIT();
     return status;
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+       return -EBUSY;
+    }
+    return iw_set_pno(dev,info,wrqu,extra,0);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static int iw_set_pno_priv(struct net_device *dev,
@@ -9588,6 +10697,7 @@ static int iw_set_pno_priv(struct net_device *dev,
 //Common function to SetBand
 int hdd_setBand(struct net_device *dev, u8 ui_band)
 {
+<<<<<<< HEAD
     hdd_adapter_t *pAdapter;
     tHalHandle hHal;
     hdd_context_t *pHddCtx;
@@ -9621,6 +10731,17 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
         return -EINVAL;
     }
     pMac = PMAC_STRUCT(hHal);
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+    tHalHandle hHal = WLAN_HDD_GET_HAL_CTX(pAdapter);
+    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+    hdd_scaninfo_t *pScanInfo = NULL;
+    eCsrBand band;
+    eCsrBand currBand = eCSR_BAND_MAX;
+    eCsrBand connectedBand;
+    v_U8_t ret = SEND_CHANNEL_CHANGE_EVENT;
+    tpAniSirGlobal pMac = PMAC_STRUCT( hHal );
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     switch(ui_band)
     {
@@ -9651,7 +10772,12 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
     }
 
     if ( (band == eCSR_BAND_24 && pHddCtx->cfg_ini->nBandCapability==2) ||
+<<<<<<< HEAD
          (band == eCSR_BAND_5G && pHddCtx->cfg_ini->nBandCapability==1) )
+=======
+         (band == eCSR_BAND_5G && pHddCtx->cfg_ini->nBandCapability==1) ||
+         (band == eCSR_BAND_ALL && pHddCtx->cfg_ini->nBandCapability!=0))
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     {
          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
              "%s: band value %u violate INI settings %u", __func__,
@@ -9659,6 +10785,7 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
          return -EIO;
     }
 
+<<<<<<< HEAD
     if (band == eCSR_BAND_ALL)
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, FL("Auto Band "
@@ -9667,6 +10794,8 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
         band = pHddCtx->cfg_ini->nBandCapability;
     }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (eHAL_STATUS_SUCCESS != sme_GetFreqBand(hHal, &currBand))
     {
          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
@@ -9677,6 +10806,7 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
 
     if (currBand != band)
     {
+<<<<<<< HEAD
         if ( band == eCSR_BAND_5G )
         {
             /* Return failure if current country code is world regulatory domain*/
@@ -9688,6 +10818,16 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
                         __func__, band);
                 return -EAGAIN;
             }
+=======
+        /* Return failure if current country code is world regulatory domain*/
+        if( (pMac->scan.countryCodeCurrent[0] == '0' &&
+                        pMac->scan.countryCodeCurrent[1] == '0') )
+        {
+          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+             "%s: failed to set the band value to %u as country code is 00",
+                        __func__, band);
+             return -EAGAIN;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         }
 
         /* Change band request received.
@@ -9711,21 +10851,33 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
         }
         if(currBand == eCSR_BAND_24 || currBand == eCSR_BAND_5G)
         {
+<<<<<<< HEAD
              tANI_U8 curr_country[WNI_CFG_COUNTRY_CODE_LEN];
              curr_country[0]=pMac->scan.countryCodeCurrent[0];
              curr_country[1]=pMac->scan.countryCodeCurrent[1];
              INIT_COMPLETION(pHddCtx->linux_reg_req);
+=======
+             v_COUNTRYCODE_t curr_country;
+             curr_country[0]=pMac->scan.countryCodeCurrent[0];
+             curr_country[1]=pMac->scan.countryCodeCurrent[1];
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
              /* As currunt band is already set to 2.4Ghz/5Ghz we dont have all channel
               * information available in NV so to get the channel information from kernel
               * we need to send regulatory hint for the currunt country
               * And to set the same country again we need to set the dummy country
               * first and then the actual country.
               */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,9,0))
              regulatory_hint_user("00", NL80211_USER_REG_HINT_USER);
 #else
              regulatory_hint_user("00");
 #endif
+<<<<<<< HEAD
              wait_result = wait_for_completion_interruptible_timeout(
                                &pHddCtx->linux_reg_req,
                                msecs_to_jiffies(LINUX_REG_WAIT_TIME));
@@ -9755,11 +10907,16 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
                       WNI_CFG_COUNTRY_CODE_LEN);
              vos_mem_copy(pMac->scan.countryCodeCurrent, curr_country,
                       WNI_CFG_COUNTRY_CODE_LEN);
+=======
+
+             pMac->roam.configParam.fEnforceCountryCode = eANI_BOOLEAN_TRUE;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,9,0))
              regulatory_hint_user(curr_country, NL80211_USER_REG_HINT_USER);
 #else
              regulatory_hint_user(curr_country);
 #endif
+<<<<<<< HEAD
              wait_result = wait_for_completion_interruptible_timeout(
                                &pHddCtx->linux_reg_req,
                                msecs_to_jiffies(LINUX_REG_WAIT_TIME));
@@ -9779,6 +10936,9 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
              }
 
              retval = DO_NOT_SEND_CHANNEL_CHANGE_EVENT;
+=======
+             ret = DO_NOT_SEND_CHANNEL_CHANGE_EVENT;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         }
         else
         {
@@ -9838,11 +10998,15 @@ int hdd_setBand(struct net_device *dev, u8 ui_band)
              }
         }
     }
+<<<<<<< HEAD
     EXIT();
     if (TRUE == pHddCtx->isSetBandByNL)
         return 0;
     else
         return retval;
+=======
+    return ret;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 int hdd_setBand_helper(struct net_device *dev, const char *command)
@@ -9860,15 +11024,27 @@ static int __iw_set_band_config(struct net_device *dev,
                                 struct iw_request_info *info,
                                 union iwreq_data *wrqu, char *extra)
 {
+<<<<<<< HEAD
+=======
+    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     int *value = (int *)extra;
 
     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: ", __func__);
 
+<<<<<<< HEAD
     if (!capable(CAP_NET_ADMIN))
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   FL("permission check failed"));
         return -EPERM;
+=======
+    if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+        return -EBUSY;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     return hdd_setBand(dev, value[0]);
@@ -9893,6 +11069,7 @@ static int __iw_set_power_params_priv(struct net_device *dev,
 {
   int ret;
   char *ptr;
+<<<<<<< HEAD
 
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                 "Set power params Private");
@@ -9904,6 +11081,10 @@ static int __iw_set_power_params_priv(struct net_device *dev,
       return -EPERM;
   }
 
+=======
+  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+                "Set power params Private");
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   /* ODD number is used for set, copy data using copy_from_user */
   ptr = mem_alloc_copy_from_user_helper(wrqu->data.pointer,
                                           wrqu->data.length);
@@ -9936,12 +11117,17 @@ static int iw_set_power_params_priv(struct net_device *dev,
 VOS_STATUS iw_set_power_params(struct net_device *dev, struct iw_request_info *info,
                       union iwreq_data *wrqu, char *extra, int nOffset)
 {
+<<<<<<< HEAD
   hdd_adapter_t *pAdapter;
   hdd_context_t *pHddCtx;
+=======
+  hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   tSirSetPowerParamsReq powerRequest;
   char *ptr;
   v_U8_t  ucType;
   v_U32_t  uTotalSize, uValue;
+<<<<<<< HEAD
   int ret = 0;
 
   ENTER();
@@ -9959,11 +11145,25 @@ VOS_STATUS iw_set_power_params(struct net_device *dev, struct iw_request_info *i
   {
       return ret;
   }
+=======
+  /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
             "Power Params data len %d data %s",
             wrqu->data.length,
             extra);
 
+<<<<<<< HEAD
+=======
+  if ((WLAN_HDD_GET_CTX(pAdapter))->isLogpInProgress)
+  {
+    VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
+                                  "%s:LOGP in Progress. Ignore!!!", __func__);
+    return -EBUSY;
+  }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   if (wrqu->data.length <= nOffset )
   {
     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN, "set power param input is not correct");
@@ -10078,7 +11278,10 @@ VOS_STATUS iw_set_power_params(struct net_device *dev, struct iw_request_info *i
   /* put the device back to power save*/
   wlan_hdd_enter_bmps(pAdapter, DRIVER_POWER_MODE_AUTO);
 
+<<<<<<< HEAD
   EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   return VOS_STATUS_SUCCESS;
 }/*iw_set_power_params*/
 
@@ -10106,7 +11309,11 @@ int iw_set_tdlssecoffchanneloffset(hdd_context_t *pHddCtx, int offchanoffset)
 {
     if (offchanoffset ==  0)
     {
+<<<<<<< HEAD
        tdlsOffChBwOffset = 1;
+=======
+       tdlsOffChBwOffset = 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: change tdls secondary off channel offset to %u",
                  __func__, tdlsOffChBwOffset);
 
@@ -10116,7 +11323,11 @@ int iw_set_tdlssecoffchanneloffset(hdd_context_t *pHddCtx, int offchanoffset)
 
     if ( offchanoffset == 40 )
     {
+<<<<<<< HEAD
        tdlsOffChBwOffset = 2;
+=======
+       tdlsOffChBwOffset = 1;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: change tdls secondary off channel offset to %u",
                  __func__, tdlsOffChBwOffset);
 
@@ -10132,6 +11343,7 @@ int iw_set_tdlssecoffchanneloffset(hdd_context_t *pHddCtx, int offchanoffset)
        return 0;
 
     }
+<<<<<<< HEAD
 
     if ((offchanoffset == 80) &&
         (TRUE == sme_IsFeatureSupportedByFW(DOT11AC)) &&
@@ -10144,6 +11356,8 @@ int iw_set_tdlssecoffchanneloffset(hdd_context_t *pHddCtx, int offchanoffset)
 
        return 0;
     }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR, "%s: Invalid tdls secondary off channel offset %d",
               __func__, offchanoffset);
     return -1;
@@ -10175,15 +11389,23 @@ int iw_set_tdlsoffchannelmode(hdd_adapter_t *pAdapter, int offchanmode)
         eTDLS_SUPPORT_EXPLICIT_TRIGGER_ONLY == pHddCtx->tdls_mode)
     {
        /* Send TDLS Channel Switch Request to connected peer */
+<<<<<<< HEAD
        mutex_lock(&pHddCtx->tdls_lock);
        connPeer = wlan_hdd_tdls_get_connected_peer(pAdapter);
        if (NULL == connPeer) {
            mutex_unlock(&pHddCtx->tdls_lock);
+=======
+       connPeer = wlan_hdd_tdls_get_first_connected_peer(pAdapter);
+       if (NULL == connPeer) {
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
            VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
                      "%s: No TDLS Connected Peer", __func__);
            return -1;
        }
+<<<<<<< HEAD
        mutex_unlock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
     else
     {
@@ -10356,10 +11578,13 @@ static const iw_handler we_private[] = {
 /*Maximum command length can be only 15 */
 static const struct iw_priv_args we_private_args[] = {
 
+<<<<<<< HEAD
     {   WE_SET_MONITOR_STATE,
         IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1,
         0, "monitor" },
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* handlers for main ioctl */
     {   WLAN_PRIV_SET_INT_GET_NONE,
         IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1,
@@ -10462,16 +11687,20 @@ static const struct iw_priv_args we_private_args[] = {
     {   WE_SET_SCAN_BAND_PREFERENCE,
         IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1,
         0, "set_scan_pref" },
+<<<<<<< HEAD
     {
         WE_GET_FRAME_LOG,
         IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1,
         0,
         "getFrameLogs" },
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     {   WE_SET_MIRACAST_VENDOR_CONFIG,
         IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1,
         0, "setMiracstConf" },
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_TDLS
     {
         WE_SET_TDLS_2040_BSS_COEXISTENCE,
@@ -10486,6 +11715,8 @@ static const struct iw_priv_args we_private_args[] = {
     {   WE_SET_PROXIMITY_ENABLE,
         IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1,
         0, "setProximity" },
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* handlers for main ioctl */
     {   WLAN_PRIV_SET_NONE_GET_INT,
         0,
@@ -10714,6 +11945,10 @@ static const struct iw_priv_args we_private_args[] = {
         0,
         0,
         "stopOBSSScan" },
+<<<<<<< HEAD
+=======
+#ifdef DEBUG_ROAM_DELAY
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     {
         WE_DUMP_ROAM_TIMER_LOG,
         0,
@@ -10724,19 +11959,26 @@ static const struct iw_priv_args we_private_args[] = {
         0,
         0,
         "resetRoamDelay" },
+<<<<<<< HEAD
     {
         WE_GET_FW_LOGS,
         0,
         0,
         "getFwLogs" },
+=======
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* handlers for main ioctl */
     {   WLAN_PRIV_SET_VAR_INT_GET_NONE,
         IW_PRIV_TYPE_INT | MAX_VAR_ARGS,
         0,
         "" },
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* handlers for sub-ioctl */
     {   WE_LOG_DUMP_CMD,
         IW_PRIV_TYPE_INT | MAX_VAR_ARGS,
@@ -10777,6 +12019,7 @@ static const struct iw_priv_args we_private_args[] = {
        "setTdlsConfig" },
 #endif
 
+<<<<<<< HEAD
    {
        WE_CONFIGURE_MONITOR_MODE,
        IW_PRIV_TYPE_INT | MAX_VAR_ARGS,
@@ -10789,6 +12032,8 @@ static const struct iw_priv_args we_private_args[] = {
        0,
        "MonitorFilter" },
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     /* handlers for main ioctl */
     {   WLAN_PRIV_ADD_TSPEC,
         IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | HDD_WLAN_WMM_PARAM_COUNT,
@@ -11157,6 +12402,7 @@ int hdd_register_wext(struct net_device *dev)
 
 int hdd_UnregisterWext(struct net_device *dev)
 {
+<<<<<<< HEAD
    VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,"In %s %p", __func__, dev);
    if (dev != NULL)
    {
@@ -11164,6 +12410,29 @@ int hdd_UnregisterWext(struct net_device *dev)
        dev->wireless_handlers = NULL;
        rtnl_unlock();
    }
+=======
+#if 0
+   hdd_wext_state_t *wextBuf;
+   hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+
+   ENTER();
+   // Set up the pointer to the Wireless Extensions state structure
+   wextBuf = pAdapter->pWextState;
+
+   // De-allocate the Wireless Extensions state structure
+   kfree(wextBuf);
+
+   // Clear out the pointer to the Wireless Extensions state structure
+   pAdapter->pWextState = NULL;
+
+   EXIT();
+#endif
+
+   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,"In %s", __func__);
+   rtnl_lock();
+   dev->wireless_handlers = NULL;
+   rtnl_unlock();
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    return 0;
 }

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -34,6 +38,12 @@
   This file implements the device specific HW access interface
   required by the WLAN Platform Abstraction Layer (WPAL)
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2011 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ========================================================================*/
 
 /*===========================================================================
@@ -103,7 +113,10 @@ typedef struct {
    u64              *rx_enable_return;
    u8               rx_isr_enable_failure;
    u8               rx_isr_enable_partial_failure;
+<<<<<<< HEAD
    u8               tx_isr_enabled;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 } wcnss_env;
 
 static wcnss_env  gEnv;
@@ -333,7 +346,10 @@ wpt_status wpalEnableInterrupt
 )
 {
    int ret;
+<<<<<<< HEAD
    wpt_status status = eWLAN_PAL_STATUS_SUCCESS;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    
    switch (intType) 
    {
@@ -361,12 +377,21 @@ wpt_status wpalEnableInterrupt
            gpEnv->rx_isr_enable_partial_failure = 1;
             /* not fatal -- keep on going */
          }
+<<<<<<< HEAD
+=======
+         gpEnv->rx_isr_enabled = 1;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       }
       else
       {
          enable_irq(gpEnv->rx_irq);
+<<<<<<< HEAD
       }
       gpEnv->rx_isr_enabled = 1;
+=======
+         gpEnv->rx_isr_enabled = 1;
+      }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       break;
    case DXE_INTERRUPT_TX_COMPLE:
       if (!gpEnv->tx_registered) 
@@ -394,18 +419,28 @@ wpt_status wpalEnableInterrupt
       {
          enable_irq(gpEnv->tx_irq);
       }
+<<<<<<< HEAD
       gpEnv->tx_isr_enabled = 1;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       break;
    default:
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                     "%s: unknown interrupt: %d",
                     __func__, (int)intType);
+<<<<<<< HEAD
       status = eWLAN_PAL_STATUS_E_INVAL;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       break;
    }
    /* on the integrated platform there is no platform-specific
       interrupt control */
+<<<<<<< HEAD
    return status;
+=======
+   return eWLAN_PAL_STATUS_SUCCESS;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 /**
@@ -428,9 +463,13 @@ wpt_status wpalDisableInterrupt
    wpt_uint32    intType
 )
 {
+<<<<<<< HEAD
    wpt_status status = eWLAN_PAL_STATUS_SUCCESS;
 
    switch (intType)
+=======
+   switch (intType) 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    {
    case DXE_INTERRUPT_RX_READY:
       gpEnv->rx_disable_return = VOS_RETURN_ADDRESS;
@@ -439,19 +478,29 @@ wpt_status wpalDisableInterrupt
       break;
    case DXE_INTERRUPT_TX_COMPLE:
       disable_irq_nosync(gpEnv->tx_irq);
+<<<<<<< HEAD
       gpEnv->tx_isr_enabled = 0;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       break;
    default:
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                     "%s: unknown interrupt: %d",
                     __func__, (int)intType);
+<<<<<<< HEAD
       status = eWLAN_PAL_STATUS_E_INVAL;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       break;
    }
 
    /* on the integrated platform there is no platform-specific
       interrupt control */
+<<<<<<< HEAD
    return status;
+=======
+   return eWLAN_PAL_STATUS_SUCCESS;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 /**

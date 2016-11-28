@@ -48,6 +48,12 @@
   Are listed for each API below.
 
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2010 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ===========================================================================*/
 
 /*===========================================================================
@@ -386,8 +392,12 @@ WDI_FillTxBd
     wpt_uint8              ucProtMgmtFrame,
     wpt_uint32             uTimeStamp,
     wpt_uint8              isEapol,
+<<<<<<< HEAD
     wpt_uint8*             staIndex,
     wpt_uint32             txBdToken
+=======
+    wpt_uint8*             staIndex
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 )
 {
     wpt_uint8              ucTid        = *pTid; 
@@ -408,7 +418,10 @@ WDI_FillTxBd
     /*------------------------------------------------------------------------
        Get type and subtype of the frame first 
     ------------------------------------------------------------------------*/
+<<<<<<< HEAD
     pBd->txBdToken = txBdToken;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     ucType = (ucTypeSubtype & WDI_FRAME_TYPE_MASK) >> WDI_FRAME_TYPE_OFFSET;
     ucSubType = (ucTypeSubtype & WDI_FRAME_SUBTYPE_MASK);
 
@@ -552,6 +565,7 @@ WDI_FillTxBd
         }
 #endif
 
+<<<<<<< HEAD
         if(ucTxFlag & WDI_USE_BD_RATE_1_MASK)
         {
             pBd->bdRate = WDI_BDRATE_BCDATA_FRAME;
@@ -564,6 +578,12 @@ WDI_FillTxBd
         {
             pBd->bdRate = WDI_BDRATE_CTRL_FRAME;
         }
+=======
+        if(ucTxFlag & WDI_USE_BD_RATE_MASK)
+        {
+            pBd->bdRate = WDI_BDRATE_BCDATA_FRAME;
+        }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
         pBd->rmf    = WDI_RMF_DISABLED;     
 

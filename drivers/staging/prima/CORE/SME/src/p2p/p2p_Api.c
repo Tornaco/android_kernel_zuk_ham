@@ -48,6 +48,7 @@ static tANI_BOOLEAN p2pIsGOportEnabled(tpAniSirGlobal pMac);
 eHalStatus p2pProcessNoAReq(tpAniSirGlobal pMac, tSmeCmd *pNoACmd);
 /*------------------------------------------------------------------
  *
+<<<<<<< HEAD
  * Release RoC Request command.
  *
  *------------------------------------------------------------------*/
@@ -80,6 +81,8 @@ void csrReleaseRocReqCommand(tpAniSirGlobal pMac)
 
 /*------------------------------------------------------------------
  *
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  * handle SME remain on channel request.
  *
  *------------------------------------------------------------------*/
@@ -94,8 +97,12 @@ eHalStatus p2pProcessRemainOnChannelCmd(tpAniSirGlobal pMac, tSmeCmd *p2pRemaino
     if(!pSession)
     {
        smsLog(pMac, LOGE, FL("  session %d not found "), p2pRemainonChn->sessionId);
+<<<<<<< HEAD
        status = eHAL_STATUS_FAILURE;
        goto error;
+=======
+       return eHAL_STATUS_FAILURE;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
 #ifdef WLAN_FEATURE_P2P_INTERNAL
@@ -109,16 +116,24 @@ eHalStatus p2pProcessRemainOnChannelCmd(tpAniSirGlobal pMac, tSmeCmd *p2pRemaino
     {
        smsLog(pMac, LOGE, FL("  session %d (P2P session %d) is invalid or listen is disabled "),
             p2pRemainonChn->sessionId, P2PsessionId);
+<<<<<<< HEAD
        status = eHAL_STATUS_FAILURE;
        goto error;
+=======
+       return eHAL_STATUS_FAILURE;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 #else
     if(!pSession->sessionActive) 
     {
        smsLog(pMac, LOGE, FL("  session %d is invalid or listen is disabled "),
             p2pRemainonChn->sessionId);
+<<<<<<< HEAD
        status = eHAL_STATUS_FAILURE;
        goto error;
+=======
+       return eHAL_STATUS_FAILURE;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 #endif
 #ifdef WLAN_FEATURE_P2P_INTERNAL
@@ -135,6 +150,7 @@ eHalStatus p2pProcessRemainOnChannelCmd(tpAniSirGlobal pMac, tSmeCmd *p2pRemaino
        /*In coming len for Msg is more then 16bit value*/
        smsLog(pMac, LOGE, FL("  Message length is very large, %d"),
             len);
+<<<<<<< HEAD
        status = eHAL_STATUS_FAILURE;
        goto error;
     }
@@ -145,6 +161,13 @@ eHalStatus p2pProcessRemainOnChannelCmd(tpAniSirGlobal pMac, tSmeCmd *p2pRemaino
         status = eHAL_STATUS_FAILURE;
         goto error;
     }
+=======
+       return eHAL_STATUS_FAILURE;
+    }
+    pMsg = vos_mem_malloc(len);
+    if ( NULL == pMsg )
+        status = eHAL_STATUS_FAILURE;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     else
     {
         VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_INFO, "%s call", __func__);
@@ -171,11 +194,15 @@ eHalStatus p2pProcessRemainOnChannelCmd(tpAniSirGlobal pMac, tSmeCmd *p2pRemaino
 #endif
         status = palSendMBMessage(pMac->hHdd, pMsg);
     }
+<<<<<<< HEAD
  error:
     if (eHAL_STATUS_FAILURE == status)
     {
         csrReleaseRocReqCommand(pMac);
     }
+=======
+    
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return status;
 }
 
@@ -216,6 +243,63 @@ eHalStatus sme_remainOnChnRsp( tpAniSirGlobal pMac, tANI_U8 *pMsg)
     return status;
 }
 
+<<<<<<< HEAD
+=======
+
+/*------------------------------------------------------------------
+ *
+ * Handle the Mgmt frm ind from LIM and forward to HDD.
+ *
+ *------------------------------------------------------------------*/
+
+eHalStatus sme_mgmtFrmInd( tHalHandle hHal, tpSirSmeMgmtFrameInd pSmeMgmtFrm)
+{
+    tpAniSirGlobal pMac = PMAC_STRUCT( hHal );
+    eHalStatus  status = eHAL_STATUS_SUCCESS;
+    tCsrRoamInfo pRoamInfo = {0};
+#ifndef WLAN_FEATURE_P2P_INTERNAL
+    tANI_U32 SessionId = pSmeMgmtFrm->sessionId;
+#endif
+
+#ifdef WLAN_FEATURE_P2P_INTERNAL
+    tANI_U8 i;
+
+    //For now, only action frames are needed.
+    if(SIR_MAC_MGMT_ACTION == pSmeMgmtFrm->frameType)
+    {
+       pRoamInfo.nFrameLength = pSmeMgmtFrm->mesgLen - sizeof(tSirSmeMgmtFrameInd);
+       pRoamInfo.pbFrames = pSmeMgmtFrm->frameBuf;
+       pRoamInfo.frameType = pSmeMgmtFrm->frameType;
+       pRoamInfo.rxChan   = pSmeMgmtFrm->rxChan;
+       pRoamInfo.rxRssi   = pSmeMgmtFrm->rxRssi;
+
+       //Somehow we don't get the right sessionId.
+       for(i = 0; i < CSR_ROAM_SESSION_MAX; i++)
+       {
+          if( CSR_IS_SESSION_VALID( pMac, i ) )
+          {
+              status = eHAL_STATUS_SUCCESS;
+              /* forward the mgmt frame to all active sessions*/
+              csrRoamCallCallback(pMac, i, &pRoamInfo, 0, eCSR_ROAM_INDICATE_MGMT_FRAME, 0);
+          }
+       }
+    }
+#else
+    pRoamInfo.nFrameLength = pSmeMgmtFrm->mesgLen - sizeof(tSirSmeMgmtFrameInd);
+    pRoamInfo.pbFrames = pSmeMgmtFrm->frameBuf;
+    pRoamInfo.frameType = pSmeMgmtFrm->frameType;
+    pRoamInfo.rxChan   = pSmeMgmtFrm->rxChan;
+    pRoamInfo.rxRssi   = pSmeMgmtFrm->rxRssi;
+
+    /* forward the mgmt frame to HDD */
+    csrRoamCallCallback(pMac, SessionId, &pRoamInfo, 0, eCSR_ROAM_INDICATE_MGMT_FRAME, 0);
+#endif
+
+    return status;
+}
+
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*------------------------------------------------------------------
  *
  * Handle the remain on channel ready indication from PE
@@ -764,7 +848,11 @@ eHalStatus p2pRemainOnChannel(tHalHandle hHal, tANI_U8 sessionId,
 #ifdef WLAN_FEATURE_P2P_INTERNAL
         smePushCommand(pMac, pRemainChlCmd, (eP2PRemainOnChnReasonSendFrame == reason));
 #else
+<<<<<<< HEAD
         status = csrQueueSmeCommand(pMac, pRemainChlCmd, eANI_BOOLEAN_FALSE);
+=======
+        csrQueueSmeCommand(pMac, pRemainChlCmd, eANI_BOOLEAN_FALSE);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #endif
     } while(0);
   

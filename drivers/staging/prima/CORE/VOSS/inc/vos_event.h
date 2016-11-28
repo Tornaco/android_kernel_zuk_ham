@@ -36,6 +36,12 @@
                
    Definitions for vOSS Events
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 
@@ -55,10 +61,13 @@
 extern "C" {
 #endif /* __cplusplus */
 
+<<<<<<< HEAD
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,14,0))
 #define INIT_COMPLETION(event) reinit_completion(&event)
 #endif
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*-------------------------------------------------------------------------- 
   Type declarations
   ------------------------------------------------------------------------*/

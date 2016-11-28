@@ -57,4 +57,8 @@ obj-$(CONFIG_ANDROID)		+= android/
 obj-$(CONFIG_PHONE)		+= telephony/
 obj-$(CONFIG_RAMSTER)		+= ramster/
 obj-$(CONFIG_USB_WPAN_HCD)	+= ozwpan/
+<<<<<<< HEAD
 obj-$(CONFIG_PRIMA_WLAN)        += prima/
+=======
+obj-$(CONFIG_PRIMA_WLAN)	+= prima/
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc

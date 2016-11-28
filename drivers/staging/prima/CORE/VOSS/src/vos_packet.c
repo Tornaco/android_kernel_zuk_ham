@@ -33,6 +33,12 @@
 
    Network Protocol packet/buffer support interfaces
 
+<<<<<<< HEAD
+=======
+   Copyright 2009 (c) Qualcomm, Incorporated.  All Rights Reserved.
+
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
   ========================================================================*/
 
@@ -58,7 +64,10 @@
 #define VOS_PKT_PROT_DHCP_SRV_PORT   67
 #define VOS_PKT_PROT_DHCP_CLI_PORT   68
 #define VOS_PKT_PROT_EAPOL_ETH_TYPE  0x888E
+<<<<<<< HEAD
 #define VOS_PKT_PROT_ARP_ETH_TYPE    0x0806
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*--------------------------------------------------------------------------
   Type declarations
@@ -3068,6 +3077,7 @@ v_U8_t vos_pkt_get_proto_type
       }
    }
 
+<<<<<<< HEAD
    /* ARP Tracking Enabled */
    if (VOS_PKT_PROTO_TYPE_ARP & tracking_map)
    {
@@ -3078,6 +3088,8 @@ v_U8_t vos_pkt_get_proto_type
       }
    }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    /* DHCP Tracking enabled */
    if (VOS_PKT_PROTO_TYPE_DHCP & tracking_map)
    {

@@ -173,7 +173,10 @@ char* dumpLOG( tpAniSirGlobal pMac, char *p )
         switch (i)
         {
             case SIR_HAL_MODULE_ID: p += log_sprintf( pMac, p, "HAL "); break;
+<<<<<<< HEAD
             case SIR_HAL_EXT_MODULE_ID: p += log_sprintf( pMac, p, "HAL "); break;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             case SIR_CFG_MODULE_ID: p += log_sprintf( pMac, p, "CFG "); break;
             case SIR_LIM_MODULE_ID: p += log_sprintf( pMac, p, "LIM "); break;
             case SIR_ARQ_MODULE_ID: p += log_sprintf( pMac, p, "ARQ "); break;
@@ -415,7 +418,11 @@ int logRtaiDump( tpAniSirGlobal pMac, tANI_U32 cmd, tANI_U32 arg1, tANI_U32 arg2
     }
     if(cmd <= HAL_LOG_DUMP_CMD_END)
     {
+<<<<<<< HEAD
        WDA_HALDumpCmdReq(pMac, cmd, arg1, arg2, arg3, arg4, p, 0);
+=======
+       WDA_HALDumpCmdReq(pMac, cmd, arg1, arg2, arg3, arg4, p);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
     else
     {

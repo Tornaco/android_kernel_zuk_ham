@@ -298,6 +298,7 @@ config CPU_FREQ_GOV_CONSERVATIVE
 
 	  If in doubt, say N.
 
+<<<<<<< HEAD
 
 config CPU_FREQ_GOV_ADAPTIVE
 	tristate "'adaptive' cpufreq policy governor"
@@ -361,6 +362,13 @@ config CPU_FREQ_GOV_WAVE
 	tristate "'wave' cpufreq governor"
 	depends on CPU_FREQ
 	help
+=======
+config CPU_INPUT_BOOST
+	bool "CPU Input Boost"
+	help
+	  Boosts the CPU on touchscreen and touchpad input. Boost frequencies and
+	  durations are calculated automatically.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 menu "x86 CPU frequency scaling drivers"
 depends on X86

@@ -17,7 +17,11 @@
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM mdss
 #undef TRACE_INCLUDE_PATH
+<<<<<<< HEAD
 #define TRACE_INCLUDE_PATH ../../drivers/video/msm/mdss
+=======
+#define TRACE_INCLUDE_PATH ../../../../drivers/video/msm/mdss
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #undef TRACE_INCLUDE_FILE
 #define TRACE_INCLUDE_FILE mdss_mdp_trace
 

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -68,16 +72,32 @@ enum
 #ifdef WLAN_FEATURE_VOWIFI_11R
     eLIM_FT_PREAUTH_RSP_TIMER,
 #endif
+<<<<<<< HEAD
+=======
+    eLIM_REMAIN_CHN_TIMER,
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     eLIM_PERIODIC_PROBE_REQ_TIMER,
 #ifdef FEATURE_WLAN_ESE
     eLIM_TSM_TIMER,
 #endif
+<<<<<<< HEAD
+=======
+#ifdef FEATURE_WLAN_TDLS_INTERNAL
+    eLIM_TDLS_DISCOVERY_RSP_WAIT,
+    eLIM_TDLS_LINK_SETUP_RSP_TIMEOUT,
+    eLIM_TDLS_LINK_SETUP_CNF_TIMEOUT,
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     eLIM_DISASSOC_ACK_TIMER,
     eLIM_DEAUTH_ACK_TIMER,
     eLIM_PERIODIC_JOIN_PROBE_REQ_TIMER,
     eLIM_INSERT_SINGLESHOT_NOA_TIMER,
+<<<<<<< HEAD
     eLIM_CONVERT_ACTIVE_CHANNEL_TO_PASSIVE,
     eLIM_AUTH_RETRY_TIMER
+=======
+    eLIM_CONVERT_ACTIVE_CHANNEL_TO_PASSIVE
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 };
 
 #define LIM_DISASSOC_DEAUTH_ACK_TIMEOUT         500

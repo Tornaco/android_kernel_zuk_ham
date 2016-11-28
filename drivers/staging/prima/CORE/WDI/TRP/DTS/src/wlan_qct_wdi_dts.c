@@ -36,6 +36,11 @@
  *  This file contains the external API implemntation exposed by the 
  *   wlan device abstarction layer module.
  *
+<<<<<<< HEAD
+=======
+ *   Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+ *   Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  */
 
 
@@ -46,8 +51,15 @@
 #include "wlan_qct_wdi_dts.h"
 #include "wlan_qct_wdi_dp.h"
 #include "wlan_qct_wdi_sta.h"
+<<<<<<< HEAD
 #include "vos_utils.h"
 #include "vos_api.h"
+=======
+
+#ifdef DEBUG_ROAM_DELAY
+#include "vos_utils.h"
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 static WDTS_TransportDriverTrype gTransportDriver = {
   WLANDXE_Open, 
@@ -57,12 +69,18 @@ static WDTS_TransportDriverTrype gTransportDriver = {
   WLANDXE_CompleteTX,
   WLANDXE_SetPowerState,
   WLANDXE_ChannelDebug,
+<<<<<<< HEAD
   WLANDXE_KickDxe,
   WLANDXE_Stop,
   WLANDXE_Close,
   WLANDXE_GetFreeTxDataResNumber,
   WLANDXE_SetupLogTransfer,
   WLANDXE_StartLogTransfer
+=======
+  WLANDXE_Stop,
+  WLANDXE_Close,
+  WLANDXE_GetFreeTxDataResNumber
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 };
 
 static WDTS_SetPowerStateCbInfoType gSetPowerStateCbInfo;
@@ -413,9 +431,12 @@ wpt_status WDTS_TxPacketComplete(void *pContext, wpt_packet *pFrame, wpt_status 
 
   // Do Sanity checks
   if(NULL == pContext || NULL == pFrame){
+<<<<<<< HEAD
     VOS_TRACE(VOS_MODULE_ID_WDI, VOS_TRACE_LEVEL_WARN,
                  "%s: Tx complete cannot proceed(%p:%p)",
                  __func__, pContext, pFrame);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return eWLAN_PAL_STATUS_E_FAILURE;
   }
 
@@ -454,8 +475,11 @@ wpt_status WDTS_TxPacketComplete(void *pContext, wpt_packet *pFrame, wpt_status 
     // intentional fall-through to handle eapol packet as mgmt
     case WDI_MAC_MGMT_FRAME:
       WDI_DS_MemPoolFree(&(pClientData->mgmtMemPool), pvBDHeader, physBDHeader);
+<<<<<<< HEAD
       VOS_TRACE(VOS_MODULE_ID_WDI, VOS_TRACE_LEVEL_INFO,
                    "%s: Management frame Tx complete status: %d", __func__, status);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       break;
   }
   WDI_SetBDPointers(pFrame, 0, 0);
@@ -543,6 +567,7 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
     return eWLAN_PAL_STATUS_E_FAILURE;
   }
 
+<<<<<<< HEAD
   // Normal DMA transfer does not contain RxBD
   if (WDTS_CHANNEL_RX_FW_LOG == channel)
   {
@@ -551,6 +576,8 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       return eWLAN_PAL_STATUS_SUCCESS;
   }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   /*------------------------------------------------------------------------
     Extract BD header and check if valid
     ------------------------------------------------------------------------*/
@@ -597,6 +624,7 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       ucMPDUHOffset, usMPDUDOffset, usMPDULen, ucMPDUHLen, ucTid,
       WDI_RX_BD_HEADER_SIZE);
 
+<<<<<<< HEAD
   pRxMetadata = WDI_DS_ExtractRxMetaData(pFrame);
 
   // Special handling for frames which contain logging information
@@ -633,6 +661,8 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       pRxMetadata->loggingData = 0;
   }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   if(!isFcBd)
   {
       if(usMPDUDOffset <= ucMPDUHOffset || usMPDULen < ucMPDUHLen) {
@@ -682,6 +712,12 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
           wpalPacketFree(pFrame);
           return eWLAN_PAL_STATUS_SUCCESS;
       }
+<<<<<<< HEAD
+=======
+     
+
+      pRxMetadata = WDI_DS_ExtractRxMetaData(pFrame);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
       pRxMetadata->fc = isFcBd;
       pRxMetadata->staId = WDI_RX_BD_GET_STA_ID(pBDHeader);
@@ -775,10 +811,23 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       WPAL_PACKET_SET_BD_POINTER(pFrame, pBDHeader);
       WPAL_PACKET_SET_BD_LENGTH(pFrame, sizeof(WDI_RxBdType));
 
+<<<<<<< HEAD
       if (((WDI_ControlBlockType *)pClientData->pcontext)->roamDelayStatsEnabled)
       {
           vos_record_roam_event(e_DXE_RX_PKT_TIME, (void *)pFrame, pRxMetadata->type);
       }
+=======
+#ifdef DEBUG_ROAM_DELAY
+      //Hack we need to send the frame type, so we are using bufflen as frametype
+      vos_record_roam_event(e_DXE_RX_PKT_TIME, (void *)pFrame, pRxMetadata->type);
+      //Should we use the below check to avoid funciton calls
+      /*
+      if(gRoamDelayMetaInfo.dxe_monitor_tx)
+      {
+      }
+      */
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       // Invoke Rx complete callback
       pClientData->receiveFrameCB(pClientData->pCallbackContext, pFrame);  
   }
@@ -787,6 +836,10 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       wpalPacketSetRxLength(pFrame, usMPDULen+ucMPDUHOffset);
       wpalPacketRawTrimHead(pFrame, ucMPDUHOffset);
 
+<<<<<<< HEAD
+=======
+      pRxMetadata = WDI_DS_ExtractRxMetaData(pFrame);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
       //flow control related
       pRxMetadata->fc = isFcBd;
       pRxMetadata->mclkRxTimestamp = WDI_RX_BD_GET_TIMESTAMP(pBDHeader);
@@ -847,6 +900,7 @@ wpt_status WDTS_OOResourceNotification(void *pContext, WDTS_ChannelType channel,
 
 }
 
+<<<<<<< HEAD
 void WDTS_MbReceiveMsg(void *pContext)
 {
   tpLoggingMailBox pLoggingMb;
@@ -917,6 +971,8 @@ void WDTS_LogRxDone(void *pContext)
   return;
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /* DTS open  function. 
  * On open the transport device should initialize itself.
  * Parameters:
@@ -932,7 +988,10 @@ wpt_status WDTS_openTransport( void *pContext)
   void *pDTDriverContext; 
   WDI_DS_ClientDataType *pClientData;
   WDI_Status sWdiStatus = WDI_STATUS_SUCCESS;
+<<<<<<< HEAD
   WDTS_ClientCallbacks WDTSCb;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
   pClientData = (WDI_DS_ClientDataType*) wpalMemoryAllocate(sizeof(WDI_DS_ClientDataType));
   if (!pClientData){
@@ -949,6 +1008,7 @@ wpt_status WDTS_openTransport( void *pContext)
      return eWLAN_PAL_STATUS_E_FAILURE;
   }
   WDT_AssignTransportDriverContext(pContext, pDTDriverContext);
+<<<<<<< HEAD
 
   WDTSCb.rxFrameReadyCB = WDTS_RxPacket;
   WDTSCb.txCompleteCB = WDTS_TxPacketComplete;
@@ -956,6 +1016,10 @@ wpt_status WDTS_openTransport( void *pContext)
   WDTSCb.receiveMbMsgCB = WDTS_MbReceiveMsg;
   WDTSCb.receiveLogCompleteCB = WDTS_LogRxDone;
   gTransportDriver.register_client(pDTDriverContext, WDTSCb, (void*)pClientData);
+=======
+  gTransportDriver.register_client(pDTDriverContext, WDTS_RxPacket, WDTS_TxPacketComplete, 
+    WDTS_OOResourceNotification, (void*)pClientData);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
   /* Create a memory pool for Mgmt BDheaders.*/
   sWdiStatus = WDI_DS_MemPoolCreate(&pClientData->mgmtMemPool, WDI_DS_MAX_CHUNK_SIZE, 
@@ -973,10 +1037,13 @@ wpt_status WDTS_openTransport( void *pContext)
 
   wpalMemoryZero(&gDsTrafficStats, sizeof(gDsTrafficStats));
 
+<<<<<<< HEAD
   sWdiStatus = WDI_DS_LoggingMbCreate(&pClientData->loggingMbContext, sizeof(tLoggingMailBox));
   if (WDI_STATUS_SUCCESS != sWdiStatus)
     return eWLAN_PAL_STATUS_E_NOMEM;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   return eWLAN_PAL_STATUS_SUCCESS;
 
 }
@@ -1051,10 +1118,23 @@ wpt_status WDTS_TxPacket(void *pContext, wpt_packet *pFrame)
 #endif
   // Send packet to  Transport Driver. 
   status =  gTransportDriver.xmit(pDTDriverContext, pFrame, channel);
+<<<<<<< HEAD
   if (((WDI_ControlBlockType *)pContext)->roamDelayStatsEnabled)
   {
       vos_record_roam_event(e_DXE_FIRST_XMIT_TIME, (void *)pFrame, pTxMetadata->frmType);
   }
+=======
+#ifdef DEBUG_ROAM_DELAY
+   //Hack we need to send the frame type, so we are using bufflen as frametype
+   vos_record_roam_event(e_DXE_FIRST_XMIT_TIME, (void *)pFrame, pTxMetadata->frmType);
+   //Should we use the below check to avoid funciton calls
+   /*
+   if(gRoamDelayMetaInfo.dxe_monitor_tx)
+   {
+   }
+   */
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   return status;
 }
 
@@ -1143,6 +1223,7 @@ void WDTS_ChannelDebug(wpt_boolean displaySnapshot, wpt_uint8 debugFlags)
    return;
 }
 
+<<<<<<< HEAD
 /* DTS Transport Channel Kick Dxe
  * Request Kick DXE when HDD TX time out happen
  *
@@ -1156,6 +1237,8 @@ void WDTS_ChannelKickDxe()
    return;
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /* DTS Stop function. 
  * Stop Transport driver, ie DXE, SDIO
  * Parameters:
@@ -1195,9 +1278,13 @@ wpt_status WDTS_Close(void *pContext)
   
   /*Destroy the mem pool for mgmt BD headers*/
   WDI_DS_MemPoolDestroy(&pClientData->dataMemPool);
+<<<<<<< HEAD
 
   WDI_DS_LoggingMbDestroy(&pClientData->loggingMbContext);
 
+=======
+  
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   status =  gTransportDriver.close(pDTDriverContext);
 
   wpalMemoryFree(pClientData);

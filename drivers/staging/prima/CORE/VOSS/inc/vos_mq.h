@@ -156,6 +156,7 @@ typedef enum
   --------------------------------------------------------------------------*/
 VOS_STATUS vos_mq_post_message( VOS_MQ_ID msgQueueId, vos_msg_t *message );
 
+<<<<<<< HEAD
 /**--------------------------------------------------------------------------
   \brief vos_mq_post_message_high_pri() - posts a high priority message to
            a message queue
@@ -193,6 +194,8 @@ VOS_STATUS vos_mq_post_message( VOS_MQ_ID msgQueueId, vos_msg_t *message );
 
 VOS_STATUS vos_mq_post_message_high_pri(VOS_MQ_ID msgQueueId, vos_msg_t *message);
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /**---------------------------------------------------------------------------
   

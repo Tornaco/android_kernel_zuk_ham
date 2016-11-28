@@ -404,7 +404,11 @@ void hci_le_ltk_reply(struct hci_conn *conn, u8 ltk[16])
 	memset(&cp, 0, sizeof(cp));
 
 	cp.handle = cpu_to_le16(conn->handle);
+<<<<<<< HEAD
 	memcpy(cp.ltk, ltk, sizeof(u8));
+=======
+	memcpy(cp.ltk, ltk, sizeof(cp.ltk));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 	hci_send_cmd(hdev, HCI_OP_LE_LTK_REPLY, sizeof(cp), &cp);
 }

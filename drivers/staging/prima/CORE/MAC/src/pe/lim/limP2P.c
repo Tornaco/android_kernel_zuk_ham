@@ -33,6 +33,12 @@
   This software unit holds the implementation of the WLAN Protocol Engine for
   P2P.
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2011 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ===========================================================================*/
 
 /*===========================================================================
@@ -86,7 +92,11 @@ extern tSirRetStatus limSetLinkState(
                          tpSetLinkStateCallback callback, void *callbackArg);
 
 static tSirRetStatus limCreateSessionForRemainOnChn(tpAniSirGlobal pMac, tPESession **ppP2pSession);
+<<<<<<< HEAD
 eHalStatus limP2PActionCnf(tpAniSirGlobal pMac, void *pData);
+=======
+eHalStatus limP2PActionCnf(tpAniSirGlobal pMac, tANI_U32 txCompleteSuccess);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*----------------------------------------------------------------------------
  *
@@ -670,8 +680,11 @@ void limRemainOnChnRsp(tpAniSirGlobal pMac, eHalStatus status, tANI_U32 *data)
     tANI_U8             sessionId;
     tSirRemainOnChnReq *MsgRemainonChannel = pMac->lim.gpLimRemainOnChanReq;
     tSirMacAddr             nullBssid = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+<<<<<<< HEAD
     tANI_U32 txStatus = 0;
     tSirTxBdStatus txBdStatus = {0};
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     if ( NULL == MsgRemainonChannel )
     {
@@ -686,6 +699,12 @@ void limRemainOnChnRsp(tpAniSirGlobal pMac, eHalStatus status, tANI_U32 *data)
     //Cleanup Everything
     if(eHAL_STATUS_FAILURE == status)
     {
+<<<<<<< HEAD
+=======
+       //Deactivate Remain on Channel Timer
+       limDeactivateAndChangeTimer(pMac, eLIM_REMAIN_CHN_TIMER);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        //Set the Link State to Idle
        /* get the previous valid LINK state */
        if (limSetLinkState(pMac, eSIR_LINK_IDLE_STATE, nullBssid,
@@ -696,7 +715,10 @@ void limRemainOnChnRsp(tpAniSirGlobal pMac, eHalStatus status, tANI_U32 *data)
 
        pMac->lim.gLimSystemInScanLearnMode = 0;
        pMac->lim.gLimHalScanState = eLIM_HAL_IDLE_SCAN_STATE;
+<<<<<<< HEAD
        SET_LIM_PROCESS_DEFD_MESGS(pMac, true);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     /* delete the session */
@@ -722,6 +744,7 @@ void limRemainOnChnRsp(tpAniSirGlobal pMac, eHalStatus status, tANI_U32 *data)
      * indicaiton confirmation with status failure */
     if (pMac->lim.mgmtFrameSessionId != 0xff)
     {
+<<<<<<< HEAD
         limLog(pMac, LOGE,
                 FL("Remain on channel expired, Action frame status failure"));
 
@@ -729,6 +752,11 @@ void limRemainOnChnRsp(tpAniSirGlobal pMac, eHalStatus status, tANI_U32 *data)
             limP2PActionCnf(pMac, &txBdStatus);
         else
             limP2PActionCnf(pMac, &txStatus);
+=======
+       limLog(pMac, LOGE,
+              FL("Remain on channel expired, Action frame status failure"));
+       limP2PActionCnf(pMac, 0);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     }
 
     return;
@@ -745,6 +773,10 @@ void limSendSmeMgmtFrameInd(
                     tANI_U8 *pRxPacketInfo, tpPESession psessionEntry,
                     tANI_S8 rxRssi)
 {
+<<<<<<< HEAD
+=======
+    tSirMsgQ              mmhMsg;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     tpSirSmeMgmtFrameInd  pSirSmeMgmtFrame = NULL;
     tANI_U16              length;
     tANI_U8               frameType;
@@ -769,7 +801,12 @@ void limSendSmeMgmtFrameInd(
     }
     vos_mem_set((void*)pSirSmeMgmtFrame, length, 0);
 
+<<<<<<< HEAD
     pSirSmeMgmtFrame->frameLen = frameLen;
+=======
+    pSirSmeMgmtFrame->mesgType = eWNI_SME_MGMT_FRM_IND;
+    pSirSmeMgmtFrame->mesgLen = length;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     pSirSmeMgmtFrame->sessionId = sessionId;
     pSirSmeMgmtFrame->frameType = frameType;
     pSirSmeMgmtFrame->rxRssi = rxRssi;
@@ -829,6 +866,7 @@ void limSendSmeMgmtFrameInd(
     vos_mem_zero(pSirSmeMgmtFrame->frameBuf, frameLen);
     vos_mem_copy(pSirSmeMgmtFrame->frameBuf, frame, frameLen);
 
+<<<<<<< HEAD
     if (pMac->mgmt_frame_ind_cb)
        pMac->mgmt_frame_ind_cb(pSirSmeMgmtFrame);
     else
@@ -837,10 +875,18 @@ void limSendSmeMgmtFrameInd(
                FL("Management indication callback not registered!!"));
     }
     vos_mem_free(pSirSmeMgmtFrame);
+=======
+    mmhMsg.type = eWNI_SME_MGMT_FRM_IND;
+    mmhMsg.bodyptr = pSirSmeMgmtFrame;
+    mmhMsg.bodyval = 0;
+
+    limSysProcessMmhMsgApi(pMac, &mmhMsg, ePROT);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return;
 } /*** end limSendSmeListenRsp() ***/
 
 
+<<<<<<< HEAD
 eHalStatus limP2PActionCnf(tpAniSirGlobal pMac, void *pData)
 {
     tANI_U32 txCompleteSuccess;
@@ -872,6 +918,13 @@ eHalStatus limP2PActionCnf(tpAniSirGlobal pMac, void *pData)
                 __func__, txCompleteSuccess, pMac->lim.mgmtFrameSessionId);
     }
 
+=======
+eHalStatus limP2PActionCnf(tpAniSirGlobal pMac, tANI_U32 txCompleteSuccess)
+{
+    limLog(pMac, LOG1,
+              FL(" %s txCompleteSuccess %d, Session Id %d"),
+              __func__, txCompleteSuccess, pMac->lim.mgmtFrameSessionId);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (pMac->lim.mgmtFrameSessionId != 0xff)
     {
         /* The session entry might be invalid(0xff) action confirmation received after
@@ -892,7 +945,10 @@ void limSetHtCaps(tpAniSirGlobal pMac, tpPESession psessionEntry, tANI_U8 *pIeSt
     tDot11fIEHTCaps     dot11HtCap;
 
     PopulateDot11fHTCaps(pMac, psessionEntry, &dot11HtCap);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     pIe = limGetIEPtr(pMac,pIeStartPtr, nBytes,
                                        DOT11F_EID_HTCAPS,ONE_BYTE);
     limLog( pMac, LOG2, FL("pIe %p dot11HtCap.supportedMCSSet[0]=0x%x"),
@@ -1127,7 +1183,11 @@ void limSendP2PActionFrame(tpAniSirGlobal pMac, tpSirMsgQ pMsg)
             if (pMac->lim.gpLimRemainOnChanReq == NULL)
             {
                 limLog( pMac, LOGE,
+<<<<<<< HEAD
                         FL("Failed to Send Action frame"));
+=======
+                        FL("Failed to Send Action frame \n"));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                 limSendSmeRsp(pMac, eWNI_SME_ACTION_FRAME_SEND_CNF,
                               eHAL_STATUS_FAILURE, pMbMsg->sessionId, 0);
                 return;
@@ -1196,7 +1256,11 @@ void limSendP2PActionFrame(tpAniSirGlobal pMac, tpSirMsgQ pMsg)
         else
         {
             limLog(pMac, LOGE,
+<<<<<<< HEAD
                 FL("Dropping SA Query frame - Unable to find PE Session "));
+=======
+                FL("Dropping SA Query frame - Unable to find PE Session \n"));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             limSendSmeRsp(pMac, eWNI_SME_ACTION_FRAME_SEND_CNF,
                     eHAL_STATUS_FAILURE, pMbMsg->sessionId, 0);
             palPktFree( pMac->hHdd, HAL_TXRX_FRM_802_11_MGMT,
@@ -1255,7 +1319,11 @@ void limSendP2PActionFrame(tpAniSirGlobal pMac, tpSirMsgQ pMsg)
         halstatus = halTxFrameWithTxComplete( pMac, pPacket, (tANI_U16)nBytes,
                         HAL_TXRX_FRM_802_11_MGMT, ANI_TXDIR_TODS,
                         7,/*SMAC_SWBD_TX_TID_MGMT_HIGH */ limTxComplete, pFrame,
+<<<<<<< HEAD
                         limP2PActionCnf, txFlag, pMac->lim.txBdToken++ );
+=======
+                        limP2PActionCnf, txFlag );
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
         if ( ! HAL_STATUS_SUCCESS ( halstatus ) )
         {

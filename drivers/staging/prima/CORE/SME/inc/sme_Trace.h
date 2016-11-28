@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2013-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -41,6 +45,7 @@
 #include "macTrace.h"
 
 #define NO_SESSION 0xFF
+<<<<<<< HEAD
 enum {
      TRACE_CODE_SME_COMMAND,
      TRACE_CODE_SME_TX_WDA_MSG,
@@ -51,6 +56,11 @@ enum {
      * three enums in smeTraceDump()
      */
     TRACE_CODE_SME_RX_HDD_MSG_SCAN_REQ = 3,
+=======
+#define TRACE_CODE_SME_COMMAND 0xFF
+enum {
+    TRACE_CODE_SME_RX_HDD_MSG_SCAN_REQ,
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     TRACE_CODE_SME_RX_HDD_MSG_SCAN_GET_RESULTS,
     TRACE_CODE_SME_RX_HDD_MSG_CONNECT,
     TRACE_CODE_SME_RX_HDD_MSG_SET_11DINFO,
@@ -69,7 +79,10 @@ enum {
     TRACE_CODE_SME_RX_HDD_ROAM_GET_CONNECTPROFILE,
     TRACE_CODE_SME_RX_HDD_ROAM_FREE_CONNECTPROFILE,
     TRACE_CODE_SME_RX_HDD_ROAM_SET_PMKIDCACHE,
+<<<<<<< HEAD
     TRACE_CODE_SME_RX_HDD_ROAM_DEL_PMKIDCACHE,
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     TRACE_CODE_SME_RX_HDD_GET_CONFIGPARAM,
     TRACE_CODE_SME_RX_HDD_GET_MODPROFFIELDS,
     TRACE_CODE_SME_RX_HDD_SET_CONFIG_PWRSAVE,
@@ -141,6 +154,7 @@ enum {
     TRACE_CODE_SME_RX_HDD_EXTSCAN_SET_SIGNF_CHANGE,
     TRACE_CODE_SME_RX_HDD_EXTSCAN_RESET_SIGNF_CHANGE,
     TRACE_CODE_SME_RX_HDD_EXTSCAN_GET_CACHED_RESULTS,
+<<<<<<< HEAD
     TRACE_CODE_SME_RX_HDD_MSG_DEAUTH_STA,
 #ifdef FEATURE_WLAN_TDLS
     TRACE_CODE_SME_RX_HDD_TDLS_LINK_ESTABLISH_PARAM,
@@ -154,6 +168,8 @@ enum {
 #ifdef FEATURE_WLAN_LPHB
     TRACE_CODE_SME_RX_HDD_LPHB_CONFIG_REQ,
 #endif /* FEATURE_WLAN_LPHB */
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 };
 
 void smeTraceInit(tpAniSirGlobal pMac);

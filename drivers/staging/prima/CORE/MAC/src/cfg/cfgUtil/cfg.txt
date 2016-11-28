@@ -2449,10 +2449,17 @@ NIM
 WNI_CFG_BLOCK_ACK_ENABLED    I    4    8
 V    RW    NP RESTART
 LIM
+<<<<<<< HEAD
 0    3    0
 V    RW    NP RESTART
 LIM
 0    3    0
+=======
+0    3    2
+V    RW    NP RESTART
+LIM
+0    3    2
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #ENUM DELAYED 0
 #ENUM IMMEDIATE 1

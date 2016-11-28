@@ -33,6 +33,12 @@
                
    Definitions for Linux/Android platform
   
+<<<<<<< HEAD
+=======
+   Copyright 2010-2011 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 

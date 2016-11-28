@@ -274,6 +274,7 @@ typedef enum
     WEXT_SCAN_PENDING_MAX
 } hdd_scan_pending_option_e;
 
+<<<<<<< HEAD
 enum
 {
    WLAN_HDD_GET_FRAME_LOG_CMD_CLEAR          = 1<<0,
@@ -281,6 +282,8 @@ enum
    WLAN_HDD_GET_FRAME_LOG_CMD_BMU_TRACING    = 1<<2,
 };
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /* 
  * This structure contains the interface level (granularity) 
  * configuration information in support of wireless extensions. 
@@ -462,6 +465,10 @@ void* wlan_hdd_change_country_code_callback(void *pAdapter);
 
 int hdd_setBand(struct net_device *dev, u8 ui_band);
 int hdd_setBand_helper(struct net_device *dev, const char *command);
+<<<<<<< HEAD
 VOS_STATUS wlan_hdd_get_frame_logs(hdd_adapter_t *pAdapter, v_U8_t flag);
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #endif // __WEXT_IW_H__
 

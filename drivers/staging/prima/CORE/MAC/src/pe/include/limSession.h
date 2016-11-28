@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -91,7 +95,10 @@ typedef struct sPESession           // Added to Support BT-AMP
     tANI_U8                 operMode;               // AP - 0; STA - 1 ; 
     tSirNwType              nwType;
     tpSirSmeStartBssReq     pLimStartBssReq;        //handle to smestart bss req
+<<<<<<< HEAD
     tANI_BOOLEAN            bOSENAssociation;       //handle to OSEN assoc req
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     tpSirSmeJoinReq         pLimJoinReq;            // handle to sme join req
     tpSirSmeJoinReq         pLimReAssocReq;         //handle to sme reassoc req
     tpLimMlmJoinReq         pLimMlmJoinReq;         //handle to MLM join Req
@@ -357,9 +364,12 @@ typedef struct sPESession           // Added to Support BT-AMP
     /*  DSCP to UP mapping for HS 2.0 */
     tSirQosMapSet QosMapSet;
     tANI_U8  isKeyInstalled;
+<<<<<<< HEAD
     tANI_BOOLEAN is11Gonly;
     tANI_BOOLEAN is_ext_caps_present;
     tANI_BOOLEAN addBssfailed;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }tPESession, *tpPESession;
 
 #define LIM_MAX_ACTIVE_SESSIONS 4

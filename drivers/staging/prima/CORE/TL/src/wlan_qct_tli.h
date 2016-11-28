@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -122,7 +126,10 @@ when        who    what, where, why
 
 /*WAPI protocol type */
 #define WLANTL_LLC_WAI_TYPE              0x88b4
+<<<<<<< HEAD
 #define WLANTL_ETHERTYPE_ARP             0x0806
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #ifdef FEATURE_WLAN_TDLS
 #define WLANTL_LLC_TDLS_TYPE             0x890d
@@ -169,8 +176,11 @@ when        who    what, where, why
 #define WLANTL_CTRL_FRAME_TYPE       0x10
 #define WLANTL_DATA_FRAME_TYPE       0x20
 
+<<<<<<< HEAD
 #define WLANTL_MGMT_PROBE_REQ_FRAME_TYPE    0x04
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*Value of the data type field in the 802.11 frame */
 #define WLANTL_80211_DATA_TYPE         0x02
 #define WLANTL_80211_DATA_QOS_SUBTYPE  0x08
@@ -282,8 +292,11 @@ typedef enum
 
   WLANTL_TX_FW_DEBUG = 8,
 
+<<<<<<< HEAD
   WLANTL_TX_KICKDXE = 9,
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   WLANTL_TX_MAX
 }WLANTL_TxSignalsType;
 
@@ -581,7 +594,11 @@ typedef struct
   v_U8_t                        ucMPDUHeaderLen;
 
   /* Enabled ACs currently serviced by TL (automatic setup in TL)*/
+<<<<<<< HEAD
   v_U8_t                        aucACMask[WLANTL_NUM_TX_QUEUES];
+=======
+  v_U8_t                        aucACMask[WLANTL_MAX_AC];
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
   /* Current AC to be retrieved */
   WLANTL_ACEnumType             ucCurrentAC;
@@ -698,9 +715,12 @@ typedef struct
 
   WLANTL_InterfaceStatsType         interfaceStats;
 #endif
+<<<<<<< HEAD
   /* BD Rate for transmitting ARP packets */
   v_U8_t arpRate;
   v_BOOL_t arpOnWQ5;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }WLANTL_STAClientType;
 
 /*---------------------------------------------------------------------------
@@ -873,8 +893,11 @@ typedef struct
   /* Current served station ID in round-robin method to traverse all stations.*/
   WLANTL_ACEnumType uCurServedAC;
 
+<<<<<<< HEAD
   WLANTL_SpoofMacAddr   spoofMacAddr;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   /* How many weights have not been served in current AC. */
   v_U8_t ucCurLeftWeight;
 
@@ -896,9 +919,12 @@ typedef struct
   v_BOOL_t                  isBMPS;
   /* Whether WDA_DS_TX_START_XMIT msg is pending or not */
   v_BOOL_t   isTxTranmitMsgPending;
+<<<<<<< HEAD
   WLANTL_MonRxCBType           pfnMonRx;
   v_BOOL_t              isConversionReq;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }WLANTL_CbType;
 
 /*==========================================================================
@@ -1395,6 +1421,7 @@ WLANTL_Translate80211To8023Header
   v_U8_t          ucHeaderLen,
   WLANTL_CbType*  pTLCb,
   v_U8_t          ucSTAId,
+<<<<<<< HEAD
   v_BOOL_t       bForwardIAPPwithLLC
 );
 
@@ -1404,6 +1431,11 @@ WLANTL_MonTranslate80211To8023Header
   vos_pkt_t*      vosDataBuff,
   WLANTL_CbType*  pTLCb
 );
+=======
+  v_BOOL_t	  bForwardIAPPwithLLC
+);
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*==========================================================================
   FUNCTION    WLANTL_FindFrameTypeBcMcUc
 

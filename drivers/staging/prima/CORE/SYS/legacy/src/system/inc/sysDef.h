@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -116,6 +120,18 @@
 /// PTT  Message Queue
 # define SYS_NIM_PTT_Q_SIZE   200             // Holds up to 25 messages
 
+<<<<<<< HEAD
+=======
+/// Semaphore definitions
+// Data Semaphore
+
+# define SYS_DPH_SEM_INITIAL_CNT 0
+
+// Transport Semaphore
+
+# define SYS_BBT_SEM_INITIAL_CNT 0
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /// Thread definitions
 // tHAL
 

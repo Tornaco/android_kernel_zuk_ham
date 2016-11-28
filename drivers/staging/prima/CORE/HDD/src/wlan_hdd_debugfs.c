@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -28,36 +32,54 @@
 #ifdef WLAN_OPEN_SOURCE
 #include <wlan_hdd_includes.h>
 #include <wlan_hdd_wowl.h>
+<<<<<<< HEAD
 #include <vos_sched.h>
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #define MAX_USER_COMMAND_SIZE_WOWL_ENABLE 8
 #define MAX_USER_COMMAND_SIZE_WOWL_PATTERN 512
 #define MAX_USER_COMMAND_SIZE_FRAME 4096
 
+<<<<<<< HEAD
 static ssize_t __wcnss_wowenable_write(struct file *file,
                const char __user *buf, size_t count, loff_t *ppos)
 {
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
+=======
+static ssize_t wcnss_wowenable_write(struct file *file,
+               const char __user *buf, size_t count, loff_t *ppos)
+{
+    hdd_adapter_t *pAdapter = (hdd_adapter_t *)file->private_data;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     char cmd[MAX_USER_COMMAND_SIZE_WOWL_ENABLE + 1];
     char *sptr, *token;
     v_U8_t wow_enable = 0;
     v_U8_t wow_mp = 0;
     v_U8_t wow_pbm = 0;
 
+<<<<<<< HEAD
     ENTER();
 
     pAdapter = (hdd_adapter_t *)file->private_data;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if ((NULL == pAdapter) || (WLAN_HDD_ADAPTER_MAGIC != pAdapter->magic))
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
                   "%s: Invalid adapter or adapter has invalid magic.",
                   __func__);
+<<<<<<< HEAD
         return -EINVAL;
     }
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     if (0 != wlan_hdd_validate_context(pHddCtx))
     {
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         return -EINVAL;
     }
 
@@ -130,6 +152,7 @@ static ssize_t __wcnss_wowenable_write(struct file *file,
 
       return -EFAULT;
     }
+<<<<<<< HEAD
     EXIT();
     return count;
 }
@@ -151,6 +174,17 @@ static ssize_t __wcnss_wowpattern_write(struct file *file,
 {
     hdd_adapter_t *pAdapter;
     hdd_context_t *pHddCtx;
+=======
+
+    return count;
+}
+
+static ssize_t wcnss_wowpattern_write(struct file *file,
+               const char __user *buf, size_t count, loff_t *ppos)
+{
+    hdd_adapter_t *pAdapter = (hdd_adapter_t *)file->private_data;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     char cmd[MAX_USER_COMMAND_SIZE_WOWL_PATTERN + 1];
     char *sptr, *token;
     v_U8_t pattern_idx = 0;
@@ -158,9 +192,12 @@ static ssize_t __wcnss_wowpattern_write(struct file *file,
     char *pattern_buf;
     char *pattern_mask;
 
+<<<<<<< HEAD
     ENTER();
 
     pAdapter = (hdd_adapter_t *)file->private_data;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if ((NULL == pAdapter) || (WLAN_HDD_ADAPTER_MAGIC != pAdapter->magic))
     {
         VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
@@ -169,11 +206,15 @@ static ssize_t __wcnss_wowpattern_write(struct file *file,
 
         return -EINVAL;
     }
+<<<<<<< HEAD
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     if (0 != wlan_hdd_validate_context(pHddCtx))
     {
         return -EINVAL;
     }
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (!sme_IsFeatureSupportedByFW(WOW))
     {
         VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -236,6 +277,7 @@ static ssize_t __wcnss_wowpattern_write(struct file *file,
 
     hdd_add_wowl_ptrn_debugfs(pAdapter, pattern_idx, pattern_offset,
                               pattern_buf, pattern_mask);
+<<<<<<< HEAD
     EXIT();
     return count;
 }
@@ -259,6 +301,20 @@ static ssize_t __wcnss_patterngen_write(struct file *file,
     hdd_context_t *pHddCtx;
     tSirAddPeriodicTxPtrn *addPeriodicTxPtrnParams;
     tSirDelPeriodicTxPtrn *delPeriodicTxPtrnParams;
+=======
+
+    return count;
+}
+
+static ssize_t wcnss_patterngen_write(struct file *file,
+               const char __user *buf, size_t count, loff_t *ppos)
+{
+    hdd_adapter_t *pAdapter = (hdd_adapter_t *)file->private_data;
+    hdd_context_t *pHddCtx;
+    tSirAddPeriodicTxPtrn *addPeriodicTxPtrnParams;
+    tSirDelPeriodicTxPtrn *delPeriodicTxPtrnParams;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     char *cmd, *sptr, *token;
     v_U8_t pattern_idx = 0;
     v_U8_t pattern_duration = 0;
@@ -266,9 +322,12 @@ static ssize_t __wcnss_patterngen_write(struct file *file,
     v_U16_t pattern_len = 0;
     v_U16_t i = 0;
 
+<<<<<<< HEAD
     ENTER();
 
     pAdapter = (hdd_adapter_t *)file->private_data;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if ((NULL == pAdapter) || (WLAN_HDD_ADAPTER_MAGIC != pAdapter->magic))
     {
         VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
@@ -277,11 +336,16 @@ static ssize_t __wcnss_patterngen_write(struct file *file,
 
         return -EINVAL;
     }
+<<<<<<< HEAD
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     if (0 != wlan_hdd_validate_context(pHddCtx))
     {
         return -EINVAL;
     }
+=======
+
+    pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     if (!sme_IsFeatureSupportedByFW(WLAN_PERIODIC_TX_PTRN))
     {
@@ -455,7 +519,10 @@ static ssize_t __wcnss_patterngen_write(struct file *file,
 
     vos_mem_free(addPeriodicTxPtrnParams);
     vos_mem_free(cmd);
+<<<<<<< HEAD
     EXIT();
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     return count;
 
 failure:
@@ -463,6 +530,7 @@ failure:
     return -EINVAL;
 }
 
+<<<<<<< HEAD
 static ssize_t wcnss_patterngen_write(struct file *file,
                const char __user *buf, size_t count, loff_t *ppos)
 {
@@ -497,10 +565,15 @@ static int __wcnss_debugfs_open(struct inode *inode, struct file *file)
         return -EINVAL;
     }
 
+=======
+static int wcnss_debugfs_open(struct inode *inode, struct file *file)
+{
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     if (inode->i_private)
     {
         file->private_data = inode->i_private;
     }
+<<<<<<< HEAD
     EXIT();
     return 0;
 }
@@ -514,6 +587,10 @@ static int wcnss_debugfs_open(struct inode *inode, struct file *file)
     vos_ssr_unprotect(__func__);
 
     return ret;
+=======
+
+    return 0;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 static const struct file_operations fops_wowenable = {

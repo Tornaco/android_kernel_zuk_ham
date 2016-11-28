@@ -81,6 +81,7 @@ typedef enum
     
 } VOS_TRACE_LEVEL;
 
+<<<<<<< HEAD
 enum {
 	LOG_PKT_TYPE_DATA_MGMT = 0x1,
 	LOG_PKT_TYPE_FW_LOG    = 0x2
@@ -97,6 +98,8 @@ typedef enum
 }FrameLoggingType;
 
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*-------------------------------------------------------------------------- 
   Preprocessor definitions and constants
   ------------------------------------------------------------------------*/

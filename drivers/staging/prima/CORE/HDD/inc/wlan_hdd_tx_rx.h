@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2013-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -111,13 +115,19 @@
 #define DHCP_OPTION53_STATUS_OFFSET    ( 0x11C )
 /* WLAN_DHCP_DEBUG */
 
+<<<<<<< HEAD
 #define TID3 0x60
+=======
+
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 
 /*--------------------------------------------------------------------------- 
   Type declarations
   -------------------------------------------------------------------------*/ 
  
+<<<<<<< HEAD
 /*---------------------------------------------------------------------------
   Function declarations and documenation
   -------------------------------------------------------------------------*/
@@ -135,6 +145,14 @@ extern int hdd_ibss_hard_start_xmit(struct sk_buff *skb, struct net_device *dev)
 
 /**============================================================================
   @brief hdd_hard_start_xmit() - Function registered with the Linux OS for
+=======
+/*--------------------------------------------------------------------------- 
+  Function declarations and documenation
+  -------------------------------------------------------------------------*/ 
+
+/**============================================================================
+  @brief hdd_hard_start_xmit() - Function registered with the Linux OS for 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   transmitting packets
 
   @param skb      : [in]  pointer to OS packet (sk_buff)
@@ -167,6 +185,7 @@ extern void hdd_tx_timeout(struct net_device *dev);
 extern struct net_device_stats* hdd_stats(struct net_device *dev);
 
 /**============================================================================
+<<<<<<< HEAD
   @brief hdd_ibss_init_tx_rx() - Init function to initialize Tx/RX
   modules in HDD
 
@@ -187,6 +206,8 @@ extern void hdd_ibss_init_tx_rx( hdd_adapter_t *pAdapter );
 extern VOS_STATUS hdd_ibss_deinit_tx_rx( hdd_adapter_t *pAdapter );
 
 /**============================================================================
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   @brief hdd_init_tx_rx() - Init function to initialize Tx/RX
   modules in HDD
 
@@ -233,6 +254,7 @@ extern VOS_STATUS hdd_tx_complete_cbk( v_VOID_t *vosContext,
                                        VOS_STATUS vosStatusIn );
 
 /**============================================================================
+<<<<<<< HEAD
   @brief hdd_ibss_tx_fetch_packet_cbk() - Callback function invoked by TL to
   fetch a packet for transmission.
 
@@ -253,6 +275,8 @@ extern VOS_STATUS hdd_ibss_tx_fetch_packet_cbk( v_VOID_t *vosContext,
                                            WLANTL_MetaInfoType *pPktMetaInfo );
 
 /**============================================================================
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   @brief hdd_tx_fetch_packet_cbk() - Callback function invoked by TL to 
   fetch a packet for transmission.
 
@@ -287,8 +311,11 @@ extern VOS_STATUS hdd_tx_fetch_packet_cbk( v_VOID_t *vosContext,
 extern VOS_STATUS hdd_tx_low_resource_cbk( vos_pkt_t *pVosPacket, 
                                            v_VOID_t *userData );
 
+<<<<<<< HEAD
 extern VOS_STATUS hdd_rx_packet_monitor_cbk(v_VOID_t *vosContext,vos_pkt_t *pVosPacket, int conversion);
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /**============================================================================
   @brief hdd_rx_packet_cbk() - Receive callback registered with TL.
   TL will call this to notify the HDD when a packet was received 
@@ -377,6 +404,7 @@ void hdd_wmm_acquire_access_required(hdd_adapter_t *pAdapter,
    ========================================================================*/
 void hdd_dump_dhcp_pkt(struct sk_buff *skb, int path);
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_DIAG_SUPPORT
 /**
  * wlan_hdd_log_eapol() - Function to check and extract EAPOL params
@@ -398,4 +426,6 @@ static inline void wlan_hdd_log_eapol(struct sk_buff *skb,
 }
 #endif /* FEATURE_WLAN_DIAG_SUPPORT */
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #endif    // end #if !defined( WLAN_HDD_TX_RX_H )

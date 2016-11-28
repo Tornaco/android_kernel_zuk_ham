@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2011-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2011-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -1243,16 +1247,22 @@ get_eRoamCmdStatus_str(eRoamCmdStatus val)
     switch (val)
     {
         CASE_RETURN_STR(eCSR_ROAM_CANCELLED);
+<<<<<<< HEAD
         CASE_RETURN_STR(eCSR_ROAM_FAILED);
         CASE_RETURN_STR(eCSR_ROAM_ROAMING_START);
         CASE_RETURN_STR(eCSR_ROAM_ROAMING_COMPLETION);
         CASE_RETURN_STR(eCSR_ROAM_CONNECT_COMPLETION);
+=======
+        CASE_RETURN_STR(eCSR_ROAM_ROAMING_START);
+        CASE_RETURN_STR(eCSR_ROAM_ROAMING_COMPLETION);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         CASE_RETURN_STR(eCSR_ROAM_ASSOCIATION_START);
         CASE_RETURN_STR(eCSR_ROAM_ASSOCIATION_COMPLETION);
         CASE_RETURN_STR(eCSR_ROAM_DISASSOCIATED);
         CASE_RETURN_STR(eCSR_ROAM_SHOULD_ROAM);
         CASE_RETURN_STR(eCSR_ROAM_SCAN_FOUND_NEW_BSS);
         CASE_RETURN_STR(eCSR_ROAM_LOSTLINK);
+<<<<<<< HEAD
         CASE_RETURN_STR(eCSR_ROAM_LOSTLINK_DETECTED);
         CASE_RETURN_STR(eCSR_ROAM_MIC_ERROR_IND);
         CASE_RETURN_STR(eCSR_ROAM_IBSS_IND);
@@ -1304,6 +1314,8 @@ get_eRoamCmdStatus_str(eRoamCmdStatus val)
 #endif /* FEATURE_WLAN_ESE && FEATURE_WLAN_ESE_UPLOAD */
         CASE_RETURN_STR(eCSR_ROAM_UPDATE_MAX_RATE_IND);
         CASE_RETURN_STR(eCSR_ROAM_LOST_LINK_PARAMS_IND);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     default:
         return "unknown";
     }
@@ -2109,6 +2121,7 @@ eHalStatus csrGetParsedBssDescriptionIEs(tHalHandle hHal, tSirBssDescription *pB
     return (status);
 }
 
+<<<<<<< HEAD
 eHalStatus csrProcessGetFrameLogCommand( tpAniSirGlobal pMac,
                                          tSmeCmd *pCommand )
 {
@@ -2140,6 +2153,10 @@ eHalStatus csrProcessGetFrameLogCommand( tpAniSirGlobal pMac,
 
    return( status );
 }
+=======
+
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 tANI_BOOLEAN csrIsNULLSSID( tANI_U8 *pBssSsid, tANI_U8 len )
 {
@@ -2251,6 +2268,7 @@ tANI_U32 csrTranslateToWNICfgDot11Mode(tpAniSirGlobal pMac, eCsrCfgDot11Mode csr
         }
         else
         {
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_11AC
             if ( IS_FEATURE_SUPPORTED_BY_DRIVER(DOT11AC) &&
                      IS_FEATURE_SUPPORTED_BY_FW(DOT11AC))
@@ -2260,6 +2278,9 @@ tANI_U32 csrTranslateToWNICfgDot11Mode(tpAniSirGlobal pMac, eCsrCfgDot11Mode csr
 #else
             ret = WNI_CFG_DOT11_MODE_11N;
 #endif
+=======
+            ret = WNI_CFG_DOT11_MODE_11AC;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         }
         break;
     case eCSR_CFG_DOT11_MODE_TAURUS:
@@ -2284,6 +2305,7 @@ tANI_U32 csrTranslateToWNICfgDot11Mode(tpAniSirGlobal pMac, eCsrCfgDot11Mode csr
         ret = WNI_CFG_DOT11_MODE_TITAN;
         break;
     case eCSR_CFG_DOT11_MODE_11G_ONLY:
+<<<<<<< HEAD
         ret = WNI_CFG_DOT11_MODE_11G_ONLY;
         break;
     case eCSR_CFG_DOT11_MODE_11N_ONLY:
@@ -2305,6 +2327,21 @@ tANI_U32 csrTranslateToWNICfgDot11Mode(tpAniSirGlobal pMac, eCsrCfgDot11Mode csr
         else
             ret = WNI_CFG_DOT11_MODE_11N;
         break;
+=======
+       ret = WNI_CFG_DOT11_MODE_11G_ONLY;
+       break;
+    case eCSR_CFG_DOT11_MODE_11N_ONLY:
+       ret = WNI_CFG_DOT11_MODE_11N_ONLY;
+       break;
+
+#ifdef WLAN_FEATURE_11AC
+     case eCSR_CFG_DOT11_MODE_11AC_ONLY:
+        ret = WNI_CFG_DOT11_MODE_11AC_ONLY;
+        break;
+     case eCSR_CFG_DOT11_MODE_11AC:
+        ret = WNI_CFG_DOT11_MODE_11AC;
+       break;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #endif
     default:
         smsLog(pMac, LOGW, FL("doesn't expect %d as csrDo11Mode"), csrDot11Mode);
@@ -2340,6 +2377,7 @@ eHalStatus csrGetPhyModeFromBss(tpAniSirGlobal pMac, tSirBssDescription *pBSSDes
                 {
                     phyMode = eCSR_DOT11_MODE_TAURUS;
                 }
+<<<<<<< HEAD
             }
         }
         if(pIes->HTCaps.present && (eCSR_DOT11_MODE_TAURUS != phyMode))
@@ -2352,6 +2390,21 @@ eHalStatus csrGetPhyModeFromBss(tpAniSirGlobal pMac, tSirBssDescription *pBSSDes
             }
 #endif
         }
+=======
+                }
+                }
+        if(pIes->HTCaps.present && (eCSR_DOT11_MODE_TAURUS != phyMode))
+        {
+            phyMode = eCSR_DOT11_MODE_11n;
+        }
+
+#ifdef WLAN_FEATURE_11AC
+        if ( pIes->VHTCaps.present && (eCSR_DOT11_MODE_TAURUS != phyMode))
+        {
+             phyMode = eCSR_DOT11_MODE_11ac;
+        }
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         *pPhyMode = phyMode;
     }
 
@@ -3829,6 +3882,7 @@ tANI_BOOLEAN csrGetRSNInformation( tHalHandle hHal, tCsrAuthList *pAuthType, eCs
             Capabilities->NoPairwise = (pRSNIe->RSN_Cap[0] >> 1) & 0x1 ; // Bit 1 No Pairwise
             Capabilities->PTKSAReplayCounter = (pRSNIe->RSN_Cap[0] >> 2) & 0x3 ; // Bit 2, 3 PTKSA Replay Counter
             Capabilities->GTKSAReplayCounter = (pRSNIe->RSN_Cap[0] >> 4) & 0x3 ; // Bit 4, 5 GTKSA Replay Counter
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_11W
             Capabilities->MFPRequired = (pRSNIe->RSN_Cap[0] >> 6) & 0x1 ; // Bit 6 MFPR
             Capabilities->MFPCapable = (pRSNIe->RSN_Cap[0] >> 7) & 0x1 ; // Bit 7 MFPC
@@ -3837,6 +3891,10 @@ tANI_BOOLEAN csrGetRSNInformation( tHalHandle hHal, tCsrAuthList *pAuthType, eCs
             Capabilities->MFPCapable = 0 ; // Bit 7 MFPC
 #endif
 
+=======
+            Capabilities->MFPRequired = (pRSNIe->RSN_Cap[0] >> 6) & 0x1 ; // Bit 6 MFPR
+            Capabilities->MFPCapable = (pRSNIe->RSN_Cap[0] >> 7) & 0x1 ; // Bit 7 MFPC
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             Capabilities->Reserved = pRSNIe->RSN_Cap[1]  & 0xff ; // remaining reserved
         }
     }
@@ -3997,7 +4055,11 @@ tANI_BOOLEAN csrLookupPMKID( tpAniSirGlobal pMac, tANI_U32 sessionId, tANI_U8 *p
         fRC = TRUE;
     }
     while( 0 );
+<<<<<<< HEAD
     smsLog(pMac, LOG1, "csrLookupPMKID called return match = %d pMac->roam.NumPmkidCache = %d",
+=======
+    smsLog(pMac, LOGW, "csrLookupPMKID called return match = %d pMac->roam.NumPmkidCache = %d",
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         fRC, pSession->NumPmkidCache);
 
     return fRC;
@@ -5265,6 +5327,7 @@ tANI_BOOLEAN csrIsSsidMatch( tpAniSirGlobal pMac, tANI_U8 *ssid1, tANI_U8 ssid1L
     tANI_BOOLEAN fMatch = FALSE;
 
     do {
+<<<<<<< HEAD
         // Check for the specification of the Broadcast SSID at the beginning
         // of the list. If specified, then all SSIDs are matches
         // (broadcast SSID means accept all SSIDs).
@@ -5273,6 +5336,8 @@ tANI_BOOLEAN csrIsSsidMatch( tpAniSirGlobal pMac, tANI_U8 *ssid1, tANI_U8 ssid1L
             fMatch = TRUE;
             break;
         }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
         // There are a few special cases.  If the Bss description has a Broadcast SSID,
         // then our Profile must have a single SSID without Wildcards so we can program
@@ -5289,6 +5354,17 @@ tANI_BOOLEAN csrIsSsidMatch( tpAniSirGlobal pMac, tANI_U8 *ssid1, tANI_U8 ssid1L
             break;
         }
 
+<<<<<<< HEAD
+=======
+        // Check for the specification of the Broadcast SSID at the beginning of the list.
+        // If specified, then all SSIDs are matches (broadcast SSID means accept all SSIDs).
+        if ( ssid1Len == 0 )
+        {
+            fMatch = TRUE;
+            break;
+        }
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         if(ssid1Len != bssSsidLen) break;
         if (vos_mem_compare(bssSsid, ssid1, bssSsidLen))
         {
@@ -5832,7 +5908,11 @@ tANI_BOOLEAN csrMatchBSS( tHalHandle hHal, tSirBssDescription *pBssDesc, tCsrSca
             break;
 
 #ifdef WLAN_FEATURE_VOWIFI_11R
+<<<<<<< HEAD
         if (pFilter->MDID.mdiePresent && csrRoamIs11rAssoc(pMac))
+=======
+        if (pFilter->MDID.mdiePresent)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         {
             if (pBssDesc->mdiePresent)
             {
@@ -5929,6 +6009,7 @@ tANI_BOOLEAN csrMatchBSSToConnectProfile( tHalHandle hHal, tCsrRoamConnectedProf
 
 
 
+<<<<<<< HEAD
 void csrAddRateBitmap(tANI_U8 rate, tANI_U16 *pRateBitmap)
 {
     tANI_U16 rateBitmap;
@@ -6026,6 +6107,8 @@ tANI_BOOLEAN csrIsRateAlreadyPresent(tANI_U8 rate, tANI_U16 rateBitmap)
 
 
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 tANI_BOOLEAN csrRatesIsDot11RateSupported( tHalHandle hHal, tANI_U8 rate )
 {
     tpAniSirGlobal pMac = PMAC_STRUCT( hHal );
@@ -6193,7 +6276,11 @@ void csrReleaseProfile(tpAniSirGlobal pMac, tCsrRoamProfile *pProfile)
 
         if (pProfile->nAddIEScanLength)
         {
+<<<<<<< HEAD
            memset(pProfile->addIEScan, 0 , SIR_MAC_MAX_ADD_IE_LENGTH+2);
+=======
+           memset(pProfile->addIEScan, 0 , SIR_MAC_MAX_IE_LENGTH+2);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
            pProfile->nAddIEScanLength = 0;
         }
 

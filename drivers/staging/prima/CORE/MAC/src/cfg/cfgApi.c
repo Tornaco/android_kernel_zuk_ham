@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2011-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2011-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -50,6 +54,11 @@ static tANI_U32  __gCfgIBufMax[CFG_STA_IBUF_MAX_SIZE]          ;
 static tANI_U32  __gCfgIBuf[CFG_STA_IBUF_MAX_SIZE]             ;
 static tANI_U8   __gCfgSBuf[CFG_STA_SBUF_MAX_SIZE]             ;
 static tANI_U8   __gSBuffer[CFG_MAX_STR_LEN]                   ;
+<<<<<<< HEAD
+=======
+static tANI_U32  __gParamList[WNI_CFG_MAX_PARAM_NUM + 
+                              WNI_CFG_GET_PER_STA_STAT_RSP_NUM];
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 
 static void Notify(tpAniSirGlobal, tANI_U16, tANI_U32);
@@ -140,6 +149,10 @@ tSirRetStatus cfgInit(tpAniSirGlobal pMac)
    pMac->cfg.gCfgSBuf     = __gCfgSBuf;
    pMac->cfg.gSBuffer     = __gSBuffer;
    pMac->cfg.gCfgEntry    = __gCfgEntry;
+<<<<<<< HEAD
+=======
+   pMac->cfg.gParamList   = __gParamList;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    for(i=0; i<CFG_PARAM_MAX_NUM; i++)
    {
@@ -164,6 +177,10 @@ void cfgDeInit(tpAniSirGlobal pMac)
    pMac->cfg.gCfgSBuf     = NULL;
    pMac->cfg.gSBuffer     = NULL;
    pMac->cfg.gCfgEntry    = NULL;
+<<<<<<< HEAD
+=======
+   pMac->cfg.gParamList   = NULL;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 // ---------------------------------------------------------------------
@@ -225,7 +242,11 @@ cfgSetInt(tpAniSirGlobal pMac, tANI_U16 cfgId, tANI_U32 value)
     // Check if parameter is valid
     if ((control & CFG_CTL_VALID) == 0)
     {
+<<<<<<< HEAD
         PELOGE(cfgLog(pMac, LOG3, FL("Not valid cfg id %d"), cfgId);)
+=======
+        PELOGE(cfgLog(pMac, LOGE, FL("Not valid cfg id %d"), cfgId);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         retVal = eSIR_CFG_INVALID_ID;
     }
     else if ((pMac->cfg.gCfgIBufMin[index] < pMac->cfg.gCfgIBufMax[index]) &&
@@ -367,7 +388,11 @@ wlan_cfgGetInt(tpAniSirGlobal pMac, tANI_U16 cfgId, tANI_U32 *pValue)
     // Check if parameter is valid
     if ((control & CFG_CTL_VALID) == 0)
     {
+<<<<<<< HEAD
         PELOGE(cfgLog(pMac, LOG3, FL("Not valid cfg id %d"), cfgId);)
+=======
+        PELOGE(cfgLog(pMac, LOGE, FL("Not valid cfg id %d"), cfgId);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         retVal = eSIR_CFG_INVALID_ID;
     }
     else {
@@ -429,7 +454,11 @@ cfgIncrementInt(tpAniSirGlobal pMac, tANI_U16 cfgId, tANI_U32 value)
     // Check if parameter is valid
     if ((control & CFG_CTL_VALID) == 0)
     {
+<<<<<<< HEAD
         PELOGE(cfgLog(pMac, LOG3, FL("Not valid cfg id %d"), cfgId);)
+=======
+        PELOGE(cfgLog(pMac, LOGE, FL("Not valid cfg id %d"), cfgId);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         retVal = eSIR_CFG_INVALID_ID;
     }
     else
@@ -642,7 +671,11 @@ wlan_cfgGetStr(tpAniSirGlobal pMac, tANI_U16 cfgId, tANI_U8 *pBuf, tANI_U32 *pLe
     // Check if parameter is valid
     if ((control & CFG_CTL_VALID) == 0)
     {
+<<<<<<< HEAD
         PELOGE(cfgLog(pMac, LOG3, FL("Not valid cfg id %d"), cfgId);)
+=======
+        PELOGE(cfgLog(pMac, LOGE, FL("Not valid cfg id %d"), cfgId);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         retVal = eSIR_CFG_INVALID_ID;
     }
     else
@@ -723,7 +756,11 @@ wlan_cfgGetStrMaxLen(tpAniSirGlobal pMac, tANI_U16 cfgId, tANI_U32 *pLength)
     // Check if parameter is valid
     if ((control & CFG_CTL_VALID) == 0)
     {
+<<<<<<< HEAD
         PELOGE(cfgLog(pMac, LOG3, FL("Not valid cfg id %d"), cfgId);)
+=======
+        PELOGE(cfgLog(pMac, LOGE, FL("Not valid cfg id %d"), cfgId);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         retVal = eSIR_CFG_INVALID_ID;
     }
     else
@@ -789,7 +826,11 @@ wlan_cfgGetStrLen(tpAniSirGlobal pMac, tANI_U16 cfgId, tANI_U32 *pLength)
     // Check if parameter is valid
     if ((control & CFG_CTL_VALID) == 0)
     {
+<<<<<<< HEAD
         PELOGE(cfgLog(pMac, LOG3, FL("Not valid cfg id %d"), cfgId);)
+=======
+        PELOGE(cfgLog(pMac, LOGE, FL("Not valid cfg id %d"), cfgId);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         retVal = eSIR_CFG_INVALID_ID;
     }
     else

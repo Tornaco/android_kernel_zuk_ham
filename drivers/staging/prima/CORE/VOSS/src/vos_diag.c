@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -40,7 +44,10 @@
 #include "wlan_nlink_common.h"
 #include "vos_sched.h"
 #include "wlan_ptt_sock_svc.h"
+<<<<<<< HEAD
 #include "wlan_nlink_srv.h"
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 
 #define PTT_MSG_DIAG_CMDS_TYPE   0x5050
@@ -150,11 +157,16 @@ void vos_log_submit(v_VOID_t *plog_hdr_ptr)
     }
 #endif /* WLAN_KD_READY_NOTIFIER */
 
+<<<<<<< HEAD
     if (nl_srv_is_initialized() != 0)
         return;
 
    /* Send the log data to the ptt app only if it is registered with the wlan driver*/
     if(vos_is_multicast_logging())
+=======
+   /* Send the log data to the ptt app only if it is registered with the wlan driver*/
+    if(pHddCtx->ptt_pid)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     {
         data_len = pHdr->len;
     
@@ -183,6 +195,7 @@ void vos_log_submit(v_VOID_t *plog_hdr_ptr)
     
     
         vos_mem_copy(pBuf, pHdr,data_len);
+<<<<<<< HEAD
 
         if (ptt_sock_send_msg_to_app(wmsg, 0,
                   ANI_NL_MSG_PUMAC, INVALID_PID, MSG_DONTWAIT) < 0)
@@ -191,11 +204,27 @@ void vos_log_submit(v_VOID_t *plog_hdr_ptr)
             return;
         }
 
+=======
+    
+        if(pHddCtx->ptt_pid)
+        {
+            if( ptt_sock_send_msg_to_app(wmsg, 0,
+                      ANI_NL_MSG_PUMAC, pHddCtx->ptt_pid, MSG_DONTWAIT) < 0) {
+        
+                VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                          ("Ptt Socket error sending message to the app!!"));
+                vos_mem_free((v_VOID_t *)wmsg);
+                return;
+            }
+       
+        }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         vos_mem_free((v_VOID_t*)wmsg);
     }
     return;
 }
 
+<<<<<<< HEAD
 /**
  * vos_log_wlock_diag() - This function is used to send wake lock diag events
  * @reason: Reason why the wakelock was taken or released
@@ -229,6 +258,8 @@ void vos_log_wlock_diag(uint32_t reason, const char *wake_lock_name,
 }
 
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /**---------------------------------------------------------------------------
   
   \brief vos_event_report_payload() - 
@@ -254,6 +285,7 @@ void vos_event_report_payload(v_U16_t event_Id, v_U16_t length, v_VOID_t *pPaylo
 
      /*Get the global context */
     pVosContext = vos_get_global_context(VOS_MODULE_ID_SYS, NULL);
+<<<<<<< HEAD
     if (!pVosContext)
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -269,6 +301,11 @@ void vos_event_report_payload(v_U16_t event_Id, v_U16_t length, v_VOID_t *pPaylo
                   "%s: hdd context is NULL", __func__);
         return;
     }
+=======
+
+     /*Get the Hdd Context */
+    pHddCtx = ((VosContextType*)(pVosContext))->pHDDContext;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #ifdef WLAN_KD_READY_NOTIFIER
     /* NL is not ready yet, WLAN KO started first */
@@ -278,11 +315,16 @@ void vos_event_report_payload(v_U16_t event_Id, v_U16_t length, v_VOID_t *pPaylo
     }
 #endif /* WLAN_KD_READY_NOTIFIER */
     
+<<<<<<< HEAD
     if (nl_srv_is_initialized() != 0)
         return;
 
     /* Send the log data to the ptt app only if it is registered with the wlan driver*/
     if(vos_is_multicast_logging())
+=======
+    /* Send the log data to the ptt app only if it is registered with the wlan driver*/
+    if(pHddCtx->ptt_pid)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     {
         total_len = sizeof(tAniHdr)+sizeof(event_report_t)+length;
         
@@ -309,7 +351,11 @@ void vos_event_report_payload(v_U16_t event_Id, v_U16_t length, v_VOID_t *pPaylo
         vos_mem_copy(pBuf, pPayload,length);
       
         if( ptt_sock_send_msg_to_app(wmsg, 0,
+<<<<<<< HEAD
                      ANI_NL_MSG_PUMAC, INVALID_PID, MSG_DONTWAIT) < 0) {
+=======
+                     ANI_NL_MSG_PUMAC, pHddCtx->ptt_pid, MSG_DONTWAIT) < 0) {
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                        ("Ptt Socket error sending message to the app!!"));
             vos_mem_free((v_VOID_t*)wmsg);

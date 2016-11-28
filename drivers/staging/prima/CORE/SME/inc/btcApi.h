@@ -31,6 +31,11 @@
 *
 * Description: BTC Events Layer API definitions.
 *
+<<<<<<< HEAD
+=======
+* Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+* Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 *
 ******************************************************************************/
 
@@ -106,6 +111,15 @@
 #define BT_MAX_EVENT_DONE_TIMEOUT   45000
 
 /*
+<<<<<<< HEAD
+=======
+    Maximum time duration to enable uapsd after the event is received from
+    firmware. This is added to handle back to back events from BTC.
+*/
+#define BTC_MAX_ENABLE_UAPSD_TIMER         (1000*60)
+
+/*
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     To suppurt multiple SCO connections for BT+UAPSD work
 */
 #define BT_MAX_SCO_SUPPORT  3

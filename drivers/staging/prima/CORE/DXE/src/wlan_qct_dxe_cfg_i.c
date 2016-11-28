@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -32,6 +36,12 @@
   @brief 
                
    This file contains the external API exposed by the wlan data transfer abstraction layer module.
+<<<<<<< HEAD
+=======
+   Copyright (c) 2011 QUALCOMM Incorporated.
+   All Rights Reserved.
+   Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ========================================================================*/
 
 /*===========================================================================
@@ -81,8 +91,12 @@ wpt_uint32 channelBaseAddressList[WLANDXE_DMA_CHANNEL_MAX] =
    WLANDXE_DMA_CHAN3_BASE_ADDRESS,
    WLANDXE_DMA_CHAN4_BASE_ADDRESS,
    WLANDXE_DMA_CHAN5_BASE_ADDRESS,
+<<<<<<< HEAD
    WLANDXE_DMA_CHAN6_BASE_ADDRESS,
    WLANDXE_DMA_CHAN7_BASE_ADDRESS
+=======
+   WLANDXE_DMA_CHAN6_BASE_ADDRESS
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 };
 
 wpt_uint32 channelInterruptMask[WLANDXE_DMA_CHANNEL_MAX] =
@@ -93,8 +107,12 @@ wpt_uint32 channelInterruptMask[WLANDXE_DMA_CHANNEL_MAX] =
    WLANDXE_INT_MASK_CHAN_3,
    WLANDXE_INT_MASK_CHAN_4,
    WLANDXE_INT_MASK_CHAN_5,
+<<<<<<< HEAD
    WLANDXE_INT_MASK_CHAN_6,
    WLANDXE_INT_MASK_CHAN_7
+=======
+   WLANDXE_INT_MASK_CHAN_6
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 };
 
 WLANDXE_ChannelConfigType chanTXLowPriConfig =
@@ -254,11 +272,17 @@ WLANDXE_ChannelConfigType chanRXHighPriConfig =
    eWLAN_PAL_TRUE
 };
 
+<<<<<<< HEAD
 WLANDXE_ChannelConfigType chanRXLogConfig =
+=======
+#ifdef WLANDXE_TEST_CHANNEL_ENABLE
+WLANDXE_ChannelConfigType chanH2HTestConfig =
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 {
    /* Q handle type, Circular */
    WLANDXE_CHANNEL_HANDLE_CIRCULA,
 
+<<<<<<< HEAD
    /* Number of Descriptors*/
    8,
 
@@ -306,6 +330,17 @@ WLANDXE_ChannelConfigType chanRXFWLogConfig =
 
    /* Reference WQ - NA as channel used for H2H */
    0,
+=======
+   /* Number of Descriptor, NOT CLEAR YET !!! */
+   5,
+
+   /* MAX num RX Buffer, NOT CLEAR YET !!! */
+   0,
+
+   /* Reference WQ, NOT CLEAR YET !!! */
+   /* Temporary BMU Work Q 5 */
+   5,
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    /* USB Only, End point info */
    0,
@@ -313,6 +348,7 @@ WLANDXE_ChannelConfigType chanRXFWLogConfig =
    /* Transfer Type */
    WLANDXE_DESC_CTRL_XTYPE_H2H,
 
+<<<<<<< HEAD
    /* Channel Priority 7(Highest) - 0(Lowest)*/
    0,
 
@@ -326,20 +362,48 @@ WLANDXE_ChannelConfigType chanRXFWLogConfig =
    8,
 
    /* Added in Gen5 for Prefetch*/
+=======
+   /* Channel Priority 7(Highest) - 0(Lowest), NOT CLEAR YET !!! */
+   5,
+
+   /* BD attached to frames for this pipe */
+   eWLAN_PAL_FALSE,
+
+   /* chk_size, NOT CLEAR YET !!!*/
+   0,
+
+   /* bmuThdSel, NOT CLEAR YET !!! */
+   0,
+
+   /* Added in Gen5 for Prefetch, NOT CLEAR YET !!!*/
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    eWLAN_PAL_TRUE,
 
    /* Use short Descriptor */
    eWLAN_PAL_TRUE
 };
+<<<<<<< HEAD
+=======
+#endif /* WLANDXE_TEST_CHANNEL_ENABLE */
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 WLANDXE_ChannelMappingType channelList[WDTS_CHANNEL_MAX] =
 {
    {WDTS_CHANNEL_TX_LOW_PRI,  WLANDXE_DMA_CHANNEL_0, &chanTXLowPriConfig},
    {WDTS_CHANNEL_TX_HIGH_PRI, WLANDXE_DMA_CHANNEL_4, &chanTXHighPriConfig},
    {WDTS_CHANNEL_RX_LOW_PRI,  WLANDXE_DMA_CHANNEL_1, &chanRXLowPriConfig},
+<<<<<<< HEAD
    {WDTS_CHANNEL_RX_HIGH_PRI, WLANDXE_DMA_CHANNEL_3, &chanRXHighPriConfig},
    {WDTS_CHANNEL_RX_LOG, WLANDXE_DMA_CHANNEL_5, &chanRXLogConfig},
    {WDTS_CHANNEL_RX_FW_LOG, WLANDXE_DMA_CHANNEL_7, &chanRXFWLogConfig},
+=======
+#ifndef WLANDXE_TEST_CHANNEL_ENABLE
+   {WDTS_CHANNEL_RX_HIGH_PRI, WLANDXE_DMA_CHANNEL_3, &chanRXHighPriConfig},
+#else
+   {WDTS_CHANNEL_H2H_TEST_TX,    WLANDXE_DMA_CHANNEL_2, &chanH2HTestConfig},
+   {WDTS_CHANNEL_H2H_TEST_RX,    WLANDXE_DMA_CHANNEL_2, &chanH2HTestConfig}
+#endif /* WLANDXE_TEST_CHANNEL_ENABLE */
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 };
 
 WLANDXE_TxCompIntConfigType txCompInt = 
@@ -363,6 +427,7 @@ WLANDXE_TxCompIntConfigType txCompInt =
    10
 };
 
+<<<<<<< HEAD
 // Indicates the DXE channels being used in the current run.
 static wpt_uint8 dxeEnabledChannels;
 
@@ -406,6 +471,8 @@ wpt_uint8 dxeGetEnabledChannels
    return dxeEnabledChannels;
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*==========================================================================
   @  Function Name 
       dxeCommonDefaultConfig
@@ -417,14 +484,26 @@ wpt_uint8 dxeGetEnabledChannels
                                DXE host driver main control block
 
   @  Return
+<<<<<<< HEAD
       void
 
 ===========================================================================*/
 void dxeCommonDefaultConfig
+=======
+      wpt_status
+
+===========================================================================*/
+wpt_status dxeCommonDefaultConfig
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 (
    WLANDXE_CtrlBlkType     *dxeCtrlBlk
 )
 {
+<<<<<<< HEAD
+=======
+   wpt_status                  status = eWLAN_PAL_STATUS_SUCCESS;
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    dxeCtrlBlk->rxReadyCB     = NULL;
    dxeCtrlBlk->txCompCB      = NULL;
    dxeCtrlBlk->lowResourceCB = NULL;
@@ -432,6 +511,11 @@ void dxeCommonDefaultConfig
    wpalMemoryCopy(&dxeCtrlBlk->txCompInt,
                   &txCompInt,
                   sizeof(WLANDXE_TxCompIntConfigType));
+<<<<<<< HEAD
+=======
+
+   return status;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 /*==========================================================================
@@ -540,6 +624,7 @@ wpt_status dxeChannelDefaultConfig
       (WDTS_CHANNEL_TX_HIGH_PRI == channelEntry->channelType))
    {
       channelEntry->extraConfig.chan_mask |= WLANDXE_CH_CTRL_DIQ_MASK;
+<<<<<<< HEAD
       if (wpalWcnssIsProntoHwVer3())
       {
          HDXE_MSG(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_INFO,
@@ -551,11 +636,18 @@ wpt_status dxeChannelDefaultConfig
    else if((WDTS_CHANNEL_RX_LOW_PRI  == channelEntry->channelType) ||
            (WDTS_CHANNEL_RX_HIGH_PRI == channelEntry->channelType) ||
            (WDTS_CHANNEL_RX_LOG == channelEntry->channelType))
+=======
+   }
+   /* RX Channel, Set SIQ bit, Clear DIQ bit since source is not WQ */
+   else if((WDTS_CHANNEL_RX_LOW_PRI  == channelEntry->channelType) ||
+           (WDTS_CHANNEL_RX_HIGH_PRI == channelEntry->channelType))
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    {
       channelEntry->extraConfig.chan_mask |= WLANDXE_CH_CTRL_SIQ_MASK;
    }
    else
    {
+<<<<<<< HEAD
       /* This is H2H channel, TX, RX not use work Q
        * Do Nothing */
    }
@@ -565,6 +657,13 @@ wpt_status dxeChannelDefaultConfig
       /* Frame Contents Swap */
       channelEntry->extraConfig.chan_mask |= WLANDXE_CH_CTRL_SWAP_MASK;
    }
+=======
+      /* This is test H2H channel, TX, RX not use work Q
+       * Do Nothing */
+   }
+   /* Frame Contents Swap */
+   channelEntry->extraConfig.chan_mask |= WLANDXE_CH_CTRL_SWAP_MASK;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    /* Host System Using Little Endian */
    channelEntry->extraConfig.chan_mask |= WLANDXE_CH_CTRL_ENDIAN_MASK;
    /* BMU Threshold select */
@@ -587,6 +686,7 @@ wpt_status dxeChannelDefaultConfig
     * DXE engine will reference this value before DMA transfer */
    dxeControlRead = 0;
    /* Source is a Queue ID, not flat memory address */
+<<<<<<< HEAD
    if (WDTS_CHANNEL_RX_FW_LOG != channelEntry->channelType)
      dxeControlRead |= WLANDXE_DESC_CTRL_SIQ;
    /* Transfer direction is BMU 2 Host */
@@ -595,6 +695,11 @@ wpt_status dxeChannelDefaultConfig
    else
      dxeControlRead |= WLANDXE_DESC_CTRL_XTYPE_H2H;
 
+=======
+   dxeControlRead |= WLANDXE_DESC_CTRL_SIQ;
+   /* Transfer direction is BMU 2 Host */
+   dxeControlRead |= WLANDXE_DESC_CTRL_XTYPE_B2H;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    /* End of Packet, RX is single fragment */
    dxeControlRead |= WLANDXE_DESC_CTRL_EOP;
    /* BD Present, default YES, B2H case it must be 0 to insert BD */
@@ -617,6 +722,7 @@ wpt_status dxeChannelDefaultConfig
    dxeControlRead |= WLANDXE_DESC_CTRL_INT;
    /* For ready status, this Control WORD must be VALID */
    dxeControlRead |= WLANDXE_DESC_CTRL_VALID;
+<<<<<<< HEAD
 
    /* Frame Contents Swap */
    if (WDTS_CHANNEL_RX_FW_LOG != channelEntry->channelType)
@@ -626,6 +732,13 @@ wpt_status dxeChannelDefaultConfig
    if((WDTS_CHANNEL_TX_LOW_PRI  == channelEntry->channelType) ||
       (WDTS_CHANNEL_TX_HIGH_PRI == channelEntry->channelType) ||
       (WDTS_CHANNEL_RX_FW_LOG == channelEntry->channelType))
+=======
+   /* Frame Contents Swap */
+   dxeControlRead |= WLANDXE_DESC_CTRL_BDT_SWAP;
+   /* Host Little Endian */
+   if((WDTS_CHANNEL_TX_LOW_PRI  == channelEntry->channelType) ||
+      (WDTS_CHANNEL_TX_HIGH_PRI == channelEntry->channelType))
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    {
       dxeControlRead |= WLANDXE_DESC_CTRL_ENDIANNESS;
    }
@@ -705,6 +818,7 @@ wpt_status dxeChannelDefaultConfig
    {
       channelEntry->numDesc         = mappedChannel->channelConfig->nDescs;
    }
+<<<<<<< HEAD
    else if(WDTS_CHANNEL_RX_LOG == channelEntry->channelType)
    {
       channelEntry->numDesc         = mappedChannel->channelConfig->nDescs;
@@ -713,6 +827,8 @@ wpt_status dxeChannelDefaultConfig
    {
       channelEntry->numDesc         = mappedChannel->channelConfig->nDescs;
    }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    else
    {
       channelEntry->numDesc         = rxResourceCount / 4;
@@ -720,7 +836,10 @@ wpt_status dxeChannelDefaultConfig
    channelEntry->assignedDMAChannel = mappedChannel->DMAChannel;
    channelEntry->numFreeDesc             = 0;
    channelEntry->numRsvdDesc             = 0;
+<<<<<<< HEAD
    channelEntry->desc_write_fail_count   = 0;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    channelEntry->numFragmentCurrentChain = 0;
    channelEntry->numTotalFrame           = 0;
    channelEntry->hitLowResource          = eWLAN_PAL_FALSE;

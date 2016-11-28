@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2014-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -36,6 +40,12 @@
                
    Definitions for vOSS Locks
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 
@@ -248,6 +258,7 @@ VOS_STATUS vos_spin_lock_release(vos_spin_lock_t *pLock);
   ------------------------------------------------------------------------*/
 VOS_STATUS vos_spin_lock_destroy(vos_spin_lock_t *pLock);
 
+<<<<<<< HEAD
 /*--------------------------------------------------------------------------
 
   \brief vos_wake_lock_init() - initializes a vOSS wake lock
@@ -306,5 +317,7 @@ VOS_STATUS vos_wake_lock_release(vos_wake_lock_t *pLock, uint32_t reason);
 
   ------------------------------------------------------------------------*/
 VOS_STATUS vos_wake_lock_destroy(vos_wake_lock_t *pLock);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #endif // __VOSS_LOCK_H

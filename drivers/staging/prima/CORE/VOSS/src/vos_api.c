@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -74,8 +78,13 @@
 
 #include "sapApi.h"
 #include "vos_trace.h"
+<<<<<<< HEAD
 #include "vos_utils.h"
 #include <wlan_logging_sock_svc.h>
+=======
+
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 #ifdef WLAN_BTAMP_FEATURE
 #include "bapApi.h"
@@ -104,7 +113,10 @@
  * ------------------------------------------------------------------------*/
 static VosContextType  gVosContext;
 static pVosContextType gpVosContext;
+<<<<<<< HEAD
 static v_U8_t vos_multicast_logging;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*---------------------------------------------------------------------------
  * Forward declaration
@@ -284,6 +296,7 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle )
     
       goto err_probe_event;
    }
+<<<<<<< HEAD
    if (vos_event_init( &(gpVosContext->fwLogsComplete) ) != VOS_STATUS_SUCCESS )
    {
       VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_FATAL,
@@ -292,6 +305,8 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle )
 
       goto err_wda_complete_event;
    }
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
    /* Initialize the free message queue */
    vStatus = vos_mq_init(&gpVosContext->freeVosMq);
@@ -302,7 +317,11 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle )
       VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_FATAL,
                 "%s: Failed to initialize VOS free message queue", __func__);
       VOS_ASSERT(0);
+<<<<<<< HEAD
       goto err_fw_logs_complete_event;
+=======
+      goto err_wda_complete_event;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    }
 
    for (iter = 0; iter < VOS_CORE_MAX_MESSAGES; iter++)
@@ -430,6 +449,7 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle )
      goto err_sme_close;
    }
 
+<<<<<<< HEAD
    if (gpVosContext->roamDelayStatsEnabled &&
        !vos_roam_delay_stats_init())
    {
@@ -437,6 +457,8 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle )
                  "%s: Could not init roamDelayStats", __func__);
    }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO_HIGH,
                "%s: VOSS successfully Opened", __func__);
 
@@ -474,9 +496,12 @@ err_sched_close:
 err_msg_queue:
    vos_mq_deinit(&gpVosContext->freeVosMq);
 
+<<<<<<< HEAD
 err_fw_logs_complete_event:
     vos_event_destroy( &gpVosContext->fwLogsComplete);
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 err_wda_complete_event:
    vos_event_destroy( &gpVosContext->wdaCompleteEvent );
 
@@ -601,6 +626,7 @@ VOS_STATUS vos_preStart( v_CONTEXT_t vosContext )
    return VOS_STATUS_SUCCESS;
 }
 
+<<<<<<< HEAD
 VOS_STATUS vos_mon_start( v_CONTEXT_t vosContext )
 {
   VOS_STATUS vStatus          = VOS_STATUS_SUCCESS;
@@ -774,6 +800,8 @@ VOS_STATUS vos_mon_stop( v_CONTEXT_t vosContext )
   return VOS_STATUS_SUCCESS;
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*---------------------------------------------------------------------------
   
   \brief vos_start() - Start the Libra SW Modules 
@@ -891,6 +919,7 @@ VOS_STATUS vos_start( v_CONTEXT_t vosContext )
   if ( vStatus != VOS_STATUS_SUCCESS )
   {
      VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                  "%s: Failed to start WDA - WDA_shutdown needed %d ",
                    __func__, vStatus);
      if ( vStatus == VOS_STATUS_E_TIMEOUT )
@@ -898,6 +927,13 @@ VOS_STATUS vos_start( v_CONTEXT_t vosContext )
          WDA_setNeedShutdown(vosContext);
      }
      VOS_ASSERT(0);
+=======
+                 "%s: Failed to start WDA - WDA_shutdown needed", __func__);
+     if ( vStatus == VOS_STATUS_E_TIMEOUT )
+      {
+         WDA_setNeedShutdown(vosContext);
+      }
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
      return VOS_STATUS_E_FAILURE;
   }
   VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO,
@@ -1012,6 +1048,7 @@ VOS_STATUS vos_stop( v_CONTEXT_t vosContext )
   }
   else
   {
+<<<<<<< HEAD
     if(wcnss_device_is_shutdown())
     {
        vosStatus = VOS_STATUS_E_TIMEOUT;
@@ -1024,6 +1061,10 @@ VOS_STATUS vos_stop( v_CONTEXT_t vosContext )
        vosStatus = vos_wait_single_event( &(gpVosContext->wdaCompleteEvent),
                                        VOS_WDA_STOP_TIMEOUT );
     }
+=======
+    vosStatus = vos_wait_single_event( &(gpVosContext->wdaCompleteEvent),
+                                       VOS_WDA_STOP_TIMEOUT );
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     if ( vosStatus != VOS_STATUS_SUCCESS )
     {
@@ -1164,6 +1205,7 @@ VOS_STATUS vos_close( v_CONTEXT_t vosContext )
 
   vos_mq_deinit(&((pVosContextType)vosContext)->freeVosMq);
 
+<<<<<<< HEAD
   vosStatus = vos_event_destroy(&gpVosContext->fwLogsComplete);
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -1172,6 +1214,8 @@ VOS_STATUS vos_close( v_CONTEXT_t vosContext )
      VOS_ASSERT( VOS_IS_STATUS_SUCCESS( vosStatus ) );
   }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   vosStatus = vos_event_destroy(&gpVosContext->wdaCompleteEvent);
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -1180,7 +1224,10 @@ VOS_STATUS vos_close( v_CONTEXT_t vosContext )
      VOS_ASSERT( VOS_IS_STATUS_SUCCESS( vosStatus ) );
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   vosStatus = vos_event_destroy(&gpVosContext->ProbeEvent);
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -1189,6 +1236,7 @@ VOS_STATUS vos_close( v_CONTEXT_t vosContext )
      VOS_ASSERT( VOS_IS_STATUS_SUCCESS( vosStatus ) );
   }
 
+<<<<<<< HEAD
   if (gpVosContext->roamDelayStatsEnabled &&
       !vos_roam_delay_stats_deinit())
   {
@@ -1196,6 +1244,8 @@ VOS_STATUS vos_close( v_CONTEXT_t vosContext )
                 "%s: Could not deinit roamDelayStats", __func__);
   }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   return VOS_STATUS_SUCCESS;
 }
                   
@@ -1666,6 +1716,7 @@ VOS_STATUS vos_free_context( v_VOID_t *pVosContext, VOS_MODULE_ID moduleID,
   return VOS_STATUS_SUCCESS;
 
 } /* vos_free_context() */
+<<<<<<< HEAD
 
 
 bool vos_is_log_report_in_progress(void)
@@ -1854,6 +1905,9 @@ VOS_STATUS vos_logger_pkt_serialize( vos_pkt_t *pPacket, uint32 pkt_type)
       return vos_pkt_return_packet(pPacket);
 #endif
 }
+=======
+                                                 
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /**---------------------------------------------------------------------------
   
@@ -1995,6 +2049,7 @@ VOS_STATUS vos_mq_post_message( VOS_MQ_ID msgQueueId, vos_msg_t *pMsg )
 } /* vos_mq_post_message()*/
 
 
+<<<<<<< HEAD
 /**--------------------------------------------------------------------------
   \brief vos_mq_post_message_high_pri() - posts a high priority message to
            a message queue
@@ -2145,6 +2200,21 @@ VOS_STATUS vos_mq_post_message_high_pri(VOS_MQ_ID msgQueueId, vos_msg_t *pMsg)
     <li> SSC/WDI
   </ul>
   
+=======
+/**---------------------------------------------------------------------------
+  
+  \brief vos_tx_mq_serialize() - serialize a message to the Tx execution flow
+
+  This API allows messages to be posted to a specific message queue in the 
+  Tx excution flow.  Messages for the Tx execution flow can be posted only 
+  to the following queue.
+  
+  <ul>
+    <li> TL
+    <li> SSC/WDI
+  </ul>
+  
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   \param msgQueueId - identifies the message queue upon which the message
          will be posted.
          
@@ -2470,7 +2540,10 @@ vos_fetch_tl_cfg_parms
   pTLConfig->ucAcWeights[1] = pConfig->WfqBeWeight;
   pTLConfig->ucAcWeights[2] = pConfig->WfqViWeight;
   pTLConfig->ucAcWeights[3] = pConfig->WfqVoWeight;
+<<<<<<< HEAD
   pTLConfig->ucAcWeights[4] = pConfig->WfqVoWeight;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   pTLConfig->ucReorderAgingTime[0] = pConfig->BkReorderAgingTime;/*WLANTL_AC_BK*/
   pTLConfig->ucReorderAgingTime[1] = pConfig->BeReorderAgingTime;/*WLANTL_AC_BE*/
   pTLConfig->ucReorderAgingTime[2] = pConfig->ViReorderAgingTime;/*WLANTL_AC_VI*/
@@ -2485,6 +2558,31 @@ v_BOOL_t vos_is_apps_power_collapse_allowed(void* pHddCtx)
   return hdd_is_apps_power_collapse_allowed((hdd_context_t*) pHddCtx);
 }
 
+<<<<<<< HEAD
+=======
+void vos_abort_mac_scan(v_U8_t sessionId)
+{
+    hdd_context_t *pHddCtx = NULL;
+    v_CONTEXT_t pVosContext        = NULL;
+
+    /* Get the Global VOSS Context */
+    pVosContext = vos_get_global_context(VOS_MODULE_ID_SYS, NULL);
+    if(!pVosContext) {
+       hddLog(VOS_TRACE_LEVEL_FATAL, "%s: Global VOS context is Null", __func__);
+       return;
+    }
+    
+    /* Get the HDD context */
+    pHddCtx = (hdd_context_t *)vos_get_context(VOS_MODULE_ID_HDD, pVosContext );
+    if(!pHddCtx) {
+       hddLog(VOS_TRACE_LEVEL_FATAL, "%s: HDD context is Null", __func__);
+       return;
+    }
+
+    hdd_abort_mac_scan(pHddCtx, sessionId, eCSR_SCAN_ABORT_DEFAULT);
+    return;
+}
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*---------------------------------------------------------------------------
 
   \brief vos_shutdown() - shutdown VOS
@@ -2562,6 +2660,7 @@ VOS_STATUS vos_shutdown(v_CONTEXT_t vosContext)
 
   vos_mq_deinit(&((pVosContextType)vosContext)->freeVosMq);
 
+<<<<<<< HEAD
   vosStatus = vos_event_destroy(&gpVosContext->fwLogsComplete);
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -2571,6 +2670,8 @@ VOS_STATUS vos_shutdown(v_CONTEXT_t vosContext)
   }
 
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   vosStatus = vos_event_destroy(&gpVosContext->wdaCompleteEvent);
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -2721,19 +2822,33 @@ VOS_STATUS vos_wlanRestart(void)
   This function is called to issue dump commands to Firmware
 
   @param
+<<<<<<< HEAD
        cmd     -  Command No. to execute
        arg1    -  argument 1 to cmd
        arg2    -  argument 2 to cmd
        arg3    -  argument 3 to cmd
        arg4    -  argument 4 to cmd
        async   -  asynchronous event. Don't wait for completion.
+=======
+       cmd - Command No. to execute
+       arg1 - argument 1 to cmd
+       arg2 - argument 2 to cmd
+       arg3 - argument 3 to cmd
+       arg4 - argument 4 to cmd
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   @return
        NONE
 */
 v_VOID_t vos_fwDumpReq(tANI_U32 cmd, tANI_U32 arg1, tANI_U32 arg2,
+<<<<<<< HEAD
                         tANI_U32 arg3, tANI_U32 arg4, tANI_U8 async)
 {
    WDA_HALDumpCmdReq(NULL, cmd, arg1, arg2, arg3, arg4, NULL, async);
+=======
+                        tANI_U32 arg3, tANI_U32 arg4)
+{
+   WDA_HALDumpCmdReq(NULL, cmd, arg1, arg2, arg3, arg4, NULL);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }
 
 v_U64_t vos_get_monotonic_boottime(void)
@@ -2765,6 +2880,7 @@ VOS_STATUS  vos_randomize_n_bytes(void *start_addr, tANI_U32 n)
 
     return eHAL_STATUS_SUCCESS;
 }
+<<<<<<< HEAD
 
 /**---------------------------------------------------------------------------
 
@@ -3074,3 +3190,5 @@ void vos_probe_threads(void)
     }
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc

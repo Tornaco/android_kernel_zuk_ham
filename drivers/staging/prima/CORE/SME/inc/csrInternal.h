@@ -47,8 +47,11 @@
 #include "vos_nvitem.h"
 #include "wlan_qct_tl.h"
 
+<<<<<<< HEAD
 #include "csrApi.h"
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef WLAN_FEATURE_NEIGHBOR_ROAMING
 #include "csrNeighborRoam.h"
 #endif
@@ -406,7 +409,11 @@ typedef struct tagScanCmd
         tCsrBGScanRequest bgScanRequest;
     }u;
     //This flag will be set while aborting the scan due to band change
+<<<<<<< HEAD
      eCsrAbortReason        abortScanIndication;
+=======
+    tANI_BOOLEAN            abortScanDueToBandChange;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }tScanCmd;
 
 typedef struct tagRoamCmd
@@ -672,6 +679,7 @@ typedef struct tagCsrConfig
     tANI_U8 isCoalesingInIBSSAllowed;
     tANI_U8 allowDFSChannelRoam;
     tANI_BOOLEAN initialScanSkipDFSCh;
+<<<<<<< HEAD
     tANI_BOOLEAN ignorePeerErpInfo;
     tANI_BOOLEAN sendDeauthBeforeCon;
 #ifdef WLAN_FEATURE_AP_HT40_24G
@@ -682,6 +690,9 @@ typedef struct tagCsrConfig
     tANI_U8 roamDelayStatsEnabled;
     tANI_BOOLEAN ignorePeerHTopMode;
     tANI_BOOLEAN disableP2PMacSpoofing;
+=======
+    tANI_BOOLEAN sendDeauthBeforeCon;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 }tCsrConfig;
 
 typedef struct tagCsrChannelPowerInfo
@@ -727,6 +738,10 @@ typedef struct tagCsrScanStruct
     vos_timer_t hTimerStaApConcTimer;
 #endif
     vos_timer_t hTimerIdleScan;
+<<<<<<< HEAD
+=======
+    vos_timer_t hTimerResultAging;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     vos_timer_t hTimerResultCfgAging;
     tPalTimerHandle hTimerBgScan;
     //changes on every scan, it is used as a flag for whether 11d info is found on every scan
@@ -791,7 +806,11 @@ typedef struct tagCsrScanStruct
     /*Customer wants to optimize the scan time. Avoiding scans(passive) on DFS
     * channels while swipping through both bands can save some time
     * (apprx 1.3 sec) */
+<<<<<<< HEAD
     tANI_U8 fEnableDFSChnlScan;
+=======
+    tANI_BOOLEAN fEnableDFSChnlScan;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     /*
     * To enable/disable scanning only 2.4Ghz channels on first scan
@@ -808,9 +827,35 @@ typedef struct tagCsrScanStruct
 
     csrScanCompleteCallback callback11dScanDone;
     eCsrBand  scanBandPreference;  //This defines the band perference for scan
+<<<<<<< HEAD
     bool fcc_constraint;
 }tCsrScanStruct;
 
+=======
+}tCsrScanStruct;
+
+#ifdef FEATURE_WLAN_TDLS_INTERNAL
+/*
+ * struct to carry TDLS discovery info..
+ */
+typedef struct sCsrTdlsContext
+{
+    tDblLinkList tdlsPotentialPeerList ;
+    tANI_U16 tdlsCommonFlag ;
+    tANI_U16 tdlsCommonState ;
+    tANI_U16 tdlsPeerCount ;
+}tCsrTdlsCtxStruct;
+
+typedef struct sCsrTdlsPeerLinkInfo
+{
+    tListElem tdlsPeerStaLink ;
+    tSirTdlsPeerInfo tdlsDisPeerInfo ;
+}tCsrTdlsPeerLinkinfo ;
+#endif
+
+
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 //Save the connected information. This structure + connectedProfile
 //should contain all information about the connection
@@ -889,8 +934,12 @@ typedef struct tagCsrRoamSession
     tCsrRoamConnectedInfo connectedInfo;
     tCsrRoamProfile *pCurRoamProfile;
     tSirBssDescription *pConnectBssDesc;
+<<<<<<< HEAD
     tANI_U16 NumPmkidCache; /* valid no. of pmkid in the cache */
     tANI_U16 CurCacheIndex; /* the index in pmkidcache to write next to */
+=======
+    tANI_U16 NumPmkidCache;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     tPmkidCacheInfo PmkidCacheInfo[CSR_MAX_PMKID_ALLOWED];
     tANI_U8 cJoinAttemps;
     //This may or may not have the up-to-date valid channel list
@@ -919,7 +968,11 @@ typedef struct tagCsrRoamSession
     /* This contains the additional IE in (unicast)
      *  probe request at the time of join
      */
+<<<<<<< HEAD
     tANI_U8 addIEScan[SIR_MAC_MAX_ADD_IE_LENGTH+2];
+=======
+    tANI_U8 addIEScan[SIR_MAC_MAX_IE_LENGTH+2];
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     tANI_U32 nAddIEAssocLength;      //the byte count for pAddIeAssocIE
     tANI_U8 *pAddIEAssoc; //this contains the additional IE in (re) assoc request
 
@@ -964,7 +1017,10 @@ typedef struct tagCsrRoamSession
     * the PMKID cache. To clear the cache in this particular case this is added
     * it is needed by the HS 2.0 passpoint certification 5.2.a and b testcases */
     tANI_BOOLEAN fIgnorePMKIDCache;
+<<<<<<< HEAD
     tANI_BOOLEAN abortConnection;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 } tCsrRoamSession;
 
 typedef struct tagCsrRoamStruct
@@ -1149,7 +1205,10 @@ void csrScanResumeIMPS( tpAniSirGlobal pMac );
 
 eHalStatus csrInitGetChannels(tpAniSirGlobal pMac);
 eHalStatus csrScanFilterResults(tpAniSirGlobal pMac);
+<<<<<<< HEAD
 eHalStatus csrScanFilterDFSResults(tpAniSirGlobal pMac);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 eHalStatus csrSetModifyProfileFields(tpAniSirGlobal pMac, tANI_U32 sessionId,
                                      tCsrRoamModifyProfileFields *pModifyProfileFields);

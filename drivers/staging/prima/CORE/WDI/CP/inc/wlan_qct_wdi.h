@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -42,6 +46,12 @@ DESCRIPTION
   module.
   
       
+<<<<<<< HEAD
+=======
+  Copyright (c) 2010-2011 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ===========================================================================*/
 
 
@@ -152,9 +162,12 @@ of NV fragment is nt possbile.The next multiple of 1Kb is 3K */
 #define PERIODIC_TX_PTRN_MAX_SIZE 1536
 #define MAXNUM_PERIODIC_TX_PTRNS 6
 #define WDI_DISA_MAX_PAYLOAD_SIZE                1600
+<<<<<<< HEAD
 #define MAX_NUM_OF_BUFFER 3
 #define VALID_FW_LOG_TYPES      2
 #define MAX_LOG_BUFFER_LENGTH      128 * 1024
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*============================================================================
  *     GENERIC STRUCTURES 
@@ -417,8 +430,12 @@ typedef enum
 #endif
   /*Delete BA Ind*/
   WDI_DEL_BA_IND,
+<<<<<<< HEAD
   WDI_NAN_EVENT_IND,
   WDI_LOST_LINK_PARAMS_IND,
+=======
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   WDI_MAX_IND
 }WDI_LowLevelIndEnumType;
 
@@ -619,6 +636,7 @@ typedef struct
 } WDI_WakeReasonIndType;
 #endif // WLAN_WAKEUP_EVENTS
 
+<<<<<<< HEAD
 typedef struct
 {
     wpt_uint16 event_data_len;
@@ -626,6 +644,8 @@ typedef struct
 } WDI_NanEventType;
 
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*---------------------------------------------------------------------------
  WDI_MissedBeaconIndType
 -----------------------------------------------------------------------------*/
@@ -736,6 +756,7 @@ typedef struct
 #endif
 
 
+<<<<<<< HEAD
 typedef struct
 {
   wpt_uint8  bssIdx;
@@ -749,6 +770,8 @@ typedef struct
 
 }WDI_LostLinkParamsIndType;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*---------------------------------------------------------------------------
  WDI_IbssPeerInactivityIndType
 -----------------------------------------------------------------------------*/
@@ -833,6 +856,7 @@ typedef struct
 
 } WDI_RateUpdateIndParams;
 
+<<<<<<< HEAD
 typedef struct
 {
    wpt_uint32 ubsp_enter_cnt;
@@ -850,6 +874,10 @@ typedef struct
 
 #ifdef FEATURE_WLAN_CH_AVOID
 #define WDI_CH_AVOID_MAX_RANGE   15
+=======
+#ifdef FEATURE_WLAN_CH_AVOID
+#define WDI_CH_AVOID_MAX_RANGE   4
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 typedef struct
 {
@@ -892,11 +920,14 @@ typedef struct
     wpt_macAddr  bssId;   // TO SUPPORT BT-AMP
 }  WDI_DeleteBAIndType;
 
+<<<<<<< HEAD
 typedef struct
 {
     wpt_uint32 tx_complete_status;
     wpt_uint32 tx_bd_token;
 }  WDI_TxBDStatus;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*---------------------------------------------------------------------------
   WDI_LowLevelIndType
     Inidcation type and information about the indication being carried
@@ -975,11 +1006,14 @@ typedef struct
     void *pEXTScanIndData;
 #endif
     WDI_DeleteBAIndType         wdiDeleteBAInd;
+<<<<<<< HEAD
 
     WDI_NanEventType wdiNanEvent;
 
     WDI_TxBDStatus              wdiTxBdInd;
     WDI_LostLinkParamsIndType   wdiLostLinkParamsInd;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   }  wdiIndicationData;
 }WDI_LowLevelIndType;
 
@@ -2684,6 +2718,7 @@ typedef struct
 
 }WDI_SpoofMacAddrRspParamType;
 /*---------------------------------------------------------------------------
+<<<<<<< HEAD
   WDI_GetFrameLogRspParamType
 ---------------------------------------------------------------------------*/
 typedef struct
@@ -2720,6 +2755,8 @@ typedef struct
 }WDI_FatalEventLogsRspParamType;
 
 /*---------------------------------------------------------------------------
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   WDI_AddBAReqinfoType
 ---------------------------------------------------------------------------*/
 typedef struct
@@ -4091,6 +4128,7 @@ typedef struct
    void*                      pUserData; 
 }WDI_ConfigureRxpFilterReqParamsType;
 
+<<<<<<< HEAD
 typedef struct
 {
    wpt_uint8 enableFlag;
@@ -4120,6 +4158,8 @@ typedef struct
    wpt_uint32 logBuffLength[MAX_NUM_OF_BUFFER];
 }WDI_FWLoggingDXEdoneIndInfoType;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*---------------------------------------------------------------------------
   WDI_BeaconFilterInfoType
   Beacon Filtering data structures passed to WDA form UMAC
@@ -5811,6 +5851,7 @@ typedef struct
 } WDI_AddPeriodicTxPtrnParamsType;
 
 /*---------------------------------------------------------------------------
+<<<<<<< HEAD
   WDI_NanRequestType
 ---------------------------------------------------------------------------*/
 typedef struct
@@ -5821,6 +5862,8 @@ typedef struct
 
 
 /*---------------------------------------------------------------------------
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   WDI_DelPeriodicTxPtrnParamsType
 ---------------------------------------------------------------------------*/
 typedef struct
@@ -6043,7 +6086,10 @@ typedef enum
 /* Max key size  including the WAPI and TKIP */
 #define WLAN_MAX_KEY_RSC_LEN         16
 // Definition for Encryption Keys
+<<<<<<< HEAD
 //typedef struct sSirKeys
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 typedef struct
 {
     wpt_uint8                  keyId;
@@ -6117,6 +6163,7 @@ typedef struct
     wpt_payload data;
 }wpt_pkt80211;
 
+<<<<<<< HEAD
 #define NUM_FILTERS_SUPPORTED 1
 typedef struct
 {
@@ -6142,6 +6189,8 @@ typedef struct
 
 }WDI_MonStartReqType;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /*----------------------------------------------------------------------------
  *   WDI callback types
  *--------------------------------------------------------------------------*/
@@ -8050,6 +8099,7 @@ typedef void  (*WDI_LLStatsClearRspCb)(void *pEventData,
 typedef void  (*WDI_SetSpoofMacAddrRspCb)(
                         WDI_SpoofMacAddrRspParamType* wdiRsp, void *pUserData);
 
+<<<<<<< HEAD
 typedef void  (*WDI_FWStatsGetRspCb)(WDI_Status status,void *fwStatsResp,
                                          void *pUserData);
 
@@ -8062,6 +8112,9 @@ typedef void  (*WDI_FatalEventLogsRspCb)(
                          WDI_FatalEventLogsRspParamType *wdiRsp, void *pUserData);
 
 typedef void  (*WDI_MonModeRspCb)(void *pEventData,void *pUserData);
+=======
+typedef void  (*WDI_EncryptMsgRspCb)(wpt_uint8 status, void *pEventData, void* pUserData);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*========================================================================
  *     Function Declarations and Documentation
@@ -9491,6 +9544,7 @@ WDI_SetUapsdAcParamsReq
   void*                   pUserData
 );
 
+<<<<<<< HEAD
 
 /**
  @brief WDI_FatalEventLogsReq will be called when the upper
@@ -9585,6 +9639,8 @@ WDI_FWLoggingInitReq
    void*                                pUserData
 );
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 /**
  @brief WDI_ConfigureRxpFilterReq will be called when the upper 
         MAC wants to set/reset the RXP filters for received pkts
@@ -11201,6 +11257,7 @@ void WDI_TransportChannelDebug
 );
 
 /**
+<<<<<<< HEAD
  @brief WDI_TransportKickDxe -
     Request Kick DXE when first HDD TX time out
     happens
@@ -11211,6 +11268,8 @@ void WDI_TransportChannelDebug
 void WDI_TransportKickDxe(void);
 
 /**
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  @brief WDI_SsrTimerCB
     Callback function for SSR timer, if this is called then the graceful
     shutdown for Riva did not happen.
@@ -11449,6 +11508,7 @@ WDI_Status WDI_LLStatsClearReq
 );
 #endif /* WLAN_FEATURE_LINK_LAYER_STATS */
 
+<<<<<<< HEAD
 WDI_Status WDI_FWStatsGetReq
 (
    void* pwdiFWStatsGetReqParams,
@@ -11469,6 +11529,8 @@ WDI_Status WDI_MonStopReq
     void*                  pUserData
 );
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef FEATURE_WLAN_BATCH_SCAN
 /**
  @brief WDI_SetBatchScanReq
@@ -11555,6 +11617,7 @@ WDI_EncryptMsgReq(void* pwdiEncryptMsgParams,
         WDI_EncryptMsgRspCb wdiEncryptMsgCbRsp,
         void*                   pUserData
         );
+<<<<<<< HEAD
 
 /**
  @brief WDI_NanRequest
@@ -11612,6 +11675,8 @@ WDI_EnableDisableCAEventInd
 wpt_uint32 val
 );
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef __cplusplus
  }
 #endif 

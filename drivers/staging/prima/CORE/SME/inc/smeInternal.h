@@ -38,6 +38,12 @@
   
   \brief prototype for SME internal structures and APIs used for SME and MAC
   
+<<<<<<< HEAD
+=======
+   Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 
@@ -52,7 +58,10 @@
 #include "vos_memory.h"
 #include "vos_types.h"
 #include "csrLinkList.h"
+<<<<<<< HEAD
 #include "vos_diag_core_event.h"
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 /*-------------------------------------------------------------------------- 
   Type declarations
@@ -73,9 +82,12 @@ typedef enum eSmeCommandType
     eSmeCommandAddStaSession,
     eSmeCommandDelStaSession,
     eSmeCommandPnoReq,
+<<<<<<< HEAD
     eSmeCommandMacSpoofRequest,
     eSmeCommandGetFrameLogRequest,
     eSmeCommandSetMaxTxPower,
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef FEATURE_WLAN_TDLS
     //eSmeTdlsCommandMask = 0x80000,  //To identify TDLS commands <TODO>
     //These can be considered as csr commands. 
@@ -84,8 +96,19 @@ typedef enum eSmeCommandType
     eSmeCommandTdlsDelPeer, 
     eSmeCommandTdlsLinkEstablish,
     eSmeCommandTdlsChannelSwitch, // tdlsoffchan
+<<<<<<< HEAD
 #endif
     eSmeCommandNanReq,
+=======
+#ifdef FEATURE_WLAN_TDLS_INTERNAL
+    eSmeCommandTdlsDiscovery,
+    eSmeCommandTdlsLinkSetup,
+    eSmeCommandTdlsLinkTear,
+    eSmeCommandTdlsEnterUapsd,
+    eSmeCommandTdlsExitUapsd,
+#endif
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     //PMC
     eSmePmcCommandMask = 0x20000, //To identify PMC commands
     eSmeCommandEnterImps,
@@ -164,8 +187,11 @@ typedef struct tagSmeStruct
    void *pEXTScanCallbackContext;
 #endif /* WLAN_FEATURE_EXTSCAN */
    tSmeEncMsgHddCbkInfo pEncMsgInfoParams;
+<<<<<<< HEAD
    void (*pBtCoexTDLSNotification) (void *pAdapter, int);
    void (*nanCallback) (void*, tSirNanEvent*);
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
 } tSmeStruct, *tpSmeStruct;
 

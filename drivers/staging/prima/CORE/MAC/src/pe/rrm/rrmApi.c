@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -45,7 +49,11 @@
 #include "wniApi.h"
 #include "sirApi.h"
 #include "aniGlobal.h"
+<<<<<<< HEAD
 #include "wniCfg.h"
+=======
+#include "wniCfgSta.h"
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #include "limTypes.h"
 #include "limUtils.h"
 #include "limSendSmeRspMessages.h"
@@ -450,8 +458,12 @@ rrmProcessNeighborReportResponse( tpAniSirGlobal pMac,
    //Send request to SME.
    mmhMsg.type    = pSmeNeighborRpt->messageType;
    mmhMsg.bodyptr = pSmeNeighborRpt;
+<<<<<<< HEAD
    MTRACE(macTrace(pMac, TRACE_CODE_TX_SME_MSG, pSessionEntry->peSessionId,
                                                            mmhMsg.type));
+=======
+   MTRACE(macTraceMsgTx(pMac, pSessionEntry->peSessionId, mmhMsg.type));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    status = limSysProcessMmhMsgApi(pMac, &mmhMsg, ePROT);
 
    return status;
@@ -670,8 +682,12 @@ rrmProcessBeaconReportReq( tpAniSirGlobal pMac,
    //Send request to SME.
    mmhMsg.type    = eWNI_SME_BEACON_REPORT_REQ_IND;
    mmhMsg.bodyptr = pSmeBcnReportReq;
+<<<<<<< HEAD
    MTRACE(macTrace(pMac, TRACE_CODE_TX_SME_MSG, pSessionEntry->peSessionId,
                                                            mmhMsg.type));
+=======
+   MTRACE(macTraceMsgTx(pMac, pSessionEntry->peSessionId, mmhMsg.type));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return limSysProcessMmhMsgApi(pMac, &mmhMsg, ePROT);
 }
 

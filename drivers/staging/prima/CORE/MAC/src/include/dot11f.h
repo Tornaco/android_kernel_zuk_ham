@@ -19,6 +19,15 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
+<<<<<<< HEAD
+=======
+/**
+  * Copyright (c) 2012 - 2014 Qualcomm Atheros, Inc.
+  * All Rights Reserved.
+  * Qualcomm Atheros Confidential and Proprietary.
+  */
+
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifndef DOT11F_H
 #define DOT11F_H
 /**

@@ -71,6 +71,7 @@
 tANI_U32
 limDeactivateMinChannelTimerDuringScan(tpAniSirGlobal pMac)
 {
+<<<<<<< HEAD
     if ((VOS_TRUE ==
          tx_timer_running(&pMac->lim.limTimers.gLimMinChannelTimer)) &&
          (pMac->lim.gLimMlmState == eLIM_MLM_WT_PROBE_RESP_STATE) &&
@@ -82,6 +83,17 @@ limDeactivateMinChannelTimerDuringScan(tpAniSirGlobal pMac)
          */
 
         limDeactivateAndChangeTimer(pMac,eLIM_MIN_CHANNEL_TIMER);
+=======
+    if ((pMac->lim.gLimMlmState == eLIM_MLM_WT_PROBE_RESP_STATE) && (pMac->lim.gLimHalScanState == eLIM_HAL_SCANNING_STATE))
+    {
+        /**
+            * Beacon/Probe Response is received during active scanning.
+            * Deactivate MIN channel timer if running.
+            */
+        
+        limDeactivateAndChangeTimer(pMac,eLIM_MIN_CHANNEL_TIMER);
+        MTRACE(macTrace(pMac, TRACE_CODE_TIMER_ACTIVATE, NO_SESSION, eLIM_MAX_CHANNEL_TIMER));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         if (tx_timer_activate(&pMac->lim.limTimers.gLimMaxChannelTimer)
                                           == TX_TIMER_ERROR)
         {
@@ -518,8 +530,11 @@ limCheckAndAddBssDescription(tpAniSirGlobal pMac,
         return;
     }
 
+<<<<<<< HEAD
     vos_mem_zero(pBssDescr, frameLen);
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     // In scan state, store scan result.
 #if defined WLAN_FEATURE_VOWIFI
     status = limCollectBssDescription(pMac, &pBssDescr->bssDescription,
@@ -549,6 +564,7 @@ limCheckAndAddBssDescription(tpAniSirGlobal pMac,
 #ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
     if (WDA_GET_OFFLOADSCANLEARN(pRxPacketInfo))
     {
+<<<<<<< HEAD
        limLog(pMac, LOG1, FL(" pHdr->addr1:"MAC_ADDRESS_STR),
               MAC_ADDR_ARRAY(pHdr->addr1));
        limLog(pMac, LOG1, FL(" pHdr->addr2:"MAC_ADDRESS_STR),
@@ -556,6 +572,15 @@ limCheckAndAddBssDescription(tpAniSirGlobal pMac,
        limLog(pMac, LOG1, FL(" pHdr->addr3:"MAC_ADDRESS_STR),
               MAC_ADDR_ARRAY(pHdr->addr3));
        limLog( pMac, LOG1, FL("Save this entry in LFR cache"));
+=======
+       limLog(pMac, LOG2, FL(" pHdr->addr1:"MAC_ADDRESS_STR),
+              MAC_ADDR_ARRAY(pHdr->addr1));
+       limLog(pMac, LOG2, FL(" pHdr->addr2:"MAC_ADDRESS_STR),
+              MAC_ADDR_ARRAY(pHdr->addr2));
+       limLog(pMac, LOG2, FL(" pHdr->addr3:"MAC_ADDRESS_STR),
+              MAC_ADDR_ARRAY(pHdr->addr3));
+       limLog( pMac, LOG2, FL("Save this entry in LFR cache"));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
        status = limLookupNaddLfrHashEntry(pMac, pBssDescr, LIM_HASH_ADD, dontUpdateAll);
     }
     else

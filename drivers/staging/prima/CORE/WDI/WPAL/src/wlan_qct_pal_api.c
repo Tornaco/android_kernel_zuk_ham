@@ -34,6 +34,12 @@
                
    Definitions for platform Windows.
   
+<<<<<<< HEAD
+=======
+   Copyright 2010 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 
@@ -410,12 +416,17 @@ void wpalWlanReload(void)
 void wpalWcnssResetIntr(void)
 {
 #ifdef HAVE_WCNSS_RESET_INTR
+<<<<<<< HEAD
    wcnss_reset_fiq(true);
+=======
+   wcnss_reset_intr();
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #endif
    return;
 }
 
 /*---------------------------------------------------------------------------
+<<<<<<< HEAD
     wpalWcnssIsProntoHwVer3 -  Check if Pronto Hw ver3
 
     Param:
@@ -481,13 +492,29 @@ wpt_uint8 wpalIsFwLoggingSupported(void)
        arg3 -  argument 3 to cmd
        arg4 -  argument 4 to cmd
        async -asynchronous event. Don't wait for completion.
+=======
+    wpalFwDumpReq -  Trigger the dump commands to Firmware
+     
+    Param:
+       cmd - Command No. to execute
+       arg1 - argument 1 to cmd
+       arg2 - argument 2 to cmd
+       arg3 - argument 3 to cmd
+       arg4 - argument 4 to cmd
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     Return:
        NONE
 ---------------------------------------------------------------------------*/
 void wpalFwDumpReq(wpt_uint32 cmd, wpt_uint32 arg1, wpt_uint32 arg2,
+<<<<<<< HEAD
                     wpt_uint32 arg3, wpt_uint32 arg4, wpt_boolean async)
 {
    vos_fwDumpReq(cmd, arg1, arg2, arg3, arg4, async);
+=======
+                    wpt_uint32 arg3, wpt_uint32 arg4)
+{
+   vos_fwDumpReq(cmd, arg1, arg2, arg3, arg4);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    return;
 }
 
@@ -532,6 +559,7 @@ int  wpalIsSsrPanicOnFailure(void)
    return isSsrPanicOnFailure();
 }
 
+<<<<<<< HEAD
 int  wpalGetDxeReplenishRXTimerVal(void)
 {
    return vos_get_dxeReplenishRXTimerVal();
@@ -542,3 +570,5 @@ int  wpalIsDxeSSREnable(void)
    return vos_get_dxeSSREnable();
 }
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc

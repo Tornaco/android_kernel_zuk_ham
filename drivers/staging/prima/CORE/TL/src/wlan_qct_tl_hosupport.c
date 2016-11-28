@@ -36,6 +36,12 @@
   Are listed for each API below. 
   
   
+<<<<<<< HEAD
+=======
+  Copyright (c) 2008 QUALCOMM Incorporated.
+  All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ===========================================================================*/
 
 /*===========================================================================
@@ -377,12 +383,20 @@ void WLANTL_HSDebugDisplay
    {
       if(VOS_TRUE == tlCtxt->isBMPS)
       {
+<<<<<<< HEAD
          TLLOGE(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_INFO," ----> CRegion %d, hRSSI:NA, BMPS, Alpha %d",
+=======
+         TLLOGE(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_ERROR," ----> CRegion %d, hRSSI:NA, BMPS, Alpha %d",
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                       currentHO->regionNumber, currentHO->alpha));
       }
       else
       {
+<<<<<<< HEAD
          TLLOGE(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_INFO," ----> CRegion %d, hRSSI %d, Alpha %d",
+=======
+         TLLOGE(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_ERROR," ----> CRegion %d, hRSSI %d, Alpha %d",
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
                       currentHO->regionNumber,
                       currentHO->historyRSSI,
                       currentHO->alpha));
@@ -848,7 +862,11 @@ VOS_STATUS WLANTL_HSGetRSSI
    currentHO = &tlCtxt->hoSupport.currentHOState;
 
    currentRSSI0 = WLANTL_GETRSSI0(pBDHeader);
+<<<<<<< HEAD
    currentRSSI1 = WLANTL_GETRSSI1(pBDHeader);
+=======
+   currentRSSI1 = WLANTL_GETRSSI0(pBDHeader);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
    currentRSSI  = (currentRSSI0 > currentRSSI1) ? currentRSSI0 : currentRSSI1;
 
    if (0 == currentRSSI)

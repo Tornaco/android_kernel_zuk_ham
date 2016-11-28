@@ -37,6 +37,12 @@
    Definitions for platform independent means of packing and aligning
    data structures
   
+<<<<<<< HEAD
+=======
+   Copyright 2009 (c) Qualcomm, Incorporated.  All Rights Reserved.
+   
+   Qualcomm Confidential and Proprietary.
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
   
   ========================================================================*/
 

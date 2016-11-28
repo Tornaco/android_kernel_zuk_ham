@@ -231,10 +231,22 @@ typedef struct sLimTimers
 #ifdef FEATURE_WLAN_ESE
     TX_TIMER           gLimEseTsmTimer;
 #endif
+<<<<<<< HEAD
     TX_TIMER           gLimPeriodicJoinProbeReqTimer;
     TX_TIMER           gLimDisassocAckTimer;
     TX_TIMER           gLimDeauthAckTimer;
     TX_TIMER           gLimPeriodicAuthRetryTimer;
+=======
+#ifdef FEATURE_WLAN_TDLS_INTERNAL
+    TX_TIMER           gLimTdlsDisRspWaitTimer;
+    TX_TIMER           gLimTdlsLinkSetupRspTimeouTimer;
+    TX_TIMER           gLimTdlsLinkSetupCnfTimeoutTimer;
+#endif
+
+    TX_TIMER           gLimPeriodicJoinProbeReqTimer;
+    TX_TIMER           gLimDisassocAckTimer;
+    TX_TIMER           gLimDeauthAckTimer;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     // This timer is started when single shot NOA insert msg is sent to FW for scan in P2P GO mode
     TX_TIMER           gLimP2pSingleShotNoaInsertTimer;
     /* This timer is used to convert active channel to
@@ -369,8 +381,11 @@ typedef struct sAniSirLim
 
     //////////////////////////////////////     SCAN/LEARN RELATED START ///////////////////////////////////////////
     tSirMacAddr         gSelfMacAddr;   //added for BT-AMP Support 
+<<<<<<< HEAD
     tSirMacAddr         spoofMacAddr;   //added for Mac Addr Spoofing support
     tANI_U8             isSpoofingEnabled;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     //////////////////////////////////////////     BSS RELATED END ///////////////////////////////////////////
     // Place holder for StartBssReq message
@@ -420,7 +435,10 @@ typedef struct sAniSirLim
     /// Definition for storing IBSS peers BSS description
     tLimIbssPeerNode      *gLimIbssPeerList;
     tANI_U32               gLimNumIbssPeers;
+<<<<<<< HEAD
     tANI_U32               gLimIbssRetryCnt;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     // ibss info - params for which ibss to join while coalescing
     tAniSirLimIbss      ibssInfo;
@@ -858,6 +876,25 @@ typedef struct sAniSirLim
 
     ////////////////////////////////  HT RELATED           //////////////////////////////////////////
 
+<<<<<<< HEAD
+=======
+#ifdef FEATURE_WLAN_TDLS_INTERNAL
+    ////////////////////////////////  TDLS RELATED         //////////////////////////////////////////
+    
+    tSirTdlsDisReq gLimTdlsDisReq ; 
+    //tLimDisResultList *gTdlsDisResultList ;
+    tLimDisResultList *gLimTdlsDisResultList ;
+    tANI_U8 gLimTdlsDisStaCount ;
+    tANI_U8 gAddStaDisRspWait ;
+
+    tLimTdlsLinkSetupInfo  gLimTdlsLinkSetupInfo;
+    
+    /* to track if direct link is b/g/n, this can be independent of AP link */
+#ifdef FEATURE_WLAN_TDLS_NEGATIVE
+    tANI_U32 gLimTdlsNegativeBehavior;  
+#endif
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef FEATURE_WLAN_TDLS
     tANI_U8 gLimAddStaTdls ;
     tANI_U8 gLimTdlsLinkMode ;
@@ -904,8 +941,11 @@ tLimMlmOemDataRsp       *gpLimMlmOemDataRsp;
      * debug marker frame.
      */
     tANI_U32 remOnChnSeqNum;
+<<<<<<< HEAD
     tANI_U32 txBdToken;
     tANI_U32 EnableTdls2040BSSCoexIE;
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 } tAniSirLim, *tpAniSirLim;
 
 typedef struct sLimMgmtFrameRegistration
@@ -976,6 +1016,7 @@ typedef struct sHalMacStartParameters
 
 } tHalMacStartParameters;
 
+<<<<<<< HEAD
 typedef enum
 {
     LIM_AUTH_ACK_NOT_RCD,
@@ -983,6 +1024,8 @@ typedef enum
     LIM_AUTH_ACK_RCD_FAILURE,
 } tAuthAckStatus;
 
+=======
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 // -------------------------------------------------------------------
 /// MAC Sirius parameter structure
 typedef struct sAniSirGlobal
@@ -1020,6 +1063,12 @@ typedef struct sAniSirGlobal
 #ifdef FEATURE_OEM_DATA_SUPPORT
     tOemDataStruct oemData;
 #endif
+<<<<<<< HEAD
+=======
+#ifdef FEATURE_WLAN_TDLS_INTERNAL
+    tCsrTdlsCtxStruct tdlsCtx ;
+#endif
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     tPmcInfo     pmc;
     tSmeBtcInfo  btc;
 
@@ -1062,12 +1111,16 @@ typedef struct sAniSirGlobal
 
     v_BOOL_t isCoexScoIndSet;
     v_U8_t miracast_mode;
+<<<<<<< HEAD
     v_U8_t fBtcEnableIndTimerVal;
     v_U8_t roamDelayStatsEnabled;
     tANI_BOOLEAN miracastVendorConfig;
     v_BOOL_t fActiveScanOnDFSChannels;
     tAuthAckStatus  authAckStatus;
     sir_mgmt_frame_ind_callback mgmt_frame_ind_cb;
+=======
+    tANI_BOOLEAN miracastVendorConfig;
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 } tAniSirGlobal;
 
 #ifdef FEATURE_WLAN_TDLS

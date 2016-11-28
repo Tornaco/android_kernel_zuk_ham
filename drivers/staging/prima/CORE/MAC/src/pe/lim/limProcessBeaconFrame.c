@@ -37,7 +37,11 @@
  *
  */
 
+<<<<<<< HEAD
 #include "wniCfg.h"
+=======
+#include "wniCfgSta.h"
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #include "aniGlobal.h"
 #include "cfgApi.h"
 #include "schApi.h"
@@ -82,9 +86,15 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
     pHdr = WDA_GET_RX_MAC_HEADER(pRxPacketInfo);
 
 
+<<<<<<< HEAD
     limLog(pMac, LOG2, FL("Received Beacon frame with length=%d from "),
            WDA_GET_RX_MPDU_LEN(pRxPacketInfo));
     limPrintMacAddr(pMac, pHdr->sa, LOG2);
+=======
+    PELOG2(limLog(pMac, LOG2, FL("Received Beacon frame with length=%d from "),
+           WDA_GET_RX_MPDU_LEN(pRxPacketInfo));
+    limPrintMacAddr(pMac, pHdr->sa, LOG2);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 
     if (!pMac->fScanOffload)
     {
@@ -106,7 +116,11 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
         || pMac->fScanOffload
         )
     {
+<<<<<<< HEAD
         pBeacon = vos_mem_vmalloc(sizeof(tSchBeaconStruct));
+=======
+        pBeacon = vos_mem_malloc(sizeof(tSchBeaconStruct));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         if ( NULL == pBeacon )
         {
             limLog(pMac, LOGE, FL("Unable to allocate memory in limProcessBeaconFrame") );
@@ -127,7 +141,11 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
                (sirCompareMacAddr( psessionEntry->bssId, pHdr->sa)))
                 limParseBeaconForTim(pMac, (tANI_U8 *) pRxPacketInfo, psessionEntry);
 
+<<<<<<< HEAD
             vos_mem_vfree(pBeacon);
+=======
+            vos_mem_free(pBeacon);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             return;
         }
         /*during scanning, when any session is active, and beacon/Pr belongs to
@@ -191,7 +209,11 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
              // STA in WT_JOIN_BEACON_STATE (IBSS)
             limCheckAndAnnounceJoinSuccess(pMac, pBeacon, pHdr,psessionEntry);
         } // if (pMac->lim.gLimMlmState == eLIM_MLM_WT_PROBE_RESP_STATE)
+<<<<<<< HEAD
         vos_mem_vfree(pBeacon);
+=======
+        vos_mem_free(pBeacon);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     } // if ((pMac->lim.gLimMlmState == eLIM_MLM_WT_PROBE_RESP_STATE) || ...
     else
     {
@@ -214,9 +236,15 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
         }
         else
         {
+<<<<<<< HEAD
             limLog(pMac, LOG1, FL("Received Beacon in unexpected state %d"),
                    psessionEntry->limMlmState);
             limPrintMlmState(pMac, LOG1, psessionEntry->limMlmState);
+=======
+            PELOG1(limLog(pMac, LOG1, FL("Received Beacon in unexpected state %d"),
+                   psessionEntry->limMlmState);
+            limPrintMlmState(pMac, LOG1, psessionEntry->limMlmState);)
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 #ifdef WLAN_DEBUG                    
             pMac->lim.gLimUnexpBcnCnt++;
 #endif
@@ -264,7 +292,11 @@ limProcessBeaconFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
         (pMac->lim.gLimMlmState == eLIM_MLM_PASSIVE_SCAN_STATE) ||
         (pMac->lim.gLimMlmState == eLIM_MLM_LEARN_STATE))
     {
+<<<<<<< HEAD
         pBeacon = vos_mem_vmalloc(sizeof(tSchBeaconStruct));
+=======
+        pBeacon = vos_mem_malloc(sizeof(tSchBeaconStruct));
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         if ( NULL == pBeacon )
         {
             limLog(pMac, LOGE, FL("Unable to allocate memory in limProcessBeaconFrameNoSession") );
@@ -276,7 +308,11 @@ limProcessBeaconFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
             // Received wrongly formatted/invalid Beacon. Ignore and move on. 
             limLog(pMac, LOGW, FL("Received invalid Beacon in global MLM state %d"), pMac->lim.gLimMlmState);
             limPrintMlmState(pMac, LOGW,  pMac->lim.gLimMlmState);
+<<<<<<< HEAD
             vos_mem_vfree(pBeacon);
+=======
+            vos_mem_free(pBeacon);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
             return;
         }
 
@@ -293,7 +329,11 @@ limProcessBeaconFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
         else if (pMac->lim.gLimMlmState == eLIM_MLM_LEARN_STATE)
         {
         }  // end of eLIM_MLM_LEARN_STATE)       
+<<<<<<< HEAD
         vos_mem_vfree(pBeacon);
+=======
+        vos_mem_free(pBeacon);
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     } // end of (eLIM_MLM_WT_PROBE_RESP_STATE) || (eLIM_MLM_PASSIVE_SCAN_STATE)
     else
     {

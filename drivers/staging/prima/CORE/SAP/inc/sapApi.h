@@ -39,6 +39,11 @@ DESCRIPTION
   module.
   
       
+<<<<<<< HEAD
+=======
+  Copyright (c) 2010 QUALCOMM Incorporated. All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 ===========================================================================*/
 
 
@@ -187,6 +192,10 @@ typedef enum {
     eSAP_ASSOC_STA_CALLBACK_EVENT,  /*Event sent when user called WLANSAP_GetAssocStations */
     eSAP_GET_WPSPBC_SESSION_EVENT,  /* Event send when user call  WLANSAP_getWpsSessionOverlap */  
     eSAP_WPS_PBC_PROBE_REQ_EVENT, /* Event send on WPS PBC probe request is received */
+<<<<<<< HEAD
+=======
+    eSAP_INDICATE_MGMT_FRAME,
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
     eSAP_REMAIN_CHAN_READY,
     eSAP_SEND_ACTION_CNF,
     eSAP_DISCONNECT_ALL_P2P_CLIENT,
@@ -393,6 +402,10 @@ typedef struct sap_Event_s {
         tSap_AssocStaListEvent                    sapAssocStaListEvent; /*SAP_ASSOC_STA_CALLBACK_EVENT */
         tSap_GetWPSPBCSessionEvent                sapGetWPSPBCSessionEvent; /*SAP_GET_WPSPBC_SESSION_EVENT */
         tSap_WPSPBCProbeReqEvent                  sapPBCProbeReqEvent; /*eSAP_WPS_PBC_PROBE_REQ_EVENT */
+<<<<<<< HEAD
+=======
+        tSap_ManagementFrameInfo                  sapManagementFrameInfo; /*eSAP_INDICATE_MGMT_FRAME*/
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
         tSap_SendActionCnf                        sapActionCnf;  /* eSAP_SEND_ACTION_CNF */ 
         tSap_UnknownSTAJoinEvent                  sapUnknownSTAJoin; /* eSAP_UNKNOWN_STA_JOIN */
         tSap_MaxAssocExceededEvent                sapMaxAssocExceeded; /* eSAP_MAX_ASSOC_EXCEEDED */
@@ -1001,12 +1014,16 @@ WLANSAP_StopBss
 VOS_STATUS 
 WLANSAP_DisassocSta
 (
+<<<<<<< HEAD
     v_PVOID_t  pvosGCtx,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,18,0))
     const v_U8_t *pPeerStaMac
 #else
     v_U8_t *pPeerStaMac
 #endif
+=======
+    v_PVOID_t  pvosGCtx, v_U8_t *pPeerStaMac
+>>>>>>> 4e32c4121f2e0d83ffd2dc980b909cad291501cc
 );
 
 /*==========================================================================
