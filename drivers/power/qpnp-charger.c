@@ -2546,6 +2546,15 @@ get_prop_charge_type(struct qpnp_chg_chip *chip)
 
 	return POWER_SUPPLY_CHARGE_TYPE_NONE;
 }
+static bool needs_soc_refresh(struct qpnp_chg_chip *chip, ktime_t now)
+{
+	if (!chip->last_soc_chk.tv64 ||
+		(ktime_to_ms(ktime_sub(now, chip->last_soc_chk)) >
+		(BATT_HEARTBEAT_INTERVAL - MSEC_PER_SEC)))
+		return true;
+
+	return false;
+
 
 #define DEFAULT_CAPACITY	50
 static int
@@ -4978,6 +4987,9 @@ qpnp_chg_hwinit(struct qpnp_chg_chip *chip, u8 subtype,
 			pr_debug("failed to force on VREF_BAT_THM rc=%d\n", rc);
 			return rc;
 		}
+
+	if (needs_soc_refresh(chip, ktime_get_boottime()))
+		power_supply_changed(&chip->batt_psy);
 
 		init_data = of_get_regulator_init_data(chip->dev,
 					       spmi_resource->of_node);
