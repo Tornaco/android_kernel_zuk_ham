@@ -29,8 +29,8 @@
 #define VIB_DRV_EN_MANUAL_MASK	0xfc
 #define VIB_DRV_LOGIC_SHIFT	0x2
 
-#define VIB_MAX_LEVEL_mV	3100
-#define VIB_MIN_LEVEL_mV	1200
+#define VIB_MAX_LEVEL_mV	2200
+#define VIB_MIN_LEVEL_mV	800
 
 struct pm8xxx_vib {
 	struct hrtimer vib_timer;
@@ -237,7 +237,7 @@ static int __devinit pm8xxx_vib_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	vib->pdata	= pdata;
-	vib->level	= pdata->level_mV / 100;
+	vib->level	= pdata->level_mV / 60;
 	vib->dev	= &pdev->dev;
 
 	spin_lock_init(&vib->lock);

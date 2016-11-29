@@ -25,11 +25,11 @@
 #define QPNP_VIB_VTG_CTL(base)		(base + 0x41)
 #define QPNP_VIB_EN_CTL(base)		(base + 0x46)
 
-#define QPNP_VIB_MAX_LEVEL		31
-#define QPNP_VIB_MIN_LEVEL		12
+#define QPNP_VIB_MAX_LEVEL		25
+#define QPNP_VIB_MIN_LEVEL		7
 
-#define QPNP_VIB_DEFAULT_TIMEOUT	15000
-#define QPNP_VIB_DEFAULT_VTG_LVL	3100
+#define QPNP_VIB_DEFAULT_TIMEOUT	11000
+#define QPNP_VIB_DEFAULT_VTG_LVL	2000
 
 #define QPNP_VIB_EN			BIT(7)
 #define QPNP_VIB_VTG_SET_MASK		0x1F
@@ -258,7 +258,7 @@ static int __devinit qpnp_vibrator_probe(struct spmi_device *spmi)
 		return rc;
 	}
 
-	vib->vtg_level /= 100;
+	vib->vtg_level /= 50;
 
 	vib_resource = spmi_get_resource(spmi, 0, IORESOURCE_MEM, 0);
 	if (!vib_resource) {
