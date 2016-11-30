@@ -770,7 +770,7 @@ static ssize_t show_enabled(struct kobject *a, struct attribute *b,
 	case MSM_MPDEC_IDLE:
 	case MSM_MPDEC_DOWN:
 	case MSM_MPDEC_UP:
-		enabled = 1;
+		enabled = 0;
 		break;
 	default:
 		enabled = 333;
@@ -917,7 +917,7 @@ static ssize_t store_enabled(struct kobject *a, struct attribute *b,
 	case MSM_MPDEC_IDLE:
 	case MSM_MPDEC_DOWN:
 	case MSM_MPDEC_UP:
-		enabled = 1;
+		enabled = 0;
 		break;
 	default:
 		enabled = 333;
