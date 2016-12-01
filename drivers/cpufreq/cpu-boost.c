@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -27,6 +27,8 @@
 #include <linux/time.h>
 #ifdef CONFIG_STATE_NOTIFIER
 #include <linux/state_notifier.h>
+#else
+#include <linux/fb.h>
 #endif
 
 struct cpu_sync {
@@ -34,6 +36,7 @@ struct cpu_sync {
 	int cpu;
 	spinlock_t lock;
 	bool pending;
+	atomic_t being_woken;
 	int src_cpu;
 	unsigned int boost_min;
 	unsigned int input_boost_min;
@@ -158,9 +161,6 @@ static int boost_adjust_notify(struct notifier_block *nb, unsigned long val,
 	if (val != CPUFREQ_ADJUST)
 		return NOTIFY_OK;
 
-	if (!b_min && !ib_min)
-		return NOTIFY_OK;
-
 	min = max(b_min, ib_min);
 	min = min(min, policy->max);
 
@@ -223,6 +223,7 @@ static void do_input_boost_rem(struct work_struct *work)
 static int boost_migration_should_run(unsigned int cpu)
 {
 	struct cpu_sync *s = &per_cpu(sync_info, cpu);
+
 	return s->pending;
 }
 
@@ -248,31 +249,27 @@ static void run_boost_migration(unsigned int cpu)
 	if (ret)
 		return;
 
-	if (src_policy.min == src_policy.cpuinfo.min_freq) {
-		pr_debug("No sync. Source CPU%d@%dKHz at min freq\n",
-				src_cpu, src_policy.cur);
+	if (dest_policy.cur >= src_policy.cur ) {
+		pr_debug("No sync. CPU%d@%dKHz >= CPU%d@%dKHz\n",
+			 dest_cpu, dest_policy.cur, src_cpu, src_policy.cur);
 		return;
 	}
 
+	if (sync_threshold && (dest_policy.cur >= sync_threshold))
+		return;
+
 	cancel_delayed_work_sync(&s->boost_rem);
-	if (sync_threshold)
-		s->boost_min = min(sync_threshold, src_policy.cur);
-	else
+	if (sync_threshold) {
+		if (src_policy.cur >= sync_threshold)
+			s->boost_min = sync_threshold;
+		else
+			s->boost_min = src_policy.cur;
+	} else {
 		s->boost_min = src_policy.cur;
+	}
 
 	/* Force policy re-evaluation to trigger adjust notifier. */
 	get_online_cpus();
-	if (cpu_online(src_cpu))
-		/*
-		 * Send an unchanged policy update to the source
-		 * CPU. Even though the policy isn't changed from
-		 * its existing boosted or non-boosted state
-		 * notifying the source CPU will let the governor
-		 * know a boost happened on another CPU and that it
-		 * should re-evaluate the frequency at the next timer
-		 * event without interference from a min sample time.
-		 */
-		cpufreq_update_policy(src_cpu);
 	if (cpu_online(dest_cpu)) {
 		cpufreq_update_policy(dest_cpu);
 		queue_delayed_work_on(dest_cpu, cpu_boost_wq,
@@ -319,10 +316,6 @@ static int boost_migration_notify(struct notifier_block *nb,
 		return NOTIFY_OK;
 
 	if (!boost_ms)
-		return NOTIFY_OK;
-
-	/* Avoid deadlock in try_to_wake_up() */
-	if (thread == current)
 		return NOTIFY_OK;
 
 	pr_debug("Migration: CPU%d --> CPU%d\n", (int) arg, (int) dest_cpu);
@@ -508,6 +501,29 @@ static int state_notifier_callback(struct notifier_block *this,
 
 	return NOTIFY_OK;
 }
+#else
+static int fb_notifier_callback(struct notifier_block *self,
+				unsigned long event, void *data)
+{
+	struct fb_event *evdata = data;
+	int *blank;
+
+	if (evdata && evdata->data && event == FB_EVENT_BLANK) {
+		blank = evdata->data;
+		switch (*blank) {
+			case FB_BLANK_UNBLANK:
+				__wakeup_boost();
+				break;
+			case FB_BLANK_POWERDOWN:
+			case FB_BLANK_HSYNC_SUSPEND:
+			case FB_BLANK_VSYNC_SUSPEND:
+			case FB_BLANK_NORMAL:
+				break;
+		}
+	}
+
+	return 0;
+}
 #endif
 
 static int cpu_boost_init(void)
@@ -532,10 +548,6 @@ static int cpu_boost_init(void)
 	atomic_notifier_chain_register(&migration_notifier_head,
 					&boost_migration_nb);
 
-	ret = smpboot_register_percpu_thread(&cpuboost_threads);
-	if (ret)
-		pr_err("Cannot register cpuboost threads.\n");
-
 	ret = input_register_handler(&cpuboost_input_handler);
 	if (ret)
 		pr_err("Cannot register cpuboost input handler.\n");
@@ -548,6 +560,10 @@ static int cpu_boost_init(void)
 	notif.notifier_call = state_notifier_callback;
 	if (state_register_client(&notif))
 		pr_err("Cannot register State notifier callback for cpuboost.\n");
+#else
+	notif.notifier_call = fb_notifier_callback;
+	if (fb_register_client(&notif))
+		pr_err("Cannot register FB notifier callback for cpuboost.\n");
 #endif
 
 	return ret;
