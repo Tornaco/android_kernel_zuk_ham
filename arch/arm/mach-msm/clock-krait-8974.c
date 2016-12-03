@@ -31,10 +31,13 @@
 #include "clock-krait.h"
 #include "clock.h"
 
-
 #ifdef CONFIG_PVS_LEVEL_INTERFACE
 int pvs_level = -1;
 module_param(pvs_level, int, S_IRUGO); 
+#endif
+#ifdef CONFIG_SPEED_LEVEL_INTERFACE
+int speed_level = -1;
+module_param(speed_level, int, S_IRUGO);
 #endif
 
 /* Clock inputs coming into Krait subsystem */
@@ -468,6 +471,33 @@ static void get_krait_bin_format_b(struct platform_device *pdev,
 		*speed = 0;
 	}
 
+#ifdef CONFIG_SPEED_LEVEL_INTERFACE
+        speed_level = *speed;
+#endif
+
+	/* Check SVS PVS bin */
+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "efuse_svs");
+	if (res) {
+		base_svs = devm_ioremap(&pdev->dev, res->start,
+					resource_size(res));
+		/* Read the svs pvs value if status bit 28 is valid (set) */
+		if (!base_svs) {
+			*svs_pvs = 0;
+			dev_warn(&pdev->dev,
+			 "Unable to read svs efuse data. Defaulting to 0!\n");
+		} else {
+			pte_efuse = readl_relaxed(base_svs);
+			/*
+			 * Read the svs pvs value if status bit 28 is valid
+			 * 4 bits of SVS PVS are in efuse register bits 27-24
+			 */
+			if (pte_efuse & BIT(28))
+				*svs_pvs = (pte_efuse >> 24) & 0xF;
+
+			devm_iounmap(&pdev->dev, base_svs);
+		}
+	}
+
 	/* Check PVS_BLOW_STATUS */
 	pte_efuse = readl_relaxed(base + 0x4) & BIT(21);
 	if (pte_efuse) {
@@ -476,7 +506,6 @@ static void get_krait_bin_format_b(struct platform_device *pdev,
 		dev_warn(&pdev->dev, "PVS bin not set. Defaulting to 0!\n");
 		*pvs = 0;
 	}
-
 
 #ifdef CONFIG_PVS_LEVEL_INTERFACE
 	pvs_level = *pvs;
@@ -595,6 +624,67 @@ static void krait_update_uv(int *uv, int num, int boost_uv)
 			uv[i] += boost_uv;
 	}
 }
+
+#ifdef CONFIG_MSM_CPU_VOLTAGE_CONTROL
+#define CPU_VDD_MAX	1450
+#define CPU_VDD_MIN	475
+
+extern int use_for_scaling(unsigned int freq);
+
+ssize_t show_UV_mV_table(struct cpufreq_policy *policy,
+			 char *buf)
+{
+	int i, freq, len = 0;
+	unsigned int cpu = 0;
+	unsigned int num_levels = cpu_clk[cpu]->vdd_class->num_levels;
+
+	if (!buf)
+		return -EINVAL;
+
+	for (i = 0; i < num_levels; i++) {
+		freq = use_for_scaling(cpu_clk[cpu]->fmax[i] / 1000);
+		if (freq < 0)
+			continue;
+
+		len += sprintf(buf + len, "%dmhz: %u mV\n", freq / 1000,
+			       cpu_clk[cpu]->vdd_class->vdd_uv[i] / 1000);
+	}
+
+	return len;
+}
+
+ssize_t store_UV_mV_table(struct cpufreq_policy *policy,
+			  char *buf, size_t count)
+{
+	int i, j;
+	int ret = 0;
+	unsigned int val, cpu = 0;
+	unsigned int num_levels = cpu_clk[cpu]->vdd_class->num_levels;
+	char size_cur[4];
+
+	for (i = 0; i < num_levels; i++) {
+		if (use_for_scaling(cpu_clk[cpu]->fmax[i] / 1000) < 0)
+			continue;
+
+		ret = sscanf(buf, "%u", &val);
+		if (!ret)
+			return -EINVAL;
+
+		if (val > CPU_VDD_MAX)
+			val = CPU_VDD_MAX;
+		else if (val < CPU_VDD_MIN)
+			val = CPU_VDD_MIN;
+
+		for (j = 0; j < NR_CPUS; j++)
+			cpu_clk[j]->vdd_class->vdd_uv[i] = val * 1000;
+
+		ret = sscanf(buf, "%s", size_cur);
+		buf += strlen(size_cur) + 1;
+	}
+
+	return count;
+}
+#endif
 
 static char table_name[] = "qcom,speedXX-pvsXX-bin-vXX";
 module_param_string(table_name, table_name, sizeof(table_name), S_IRUGO);

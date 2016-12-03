@@ -960,30 +960,14 @@ static ssize_t show_available_freqs(struct device *d,
 				    char *buf)
 {
 	struct devfreq *df = to_devfreq(d);
-	struct device *dev = df->dev.parent;
-	struct opp *opp;
-	ssize_t count = 0;
-	unsigned long freq = 0;
+	int index, num_chars = 0;
 
-	rcu_read_lock();
-	do {
-		opp = opp_find_freq_ceil(dev, &freq);
-		if (IS_ERR(opp))
-			break;
+	for (index = 0; index < df->profile->max_state; index++)
+		num_chars += snprintf(buf + num_chars, PAGE_SIZE, "%d ",
+		df->profile->freq_table[index]);
+	buf[num_chars++] = '\n';
 
-		count += scnprintf(&buf[count], (PAGE_SIZE - count - 2),
-				   "%lu ", freq);
-		freq++;
-	} while (1);
-	rcu_read_unlock();
-
-	/* Truncate the trailing space */
-	if (count)
-		count--;
-
-	count += sprintf(&buf[count], "\n");
-
-	return count;
+	return num_chars;
 }
 
 static ssize_t show_trans_table(struct device *dev, struct device_attribute *attr,
@@ -1028,29 +1012,23 @@ static ssize_t show_trans_table(struct device *dev, struct device_attribute *att
 }
 
 static ssize_t show_time_in_state(struct device *dev, struct device_attribute *attr,
-				char *buf)
+                                char *buf)
 {
 	struct devfreq *devfreq = to_devfreq(dev);
-	ssize_t len;
-	int i, err;
+
+        ssize_t len = 0;
+        int i, err;
 	unsigned int max_state = devfreq->profile->max_state;
 
-	err = devfreq_update_status(devfreq, devfreq->previous_freq);
-	if (err)
-		return 0;
+        err = devfreq_update_status(devfreq, devfreq->previous_freq);
+        if (err)
+                return 0;
 
-	len = 0;
-	
-	for (i = 0; i < max_state; i++) {
-		len += sprintf(buf + len, "%u ",
-				devfreq->profile->freq_table[i]);
-		len += sprintf(buf + len, "%u ",
-			jiffies_to_msecs(devfreq->time_in_state[i]));
-	}
-
-	len += sprintf(buf + len, "\n");
-	
-	return len;
+		for (i = 0; i < max_state; i++) {
+                len += sprintf(buf + len, "%u %u\n", devfreq->profile->freq_table[i],
+                        jiffies_to_msecs(devfreq->time_in_state[i]));
+        }
+        return len;
 }
 
 static struct device_attribute devfreq_attrs[] = {

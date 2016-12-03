@@ -1851,14 +1851,6 @@ config MSM_DALRPC_TEST
 	help
 	  Exercises DAL RPC calls to QDSP6.
 
-config MSM_MPDEC
-	bool "Enable kernel based mpdecision"
-	depends on MSM_SMP
-	default n
-	help
-	  This enables kernel based multi core control.
-	  (up/down hotplug based on load)
-
 if CPU_FREQ_MSM
 
 config MSM_CPU_FREQ_SET_MIN_MAX
@@ -1880,12 +1872,6 @@ config MSM_CPU_FREQ_MIN
 
 endif # CPU_FREQ_MSM
 
-config INTELLI_PLUG
-	bool "Enable intelli-plug cpu hotplug driver"
-	default n
-	help
-		Generic Intelli-plug cpu hotplug driver for ARM SOCs
-
 config MSM_DEVFREQ_CPUBW
 	bool "Devfreq device for CPU<->DDR IB/AB BW voting"
 	depends on PM_DEVFREQ
@@ -1899,6 +1885,13 @@ config MSM_DEVFREQ_CPUBW
 	  DDR IB/AB bandwidth votes. This driver provides a SoC topology
 	  agnostic interface to so that some of the devfreq governors can be
 	  shared across SoCs.
+
+
+config CPU_VOLTAGE_TABLE
+	bool "Enable CPU Voltage Table via sysfs for adjustements"
+	default n
+	help
+	  DTS based kernel User Votlage Control
 
 config MSM_AVS_HW
 	bool "Enable Adaptive Voltage Scaling (AVS)"
@@ -3070,8 +3063,14 @@ config MSM_SECBOOT
 	bool "MSM Secboot verification driver"
 	help
 	Driver to expose secureboot status
-	  The MSM hotplug driver controls on-/offlining of additional cores based
-	  on current cpu load.
+endif
+
+config MSM_LIMITER
+		bool "MSM Frequency Limiter Driver"
+		default y
+		help
+		  The MSM Frequency Limiter Driver controls max frequency limit for each CPU
+		  to desired value on suspend/resume
 
 config PVS_LEVEL_INTERFACE
 	bool "Expose PVS level information in SYSFS"
@@ -3082,30 +3081,6 @@ config SPEED_LEVEL_INTERFACE
         bool "Expose SPEED level information in sys fs"
         help
          Allow SPEED level to be shown into specific kernel apps
-
-config MSM_LIMITER
-	bool "MSM Frequency Limiter Driver"
-	default y
-	help
-	  The MSM Frequency Limiter Driver controls max frequency limit for each CPU
-	  to desired value on suspend/resume
-
-config MSM_HOTPLUG
-	bool "MSM hotplug driver"
-	depends on HOTPLUG_CPU
-	default y
-	help
-		The MSM hotplug driver controls on-/offlining of additional cores based
-		on current cpu load.
-
-config BRICKED_HOTPLUG
-	bool "Enable kernel based mpdecision"
-	depends on MSM_RUN_QUEUE_STATS
-	default y
-	help
-		This enables kernel based multi core control.
-		(up/down hotplug based on load)
-endif
 
 config KERNEL_TEXT_MPU_PROT
         bool "Enable xpu protection of kernel r/o sections"

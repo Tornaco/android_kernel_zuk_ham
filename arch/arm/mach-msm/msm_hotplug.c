@@ -1,4 +1,4 @@
-	/*
+/*
  * MSM Hotplug Driver
  *
  * Copyright (c) 2013-2015, Pranav Vashi <neobuddy89@gmail.com>
@@ -30,8 +30,8 @@
 
 #define MSM_HOTPLUG			"msm_hotplug"
 #define HOTPLUG_ENABLED			1
-#define DEFAULT_UPDATE_RATE		100
-#define START_DELAY			10000
+#define DEFAULT_UPDATE_RATE		HZ / 10
+#define START_DELAY			HZ * 20
 #define MIN_INPUT_INTERVAL		150 * 1000L
 #define DEFAULT_HISTORY_SIZE		10
 #define DEFAULT_DOWN_LOCK_DUR		1000
@@ -513,15 +513,7 @@ static void __ref msm_hotplug_resume(void)
 		}
 	}
 
-	if (wakeup_boost || required_wakeup) {
-		/* Fire up all CPUs */
-		for_each_cpu_not(cpu, cpu_online_mask) {
-			if (cpu == 0)
-				continue;
-			cpu_up(cpu);
-			apply_down_lock(cpu);
-		}
-	}
+	
 
 	/* Resume hotplug workqueue if required */
 	if (required_reschedule)
@@ -697,7 +689,7 @@ static int __ref msm_hotplug_start(void)
 	}
 
 	queue_delayed_work_on(0, hotplug_wq, &hotplug_work,
-			      msecs_to_jiffies(START_DELAY));
+			      START_DELAY);
 
 	return ret;
 err_dev:
