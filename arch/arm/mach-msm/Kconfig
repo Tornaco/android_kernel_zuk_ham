@@ -1886,7 +1886,6 @@ config MSM_DEVFREQ_CPUBW
 	  agnostic interface to so that some of the devfreq governors can be
 	  shared across SoCs.
 
-<<<<<<< HEAD
 config TURBO_BOOST
 	bool "Enable CPU Turbo boost option"
 	depends on CPU_OVERCLOCK
@@ -1895,14 +1894,6 @@ config TURBO_BOOST
 	  This option allows overclocking of 2 cores to higher clock rate
 	  than stock maximum.  When more than 2 cores are active, the clock
 	  is limited to stock max speeds
-=======
-
-config CPU_VOLTAGE_TABLE
-	bool "Enable CPU Voltage Table via sysfs for adjustements"
-	default n
-	help
-	  DTS based kernel User Votlage Control
->>>>>>> d4a274d... feat(cpufreq): Added voltage table to ZUK Z1 (ham) [WIP]
 
 config MSM_AVS_HW
 	bool "Enable Adaptive Voltage Scaling (AVS)"
