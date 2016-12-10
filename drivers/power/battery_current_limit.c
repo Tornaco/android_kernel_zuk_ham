@@ -31,7 +31,7 @@
  * Mininum BCL poll interval 10 msec
  */
 #define MIN_BCL_POLL_INTERVAL 10
-#define BATTERY_VOLTAGE_MIN 3500
+#define BATTERY_VOLTAGE_MIN 3400
 
 static const char bcl_type[] = "bcl";
 
