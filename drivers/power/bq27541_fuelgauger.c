@@ -171,6 +171,12 @@ static int bq27541_battery_voltage(struct bq27541_device_info *di)
 	return volt * 1000;
 }
 
+	/* Double check before reporting 0% SOC */
+	if (di->old_data->soc && !soc) {
+	ret = di->old_data->soc;
+		di->old_data->soc = soc;
+		return ret;
+
 static void bq27541_cntl_cmd(struct bq27541_device_info *di,
 				int subcmd)
 {

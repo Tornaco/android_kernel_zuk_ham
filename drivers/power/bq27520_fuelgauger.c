@@ -246,6 +246,14 @@ static int bq27520_i2c_txsubcmd(u8 reg, unsigned short subcmd,
 	return 0;
 }
 
+	/* Double check before reporting 0% SOC */
+	if (di->old_data->soc && !soc) {
+	ret = di->old_data->soc;
+		di->old_data->soc = soc;
+		return ret;
+	
+
+
 static int bq27520_chip_config(struct bq27520_device_info *di)
 {
 	int flags = 0, ret = 0;
